@@ -1,0 +1,21 @@
+<% full ||= false %>
+
+<section class="c-section <%= full ? 'c-footer--full' : '' %>">
+
+  <% if @_section_head %>
+    <div class="c-section__head">
+      <h1 class="c-section__head-title"><%= @_section_head[:title] %></h1>
+      <div class="c-section__head-breadcrumb">
+        <% @_section_head[:breadcrumbs].each do |bread| %>
+          <% if bread[:url] %>
+            <a class="c-section__head-breadcrumb-link" href="<%= bread[:url] %>"><%= bread[:label] %></a>
+          <% else %>
+            <a class="c-section__head-breadcrumb-link"><%= bread[:label] %></a>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  
+  <%= yield %>
+</section>

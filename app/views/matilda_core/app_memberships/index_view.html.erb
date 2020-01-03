@@ -1,0 +1,61 @@
+<div class="c-section__content c-grid__container-spaced">
+  <div class="c-section__content-block c-grid__col c-grid__col--24">
+    <div class="c-card">
+      <div class="c-card__header">
+        <div class="c-card__header-title">
+          Lista utenti
+        </div>
+        <ul class="c-card__header-actions">
+          <li class="c-card__header-action">
+            <a class="c-button" href="<%= matilda_core.app_memberships_invitation_view_path %>">Invita utente</a>
+          </li>
+          <li class="c-card__header-action">
+            <div class="c-input-action">
+              <input class="c-input-action__field" name="search" placeholder="Ricerca">
+              <button class="c-input-action__button"><i class="fas fa-search"></i></button>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="c-card__body">
+        <% if @users.length.positive? %>
+          <table class="c-table">
+            <thead>
+              <tr>
+                <th>Cognome</th>
+                <th>Nome</th>
+                <th>Username</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @users.each do |user| %>
+                <tr>
+                  <td><%= user.surname %></td>
+                  <td><%= user.name %></td>
+                  <td>@<%= user.username %></td>
+                  <td class="c-table__actions">
+                    <a class="c-button" data-tippy-content="Gestisci" data-controller="tippy" href="<%= matilda_core.app_memberships_edit_view_path(user_uuid: user.uuid) %>">
+                      <i class="fas fa-edit"></i>
+                    </a>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+
+          <div class="c-pagination">
+            <%= paginate @users %>
+          </div>
+        <% else %>
+          <div class="c-message">
+            <div class="c-message__title">Nessun utente registrato</div>
+            <div class="c-message__content c-message__content--small">
+              Al momento non è stato registrato ancora nessun utente.
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

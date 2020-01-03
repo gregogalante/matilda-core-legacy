@@ -1,0 +1,26 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Alata', sans-serif;
+  background-color: $color_cenere;
+  color: $color_black;
+}
+
+main {
+  position: relative;
+  margin-top: $size_header_height;
+}
+
+a {
+  color: $color_primary;
+}
+
+img {
+  max-width: 100%;
+}
+
+.turbolinks-progress-bar {
+  background-color: $color_white !important;
+}

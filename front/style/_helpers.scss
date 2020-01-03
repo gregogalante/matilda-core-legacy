@@ -1,0 +1,31 @@
+.u-clearfix {
+  @include clearfix;
+}
+
+.u-float-right {
+  float: right;
+}
+
+.u-float-left {
+  float: left;
+}
+
+.u-only-md {
+  display: block;
+}
+
+.u-only-sm {
+  display: block;
+}
+
+@media (max-width: $breakpoint_md) {
+  .u-only-md {
+    display: none;
+  }
+}
+
+@media (max-width: $breakpoint_sm) {
+  .u-only-sm {
+    display: none;
+  }
+}
