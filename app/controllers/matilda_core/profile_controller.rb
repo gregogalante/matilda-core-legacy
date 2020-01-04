@@ -8,8 +8,7 @@ module MatildaCore
     before_action :session_present_check
 
     def index_view
-      section_head_set(@session.user.complete_name, [{ label: 'Imp. Account' }])
-      session_update_group(nil)
+      section_head_set(@session.user.complete_name, [{ label: 'Impostazioni Account' }])
     end
 
     def edit_info_action

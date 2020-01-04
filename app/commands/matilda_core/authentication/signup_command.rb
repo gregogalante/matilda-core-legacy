@@ -105,20 +105,20 @@ module MatildaCore
         internal_error && break unless event_session.saved?
 
         # aggiungo l'utente al gruppo di default se e' stato specificato nella configurazione generica
-        if MatildaCore.config.global_default_group_uuid && MatildaCore::Group.find_by(uuid: MatildaCore.config.global_default_group_uuid)
+        if MatildaCore.config.authentication_signup_default_group_uuid && MatildaCore::Group.find_by(uuid: MatildaCore.config.authentication_signup_default_group_uuid)
           event_membership = MatildaCore::Memberships::CreateEvent.new(
             user_uuid: @user_uuid,
-            group_uuid: MatildaCore.config.global_default_group_uuid,
+            group_uuid: MatildaCore.config.authentication_signup_default_group_uuid,
             log_who: params[:log_who]
           )
           internal_error && break unless event_membership.saved?
 
           # aggiorno i permessi di default dell'utente
-          if MatildaCore.config.global_default_group_permissions&.length&.positive?
+          if MatildaCore.config.authentication_signup_default_group_permissions&.length&.positive?
             event_permissions = MatildaCore::Memberships::EditPermissionsEvent.new(
               user_uuid: @user_uuid,
-              group_uuid: MatildaCore.config.global_default_group_uuid,
-              permissions: MatildaCore.config.global_default_group_permissions,
+              group_uuid: MatildaCore.config.authentication_signup_default_group_uuid,
+              permissions: MatildaCore.config.authentication_signup_default_group_permissions,
               log_who: params[:log_who]
             )
             internal_error && break unless event_permissions.saved?

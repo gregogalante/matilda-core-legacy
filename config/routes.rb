@@ -20,6 +20,7 @@ MatildaCore::Engine.routes.draw do
   get 'groups/select-view', to: 'groups#select_view', as: 'groups_select_view'
   get 'groups/index-view', to: 'groups#index_view', as: 'groups_index_view'
   post 'groups/select-action', to: 'groups#select_action', as: 'groups_select_action'
+  post 'groups/unselect-action', to: 'groups#unselect_action', as: 'groups_unselect_action'
   post 'groups/create-action', to: 'groups#create_action', as: 'groups_create_action'
 
   # profile

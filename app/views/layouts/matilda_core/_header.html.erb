@@ -8,7 +8,7 @@
       <% if @session.group_uuid %>
         <div class="c-header__nav-item">
           <button class="c-header__nav-item-action" title="Gruppo">
-            <%= @session.group.name %>
+            <%= @session.group_name %>
           </button>
         </div>
       <% end %>
@@ -21,13 +21,13 @@
         <div class="c-header__nav-menu" data-target="header.profileMenu">
           <ul class="c-header__nav-menu-list">
             <li class="c-header__nav-menu-list-item">
-              <a class="c-header__nav-menu-list-item-link" href="<%= matilda_core.groups_select_view_path %>">
-                Gruppi
+              <a class="c-header__nav-menu-list-item-link" data-controller="link" data-action="ajax:success->link#validateResponse" data-method="post" data-remote="true" data-link-redirect="<%= matilda_core.profile_index_view_path %>" href="<%= matilda_core.groups_unselect_action_path %>">
+                Impostazioni Account
               </a>
             </li>
             <li class="c-header__nav-menu-list-item">
-              <a class="c-header__nav-menu-list-item-link" href="<%= matilda_core.profile_index_view_path %>">
-                Imp. Account
+              <a class="c-header__nav-menu-list-item-link" data-controller="link" data-action="ajax:success->link#validateResponse" data-method="post" data-remote="true" data-link-redirect="<%= matilda_core.groups_select_view_path %>" href="<%= matilda_core.groups_unselect_action_path %>">
+                I miei gruppi
               </a>
             </li>
             <li class="c-header__nav-menu-list-item">

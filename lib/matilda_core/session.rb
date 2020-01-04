@@ -87,6 +87,10 @@ module MatildaCore
       @data[:group_permissions] || []
     end
 
+    def group_name
+      @data[:group_name]
+    end
+
     ######################################################################
 
     protected

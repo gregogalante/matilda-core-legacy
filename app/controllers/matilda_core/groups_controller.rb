@@ -19,8 +19,14 @@ module MatildaCore
     end
 
     def select_view
+      @group = @session.group
+
+      if @group
+        redirect_to matilda_core.groups_index_view_path
+        return
+      end
+
       @groups = @session.user.groups.order('name ASC')
-      session_update_group(nil)
       sidebar_set('matilda_core.groups')
     end
 
@@ -33,6 +39,10 @@ module MatildaCore
       end
 
       render_json_success(token: session_update_group(@group.uuid))
+    end
+
+    def unselect_action
+      render_json_success(token: session_update_group(nil))
     end
 
     def create_action
