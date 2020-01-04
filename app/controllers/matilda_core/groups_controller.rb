@@ -8,20 +8,19 @@ module MatildaCore
     before_action :session_present_check
 
     def index_view
-      @groups = @session.user.groups.order('name ASC')
-      session_update_group(nil)
-      sidebar_set('matilda_core.groups')
-    end
-
-    def dash_view
-      @group = @session.group || @session.user.groups.find_by(uuid: params[:group_uuid])
+      @group = @session.group
 
       unless @group
-        redirect_to matilda_core.groups_index_view_path
+        redirect_to matilda_core.groups_select_view_path
         return
       end
 
-      session_update_group(@group.uuid)
+      sidebar_set('matilda_core.groups')
+    end
+
+    def select_view
+      @groups = @session.user.groups.order('name ASC')
+      session_update_group(nil)
       sidebar_set('matilda_core.groups')
     end
 
@@ -47,7 +46,6 @@ module MatildaCore
 
     def generate_create_command
       command_params = params.permit(:name)
-      command_params[:user_uuid] = @session.user_uuid
       command_params[:log_who] = @session.user_uuid
       MatildaCore::Groups::CreateGroupCommand.new(command_params)
     end

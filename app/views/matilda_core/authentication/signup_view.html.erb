@@ -11,7 +11,7 @@
     </ul>
   </div>
   <div class="c-card__body">
-    <%= form_tag matilda_core.authentication_signup_action_path, method: :post, remote: true, data: { controller: 'form', action: 'ajax:success->form#validateResponse', 'form-redirect': matilda_core.groups_index_view_path }, class: 'c-form c-grid__container-spaced' do %>
+    <%= form_tag matilda_core.authentication_signup_action_path, method: :post, remote: true, data: { controller: 'form', action: 'ajax:success->form#validateResponse', 'form-redirect': matilda_core.groups_select_view_path }, class: 'c-form c-grid__container-spaced' do %>
       <div class="c-input c-grid__col c-grid__col--24 c-grid__col--md-12">
         <label class="c-input__label" for="name">Nome</label>
         <input class="c-input__field" type="text" name="name" id="name" autocomplete="off" data-target="form.field" required>

@@ -14,7 +14,7 @@ module MatildaCore
       MatildaCore.config.add_sidebar_item(
         'matilda_core.groups',
         label: 'Dashboard',
-        url: MatildaCore::Engine.routes.url_helpers.groups_dash_view_path,
+        url: MatildaCore::Engine.routes.url_helpers.groups_index_view_path,
         icon: 'fas fa-tachometer-alt',
         index: 10
       )
@@ -37,12 +37,6 @@ module MatildaCore
         group: 'Gestione utenti'
       )
     end
-
-    # Imposto le impostazioni di autenticazione.
-    # initializer 'matilda_core.authentication_signup_default_group' do |_app|
-    #   MatildaCore.config.authentication_signup_default_group_uuid = 'default'
-    #   MatildaCore.config.authentication_signup_default_group_permissions = ['matilda_core.memberships']
-    # end
 
   end
 

@@ -73,6 +73,15 @@ module MatildaCore
           log_who: params[:log_who]
         )
         internal_error && break unless event_membership.saved?
+
+        # aggiorno i permessi dell'utente nel gruppo
+        event_permissions = MatildaCore::Memberships::EditPermissionsEvent.new(
+          user_uuid: @user_uuid,
+          group_uuid: params[:group_uuid],
+          permissions: MatildaCore.config.global_default_group_permissions,
+          log_who: params[:log_who]
+        )
+        internal_error && break unless event_permissions.saved?
       end
 
     end

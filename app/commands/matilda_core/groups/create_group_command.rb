@@ -15,19 +15,17 @@ module MatildaCore
                 presence: true, type: :string, blank: false,
                 err: 'Nome non valido'
 
-      validates :user_uuid, type: :string
-
       validates :log_who, type: :string
 
       to_validate_logic do
-        if params[:user_uuid]
+        if params[:log_who]
           unless MatildaCore.config.groups_permit_creation_to_users
-            err('Non possono essere creati gruppi', code: :user_uuid)
+            err('Non possono essere creati gruppi', code: :log_who)
             break
           end
 
-          if MatildaCore::Membership.where(user_uuid: params[:user_uuid]).length >= MatildaCore.config.groups_max_number_per_user
-            err('Hai raggiunto il numero massimo di gruppi', code: :user_uuid)
+          if MatildaCore.config.groups_max_number_per_user && MatildaCore::Membership.where(user_uuid: params[:log_who]).length >= MatildaCore.config.groups_max_number_per_user
+            err('Hai raggiunto il numero massimo di gruppi', code: :log_who)
             break
           end
         end
@@ -43,13 +41,23 @@ module MatildaCore
         )
         internal_error && break unless event_creation.saved?
 
-        if params[:user_uuid]
+        if params[:log_who]
+          # aggiungo l'utente al nuovo gruppo creato
           event_membership = MatildaCore::Memberships::CreateEvent.new(
-            user_uuid: params[:user_uuid],
+            user_uuid: params[:log_who],
             group_uuid: @group_uuid,
             log_who: params[:log_who]
           )
           internal_error && break unless event_membership.saved?
+
+          # assegno tutti i permessi al nuovo utente creato
+          event_permissions = MatildaCore::Memberships::EditPermissionsEvent.new(
+            user_uuid: params[:log_who],
+            group_uuid: @group_uuid,
+            permissions: MatildaCore.config.memberships_permissions.map { |p| p[:name] },
+            log_who: params[:log_who]
+          )
+          internal_error && break unless event_permissions.saved?
         end
       end
 

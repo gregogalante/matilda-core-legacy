@@ -5,6 +5,14 @@
 
   <% if @session %>
     <nav class="c-header__nav">
+      <% if @session.group_uuid %>
+        <div class="c-header__nav-item">
+          <button class="c-header__nav-item-action" title="Gruppo">
+            <%= @session.group.name %>
+          </button>
+        </div>
+      <% end %>
+
       <div class="c-header__nav-item">
         <button class="c-header__nav-item-action" data-action="click->header#toggleProfile" title="Profilo">
           Profilo
@@ -13,7 +21,7 @@
         <div class="c-header__nav-menu" data-target="header.profileMenu">
           <ul class="c-header__nav-menu-list">
             <li class="c-header__nav-menu-list-item">
-              <a class="c-header__nav-menu-list-item-link" href="<%= matilda_core.groups_index_view_path %>">
+              <a class="c-header__nav-menu-list-item-link" href="<%= matilda_core.groups_select_view_path %>">
                 Gruppi
               </a>
             </li>

@@ -36,14 +36,14 @@ module MatildaCore
       command = command_manager(generate_login_command)
       return unless command
 
-      render_json_success(token: session_create(command.session_uuid, command.user_uuid))
+      render_json_success(token: generate_token(command.session_uuid, command.user_uuid))
     end
 
     def signup_action
       command = command_manager(generate_signup_command)
       return unless command
 
-      render_json_success(token: session_create(command.session_uuid, command.user_uuid))
+      render_json_success(token: generate_token(command.session_uuid, command.user_uuid))
     end
 
     def recover_password_action
@@ -72,6 +72,17 @@ module MatildaCore
     end
 
     private
+
+    def generate_token(session_uuid, user_uuid)
+      token = session_create(session_uuid, user_uuid)
+
+      # se e' stato impostato un gruppo di default lo agiungo gia nel token (quindi eseguo l'auto selezione del gruppo di default)
+      if MatildaCore.config.global_default_group_uuid && MatildaCore::Group.find_by(uuid: MatildaCore.config.global_default_group_uuid)
+        token = session_update_group(MatildaCore.config.global_default_group_uuid)
+      end
+
+      token
+    end
 
     def generate_login_command
       command_params = params.permit(:username_email, :password)

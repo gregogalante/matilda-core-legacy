@@ -20,10 +20,10 @@ module MatildaCore
 
         command = MatildaCore::Groups::CreateGroupCommand.new(
           name: 'Nome gruppo',
-          user_uuid: SecureRandom.uuid
+          log_who: SecureRandom.uuid
         )
         assert_not command.completed?
-        assert_command_error_code(command, :user_uuid)
+        assert_command_error_code(command, :log_who)
       end
 
       test 'se è creato da un utente non deve essere superata la soglia massima di gruppi per utente' do
@@ -31,10 +31,10 @@ module MatildaCore
 
         command = MatildaCore::Groups::CreateGroupCommand.new(
           name: 'Nome gruppo',
-          user_uuid: SecureRandom.uuid
+          log_who: SecureRandom.uuid
         )
         assert_not command.completed?
-        assert_command_error_code(command, :user_uuid)
+        assert_command_error_code(command, :log_who)
       end
 
       test 'caso positivo' do
@@ -42,7 +42,7 @@ module MatildaCore
 
         command = MatildaCore::Groups::CreateGroupCommand.new(
           name: 'Nome gruppo',
-          user_uuid: SecureRandom.uuid
+          log_who: SecureRandom.uuid
         )
         assert command.completed?
       end

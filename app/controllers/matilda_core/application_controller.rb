@@ -16,7 +16,7 @@ module MatildaCore
 
     def index
       if session_present?
-        redirect_to matilda_core.groups_index_view_path
+        redirect_to matilda_core.groups_select_view_path
       else
         redirect_to matilda_core.authentication_login_view_path
       end

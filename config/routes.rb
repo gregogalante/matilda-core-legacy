@@ -17,8 +17,8 @@ MatildaCore::Engine.routes.draw do
   post 'authentication/logout-action', to: 'authentication#logout_action', as: 'authentication_logout_action'
 
   # groups
+  get 'groups/select-view', to: 'groups#select_view', as: 'groups_select_view'
   get 'groups/index-view', to: 'groups#index_view', as: 'groups_index_view'
-  get 'groups/dash-view', to: 'groups#dash_view', as: 'groups_dash_view'
   post 'groups/select-action', to: 'groups#select_action', as: 'groups_select_action'
   post 'groups/create-action', to: 'groups#create_action', as: 'groups_create_action'
 

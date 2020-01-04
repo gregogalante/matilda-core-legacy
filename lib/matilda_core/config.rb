@@ -13,16 +13,18 @@ module MatildaCore
     # Imposta il formato utilizzato per la visualizzazione delle date.
     attr_accessor :global_date_format
 
+    # Imposta un gruppo utilizzabile di default. Se viene impostato
+    # l'intera piattaforma lavorera' in automatico con il gruppo specificato
+    # e non sara' possibile lavorare con qualsiasi altro gruppo.
+    attr_accessor :global_default_group_uuid
+
+    # Imposta i permessi da applicare di default ai nuovi utenti dei gruppi.
+    attr_accessor :global_default_group_permissions
+
     # AUTHENTICATION
 
     # Imposta la possibilita' di registrarsi autonomamente alla piattaforma.
     attr_accessor :authentication_permit_signup
-
-    # Imposta un gruppo di default a cui assegnare l'utente dopo il signup.
-    attr_accessor :authentication_signup_default_group_uuid
-
-    # Imposta i permessi di default per gli utenti che si iscrivono.
-    attr_accessor :authentication_signup_default_group_permissions
 
     # MEMBERSHIPS
 
@@ -50,15 +52,16 @@ module MatildaCore
     def set_default_options
       @global_title = 'Matilda'
       @global_date_format = '%d-%m-%Y'
+      @global_default_group_uuid = nil
+      @global_default_group_permissions = []
       @authentication_permit_signup = true
-      @authentication_signup_default_group_uuid = nil
-      @authentication_signup_default_group_permissions = []
       @groups_permit_creation_to_users = true
-      @groups_max_number_per_user = 99
+      @groups_max_number_per_user = nil
       @sidebar_items = []
       @memberships_permissions = []
     end
 
+    # Permette di aggiungere una nuova voce di menu alla sidebar.
     def add_sidebar_item(name, label: '', url: '', icon: '', permission: nil, index: 0)
       names = @sidebar_items.map { |i| i[:name] }
       throw 'Name already used' if names.include?(name)
@@ -74,6 +77,7 @@ module MatildaCore
       @sidebar_items = @sidebar_items.sort_by { |hsh| hsh[:index] }
     end
 
+    # Permette di aggiungere un nuovo possibile livello di permesso alla applicazione.
     def add_memberships_permission(name, label: '', group: 'Generali', index: 0)
       names = @memberships_permissions.map { |i| i[:name] }
       throw 'Name already used' if names.include?(name)

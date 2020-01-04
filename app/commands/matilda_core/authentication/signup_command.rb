@@ -53,6 +53,11 @@ module MatildaCore
       end
 
       to_validate_logic do
+        unless MatildaCore.config.authentication_permit_signup
+          err('La registrazione non può essere eseguita')
+          break
+        end
+
         # verifico che l'username sia univoco
         if MatildaCore::User.find_by(username: params[:username])
           err('Username già utilizzato', code: :username)
@@ -99,21 +104,21 @@ module MatildaCore
         )
         internal_error && break unless event_session.saved?
 
-        # aggiungo l'utente al gruppo di default se è stato specificato
-        if MatildaCore.config.authentication_signup_default_group_uuid && MatildaCore::Group.find_by(uuid: MatildaCore.config.authentication_signup_default_group_uuid)
+        # aggiungo l'utente al gruppo di default se e' stato specificato nella configurazione generica
+        if MatildaCore.config.global_default_group_uuid && MatildaCore::Group.find_by(uuid: MatildaCore.config.global_default_group_uuid)
           event_membership = MatildaCore::Memberships::CreateEvent.new(
             user_uuid: @user_uuid,
-            group_uuid: MatildaCore.config.authentication_signup_default_group_uuid,
+            group_uuid: MatildaCore.config.global_default_group_uuid,
             log_who: params[:log_who]
           )
           internal_error && break unless event_membership.saved?
 
-          # aggiorno i permessi
-          if MatildaCore.config.authentication_signup_default_group_permissions&.length&.positive?
+          # aggiorno i permessi di default dell'utente
+          if MatildaCore.config.global_default_group_permissions&.length&.positive?
             event_permissions = MatildaCore::Memberships::EditPermissionsEvent.new(
               user_uuid: @user_uuid,
-              group_uuid: MatildaCore.config.authentication_signup_default_group_uuid,
-              permissions: MatildaCore.config.authentication_signup_default_group_permissions,
+              group_uuid: MatildaCore.config.global_default_group_uuid,
+              permissions: MatildaCore.config.global_default_group_permissions,
               log_who: params[:log_who]
             )
             internal_error && break unless event_permissions.saved?
