@@ -21,7 +21,7 @@ rails matilda_core:install:front
 
 4. Installo le dipendenze front-end modificando il file **package.json**
 
-```json
+```js
 {
   "name": "app_name",
   "private": true,
