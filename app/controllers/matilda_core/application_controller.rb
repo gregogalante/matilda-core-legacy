@@ -24,10 +24,6 @@ module MatildaCore
       end
     end
 
-    # NOTE: Di seguito tutte le funzioni utili riutilizzabili dalle sottoclassi del controller
-
-    protected
-
     # FUNZIONI DI GESTIONE ELEMENTI VIEW
     ##############################################################################################################
 
@@ -62,7 +58,7 @@ module MatildaCore
       # genero token sessione
       session_data = {}
       session_data[:token] = @session.to_string
-      session_data[:exp] = 24.hours.from_now.to_i
+      session_data[:exp] = 365.days.from_now.to_i
       JWT.encode(session_data, Rails.application.secrets.secret_key_base)
     end
 
@@ -111,7 +107,7 @@ module MatildaCore
       session = session_set
       result = session[:result]
       result = !@session.data[key].nil? if result && key
-      return if result
+      return true if result
 
       if session[:type] == 'api'
         json_errors(json_error('Token not valid'))
@@ -132,7 +128,7 @@ module MatildaCore
         token = request.headers['Authorization'].split(' ').last
         begin
           token_decoded = JWT.decode(token, Rails.application.secrets.secret_key_base)[0]
-          session_data = HashWithIndifferentAccess.new(token_decoded)
+          session_data = token_decoded['token'].to_s
         rescue StandardError
           return { result: false, type: type }
         end
