@@ -57,7 +57,7 @@ end
 7. Aggiungere un file **app/javasccript/packs/matilda.js** per eseguire il require dei moduli di Matilda
 
 ```javascript
-import 'vendor/matilda_core/loader.js'
+import '../../../vendor/matilda_core/loader.js'
 ```
 
 NOTE: Se ci sono problemi di compilazione aggiungere sul file di configurazione di webpacker, nell'array **resolved_paths** la path del modulo di Matilda
