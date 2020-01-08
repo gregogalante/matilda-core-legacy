@@ -13,6 +13,9 @@ module MatildaCore
     # Imposta il formato utilizzato per la visualizzazione delle date.
     attr_accessor :global_date_format
 
+    # Imposta la versione dell'applicativo.
+    attr_accessor :global_version
+
     # AUTHENTICATION
 
     # Imposta la possibilita' di registrarsi autonomamente alla piattaforma.
@@ -54,6 +57,7 @@ module MatildaCore
     def set_default_options
       @global_title = 'Matilda'
       @global_date_format = '%d-%m-%Y'
+      @global_version = MatildaCore::VERSION
       @authentication_permit_signup = true
       @authentication_signup_default_group_uuid = nil
       @authentication_signup_default_group_permissions = []

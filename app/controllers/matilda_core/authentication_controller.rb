@@ -36,14 +36,16 @@ module MatildaCore
       command = command_manager(generate_login_command)
       return unless command
 
-      render_json_success(token: create_auth_session(command.session_uuid, command.user_uuid))
+      user = MatildaCore::User.find_by(uuid: command.user_uuid)
+      render_json_success(token: create_auth_session(command.session_uuid, command.user_uuid), user: user.serialize_authentication)
     end
 
     def signup_action
       command = command_manager(generate_signup_command)
       return unless command
 
-      render_json_success(token: create_auth_session(command.session_uuid, command.user_uuid))
+      user = MatildaCore::User.find_by(uuid: command.user_uuid)
+      render_json_success(token: create_auth_session(command.session_uuid, command.user_uuid), user: user.serialize_authentication)
     end
 
     def recover_password_action
@@ -91,7 +93,7 @@ module MatildaCore
     end
 
     def generate_signup_command
-      command_params = params.permit(:name, :surname, :email, :username, :password, :password_confirmation)
+      command_params = params.permit(:name, :surname, :email, :username, :password, :password_confirmation, :privacy)
       command_params[:ip_address] = request.remote_ip
       MatildaCore::Authentication::SignupCommand.new(command_params)
     end

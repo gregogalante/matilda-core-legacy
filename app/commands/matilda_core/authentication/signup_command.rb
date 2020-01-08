@@ -6,6 +6,7 @@ module MatildaCore
 
     # SignupCommand.
     # Permette ad un utente di registrarsi all'interno della piattaforma.
+    # TODO: Gestire salvataggio privacy.
     class SignupCommand < MatildaCore::ApplicationCommand
 
       attr_reader :session_uuid, :user_uuid
@@ -35,6 +36,8 @@ module MatildaCore
       validates :password_confirmation,
                 presence: true, type: :string, blank: false,
                 err: 'Password non valida' # TODO: Aggiungere Regex password.
+
+      validates :privacy, type: :string
 
       validates :ip_address, type: :string
 
