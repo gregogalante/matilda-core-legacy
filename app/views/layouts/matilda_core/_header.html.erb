@@ -7,24 +7,24 @@
     <nav class="c-header__nav">
       <div class="c-header__nav-item">
         <button class="c-header__nav-item-action" data-action="click->header#toggleProfile" title="Profilo">
-          Profilo
+          <%= I18n.t 'matilda_core.header.profile' %>
         </button>
 
         <div class="c-header__nav-menu" data-target="header.profileMenu">
           <ul class="c-header__nav-menu-list">
             <li class="c-header__nav-menu-list-item">
               <a class="c-header__nav-menu-list-item-link" data-controller="link" data-action="ajax:success->link#validateResponse" data-method="post" data-remote="true" data-link-redirect="<%= matilda_core.profile_index_view_path %>" href="<%= matilda_core.groups_unselect_action_path %>">
-                Impostazioni Account
+                <%= I18n.t 'matilda_core.header.account_settings' %>
               </a>
             </li>
             <li class="c-header__nav-menu-list-item">
               <a class="c-header__nav-menu-list-item-link" data-controller="link" data-action="ajax:success->link#validateResponse" data-method="post" data-remote="true" data-link-redirect="<%= matilda_core.groups_select_view_path %>" href="<%= matilda_core.groups_unselect_action_path %>">
-                I miei gruppi
+                <%= I18n.t 'matilda_core.header.groups' %>
               </a>
             </li>
             <li class="c-header__nav-menu-list-item">
               <a class="c-header__nav-menu-list-item-link" data-controller="link" data-action="ajax:success->link#validateResponse" data-method="post" data-remote="true" data-link-redirect="<%= matilda_core.authentication_login_view_path %>" href="<%= matilda_core.authentication_logout_action_path %>">
-                Logout
+                <%= I18n.t 'matilda_core.header.logout' %>
               </a>
             </li>
           </ul>

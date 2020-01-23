@@ -13,9 +13,11 @@ module MatildaCore
 
     def index_view
       sidebar_set('matilda_core.memberships')
-      section_head_set('Utenti', [{ label: 'Utenti' }])
+      section_head_set(I18n.t('matilda_core.titles.users'), [{ label: I18n.t('matilda_core.titles.users') }])
 
-      @users = @session.group.users.page(params[:page]).per(15)
+      @users = @session.group.users
+      @users = @users.where('name LIKE ? OR surname LIKE ? OR username LIKE ?', params[:s], params[:s], params[:s]) unless params[:s].blank?
+      @users = @users.page(params[:page]).per(15)
     end
 
     def invitation_view

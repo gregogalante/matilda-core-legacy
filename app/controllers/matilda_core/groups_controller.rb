@@ -15,6 +15,7 @@ module MatildaCore
         return
       end
 
+      section_head_set('Dashboard', [{ label: 'Dashboard' }])
       sidebar_set('matilda_core.groups')
     end
 

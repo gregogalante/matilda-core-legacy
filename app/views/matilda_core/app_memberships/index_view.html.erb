@@ -1,3 +1,5 @@
+<form method="get">
+
 <div class="c-section__content c-grid__container-spaced">
   <div class="c-section__content-block c-grid__col c-grid__col--24">
     <div class="c-card">
@@ -11,8 +13,8 @@
           </li>
           <li class="c-card__header-action">
             <div class="c-input-action">
-              <input class="c-input-action__field" name="search" placeholder="Ricerca">
-              <button class="c-input-action__button"><i class="fas fa-search"></i></button>
+              <input class="c-input-action__field" name="s" placeholder="Ricerca" value="<%= params[:s] %>">
+              <button class="c-input-action__button" type="submit"><i class="fas fa-search"></i></button>
             </div>
           </li>
         </ul>
@@ -50,14 +52,25 @@
             <%= paginate @users %>
           </div>
         <% else %>
-          <div class="c-message">
-            <div class="c-message__title">Nessun utente registrato</div>
-            <div class="c-message__content c-message__content--small">
-              Al momento non è stato registrato ancora nessun utente.
+          <% if params[:s].blank? %>
+            <div class="c-message">
+              <div class="c-message__title">Nessun utente registrato</div>
+              <div class="c-message__content c-message__content--small">
+                Al momento non è stato registrato ancora nessun utente.
+              </div>
             </div>
-          </div>
+          <% else %>
+            <div class="c-message">
+              <div class="c-message__title">Nessun risultato trovato</div>
+              <div class="c-message__content c-message__content--small">
+                Nessun risultato trovato per la ricerca "<%= params[:s] %>".
+              </div>
+            </div>
+          <% end %>
         <% end %>
       </div>
     </div>
   </div>
 </div>
+
+</form>

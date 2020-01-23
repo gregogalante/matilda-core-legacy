@@ -71,4 +71,8 @@ default: &default
 
 ## Configurazione
 
+Le configurazioni disponibili sono documentate nel file sorgente **/lib/matilda_core/config.rb**.
+
+## Multilingua
+
 TODO

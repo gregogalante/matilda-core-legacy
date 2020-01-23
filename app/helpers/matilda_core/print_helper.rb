@@ -11,6 +11,11 @@ module MatildaCore
       date.strftime(format)
     end
 
+    def print_sidebar_item_label(item)
+      return item[:label] unless item[:label].include?('locale.')
+      I18n.t("matilda_core.sidebar.#{item[:label].split('locale.').last}", default: item[:label])
+    end
+
   end
 
 end

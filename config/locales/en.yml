@@ -1,0 +1,32 @@
+en:
+  matilda_core:
+    header:
+      profile: Profile
+      account_settings: Account settings
+      groups: My groups
+      logout: Logout
+    footer:
+      produced_by: Produced by
+      version: Version
+    sidebar:
+      groups: Dashboard
+      users: Users
+    cta:
+      cancel: Cancel
+      confirm: Confirm
+      create_new_group: Create new group
+    labels:
+      name: Name
+    titles:
+      select_a_group: Select a group
+      create_a_group: Create a group
+      users: Users
+    helps:
+      insert_name_of_group: Insert the name of the group
+    messages:
+      general_error: There was an internal error
+      name_not_valid: Name not valid
+      groups_creation_unpermitted: Groups can not be created
+      groups_max_number_per_user: You have reached the maximum number of groups
+
+    

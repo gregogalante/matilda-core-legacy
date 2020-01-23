@@ -5,7 +5,7 @@
       <% if !item[:permission] || @session.group_permissions.include?(item[:permission]) %>
         <li class="c-sidebar__list-item" <%= @_sidebar == item[:name] ? 'data-active' : '' %>>
           <a href="<%= item[:url] %>" class="c-sidebar__list-link" title="<%= item[:name] %>">
-            <i class="<%= item[:icon] %>"></i> <span><%= item[:label] %></span>
+            <i class="<%= item[:icon] %>"></i> <span><%= print_sidebar_item_label(item) %></span>
           </a>
         </li>
       <% end %>

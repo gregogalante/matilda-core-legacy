@@ -1,26 +1,26 @@
 {
-  "application.js": "/packs/js/application-f893d817050985890a90.js",
-  "application.js.map": "/packs/js/application-f893d817050985890a90.js.map",
+  "application.js": "/packs/js/application-97c82f9ce05aa9a5b80b.js",
+  "application.js.map": "/packs/js/application-97c82f9ce05aa9a5b80b.js.map",
   "entrypoints": {
     "application": {
       "js": [
-        "/packs/js/application-f893d817050985890a90.js"
+        "/packs/js/application-97c82f9ce05aa9a5b80b.js"
       ],
       "js.map": [
-        "/packs/js/application-f893d817050985890a90.js.map"
+        "/packs/js/application-97c82f9ce05aa9a5b80b.js.map"
       ]
     },
     "matilda": {
       "js": [
-        "/packs/js/matilda-da1252f33f1382ce890a.js"
+        "/packs/js/matilda-af60787fcc60fbcddf5d.js"
       ],
       "js.map": [
-        "/packs/js/matilda-da1252f33f1382ce890a.js.map"
+        "/packs/js/matilda-af60787fcc60fbcddf5d.js.map"
       ]
     }
   },
-  "matilda.js": "/packs/js/matilda-da1252f33f1382ce890a.js",
-  "matilda.js.map": "/packs/js/matilda-da1252f33f1382ce890a.js.map",
+  "matilda.js": "/packs/js/matilda-af60787fcc60fbcddf5d.js",
+  "matilda.js.map": "/packs/js/matilda-af60787fcc60fbcddf5d.js.map",
   "media/webfonts/fa-brands-400.eot": "/packs/media/webfonts/fa-brands-400-088a34f7.eot",
   "media/webfonts/fa-brands-400.svg": "/packs/media/webfonts/fa-brands-400-d7229311.svg",
   "media/webfonts/fa-brands-400.ttf": "/packs/media/webfonts/fa-brands-400-273dc9bf.ttf",

@@ -13,14 +13,14 @@ module MatildaCore
 
       MatildaCore.config.add_sidebar_item(
         'matilda_core.groups',
-        label: 'Dashboard',
+        label: 'locale.groups',
         url: MatildaCore::Engine.routes.url_helpers.groups_index_view_path,
         icon: 'fas fa-tachometer-alt',
         index: 10
       )
       MatildaCore.config.add_sidebar_item(
         'matilda_core.memberships',
-        label: 'Utenti',
+        label: 'locale.users',
         url: MatildaCore::Engine.routes.url_helpers.app_memberships_index_view_path,
         icon: 'fas fa-users',
         permission: 'matilda_core.memberships',

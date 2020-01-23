@@ -13,19 +13,19 @@ module MatildaCore
 
       validates :name,
                 presence: true, type: :string, blank: false,
-                err: 'Nome non valido'
+                err: I18n.t('matilda_core.messages.name_not_valid')
 
       validates :log_who, type: :string
 
       to_validate_logic do
         if params[:log_who]
           unless MatildaCore.config.groups_permit_creation_to_users
-            err('Non possono essere creati gruppi', code: :log_who)
+            err(I18n.t('matilda_core.messages.groups_creation_unpermitted'), code: :log_who)
             break
           end
 
           if MatildaCore.config.groups_max_number_per_user && MatildaCore::Membership.where(user_uuid: params[:log_who]).length >= MatildaCore.config.groups_max_number_per_user
-            err('Hai raggiunto il numero massimo di gruppi', code: :log_who)
+            err(I18n.t('matilda_core.messages.groups_max_number_per_user'), code: :log_who)
             break
           end
         end
