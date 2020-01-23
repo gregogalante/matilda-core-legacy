@@ -19,30 +19,32 @@
       </div>
       <div class="c-card__body">
         <% if @users.length.positive? %>
-          <table class="c-table">
-            <thead>
-              <tr>
-                <th>Cognome</th>
-                <th>Nome</th>
-                <th>Username</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @users.each do |user| %>
+          <div class="c-table__responsive">
+            <table class="c-table">
+              <thead>
                 <tr>
-                  <td><%= user.surname %></td>
-                  <td><%= user.name %></td>
-                  <td>@<%= user.username %></td>
-                  <td class="c-table__actions">
-                    <a class="c-button" data-tippy-content="Gestisci" data-controller="tippy" href="<%= matilda_core.app_memberships_edit_view_path(user_uuid: user.uuid) %>">
-                      <i class="fas fa-edit"></i>
-                    </a>
-                  </td>
+                  <th>Cognome</th>
+                  <th>Nome</th>
+                  <th>Username</th>
+                  <th></th>
                 </tr>
-              <% end %>
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                <% @users.each do |user| %>
+                  <tr>
+                    <td><%= user.surname %></td>
+                    <td><%= user.name %></td>
+                    <td>@<%= user.username %></td>
+                    <td class="c-table__actions">
+                      <a class="c-button" data-tippy-content="Gestisci" data-controller="tippy" href="<%= matilda_core.app_memberships_edit_view_path(user_uuid: user.uuid) %>">
+                        <i class="fas fa-edit"></i>
+                      </a>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
 
           <div class="c-pagination">
             <%= paginate @users %>

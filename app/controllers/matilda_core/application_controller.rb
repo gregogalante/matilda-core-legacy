@@ -59,7 +59,7 @@ module MatildaCore
       session_data = {}
       session_data[:token] = @session.to_string
       session_data[:exp] = 365.days.from_now.to_i
-      JWT.encode(session_data, Rails.application.credentials.secret_key_base)
+      JWT.encode(session_data, Rails.application.credentials.secret_key_base || 'matilda')
     end
 
     # Funzione utilizzata per distruggere una sessione quando l'utente esegue il logout.
@@ -127,7 +127,7 @@ module MatildaCore
         type = 'api'
         token = request.headers['Authorization'].split(' ').last
         begin
-          token_decoded = JWT.decode(token, Rails.application.credentials.secret_key_base)[0]
+          token_decoded = JWT.decode(token, Rails.application.credentials.secret_key_base || 'matilda')[0]
           session_data = token_decoded['token'].to_s
         rescue StandardError
           return { result: false, type: type }
