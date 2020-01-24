@@ -3,7 +3,7 @@
     <div class="c-card">
       <div class="c-card__header">
         <div class="c-card__header-title">
-          Gestione permessi
+          <%= I18n.t 'matilda_core.titles.edit_permissions' %>
         </div>
       </div>
       <div class="c-card__body">
@@ -11,20 +11,20 @@
           <% groups = MatildaCore.config.memberships_permissions.group_by { |mp| mp[:group] } %>
           <% groups.each do |group, permissions| %>
             <div class="c-form__title c-grid__col c-grid__col--24">
-              <%= group %>
+              <%= print_config_locale(group) %>
             </div>
             
             <% permissions = permissions.sort_by { |p| p[:index] } %>
             <% permissions.each do |permission| %>
               <div class="c-input-checkbox c-grid__col c-grid__col--24">
                 <input type="checkbox" class="c-input-checkbox__field" name="permissions[]" id="permissions<%= permission[:name] %>" value="<%= permission[:name] %>" data-target="form.field" <%= @membership.permissions.include?(permission[:name]) ? 'checked' : '' %>>
-                <label class="c-input-checkbox__label" for="permissions<%= permission[:name] %>"><%= permission[:label] %></label>
+                <label class="c-input-checkbox__label" for="permissions<%= permission[:name] %>"><%= print_config_locale(permission[:label]) %></label>
               </div>
             <% end %>
           <% end %>
 
           <div class="c-form__actions c-grid__col c-grid__col--24">
-            <button class="c-button" data-target="form.submit">Aggiorna</button>
+            <button class="c-button" data-target="form.submit"><%= I18n.t 'matilda_core.cta.update' %></button>
           </div>
         <% end %>
       </div>
@@ -34,22 +34,22 @@
     <div class="c-card c-card--hasnext">
       <div class="c-card__header">
         <div class="c-card__header-title">
-          Informazioni
+          <%= I18n.t 'matilda_core.titles.informations' %>
         </div>
       </div>
       <div class="c-card__body">
         <table class="c-table">
           <tbody>
             <tr>
-              <th>Username</th>
+              <th><%= I18n.t 'matilda_core.labels.username' %></th>
               <td>@<%= @user.username %></td>
             </tr>
             <tr>
-              <th>Data di registrazione</th>
+              <th><%= I18n.t 'matilda_core.labels.registration_date' %></th>
               <td><%= print_date(@membership.created_at) %></td>
             </tr>
             <tr>
-              <th>Ultimo accesso</th>
+              <th><%= I18n.t 'matilda_core.labels.last_access_date' %></th>
               <td><%= print_date(@user.user_sessions.last&.created_at) %></td>
             </tr>
           </tbody>

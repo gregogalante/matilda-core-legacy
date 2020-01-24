@@ -22,7 +22,7 @@ module MatildaCore
 
     def invitation_view
       sidebar_set('matilda_core.memberships')
-      section_head_set('Invita utente', [{ label: 'Utenti', url: matilda_core.app_memberships_index_view_path }, { label: 'Invita utente' }])
+      section_head_set(I18n.t('matilda_core.titles.invite_user'), [{ label: I18n.t('matilda_core.titles.users'), url: matilda_core.app_memberships_index_view_path }, { label: I18n.t('matilda_core.titles.invite_user') }])
     end
 
     def edit_view
@@ -30,7 +30,7 @@ module MatildaCore
       @membership = @session.group.memberships.find_by(user_uuid: params[:user_uuid])
 
       sidebar_set('matilda_core.memberships')
-      section_head_set(@user.complete_name, [{ label: 'Utenti', url: matilda_core.app_memberships_index_view_path }, { label: 'Gestisci utente' }])
+      section_head_set(@user.complete_name, [{ label: I18n.t('matilda_core.titles.users'), url: matilda_core.app_memberships_index_view_path }, { label: I18n.t('matilda_core.titles.manage_user') }])
     end
 
     def invitation_action

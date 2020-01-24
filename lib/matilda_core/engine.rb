@@ -13,14 +13,14 @@ module MatildaCore
 
       MatildaCore.config.add_sidebar_item(
         'matilda_core.groups',
-        label: 'locale.groups',
+        label: 'locale.matilda_core.titles.dashboard',
         url: MatildaCore::Engine.routes.url_helpers.groups_index_view_path,
         icon: 'fas fa-tachometer-alt',
         index: 10
       )
       MatildaCore.config.add_sidebar_item(
         'matilda_core.memberships',
-        label: 'locale.users',
+        label: 'locale.matilda_core.titles.users',
         url: MatildaCore::Engine.routes.url_helpers.app_memberships_index_view_path,
         icon: 'fas fa-users',
         permission: 'matilda_core.memberships',
@@ -32,9 +32,9 @@ module MatildaCore
     initializer 'matilda_core.add_memberships_permissions' do |_app|
       MatildaCore.config.add_memberships_permission(
         'matilda_core.memberships',
-        label: 'Possibilità di gestire gli utenti e i relativi permessi',
+        label: 'locale.matilda_core.strings.manage_users_permission',
         index: 0,
-        group: 'Gestione utenti'
+        group: 'locale.matilda_core.titles.users'
       )
     end
 

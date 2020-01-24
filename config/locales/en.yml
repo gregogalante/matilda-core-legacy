@@ -8,25 +8,41 @@ en:
     footer:
       produced_by: Produced by
       version: Version
-    sidebar:
-      groups: Dashboard
-      users: Users
     cta:
       cancel: Cancel
       confirm: Confirm
-      create_new_group: Create new group
+      manage: Manage
+      back: Back
+      invite: Invite
+      create: Create
+      update: Update
     labels:
       name: Name
+      surname: Surname
+      username: Username
+      email: Email address
+      registration_date: Date of registration
+      last_access_date: Last login
     titles:
       select_a_group: Select a group
       create_a_group: Create a group
       users: Users
+      users_list: Users list
+      invite_user: Invite user
+      manage_user: Manage user
+      edit_permissions: Edit permissions
+      informations: Informations
+      dashboard: Dashboard
+      personal_informations: Personal informations
     helps:
       insert_name_of_group: Insert the name of the group
+      search_something: Search something
     messages:
       general_error: There was an internal error
       name_not_valid: Name not valid
       groups_creation_unpermitted: Groups can not be created
       groups_max_number_per_user: You have reached the maximum number of groups
+    strings:
+      manage_users_permission: Possibilità di gestire gli utenti e i relativi permessi
 
     

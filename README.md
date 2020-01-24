@@ -73,6 +73,14 @@ default: &default
 
 Le configurazioni disponibili sono documentate nel file sorgente **/lib/matilda_core/config.rb**.
 
+Per configurare il modulo creare un file **/config/initializers/matilda_core.rb**:
+
+```ruby
+MatildaCore.configure do |config|
+  config.global_title = 'My App Name'
+end
+```
+
 ## Multilingua
 
 TODO
