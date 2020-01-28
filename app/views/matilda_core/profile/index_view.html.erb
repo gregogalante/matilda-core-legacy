@@ -26,11 +26,11 @@
     <div class="c-card">
       <div class="c-card__header">
         <div class="c-card__header-title">
-          Indirizzi email
+          <%= I18n.t 'matilda_core.titles.email_addresses' %>
         </div>
         <ul class="c-card__header-actions">
           <li class="c-card__header-action">
-            <a class="c-button jss-modal-activator" href="#addEmailModal">Aggiungi</a>
+            <a class="c-button jss-modal-activator" href="#addEmailModal"><%= I18n.t 'matilda_core.cta.add' %></a>
           </li>
         </ul>
       </div>
@@ -39,7 +39,7 @@
           <table class="c-table">
             <thead>
               <tr>
-                <th>Indirizzo</th>
+                <th><%= I18n.t 'matilda_core.labels.email' %></th>
                 <th></th>
               </tr>
             </thead>
@@ -51,7 +51,7 @@
                   </td>
                   <td class="c-table__actions">
                     <% if user_email.primary %>
-                      Indirizzo primario
+                      <%= I18n.t 'matilda_core.strings.primary_address' %>
                     <% else %>
                       <a class="c-button c-button--orange" data-tippy-content="Elimina" data-controller="link tippy" data-action="ajax:success->link#validateResponse" data-method="post" data-remote="true" data-link-reload="true"  href="<%= matilda_core.profile_remove_email_action_path(email: user_email.email) %>">
                         <i class="fas fa-trash"></i>
@@ -80,18 +80,18 @@
     <div class="c-card c-card--hasnext">
       <div class="c-card__header">
         <div class="c-card__header-title">
-          Username
+          <%= I18n.t 'matilda_core.titles.username' %>
         </div>
       </div>
       <div class="c-card__body">
         <%= form_tag matilda_core.profile_edit_username_action_path, method: :post, remote: true, data: { controller: 'form', action: 'ajax:success->form#validateResponse', 'form-reload': 'true' }, class: 'c-form c-grid__container-spaced' do %>
           <div class="c-input c-grid__col c-grid__col--24">
-            <label class="c-input__label" for="username">Username</label>
+            <label class="c-input__label" for="username"><%= I18n.t 'matilda_core.labels.username' %></label>
             <input class="c-input__field" type="text" name="username" id="username" autocomplete="off" data-target="form.field" value="<%= @session.user.username %>" required>
           </div>
 
           <div class="c-form__actions c-grid__col c-grid__col--24">
-            <button class="c-button" data-target="form.submit">Aggiorna</button>
+            <button class="c-button" data-target="form.submit"><%= I18n.t 'matilda_core.cta.update' %></button>
           </div>
         <% end %>
       </div>
@@ -99,28 +99,28 @@
     <div class="c-card">
       <div class="c-card__header">
         <div class="c-card__header-title">
-          Aggiornamento password
+          <%= I18n.t 'matilda_core.titles.update_password' %>
         </div>
       </div>
       <div class="c-card__body">
         <%= form_tag matilda_core.profile_edit_password_action_path, method: :post, remote: true, data: { controller: 'form', action: 'ajax:success->form#validateResponse', 'form-reload': 'true' }, class: 'c-form c-grid__container-spaced' do %>
           <div class="c-input c-grid__col c-grid__col--24">
-            <label class="c-input__label" for="password_old">Password attuale</label>
+            <label class="c-input__label" for="password_old"><%= I18n.t 'matilda_core.labels.current_password' %></label>
             <input class="c-input__field" type="password" name="password_old" id="password_old" autocomplete="off" data-target="form.field" required>
           </div>
 
           <div class="c-input c-grid__col c-grid__col--24">
-            <label class="c-input__label" for="password">Nuova password</label>
+            <label class="c-input__label" for="password"><%= I18n.t 'matilda_core.labels.new_password' %></label>
             <input class="c-input__field" type="password" name="password" id="password" autocomplete="off" data-target="form.field" required>
           </div>
 
           <div class="c-input c-grid__col c-grid__col--24">
-            <label class="c-input__label" for="password_confirmation">Conferma nuova password</label>
+            <label class="c-input__label" for="password_confirmation"><%= I18n.t 'matilda_core.labels.new_password_confirmation' %></label>
             <input class="c-input__field" type="password" name="password_confirmation" id="password_confirmation" autocomplete="off" data-target="form.field" required>
           </div>
 
           <div class="c-form__actions c-grid__col c-grid__col--24">
-            <button class="c-button" data-target="form.submit">Aggiorna</button>
+            <button class="c-button" data-target="form.submit"><%= I18n.t 'matilda_core.cta.update' %></button>
           </div>
         <% end %>
       </div>
@@ -135,7 +135,7 @@
       <div class="c-card">
         <div class="c-card__header">
           <div class="c-card__header-title">
-            Aggiungi nuovo indirizzo email
+            <%= I18n.t 'matilda_core.titles.add_email_address' %>
           </div>
 
           <ul class="c-card__header-actions">
@@ -147,8 +147,8 @@
         <div class="c-card__body">
           <%= form_tag matilda_core.profile_create_email_action_path, method: :post, remote: true, data: { controller: 'form', action: 'ajax:success->form#validateResponse', 'form-reload': 'true' }, class: 'c-form c-grid__container-spaced' do %>
             <div class="c-input c-grid__col c-grid__col--24">
-              <label class="c-input__label" for="addEmailModalEmail">Indirizzo email</label>
-              <input class="c-input__field" name="email" id="addEmailModalEmail" data-target="form.field" placeholder="Inserisci il tuo indirizzo email">
+              <label class="c-input__label" for="addEmailModalEmail"><%= I18n.t 'matilda_core.labels.email' %></label>
+              <input class="c-input__field" name="email" id="addEmailModalEmail" data-target="form.field" placeholder="<%= I18n.t 'matilda_core.helps.insert_email' %>">
             </div>
 
             <div class="c-form__actions c-grid__col c-grid__col--24">

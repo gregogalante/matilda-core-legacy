@@ -17,7 +17,7 @@ module MatildaCore
 
       @users = @session.group.users
       @users = @users.where('name LIKE ? OR surname LIKE ? OR username LIKE ?', params[:s], params[:s], params[:s]) unless params[:s].blank?
-      @users = @users.page(params[:page]).per(15)
+      @users = @users.order('surname ASC, name ASC').page(params[:page]).per(15)
     end
 
     def invitation_view

@@ -2,7 +2,7 @@ import { Controller } from 'stimulus'
 import { getSreenSizes, enableScroll, disableScroll } from '../utils'
 
 class HeaderController extends Controller {
-  static targets = ['profileMenu']
+  static targets = ['profileMenu', 'langMenu']
 
   connect() {
     // set menu preference to close in case of mobile device
@@ -16,6 +16,13 @@ class HeaderController extends Controller {
    */
   toggleProfile() {
     this.profileMenuTarget.classList.toggle('is-active')
+  }
+
+  /**
+   * @function toggleLang
+   */
+  toggleLang() {
+    this.langMenuTarget.classList.toggle('is-active')
   }
 
   /**

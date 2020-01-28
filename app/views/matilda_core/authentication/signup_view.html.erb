@@ -1,44 +1,44 @@
 <div class="c-card c-card--centerpage">
   <div class="c-card__header">
     <div class="c-card__header-title">
-      Signup
+      <%= I18n.t 'matilda_core.titles.signup' %>
     </div>
 
     <ul class="c-card__header-actions">
       <li class="c-card__header-action">
-        <a class="c-button c-button--black" href="<%= matilda_core.authentication_login_view_path %>">Login</a>
+        <a class="c-button c-button--black" href="<%= matilda_core.authentication_login_view_path %>"><%= I18n.t 'matilda_core.cta.login' %></a>
       </li>
     </ul>
   </div>
   <div class="c-card__body">
     <%= form_tag matilda_core.authentication_signup_action_path, method: :post, remote: true, data: { controller: 'form', action: 'ajax:success->form#validateResponse', 'form-redirect': matilda_core.groups_select_view_path }, class: 'c-form c-grid__container-spaced' do %>
       <div class="c-input c-grid__col c-grid__col--24 c-grid__col--md-12">
-        <label class="c-input__label" for="name">Nome</label>
+        <label class="c-input__label" for="name"><%= I18n.t 'matilda_core.labels.name' %></label>
         <input class="c-input__field" type="text" name="name" id="name" autocomplete="off" data-target="form.field" required>
       </div>
 
       <div class="c-input c-grid__col c-grid__col--24 c-grid__col--md-12">
-        <label class="c-input__label" for="surname">Cognome</label>
+        <label class="c-input__label" for="surname"><%= I18n.t 'matilda_core.labels.surname' %></label>
         <input class="c-input__field" type="text" name="surname" id="surname" autocomplete="off" data-target="form.field" required>
       </div>
       
       <div class="c-input c-grid__col c-grid__col--24 c-grid__col--md-12">
-        <label class="c-input__label" for="username">Username</label>
+        <label class="c-input__label" for="username"><%= I18n.t 'matilda_core.labels.username' %></label>
         <input class="c-input__field" type="text" name="username" id="username" autocomplete="off" data-target="form.field" required>
       </div>
 
       <div class="c-input c-grid__col c-grid__col--24 c-grid__col--md-12">
-        <label class="c-input__label" for="email">Indirizzo email</label>
+        <label class="c-input__label" for="email"><%= I18n.t 'matilda_core.labels.email' %></label>
         <input class="c-input__field" type="email" name="email" id="email" autocomplete="off" data-target="form.field" required>
       </div>
 
       <div class="c-input c-grid__col c-grid__col--24 c-grid__col--md-12">
-        <label class="c-input__label" for="password">Password</label>
+        <label class="c-input__label" for="password"><%= I18n.t 'matilda_core.labels.password' %></label>
         <input class="c-input__field" type="password" name="password" id="password" autocomplete="off" data-target="form.field" required>
       </div>
 
       <div class="c-input c-grid__col c-grid__col--24 c-grid__col--md-12">
-        <label class="c-input__label" for="password_confirmation">Conferma password</label>
+        <label class="c-input__label" for="password_confirmation"><%= I18n.t 'matilda_core.labels.password_confirmation' %></label>
         <input class="c-input__field" type="password" name="password_confirmation" id="password_confirmation" autocomplete="off" data-target="form.field" required>
       </div>
 

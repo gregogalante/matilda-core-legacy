@@ -66,6 +66,11 @@
   }
 }
 
+.c-header__nav-item-locale {
+  width: 25px;
+  height: 25px;
+}
+
 .c-header__nav-menu {
   position: absolute;
   top: $size_header_height + 7px;
@@ -91,6 +96,39 @@
   
   &--large {
     width: 400px;
+  }
+
+  &--locales {
+    text-align: right;
+    padding: 5px;
+    width: auto;
+    max-width: 200px;
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.c-header__nav-menu-locale {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: $color_cenere;
+  transition: all 0.3s ease;
+  border: solid 2px $color_cenere;
+  margin: 0 5px;
+
+  img {
+    width: 100%;
+  }
+
+  &--active {
+    background-color: $color_primary;
+    border-color: $color_primary;
+  }
+
+  &:hover {
+    border-color: $color_primary;
   }
 }
 

@@ -3,10 +3,26 @@
     <span class="c-header__logo-title"><%= MatildaCore.config.global_title %></span>
   </a>
 
-  <% if @session %>
-    <nav class="c-header__nav">
+  <nav class="c-header__nav">
+    <% if I18n.available_locales.length.positive? %>
       <div class="c-header__nav-item">
-        <button class="c-header__nav-item-action" data-action="click->header#toggleProfile" title="Profilo">
+        <button class="c-header__nav-item-action" data-action="click->header#toggleLang" title="<%= I18n.t 'matilda_core.header.lang' %>">
+          <img class="c-header__nav-item-locale" src="<%= asset_pack_path("media/locales/_#{locale}.png") %>" />
+        </button>
+
+        <div class="c-header__nav-menu c-header__nav-menu--locales" data-target="header.langMenu">
+          <% I18n.available_locales.each do |locale| %>
+            <a class="c-header__nav-menu-locale <%= locale === I18n.locale ? 'c-header__nav-menu-locale--active' : '' %>" href="#">
+              <img src="<%= asset_pack_path("media/locales/_#{locale}.png") %>" />
+            </a>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if @session %>
+      <div class="c-header__nav-item">
+        <button class="c-header__nav-item-action" data-action="click->header#toggleProfile" title="<%= I18n.t 'matilda_core.header.profile' %>">
           <%= I18n.t 'matilda_core.header.profile' %>
         </button>
 
@@ -36,7 +52,7 @@
           <i class="fas fa-bars"></i>
         </button>
       </div>
-    </nav>
-  <% end %>
+    <% end %>
+  </nav>
 
 </header>

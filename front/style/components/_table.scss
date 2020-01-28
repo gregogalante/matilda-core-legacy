@@ -33,3 +33,9 @@
 .c-table__responsive {
   overflow-y: auto;
 }
+
+@media (max-width: $breakpoint_sm) {
+  .c-table__col-not-imp {
+    display: none;
+  }
+}

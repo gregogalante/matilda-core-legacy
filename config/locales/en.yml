@@ -5,6 +5,7 @@ en:
       account_settings: Account settings
       groups: My groups
       logout: Logout
+      lang: Lang
     footer:
       produced_by: Produced by
       version: Version
@@ -16,6 +17,11 @@ en:
       invite: Invite
       create: Create
       update: Update
+      signup: Signup
+      recover_password: Recover password
+      login: Login
+      continue: Continue
+      add: Add new
     labels:
       name: Name
       surname: Surname
@@ -23,6 +29,13 @@ en:
       email: Email address
       registration_date: Date of registration
       last_access_date: Last login
+      username_or_email: Username / Email address
+      password: Password
+      password_confirmation: Password confirmation
+      security_code: Security code
+      new_password: New password
+      new_password_confirmation: Confirm the new password
+      current_password: Current password
     titles:
       select_a_group: Select a group
       create_a_group: Create a group
@@ -34,8 +47,22 @@ en:
       informations: Informations
       dashboard: Dashboard
       personal_informations: Personal informations
+      login: Login
+      signup: Signup
+      recover_password: Recover password
+      update_password: Update password
+      email_addresses: Email addresses
+      username: Username
+      add_email_address: Add new email address
+      account_settings: Account settings
     helps:
       insert_name_of_group: Insert the name of the group
+      insert_username_or_email: Insert the username or email addess
+      insert_password: Insert the password
+      insert_security_code: Insert the security code received via email
+      insert_new_password: Insert the new password
+      insert_new_password_confirmation: Insert the new password to confirm
+      insert_email: Insert an email address
       search_something: Search something
     messages:
       general_error: There was an internal error
@@ -44,5 +71,8 @@ en:
       groups_max_number_per_user: You have reached the maximum number of groups
     strings:
       manage_users_permission: Possibilità di gestire gli utenti e i relativi permessi
-
-    
+      recover_password_complete_title: Email submitted
+      recover_password_complete_content: An email has been sent to you with information to continue updating your password.
+      update_password_complete_title: Password correctly updated
+      update_password_complete_content: Your credentials have been successfully updated. Now you can log in using the new password.
+      primary_address: Primary address

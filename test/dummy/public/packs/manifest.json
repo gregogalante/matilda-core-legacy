@@ -12,15 +12,17 @@
     },
     "matilda": {
       "js": [
-        "/packs/js/matilda-5381b43f764ac5f8c833.js"
+        "/packs/js/matilda-ddef4499a304165c16b6.js"
       ],
       "js.map": [
-        "/packs/js/matilda-5381b43f764ac5f8c833.js.map"
+        "/packs/js/matilda-ddef4499a304165c16b6.js.map"
       ]
     }
   },
-  "matilda.js": "/packs/js/matilda-5381b43f764ac5f8c833.js",
-  "matilda.js.map": "/packs/js/matilda-5381b43f764ac5f8c833.js.map",
+  "matilda.js": "/packs/js/matilda-ddef4499a304165c16b6.js",
+  "matilda.js.map": "/packs/js/matilda-ddef4499a304165c16b6.js.map",
+  "media/locales/_en.png": "/packs/media/locales/_en-6f382b2d.png",
+  "media/locales/_it.png": "/packs/media/locales/_it-cc79b186.png",
   "media/webfonts/fa-brands-400.eot": "/packs/media/webfonts/fa-brands-400-088a34f7.eot",
   "media/webfonts/fa-brands-400.svg": "/packs/media/webfonts/fa-brands-400-d7229311.svg",
   "media/webfonts/fa-brands-400.ttf": "/packs/media/webfonts/fa-brands-400-273dc9bf.ttf",
