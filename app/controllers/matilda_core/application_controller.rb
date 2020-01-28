@@ -10,11 +10,13 @@ module MatildaCore
   # - actions: azioni che eseguono operazioni (example 'login_action')
   class ApplicationController < ActionController::Base
 
+    layout 'matilda_core/application'
+
     protect_from_forgery with: :exception
 
     skip_before_action :verify_authenticity_token
 
-    layout 'matilda_core/application'
+    before_action :set_locale
 
     def index
       if session_present?
@@ -22,6 +24,23 @@ module MatildaCore
       else
         redirect_to matilda_core.authentication_login_view_path
       end
+    end
+
+    def helper_update_session_locale
+      session_set unless @session
+
+      @session.locale(params[:locale].to_sym) if I18n.available_locales.include?(params[:locale].to_sym)
+      render_json_success({ token: session_update })
+    end
+
+    # FUNZIONI DI GESTIONE MULTILINGUA
+    ##############################################################################################################
+
+    def set_locale
+      session_set unless @session
+      locale = @session&.locale || I18n.default_locale
+
+      I18n.locale = locale
     end
 
     # FUNZIONI DI GESTIONE ELEMENTI VIEW

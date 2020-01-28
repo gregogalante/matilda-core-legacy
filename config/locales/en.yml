@@ -22,6 +22,8 @@ en:
       login: Login
       continue: Continue
       add: Add new
+      delete: Delete
+      set_primary: Set as primary
     labels:
       name: Name
       surname: Surname
@@ -70,9 +72,13 @@ en:
       groups_creation_unpermitted: Groups can not be created
       groups_max_number_per_user: You have reached the maximum number of groups
     strings:
-      manage_users_permission: Possibilità di gestire gli utenti e i relativi permessi
+      no_data_found_title: No data found
+      no_data_found_content: There are not data present on the system
+      no_result_found_title: No result found
+      no_result_found_content: No result found for the search
       recover_password_complete_title: Email submitted
       recover_password_complete_content: An email has been sent to you with information to continue updating your password.
       update_password_complete_title: Password correctly updated
       update_password_complete_content: Your credentials have been successfully updated. Now you can log in using the new password.
       primary_address: Primary address
+      manage_users_permission: Ability to manage users and their permissions

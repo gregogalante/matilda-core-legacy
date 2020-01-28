@@ -3,6 +3,8 @@
 MatildaCore::Engine.routes.draw do
   root 'application#index'
 
+  post 'helper/update-session-locale', to: 'application#helper_update_session_locale', as: 'helper_update_session_locale'
+
   # authentication
   get 'authentication/login-view', to: 'authentication#login_view', as: 'authentication_login_view'
   get 'authentication/signup-view', to: 'authentication#signup_view', as: 'authentication_signup_view'

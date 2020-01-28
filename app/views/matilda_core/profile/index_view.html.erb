@@ -53,10 +53,10 @@
                     <% if user_email.primary %>
                       <%= I18n.t 'matilda_core.strings.primary_address' %>
                     <% else %>
-                      <a class="c-button c-button--orange" data-tippy-content="Elimina" data-controller="link tippy" data-action="ajax:success->link#validateResponse" data-method="post" data-remote="true" data-link-reload="true"  href="<%= matilda_core.profile_remove_email_action_path(email: user_email.email) %>">
+                      <a class="c-button c-button--orange" data-tippy-content="<%= I18n.t 'matilda_core.cta.delete' %>" data-controller="link tippy" data-action="ajax:success->link#validateResponse" data-method="post" data-remote="true" data-link-reload="true"  href="<%= matilda_core.profile_remove_email_action_path(email: user_email.email) %>">
                         <i class="fas fa-trash"></i>
                       </a>
-                      <a class="c-button" data-tippy-content="Imposta come primario" data-controller="link tippy" data-action="ajax:success->link#validateResponse" data-method="post" data-remote="true" data-link-reload="true" href="<%= matilda_core.profile_toggle_email_primary_action_path(email: user_email.email) %>">
+                      <a class="c-button" data-tippy-content="<%= I18n.t 'matilda_core.cta.set_primary' %>" data-controller="link tippy" data-action="ajax:success->link#validateResponse" data-method="post" data-remote="true" data-link-reload="true" href="<%= matilda_core.profile_toggle_email_primary_action_path(email: user_email.email) %>">
                         <i class="fas fa-star"></i>
                       </a>
                     <% end %>
@@ -67,9 +67,9 @@
           </table>
         <% else %>
           <div class="c-message">
-            <div class="c-message__title">Nessuna email registrata</div>
+            <div class="c-message__title"><%= I18n.t 'matilda_core.strings.no_data_found_title' %></div>
             <div class="c-message__content c-message__content--small">
-              Inserisci un indirizzo email per utilizzare la piattaforma.
+              <%= I18n.t 'matilda_core.strings.no_data_found_content' %>.
             </div>
           </div>
         <% end %>

@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.3
+
+- Completamento supporto multilingua.
+- Traduzione sistema in inglese.
+
 ## 0.1.2
 
 - Inizio predisposizione al multilingua.

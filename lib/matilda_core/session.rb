@@ -32,6 +32,14 @@ module MatildaCore
     # Funzioni principali di gestione dei dati
     ######################################################################
 
+    # Locale
+
+    def locale(locale = nil)
+      @data[:locale] = locale if locale
+
+      @data[:locale]
+    end
+
     # User session
 
     def user_session_uuid(user_session_uuid = nil)

@@ -52,16 +52,16 @@
         <% else %>
           <% if params[:s].blank? %>
             <div class="c-message">
-              <div class="c-message__title">Nessun utente registrato</div>
+              <div class="c-message__title"><%= I18n.t 'matilda_core.strings.no_data_found_title' %></div>
               <div class="c-message__content c-message__content--small">
-                Al momento non è stato registrato ancora nessun utente.
+                <%= I18n.t 'matilda_core.strings.no_data_found_content' %>.
               </div>
             </div>
           <% else %>
             <div class="c-message">
-              <div class="c-message__title">Nessun risultato trovato</div>
+              <div class="c-message__title"><%= I18n.t 'matilda_core.strings.no_result_found_title' %></div>
               <div class="c-message__content c-message__content--small">
-                Nessun risultato trovato per la ricerca "<%= params[:s] %>".
+                <%= I18n.t 'matilda_core.strings.no_result_found_content' %> "<%= params[:s] %>".
               </div>
             </div>
           <% end %>
