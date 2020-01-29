@@ -54,7 +54,7 @@ Rails.application.routes.draw do
 end
 ```
 
-7. Aggiungere un file **app/javasccript/packs/matilda.js** per eseguire il require dei moduli di Matilda
+7. Aggiungere un file **app/javascript/packs/matilda.js** per eseguire il require dei moduli di Matilda
 
 ```javascript
 import '../../../vendor/matilda_core/loader.js'
@@ -79,6 +79,49 @@ Per configurare il modulo creare un file **/config/initializers/matilda_core.rb*
 MatildaCore.configure do |config|
   config.global_title = 'My App Name'
 end
+```
+
+## Personalizzazione
+
+Tutto l'aspetto estetico dell'applicativo può essere personalizzato sovrascrivendo o personalizzando il CSS.
+In fase di installazione il comando **rails matilda_core:install:front** viene utilizzato per copiare tutti i sorgenti in **/vendor/matilda_core**. I sorgenti NON DEVONO MAI ESSERE MODIFICATI perchè nel caso di aggiornamenti del modulo rieseguendo lo stesso comando i vecchi sorgenti vengono sovrascritti da quelli nuovi.
+
+### Importare i sogenti JS e SCSS
+
+Per importare direttamente i sorgenti Javascript e SCSS del modulo seguire i seguenti punti:
+
+1. Modificare il file **app/javascript/packs/matilda.js** sostituendo l'import aggiunto in fase di installazione del modulo e aggiungendo l'import di un proprio file Javascript e SCSS:
+
+```javascript
+// import '../../../vendor/matilda_core/loader.js'
+import '../../../vendor/matilda_core/loader_assets.js'
+
+import '../style/main.scss'
+import '../scripts/main.js'
+```
+
+2. Modificare il file **app/javascript/style/main.scss** in modo da importare il main file CSS del modulo:
+
+```scss
+@import '../../../vendor/matilda_core/style/main';
+```
+
+3. Modificare il file **app/javascript/scripts/main.js** in modo da importare il main file javascript del modulo:
+
+```javascript
+import '../../../vendor/matilda_core/scripts/main'
+```
+
+A questo punto è possibile aggiungere il proprio codice CSS o Javascript all'interno dei file **app/javascript/style/main.scss** e **app/javascript/scripts/main.js**.
+
+### Sovrascrivere le variabili SCSS di default
+
+Tutte le variabili SCSS utilizzate dal modulo sono definite sul file parziale **vendor/matilda_core/style/_variables.scss**. L'importazione del resto dei file parziali necessari è dichiarata sul file parziale  **vendor/matilda_core/style/_imports.scss**. Per sovrascrivere le variabili SCSS di default basta copiare il contenuto del file **vendor/matilda_core/style/_variables.scss** in un proprio file (esempio: **app/javascript/style/_variables.scss**) e modificare il file **app/javascript/style/main.scss** come di seguito:
+
+```scss
+// @import '../../../vendor/matilda_core/style/main';
+@import 'variables';
+@import '../../../vendor/matilda_core/style/imports';
 ```
 
 ## Multilingua
