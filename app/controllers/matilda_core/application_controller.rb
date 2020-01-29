@@ -28,8 +28,8 @@ module MatildaCore
 
     def helper_update_session_locale
       session_set unless @session
-
-      @session.locale(params[:locale].to_sym) if I18n.available_locales.include?(params[:locale].to_sym)
+      @session&.locale(params[:locale].to_sym) if I18n.available_locales.include?(params[:locale].to_sym)
+      session[:mat_locale] = params[:locale]
       render_json_success({ token: session_update })
     end
 
@@ -38,7 +38,7 @@ module MatildaCore
 
     def set_locale
       session_set unless @session
-      locale = @session&.locale || I18n.default_locale
+      locale = @session&.locale || session[:mat_locale] || I18n.default_locale
 
       I18n.locale = locale
     end
@@ -70,6 +70,8 @@ module MatildaCore
 
     # Funzione che aggiorna la sessione e ritorna il token con la sessione aggiornata.
     def session_update(long = false)
+      return unless @session
+
       # salvo sessione su cookie
       cookies.encrypted[:mat_session] = { value: @session.to_string, expires: 30.days.from_now } if long
       session[:mat_session] = @session.to_string unless long
