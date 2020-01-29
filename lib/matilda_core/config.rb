@@ -84,7 +84,7 @@ module MatildaCore
     end
 
     # Permette di aggiungere un nuovo possibile livello di permesso alla applicazione.
-    def add_memberships_permission(name, label: '', group: 'Generali', index: 0)
+    def add_memberships_permission(name, label: '', group: 'Default', index: 0)
       names = @memberships_permissions.map { |i| i[:name] }
       throw 'Name already used' if names.include?(name)
 
