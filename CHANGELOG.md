@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.4
+
+- Fix bug selettore lingua nel caso di una sola lingua.
+- Modificata struttura CSS per semplificare personalizzazione dell'interfaccia.
+- Aggiornamento documentazione.
+
 ## 0.1.3
 
 - Completamento supporto multilingua.
