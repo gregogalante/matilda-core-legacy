@@ -1,23 +1,2 @@
-@import url('https://fonts.googleapis.com/css?family=Alata');
-
 @import "variables";
-@import "mixin";
-@import "normalize";
-@import "helpers";
-@import "base";
-
-@import "components/grid";
-@import "components/section";
-@import "components/header";
-@import "components/footer";
-@import "components/sidebar";
-@import "components/flash";
-@import "components/card";
-@import "components/button";
-@import "components/input";
-@import "components/message";
-@import "components/modal";
-@import "components/table";
-@import "components/pagination";
-@import "components/tag";
-@import "components/tile";
+@import "imports";
