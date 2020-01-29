@@ -14,7 +14,7 @@
           <% I18n.available_locales.each do |locale| %>
             <a
               class="c-header__nav-menu-locale <%= locale === I18n.locale ? 'c-header__nav-menu-locale--active' : '' %>"
-              href="<%= helper_update_session_locale_path(locale: locale) %>"
+              href="<%= matilda_core.helper_update_session_locale_path(locale: locale) %>"
               data-controller="link"
               data-action="ajax:success->link#validateResponse"
               data-method="post"

@@ -5,7 +5,7 @@ en:
       account_settings: Account settings
       groups: My groups
       logout: Logout
-      lang: Lang
+      lang: Language
     footer:
       produced_by: Produced by
       version: Version
