@@ -8,6 +8,8 @@ module MatildaCore
     # Invita un utente ad unirsi ad un gruppo.
     class InviteMemberCommand < MatildaCore::ApplicationCommand
 
+      attr_reader :user_uuid
+
       validates :group_uuid,
                 presence: true, type: :string, blank: false,
                 err: 'Gruppo non valido'
