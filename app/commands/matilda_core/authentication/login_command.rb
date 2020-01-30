@@ -11,7 +11,7 @@ module MatildaCore
 
       validates :username_email,
                 presence: true, type: :string, blank: false,
-                err: 'Username/Email non valido'
+                err: I18n.t('matilda_core.messages.username_email_not_valid')
 
       validates :password,
                 presence: true, type: :string, blank: false,

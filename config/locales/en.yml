@@ -69,6 +69,7 @@ en:
     messages:
       general_error: There was an internal error
       name_not_valid: Name not valid
+      username_email_not_valid: Username / Email address not valid
       groups_creation_unpermitted: Groups can not be created
       groups_max_number_per_user: You have reached the maximum number of groups
     strings:
