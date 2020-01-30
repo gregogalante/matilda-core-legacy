@@ -6,9 +6,9 @@ module MatildaCore
   class AppMembershipsController < MatildaCore::ApplicationController
 
     before_action do
-      session_present_check(:group_uuid)
-
-      redirect_to matilda_core.root_path unless session_permission_present?(['matilda_core.memberships'])
+      if session_present_check(:group_uuid)
+        redirect_to matilda_core.root_path unless session_permission_present?(['matilda_core.memberships'])
+      end
     end
 
     def index_view

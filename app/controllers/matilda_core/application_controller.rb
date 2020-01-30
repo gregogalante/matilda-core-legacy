@@ -137,6 +137,7 @@ module MatildaCore
       end
 
       redirect_to matilda_core.root_path
+      false
     end
 
     # Funzione utilizzabile per settare una nuova sessione utente (@session).
