@@ -15,7 +15,7 @@ module MatildaCore
 
       validates :password,
                 presence: true, type: :string, blank: false,
-                err: 'Password non valida'
+                err: I18n.t('matilda_core.messages.password_not_valid')
 
       validates :ip_address, type: :string
 
@@ -30,7 +30,7 @@ module MatildaCore
         user ||= MatildaCore::User.joins(:user_emails).find_by(matilda_core_user_emails: { email: params[:username_email] })
 
         unless user
-          err('Username o password non corretti', code: :username_email)
+          err(I18n.t('matilda_core.messages.username_email_not_valid'), code: :username_email)
           break
         end
 
@@ -40,7 +40,7 @@ module MatildaCore
         end
 
         unless BCrypt::Password.new(user.password) == params[:password]
-          err('Username o password non corretti', code: :password)
+          err(I18n.t('matilda_core.messages.username_email_not_valid'), code: :password)
           break
         end
 

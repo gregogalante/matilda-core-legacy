@@ -69,7 +69,13 @@ it:
     messages:
       general_error: Si è verificato un errore interno
       name_not_valid: Nome non valido
+      surname_not_valid: Cognome non valido
       username_email_not_valid: Username / Indirizzo Email non valido
+      password_not_valid: Password non valida
+      session_not_valid: Sessione non valida
+      username_not_valid: Username non valido
+      email_not_valid: Indirizzo Email non valido
+      user_not_valid: Utente non valido
       groups_creation_unpermitted: I gruppi non possono essere registrati
       groups_max_number_per_user: Hai raggiunto il numero massimo di gruppi disponibili
     strings:

@@ -14,20 +14,20 @@ module MatildaCore
       validates :username,
                 presence: true, type: :string, blank: false,
                 regex: MatildaCore::User::USERNAME_REGEX,
-                err: 'Username non valido'
+                err: I18n.t('matilda_core.messages.username_not_valid')
 
       validates :email,
                 presence: true, type: :string, blank: false,
                 regex: MatildaCore::User::EMAIL_REGEX,
-                err: 'Email non valida'
+                err: I18n.t('matilda_core.messages.email_not_valid')
 
       validates :name,
                 presence: true, type: :string, blank: false,
-                err: 'Nome non valido'
+                err: I18n.t('matilda_core.messages.name_not_valid')
 
       validates :surname,
                 presence: true, type: :string, blank: false,
-                err: 'Cognome non valido'
+                err: I18n.t('matilda_core.messages.surname_not_valid')
 
       validates :password,
                 presence: true, type: :string, blank: false,
