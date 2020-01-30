@@ -25,7 +25,7 @@ module MatildaCore
       section_head_set(I18n.t('matilda_core.titles.invite_user'), [{ label: I18n.t('matilda_core.titles.users'), url: matilda_core.app_memberships_index_view_path }, { label: I18n.t('matilda_core.titles.invite_user') }])
     end
 
-    def edit_view
+    def manage_view
       @user = @session.group.users.find_by(uuid: params[:user_uuid])
       @membership = @session.group.memberships.find_by(user_uuid: params[:user_uuid])
 

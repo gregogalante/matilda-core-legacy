@@ -36,7 +36,7 @@
                     <td><%= user.complete_name %></td>
                     <td class="c-table__col-not-imp">@<%= user.username %></td>
                     <td class="c-table__actions">
-                      <a class="c-button" data-tippy-content="<%= I18n.t 'matilda_core.cta.manage' %>" data-controller="tippy" href="<%= matilda_core.app_memberships_edit_view_path(user_uuid: user.uuid) %>">
+                      <a class="c-button" data-tippy-content="<%= I18n.t 'matilda_core.cta.manage' %>" data-controller="tippy" href="<%= matilda_core.app_memberships_manage_view_path(user_uuid: user.uuid) %>">
                         <i class="fas fa-edit"></i>
                       </a>
                     </td>

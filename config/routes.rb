@@ -37,7 +37,7 @@ MatildaCore::Engine.routes.draw do
   # memberships
   get 'app-memberships/index-view', to: 'app_memberships#index_view', as: 'app_memberships_index_view'
   get 'app-memberships/invitation-view', to: 'app_memberships#invitation_view', as: 'app_memberships_invitation_view'
-  get 'app-memberships/edit-view', to: 'app_memberships#edit_view', as: 'app_memberships_edit_view'
+  get 'app-memberships/manage-view', to: 'app_memberships#manage_view', as: 'app_memberships_manage_view'
   post 'app-memberships/invitation-action', to: 'app_memberships#invitation_action', as: 'app_memberships_invitation_action'
   post 'app-memberships/edit-permissions-action', to: 'app_memberships#edit_permissions_action', as: 'app_memberships_edit_permissions_action'
 end

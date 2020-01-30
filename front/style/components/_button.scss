@@ -149,58 +149,6 @@
     }
   }
 
-  &--twitter {
-    background-color: $color_twitter;
-
-    &:hover {
-      box-shadow: 0 5px 15px rgba(0,0,0,.05), 0 4px 10px rgba($color_twitter,.25);
-      background-color: darken($color_twitter, 5%);
-    }
-  
-    &:active, &:focus {
-      background-color: darken($color_twitter, 10%);
-    }
-  }
-
-  &--linkedin {
-    background-color: $color_linkedin;
-
-    &:hover {
-      box-shadow: 0 5px 15px rgba(0,0,0,.05), 0 4px 10px rgba($color_linkedin,.25);
-      background-color: darken($color_linkedin, 5%);
-    }
-  
-    &:active, &:focus {
-      background-color: darken($color_linkedin, 10%);
-    }
-  }
-
-  &--toggl {
-    background-color: $color_toggl;
-
-    &:hover {
-      box-shadow: 0 5px 15px rgba(0,0,0,.05), 0 4px 10px rgba($color_toggl,.25);
-      background-color: darken($color_toggl, 5%);
-    }
-  
-    &:active, &:focus {
-      background-color: darken($color_toggl, 10%);
-    }
-  }
-
-  &--dropbox {
-    background-color: $color_dropbox;
-
-    &:hover {
-      box-shadow: 0 5px 15px rgba(0,0,0,.05), 0 4px 10px rgba($color_dropbox,.25);
-      background-color: darken($color_dropbox, 5%);
-    }
-  
-    &:active, &:focus {
-      background-color: darken($color_dropbox, 10%);
-    }
-  }
-
   &--block {
     display: block;
     text-align: center;
