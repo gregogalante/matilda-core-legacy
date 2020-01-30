@@ -4,6 +4,7 @@
 
 - Fix bug selettore lingua nel caso di una sola lingua.
 - Modificata struttura CSS per semplificare personalizzazione dell'interfaccia.
+- Aggiunta configurazione per impostare il mittente delle email.
 - Aggiornamento documentazione.
 
 ## 0.1.3

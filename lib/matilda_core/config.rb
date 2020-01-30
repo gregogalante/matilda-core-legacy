@@ -16,6 +16,12 @@ module MatildaCore
     # Imposta la versione dell'applicativo.
     attr_accessor :global_version
 
+    # MAILER
+
+    # Imposta l'indirizzo del mittente delle emal inviate dal sistema.
+    # E' possibile impostare anche un valore con il formato: "Name <name@email.com>"
+    attr_accessor :mailer_from_address
+
     # AUTHENTICATION
 
     # Imposta la possibilita' di registrarsi autonomamente alla piattaforma.
@@ -58,6 +64,7 @@ module MatildaCore
       @global_title = 'Matilda'
       @global_date_format = '%d-%m-%Y'
       @global_version = MatildaCore::VERSION
+      @mailer_from_address = 'Matilda <matilda@1d3o.it>'
       @authentication_permit_signup = true
       @authentication_signup_default_group_uuid = nil
       @authentication_signup_default_group_permissions = []
