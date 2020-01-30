@@ -6,6 +6,7 @@
 - Modificata struttura CSS per semplificare personalizzazione dell'interfaccia.
 - Aggiunta configurazione per impostare il mittente delle email.
 - Aggiornamento documentazione.
+- Corretto bug su schermata di gestione utenti in fase di aggiornamento permessi.
 
 ## 0.1.3
 

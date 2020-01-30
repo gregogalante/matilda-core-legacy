@@ -58,9 +58,8 @@ module MatildaCore
     end
 
     def generate_edit_permissions_command
-      command_params = params.permit(permissions: [])
+      command_params = params.permit(:user_uuid, permissions: [])
       command_params[:group_uuid] = @session.group_uuid
-      command_params[:user_uuid] = @session.user_uuid
       command_params[:log_who] = @session.user_uuid
       command_params[:permissions] = command_params[:permissions] || []
       MatildaCore::AppMemberships::EditMemberPermissionsCommand.new(command_params)
