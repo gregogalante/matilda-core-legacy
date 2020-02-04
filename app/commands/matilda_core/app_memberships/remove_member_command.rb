@@ -21,7 +21,7 @@ module MatildaCore
       to_validate_logic do
         @user = MatildaCore::User.find_by(uuid: params[:user_uuid])
 
-        # verifico che l'utente non sia già fuori dal gruppo
+        # verifico che l'utente non sia gia' fuori dal gruppo
         unless @user && MatildaCore::Membership.find_by(user_uuid: @user.uuid, group_uuid: params[:group_uuid])
           err("L'utente non è all'interno del gruppo", code: :user_uuid)
           break
@@ -29,7 +29,12 @@ module MatildaCore
       end
 
       to_initialize_events do
-        # TODO
+        event = MatildaCore::Memberships::RemoveEvent.new(
+          user_uuid: @user.uuid,
+          group_uuid: params[:group_uuid],
+          log_who: params[:log_who]
+        )
+        internal_error && break unless event.saved?
       end
 
     end

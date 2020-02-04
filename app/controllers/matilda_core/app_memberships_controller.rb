@@ -48,6 +48,13 @@ module MatildaCore
       render_json_success({})
     end
 
+    def remove_action
+      command = command_manager(generate_remove_command)
+      return unless command
+
+      render_json_success({})
+    end
+
     private
 
     def generate_invitation_command
@@ -63,6 +70,13 @@ module MatildaCore
       command_params[:log_who] = @session.user_uuid
       command_params[:permissions] = command_params[:permissions] || []
       MatildaCore::AppMemberships::EditMemberPermissionsCommand.new(command_params)
+    end
+
+    def generate_remove_command
+      command_params = params.permit(:user_uuid)
+      command_params[:group_uuid] = @session.group_uuid
+      command_params[:log_who] = @session.user_uuid
+      MatildaCore::AppMemberships::RemoveMemberCommand.new(command_params)
     end
 
   end
