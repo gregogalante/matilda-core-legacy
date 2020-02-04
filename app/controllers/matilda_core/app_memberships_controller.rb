@@ -16,7 +16,7 @@ module MatildaCore
       section_head_set(I18n.t('matilda_core.titles.users'), [{ label: I18n.t('matilda_core.titles.users') }])
 
       @users = @session.group.users
-      @users = @users.where('name LIKE ? OR surname LIKE ? OR username LIKE ?', params[:s], params[:s], params[:s]) unless params[:s].blank?
+      @users = @users.where('lower(name) LIKE ? OR lower(surname) LIKE ?', "%#{params[:s].downcase}%", "%#{params[:s].downcase}%") unless params[:s].blank?
       @users = @users.order('surname ASC, name ASC').page(params[:page]).per(15)
     end
 
