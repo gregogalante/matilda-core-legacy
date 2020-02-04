@@ -39,14 +39,14 @@
         <ul class="c-card__header-actions">
           <li class="c-card__header-action">
             <a
-            class="c-button c-button--orange u-mt-15 u-float-right"
-            href="<%= matilda_core.app_memberships_remove_action_path(user_uuid: @user.uuid) %>"
-            data-controller="link"
-            data-action="ajax:success->link#validateResponse"
-            data-method="post"
-            data-remote="true"
-            data-link-redirect="<%= matilda_core.app_memberships_index_view_path %>"
-          ><%= I18n.t 'matilda_core.cta.delete' %></a>
+              class="c-button c-button--orange"
+              href="<%= matilda_core.app_memberships_remove_action_path(user_uuid: @user.uuid) %>"
+              data-controller="link"
+              data-action="ajax:success->link#validateResponse"
+              data-method="post"
+              data-remote="true"
+              data-link-redirect="<%= matilda_core.app_memberships_index_view_path %>"
+            ><%= I18n.t 'matilda_core.cta.delete' %></a>
           </li>
         </ul>
       </div>
