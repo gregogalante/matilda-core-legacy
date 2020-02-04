@@ -4,6 +4,7 @@
 
 - Fixato logout quando la sessione utente non esiste.
 - Cambiati index voci menu di default.
+- Aggiunti comando ed evento per rimozione utente dal gruppo.
 
 ## 0.1.4
 
