@@ -18,7 +18,9 @@ module MatildaCore
           session_uuid: params[:session_uuid],
           log_who: params[:log_who]
         )
-        internal_error && break unless event_session.saved?
+
+        # Evito controlli sull'evento in modo da permettere comunque il logout.
+        # internal_error && break unless event_session.saved?
       end
 
     end

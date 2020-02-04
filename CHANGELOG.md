@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.5
+
+- Fixato logout quando la sessione utente non esiste.
+- Cambiati index voci menu di default.
+
 ## 0.1.4
 
 - Fix bug selettore lingua nel caso di una sola lingua.
