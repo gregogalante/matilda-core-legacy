@@ -17,6 +17,7 @@ en:
       invite: Invite
       create: Create
       update: Update
+      edit: Edit
       signup: Signup
       recover_password: Recover password
       login: Login

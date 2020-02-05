@@ -17,6 +17,7 @@ it:
       invite: Invita
       create: Crea
       update: Aggiorna
+      edit: Modifica
       signup: Registrati
       recover_password: Recupera password
       login: Accedi
