@@ -1,5 +1,9 @@
 .c-message {
   padding: 30px 15px;
+
+  &--bordered {
+    border: solid 1px $color_cenere;
+  }
 }
 
 .c-message__title {
@@ -7,6 +11,7 @@
   text-align: center;
   color: $color_black;
   font-size: 30px;
+  margin-bottom: 15px;
 }
 
 .c-message__content {
@@ -14,7 +19,6 @@
   text-align: center;
   color: $color_black;
   font-size: 20px;
-  margin-top: 15px;
 
   &--small {
     max-width: 400px;
