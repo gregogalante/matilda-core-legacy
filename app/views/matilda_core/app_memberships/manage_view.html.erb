@@ -42,6 +42,7 @@
               class="c-button c-button--orange"
               href="<%= matilda_core.app_memberships_remove_action_path(user_uuid: @user.uuid) %>"
               data-controller="link"
+              data-confirm="<%= I18n.t 'matilda_core.strings.action_confirmation_request' %>"
               data-action="ajax:success->link#validateResponse"
               data-method="post"
               data-remote="true"

@@ -89,3 +89,4 @@ it:
       update_password_complete_content: Le tue credenziali sono state correttamente aggiornate.
       primary_address: Indirizzo primario
       manage_users_permission: Possibilità di gestire gli utenti del sistema ed i loro permessi.
+      action_confirmation_request: Sei sicuro di voler procedere con l'azione?

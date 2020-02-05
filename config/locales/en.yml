@@ -89,3 +89,4 @@ en:
       update_password_complete_content: Your credentials have been successfully updated. Now you can log in using the new password.
       primary_address: Primary address
       manage_users_permission: Ability to manage users and their permissions
+      action_confirmation_request: Are you sure to continue with this action?
