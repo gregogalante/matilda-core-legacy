@@ -1,4 +1,10 @@
 it:
+  views:
+    pagination:
+      next: Successivo
+      previous: Precedente
+      last: Ultimo
+      first: Primo
   matilda_core:
     header:
       profile: Profilo
