@@ -9,6 +9,14 @@
 .c-form__actions {
   margin-bottom: -15px;
   text-align: right;
+
+  .c-button {
+    margin-left: 15px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
 }
 
 .c-form__title {
@@ -221,6 +229,7 @@ input[type="date"].c-input__field {
     .c-button {
       display: block;
       width: 100%;
+      margin-left: 0;
     }
   }
 }
