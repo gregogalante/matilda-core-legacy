@@ -129,33 +129,33 @@
 </div>
 
 <div class="c-modal" id="addEmailModal" data-controller="modal" data-target="modal.container">
-    <div class="c-modal__overlay" data-action="click->modal#close"></div>
+  <div class="c-modal__overlay" data-action="click->modal#close"></div>
 
-    <div class="c-modal__box">
-      <div class="c-card">
-        <div class="c-card__header">
-          <div class="c-card__header-title">
-            <%= I18n.t 'matilda_core.titles.add_email_address' %>
+  <div class="c-modal__box">
+    <div class="c-card">
+      <div class="c-card__header">
+        <div class="c-card__header-title">
+          <%= I18n.t 'matilda_core.titles.add_email_address' %>
+        </div>
+
+        <ul class="c-card__header-actions">
+          <li class="c-card__header-action">
+            <a class="c-button c-button--black" data-action="click->modal#close"><%= I18n.t 'matilda_core.cta.cancel' %></a>
+          </li>
+        </ul>
+      </div>
+      <div class="c-card__body">
+        <%= form_tag matilda_core.profile_create_email_action_path, method: :post, remote: true, data: { controller: 'form', action: 'ajax:success->form#validateResponse', 'form-reload': 'true' }, class: 'c-form c-grid__container-spaced' do %>
+          <div class="c-input c-grid__col c-grid__col--24">
+            <label class="c-input__label" for="addEmailModalEmail"><%= I18n.t 'matilda_core.labels.email' %></label>
+            <input class="c-input__field" name="email" id="addEmailModalEmail" data-target="form.field" placeholder="<%= I18n.t 'matilda_core.helps.insert_email' %>">
           </div>
 
-          <ul class="c-card__header-actions">
-            <li class="c-card__header-action">
-              <a class="c-button c-button--black" data-action="click->modal#close"><%= I18n.t 'matilda_core.cta.cancel' %></a>
-            </li>
-          </ul>
-        </div>
-        <div class="c-card__body">
-          <%= form_tag matilda_core.profile_create_email_action_path, method: :post, remote: true, data: { controller: 'form', action: 'ajax:success->form#validateResponse', 'form-reload': 'true' }, class: 'c-form c-grid__container-spaced' do %>
-            <div class="c-input c-grid__col c-grid__col--24">
-              <label class="c-input__label" for="addEmailModalEmail"><%= I18n.t 'matilda_core.labels.email' %></label>
-              <input class="c-input__field" name="email" id="addEmailModalEmail" data-target="form.field" placeholder="<%= I18n.t 'matilda_core.helps.insert_email' %>">
-            </div>
-
-            <div class="c-form__actions c-grid__col c-grid__col--24">
-              <button class="c-button" data-target="form.submit"><%= I18n.t 'matilda_core.cta.confirm' %></button>
-            </div>
-          <% end %>
-        </div>
+          <div class="c-form__actions c-grid__col c-grid__col--24">
+            <button class="c-button" data-target="form.submit"><%= I18n.t 'matilda_core.cta.confirm' %></button>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
+</div>
