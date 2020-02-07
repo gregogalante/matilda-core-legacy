@@ -55,20 +55,20 @@
         <table class="c-table">
           <tbody>
             <tr>
-              <th><%= I18n.t 'matilda_core.labels.username' %></th>
-              <td>@<%= @user.username %></td>
+              <td><%= I18n.t 'matilda_core.labels.username' %></td>
+              <th>@<%= @user.username %></th>
             </tr>
             <tr>
-              <th><%= I18n.t 'matilda_core.labels.email' %></th>
-              <td><%= @user.email %></td>
+              <td><%= I18n.t 'matilda_core.labels.email' %></td>
+              <th><%= @user.email %></th>
             </tr>
             <tr>
-              <th><%= I18n.t 'matilda_core.labels.registration_date' %></th>
-              <td><%= print_date(@membership.created_at) %></td>
+              <td><%= I18n.t 'matilda_core.labels.registration_date' %></td>
+              <th><%= print_date(@membership.created_at) %></th>
             </tr>
             <tr>
-              <th><%= I18n.t 'matilda_core.labels.last_access_date' %></th>
-              <td><%= print_date(@user.user_sessions.last&.created_at) %></td>
+              <td><%= I18n.t 'matilda_core.labels.last_access_date' %></td>
+              <th><%= print_date(@user.user_sessions.last&.created_at) %></th>
             </tr>
           </tbody>
         </table>
