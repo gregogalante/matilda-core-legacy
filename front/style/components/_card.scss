@@ -232,7 +232,7 @@
     }
   }
 
-  .c-card__header-action-group {
+  .c-card__header-actions--group {
     display: flex;
   }
 
@@ -243,6 +243,7 @@
     .c-button {
       display: block;
       text-align: center;
+      width: 100%;
     }
   }
 
