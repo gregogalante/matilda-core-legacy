@@ -33,6 +33,11 @@ module MatildaCore
       render_json_success({ token: session_update })
     end
 
+    def helper_update_menu_preference
+      session[:mat_menupreference] = params[:value] == '1'
+      render_json_success({})
+    end
+
     # FUNZIONI DI GESTIONE MULTILINGUA
     ##############################################################################################################
 
