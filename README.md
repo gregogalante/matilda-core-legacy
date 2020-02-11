@@ -130,4 +130,4 @@ Matilda supporta nativamente il multilingua appoggiandosi a Rails I18n.
 
 Se l'applicativo principale è configurato per lavorare con più di una lingua allora in automatico risulterà disponibile nell'header un selettore per il cambio lingua.
 
-Al momento sono supportate la lingua inglese e italiana.
+Al momento sono supportate la lingua inglese, italiana, americana.
