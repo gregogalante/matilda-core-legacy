@@ -8,6 +8,11 @@ module MatildaCore
     before_action :session_present_check
 
     def index_view
+      if MatildaCore.config.groups_root_path
+        redirect_to MatildaCore.config.groups_root_path
+        return
+      end
+
       @group = @session.group
 
       unless @group

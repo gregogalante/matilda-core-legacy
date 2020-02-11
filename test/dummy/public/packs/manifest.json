@@ -12,15 +12,15 @@
     },
     "matilda": {
       "js": [
-        "/packs/js/matilda-82ff112cc4f6c3f59a7c.js"
+        "/packs/js/matilda-95f989c2d6defe088b79.js"
       ],
       "js.map": [
-        "/packs/js/matilda-82ff112cc4f6c3f59a7c.js.map"
+        "/packs/js/matilda-95f989c2d6defe088b79.js.map"
       ]
     }
   },
-  "matilda.js": "/packs/js/matilda-82ff112cc4f6c3f59a7c.js",
-  "matilda.js.map": "/packs/js/matilda-82ff112cc4f6c3f59a7c.js.map",
+  "matilda.js": "/packs/js/matilda-95f989c2d6defe088b79.js",
+  "matilda.js.map": "/packs/js/matilda-95f989c2d6defe088b79.js.map",
   "media/locales/_en.png": "/packs/media/locales/_en-6f382b2d.png",
   "media/locales/_it.png": "/packs/media/locales/_it-cc79b186.png",
   "media/webfonts/fa-brands-400.eot": "/packs/media/webfonts/fa-brands-400-088a34f7.eot",

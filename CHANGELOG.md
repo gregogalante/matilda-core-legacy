@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.6
+
+- Aggiunta possibilità di rimuovere voci di menu dalla sidebar.
+- Aggiunta possibilità di personalizzare il redirect post autenticazione.
+
 ## 0.1.5
 
 - Fixato logout quando la sessione utente non esiste.

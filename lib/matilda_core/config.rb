@@ -44,6 +44,9 @@ module MatildaCore
 
     # GRUPPI
 
+     # Specifica una path alternativa da utilizzare come root del gruppo selezionato.
+     attr_accessor :groups_root_path
+
     # Specifica se permettere agli utenti di creare nuovi gruppi o meno.
     attr_accessor :groups_permit_creation_to_users
 
@@ -68,6 +71,7 @@ module MatildaCore
       @authentication_permit_signup = true
       @authentication_signup_default_group_uuid = nil
       @authentication_signup_default_group_permissions = []
+      @groups_root_path = nil
       @groups_permit_creation_to_users = true
       @groups_max_number_per_user = nil
       @sidebar_items = []
@@ -88,6 +92,14 @@ module MatildaCore
         index: index
       )
       @sidebar_items = @sidebar_items.sort_by { |hsh| hsh[:index] }
+    end
+
+    # Permette di rimuovere una voce di menu dalla sidebar.
+    def remove_sidebar_item(name)
+      names = @sidebar_items.map { |i| i[:name] }
+      throw 'Name not used' unless names.include?(name)
+
+      @sidebar_items = @sidebar_items.reject { |si| si[:name] == name }
     end
 
     # Permette di aggiungere un nuovo possibile livello di permesso alla applicazione.
