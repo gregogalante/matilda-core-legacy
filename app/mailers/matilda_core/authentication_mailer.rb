@@ -11,15 +11,7 @@ module MatildaCore
       @user = MatildaCore::User.find_by(uuid: user_uuid)
       return unless @user
 
-      mail(to: @user.email, subject: "Recurero password - #{MatildaCore.config.global_title}")
-    end
-
-    def validate_email(user_uuid, email)
-      @email = email
-      @user = MatildaCore::User.find_by(uuid: user_uuid)
-      return unless @user
-
-      mail(to: @email, subject: "Conferma indirizzo email - #{MatildaCore.config.global_title}")
+      mail(to: @user.email, subject: "Recover password - #{MatildaCore.config.global_title}")
     end
 
   end
