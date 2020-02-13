@@ -10,6 +10,9 @@ module MatildaCore
     # Imposta il titolo generico del prodotto.
     attr_accessor :global_title
 
+    # Imposta il logo generico del prodotto (url assoluto o path relativa).
+    attr_accessor :global_logo
+
     # Imposta il formato utilizzato per la visualizzazione delle date.
     attr_accessor :global_date_format
 
@@ -65,6 +68,7 @@ module MatildaCore
 
     def set_default_options
       @global_title = 'Matilda'
+      @global_logo = nil
       @global_date_format = '%d-%m-%Y'
       @global_version = MatildaCore::VERSION
       @mailer_from_address = 'Matilda <matilda@1d3o.it>'

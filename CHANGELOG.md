@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.8
+
+- Aggiunto supporto a logo.
+
 ## 0.1.7
 
 - Aggiunta mail di notifica invito nuovo utente.

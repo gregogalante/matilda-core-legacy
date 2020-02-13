@@ -9,6 +9,8 @@ module MatildaCore
 
     # Imposto le voci della sidebar utilizzando la configurazione dell'engine.
     initializer 'matilda_core.add_sidebar_items', after: :add_routing_paths do |_app|
+      MatildaCore.config.global_logo = 'http://iot.blupura.com/assets/lato/logo-46b603a0aa82e3d1c298e65c824f313940e7a7df9e4a5ecd9158d1292e490466.png'
+
       Rails.application.reload_routes!
 
       MatildaCore.config.add_sidebar_item(
