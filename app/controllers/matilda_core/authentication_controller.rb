@@ -19,7 +19,17 @@ module MatildaCore
       redirect_to matilda_core.authentication_login_view_path unless MatildaCore.config.authentication_permit_signup
     end
 
-    def recover_password_view; end
+    def recover_password_view
+      # auto eseguo la richiesta se ho l'uuid dell'utente come prametro
+      if params[:u] && user = MatildaCore::User.find_by(uuid: params[:u])
+        command = generate_recover_password_command(username_email: user.email)
+
+        if command.completed?
+          session[:mat_core_authentication_user_uuid] = command.user_uuid
+          redirect_to matilda_core.authentication_recover_password_complete_view_path
+        end 
+      end
+    end
 
     def recover_password_complete_view; end
 
@@ -98,8 +108,8 @@ module MatildaCore
       MatildaCore::Authentication::SignupCommand.new(command_params)
     end
 
-    def generate_recover_password_command
-      command_params = params.permit(:username_email)
+    def generate_recover_password_command(command_params = nil)
+      command_params ||= params.permit(:username_email)
       MatildaCore::Authentication::RecoverPasswordCommand.new(command_params)
     end
 

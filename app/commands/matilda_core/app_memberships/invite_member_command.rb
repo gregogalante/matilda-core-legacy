@@ -48,12 +48,11 @@ module MatildaCore
           @user_uuid = SecureRandom.uuid
 
           # creo il nuovo utente
-          event_user = MatildaCore::Users::CreateEvent.new(
+          event_user = MatildaCore::Users::InviteEvent.new(
             user_uuid: @user_uuid,
-            username: @user_uuid,
             name: params[:name],
             surname: params[:surname],
-            password: nil,
+            email: params[:email],
             log_who: params[:log_who]
           )
           internal_error && break unless event_user.saved?

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.7
+
+- Aggiunta mail di notifica invito nuovo utente.
+
 ## 0.1.6
 
 - Aggiunta possibilità di rimuovere voci di menu dalla sidebar.
