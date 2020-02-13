@@ -20,7 +20,6 @@
   text-decoration: none;
   height: $size_header_height;
   padding: 10px 0;
-  padding-top: 14px;
   display: flex;
   align-items: center;
   width: auto;
@@ -29,6 +28,7 @@
 .c-header__logo-title {
   display: inline-block;
   font-size: 20px;
+  line-height: 20px;
   font-weight: normal;
   text-transform: uppercase;
   position: relative;
