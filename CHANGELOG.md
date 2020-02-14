@@ -3,6 +3,7 @@
 ## 0.1.9
 
 - Aggiunto supporto a permessi di default per gli utenti invitati ad un gruppo.
+- Aggiunta personalizzazione footer.
 
 ## 0.1.8
 

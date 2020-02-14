@@ -19,6 +19,11 @@ module MatildaCore
     # Imposta la versione dell'applicativo.
     attr_accessor :global_version
 
+    # TEMPLATE
+
+    # Sovrascrive il contenuto del footer.
+    attr_accessor :template_footer
+
     # MAILER
 
     # Imposta l'indirizzo del mittente delle emal inviate dal sistema.
@@ -74,6 +79,7 @@ module MatildaCore
       @global_logo = nil
       @global_date_format = '%d-%m-%Y'
       @global_version = MatildaCore::VERSION
+      @template_footer = nil
       @mailer_from_address = 'Matilda <matilda@1d3o.it>'
       @authentication_permit_signup = true
       @authentication_signup_default_group_uuid = nil
