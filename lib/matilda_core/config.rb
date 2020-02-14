@@ -36,19 +36,17 @@ module MatildaCore
     # Imposta i permessi di default per gli utenti che si iscrivono.
     attr_accessor :authentication_signup_default_group_permissions
 
+    # Imposta i permessi di default per gli utenti che vengono invitati.
+    attr_accessor :authentication_invitation_default_group_permissions
+
     # Imposta la logica da utilizzare per la selezione del gruppo dopo l'autenticazione.
     # Possibili valori: nil, :first, :last
     attr_accessor :authentication_login_group_selection
 
-    # MEMBERSHIPS
-
-    # Specifica la lista di permessi utilizzabili dall'applicazione.
-    attr_accessor :memberships_permissions
-
     # GRUPPI
 
-     # Specifica una path alternativa da utilizzare come root del gruppo selezionato.
-     attr_accessor :groups_root_path
+    # Specifica una path alternativa da utilizzare come root del gruppo selezionato.
+    attr_accessor :groups_root_path
 
     # Specifica se permettere agli utenti di creare nuovi gruppi o meno.
     attr_accessor :groups_permit_creation_to_users
@@ -61,6 +59,11 @@ module MatildaCore
 
     # Contiene la lista di voci della sidebar.
     attr_accessor :sidebar_items
+
+    # MEMBERSHIPS
+
+    # Specifica la lista di permessi utilizzabili dall'applicazione.
+    attr_accessor :memberships_permissions
 
     def initialize
       set_default_options
@@ -75,9 +78,12 @@ module MatildaCore
       @authentication_permit_signup = true
       @authentication_signup_default_group_uuid = nil
       @authentication_signup_default_group_permissions = []
+      @authentication_invitation_default_group_permissions = []
       @groups_root_path = nil
       @groups_permit_creation_to_users = true
       @groups_max_number_per_user = nil
+
+      # voci editabili tramite funzioni
       @sidebar_items = []
       @memberships_permissions = []
     end

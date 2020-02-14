@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.9
+
+- Aggiunto supporto a permessi di default per gli utenti invitati ad un gruppo.
+
 ## 0.1.8
 
 - Aggiunto supporto a logo.

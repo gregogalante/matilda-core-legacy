@@ -74,6 +74,16 @@ module MatildaCore
           log_who: params[:log_who]
         )
         internal_error && break unless event_membership.saved?
+
+        if MatildaCore.config.authentication_invitation_default_group_permissions&.length&.positive?
+          event_permissions = MatildaCore::Memberships::EditPermissionsEvent.new(
+            user_uuid: @user_uuid,
+            group_uuid: params[:group_uuid],
+            permissions: MatildaCore.config.authentication_invitation_default_group_permissions,
+            log_who: params[:log_who]
+          )
+          internal_error && break unless event_permissions.saved?
+        end
       end
 
     end
