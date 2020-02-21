@@ -26,22 +26,12 @@
   margin-bottom: 30px !important;
 }
 
-.u-only-md {
-  display: block !important;
-}
-
 .u-only-sm {
-  display: block !important;
-}
-
-@media (max-width: $breakpoint_md) {
-  .u-only-md {
-    display: none !important;
-  }
+  display: none !important;
 }
 
 @media (max-width: $breakpoint_sm) {
   .u-only-sm {
-    display: none !important;
+    display: block !important;
   }
 }
