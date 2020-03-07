@@ -7,6 +7,8 @@ MatildaCore::Group.create(
 MatildaCore::User.create(
   uuid: 'admin',
   username: 'admin',
+  name: 'Admin',
+  surname: 'Admin',
   password: BCrypt::Password.create('Password1!')
 )
 MatildaCore::Membership.create(

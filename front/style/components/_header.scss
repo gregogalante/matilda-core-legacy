@@ -122,6 +122,19 @@
   transition: all 0.3s ease;
   border: solid 2px $color_cenere;
   margin: 0 5px;
+  text-align: center;
+  text-decoration: none;
+  position: relative;
+
+  span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+    text-transform: uppercase;
+    color: $color_primary;
+  }
 
   img {
     width: 100%;
@@ -130,6 +143,10 @@
   &--active {
     background-color: $color_primary;
     border-color: $color_primary;
+
+    span {
+      color: $color_white;
+    }
   }
 
   &:hover {

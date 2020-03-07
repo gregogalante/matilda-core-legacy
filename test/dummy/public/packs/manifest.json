@@ -12,15 +12,15 @@
     },
     "matilda": {
       "js": [
-        "/packs/js/matilda-65da8b76868b75b09025.js"
+        "/packs/js/matilda-cdcec87bd44398a5e8f5.js"
       ],
       "js.map": [
-        "/packs/js/matilda-65da8b76868b75b09025.js.map"
+        "/packs/js/matilda-cdcec87bd44398a5e8f5.js.map"
       ]
     }
   },
-  "matilda.js": "/packs/js/matilda-65da8b76868b75b09025.js",
-  "matilda.js.map": "/packs/js/matilda-65da8b76868b75b09025.js.map",
+  "matilda.js": "/packs/js/matilda-cdcec87bd44398a5e8f5.js",
+  "matilda.js.map": "/packs/js/matilda-cdcec87bd44398a5e8f5.js.map",
   "media/locales/_en.png": "/packs/media/locales/_en-6f382b2d.png",
   "media/locales/_it.png": "/packs/media/locales/_it-cc79b186.png",
   "media/locales/_us.png": "/packs/media/locales/_us-e499f1fb.png",
