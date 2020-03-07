@@ -13,10 +13,6 @@
     width: 600px;
   }
 
-  &--centerpage-large { // center the card on the page with a large size
-    width: 900px;
-  }
-
   &--unhidden { // permit overflow on card
     overflow: visible;
   }
@@ -179,14 +175,6 @@
   color: $color_primary;
 }
 
-@media (max-width: $breakpoint_md) {
-  .c-card {
-    &--centerpage-large {
-      width: calc(100% - 30px);
-    }
-  }
-}
-
 @media (max-width: $breakpoint_sm) {
   .c-card {
     background-color: $color_white;
@@ -203,10 +191,6 @@
       border-radius: 15px;
       margin-top: $size_header_height + 15px;
       margin-bottom: 15px;
-    }
-
-    &--centerpage-large {
-      width: calc(100% - 30px);
     }
   }
 
