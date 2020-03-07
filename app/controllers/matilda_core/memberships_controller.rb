@@ -2,8 +2,8 @@
 
 module MatildaCore
 
-  # AppMembershipsController.
-  class AppMembershipsController < MatildaCore::ApplicationController
+  # MembershipsController.
+  class MembershipsController < MatildaCore::ApplicationController
 
     before_action do
       if session_present_check(:group_uuid)
@@ -22,7 +22,7 @@ module MatildaCore
 
     def invitation_view
       sidebar_set('matilda_core.memberships')
-      section_head_set(I18n.t('matilda_core.titles.invite_user'), [{ label: I18n.t('matilda_core.titles.users'), url: matilda_core.app_memberships_index_view_path }, { label: I18n.t('matilda_core.titles.invite_user') }])
+      section_head_set(I18n.t('matilda_core.titles.invite_user'), [{ label: I18n.t('matilda_core.titles.users'), url: matilda_core.memberships_index_view_path }, { label: I18n.t('matilda_core.titles.invite_user') }])
     end
 
     def manage_view
@@ -30,7 +30,7 @@ module MatildaCore
       @membership = @session.group.memberships.find_by(user_uuid: params[:user_uuid])
 
       sidebar_set('matilda_core.memberships')
-      section_head_set(@user.complete_name, [{ label: I18n.t('matilda_core.titles.users'), url: matilda_core.app_memberships_index_view_path }, { label: I18n.t('matilda_core.titles.manage_user') }])
+      section_head_set(@user.complete_name, [{ label: I18n.t('matilda_core.titles.users'), url: matilda_core.memberships_index_view_path }, { label: I18n.t('matilda_core.titles.manage_user') }])
     end
 
     def invitation_action
@@ -61,7 +61,7 @@ module MatildaCore
       command_params = params.permit(:name, :surname, :email)
       command_params[:group_uuid] = @session.group_uuid
       command_params[:log_who] = @session.user_uuid
-      MatildaCore::AppMemberships::InviteMemberCommand.new(command_params)
+      MatildaCore::Memberships::InviteMemberCommand.new(command_params)
     end
 
     def generate_edit_permissions_command
@@ -69,14 +69,14 @@ module MatildaCore
       command_params[:group_uuid] = @session.group_uuid
       command_params[:log_who] = @session.user_uuid
       command_params[:permissions] = command_params[:permissions] || []
-      MatildaCore::AppMemberships::EditMemberPermissionsCommand.new(command_params)
+      MatildaCore::Memberships::EditMemberPermissionsCommand.new(command_params)
     end
 
     def generate_remove_command
       command_params = params.permit(:user_uuid)
       command_params[:group_uuid] = @session.group_uuid
       command_params[:log_who] = @session.user_uuid
-      MatildaCore::AppMemberships::RemoveMemberCommand.new(command_params)
+      MatildaCore::Memberships::RemoveMemberCommand.new(command_params)
     end
 
   end

@@ -36,10 +36,10 @@ MatildaCore::Engine.routes.draw do
   post 'profile/edit-password-action', to: 'profile#edit_password_action', as: 'profile_edit_password_action'
 
   # memberships
-  get 'app-memberships/index-view', to: 'app_memberships#index_view', as: 'app_memberships_index_view'
-  get 'app-memberships/invitation-view', to: 'app_memberships#invitation_view', as: 'app_memberships_invitation_view'
-  get 'app-memberships/manage-view', to: 'app_memberships#manage_view', as: 'app_memberships_manage_view'
-  post 'app-memberships/invitation-action', to: 'app_memberships#invitation_action', as: 'app_memberships_invitation_action'
-  post 'app-memberships/edit-permissions-action', to: 'app_memberships#edit_permissions_action', as: 'app_memberships_edit_permissions_action'
-  post 'app-memberships/remove-action', to: 'app_memberships#remove_action', as: 'app_memberships_remove_action'
+  get 'memberships/index-view', to: 'memberships#index_view', as: 'memberships_index_view'
+  get 'memberships/invitation-view', to: 'memberships#invitation_view', as: 'memberships_invitation_view'
+  get 'memberships/manage-view', to: 'memberships#manage_view', as: 'memberships_manage_view'
+  post 'memberships/invitation-action', to: 'memberships#invitation_action', as: 'memberships_invitation_action'
+  post 'memberships/edit-permissions-action', to: 'memberships#edit_permissions_action', as: 'memberships_edit_permissions_action'
+  post 'memberships/remove-action', to: 'memberships#remove_action', as: 'memberships_remove_action'
 end

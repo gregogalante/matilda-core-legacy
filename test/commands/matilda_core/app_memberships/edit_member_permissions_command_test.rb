@@ -4,13 +4,13 @@ require 'test_helper'
 
 module MatildaCore
 
-  module AppMemberships
+  module Memberships
 
     # EditMemberPermissionsCommandTest.
     class EditMemberPermissionsCommandTest < ActiveSupport::TestCase
 
       test 'il gruppo è obbligatorio' do
-        command = MatildaCore::AppMemberships::EditMemberPermissionsCommand.new(
+        command = MatildaCore::Memberships::EditMemberPermissionsCommand.new(
           user_uuid: 'general',
           permissions: [],
           log_who: ''
@@ -20,7 +20,7 @@ module MatildaCore
       end
 
       test "l'utente è obbligatorio" do
-        command = MatildaCore::AppMemberships::EditMemberPermissionsCommand.new(
+        command = MatildaCore::Memberships::EditMemberPermissionsCommand.new(
           group_uuid: 'general',
           permissions: [],
           log_who: ''
@@ -30,7 +30,7 @@ module MatildaCore
       end
 
       test 'i permessi sono obbligatori' do
-        command = MatildaCore::AppMemberships::EditMemberPermissionsCommand.new(
+        command = MatildaCore::Memberships::EditMemberPermissionsCommand.new(
           user_uuid: 'general',
           group_uuid: 'general',
           log_who: ''
@@ -40,7 +40,7 @@ module MatildaCore
       end
 
       test "l'utente deve esistere" do
-        command = MatildaCore::AppMemberships::EditMemberPermissionsCommand.new(
+        command = MatildaCore::Memberships::EditMemberPermissionsCommand.new(
           user_uuid: SecureRandom.uuid,
           group_uuid: 'general',
           permissions: [],
@@ -51,9 +51,9 @@ module MatildaCore
       end
 
       test "l'utente deve appartenere al gruppo" do
-        command = MatildaCore::AppMemberships::EditMemberPermissionsCommand.new(
+        command = MatildaCore::Memberships::EditMemberPermissionsCommand.new(
           group_uuid: 'general',
-          user_uuid: 'app_memberships__edit_member_permissions_command_1',
+          user_uuid: 'memberships__edit_member_permissions_command_1',
           permissions: [],
           log_who: ''
         )
@@ -62,7 +62,7 @@ module MatildaCore
       end
 
       test 'caso positivo' do
-        command = MatildaCore::AppMemberships::EditMemberPermissionsCommand.new(
+        command = MatildaCore::Memberships::EditMemberPermissionsCommand.new(
           group_uuid: 'general',
           user_uuid: 'general',
           permissions: [],

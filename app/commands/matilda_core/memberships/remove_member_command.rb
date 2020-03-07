@@ -2,7 +2,7 @@
 
 module MatildaCore
 
-  module AppMemberships
+  module Memberships
 
     # RemoveMemberCommand.
     # Rimuove un utente dal gruppo.

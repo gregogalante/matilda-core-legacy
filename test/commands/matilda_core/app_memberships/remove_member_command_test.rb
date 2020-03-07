@@ -4,13 +4,13 @@ require 'test_helper'
 
 module MatildaCore
 
-  module AppMemberships
+  module Memberships
 
     # RemoveMemberCommandTest.
     class RemoveMemberCommandTest < ActiveSupport::TestCase
 
       test 'il gruppo è obbligatorio' do
-        command = MatildaCore::AppMemberships::RemoveMemberCommand.new(
+        command = MatildaCore::Memberships::RemoveMemberCommand.new(
           user_uuid: 'general',
           log_who: ''
         )
@@ -19,7 +19,7 @@ module MatildaCore
       end
 
       test "l'utente è obbligatorio" do
-        command = MatildaCore::AppMemberships::RemoveMemberCommand.new(
+        command = MatildaCore::Memberships::RemoveMemberCommand.new(
           group_uuid: 'general',
           log_who: ''
         )
@@ -28,7 +28,7 @@ module MatildaCore
       end
 
       test 'caso positivo' do
-        command = MatildaCore::AppMemberships::RemoveMemberCommand.new(
+        command = MatildaCore::Memberships::RemoveMemberCommand.new(
           group_uuid: 'general',
           user_uuid: 'general',
           log_who: ''

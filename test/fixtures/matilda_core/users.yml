@@ -21,9 +21,9 @@ authentication_update_password_command_1:
   recover_password_code: '123456'
   recover_password_code_time: <%= Time.now %>
 
-app_memberships__edit_member_permissions_command_1:
-  uuid: app_memberships__edit_member_permissions_command_1
-  username: app_memberships__edit_member_permissions_command_1
+memberships__edit_member_permissions_command_1:
+  uuid: memberships__edit_member_permissions_command_1
+  username: memberships__edit_member_permissions_command_1
   name: nome
   surname: cognome
   password: <%= BCrypt::Password.create('Password1!') %>

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    matilda_core (0.2.0)
+    matilda_core (0.2.1)
       bcrypt
       evnt (= 3.6.6)
       jwt

@@ -2,7 +2,7 @@
 
 module MatildaCore
 
-  module AppMemberships
+  module Memberships
 
     # InviteMemberCommand.
     # Invita un utente ad unirsi ad un gruppo.

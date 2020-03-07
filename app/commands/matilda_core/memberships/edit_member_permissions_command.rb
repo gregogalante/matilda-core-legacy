@@ -2,7 +2,7 @@
 
 module MatildaCore
 
-  module AppMemberships
+  module Memberships
 
     # EditMemberPermissionsCommand.
     # Modifica i permessi dell'utente.

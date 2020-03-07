@@ -21,7 +21,7 @@ module MatildaCore
       MatildaCore.config.add_sidebar_item(
         'matilda_core.memberships',
         label: 'locale.matilda_core.titles.users',
-        url: MatildaCore::Engine.routes.url_helpers.app_memberships_index_view_path,
+        url: MatildaCore::Engine.routes.url_helpers.memberships_index_view_path,
         icon: 'fas fa-users',
         permission: 'matilda_core.memberships',
         index: 1100

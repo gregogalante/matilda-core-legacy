@@ -9,7 +9,7 @@
         </div>
         <ul class="c-card__header-actions">
           <li class="c-card__header-action">
-            <a class="c-button" href="<%= matilda_core.app_memberships_invitation_view_path %>"><%= I18n.t 'matilda_core.cta.invite' %></a>
+            <a class="c-button" href="<%= matilda_core.memberships_invitation_view_path %>"><%= I18n.t 'matilda_core.cta.invite' %></a>
           </li>
           <li class="c-card__header-action">
             <div class="c-input-action">
@@ -36,7 +36,7 @@
                     <td><%= user.complete_name %></td>
                     <td class="c-table__col-not-imp">@<%= user.username %></td>
                     <td class="c-table__actions">
-                      <a class="c-button" data-tippy-content="<%= I18n.t 'matilda_core.cta.manage' %>" data-controller="tippy" href="<%= matilda_core.app_memberships_manage_view_path(user_uuid: user.uuid) %>">
+                      <a class="c-button" data-tippy-content="<%= I18n.t 'matilda_core.cta.manage' %>" data-controller="tippy" href="<%= matilda_core.memberships_manage_view_path(user_uuid: user.uuid) %>">
                         <i class="fas fa-edit"></i>
                       </a>
                     </td>

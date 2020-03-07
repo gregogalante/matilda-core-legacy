@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1
+
+- Rinominato controller AppMembership in Membership.
+
 ## 0.2.0
 
 - Fix vari.

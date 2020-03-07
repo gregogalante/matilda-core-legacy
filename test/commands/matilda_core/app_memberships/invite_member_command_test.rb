@@ -4,13 +4,13 @@ require 'test_helper'
 
 module MatildaCore
 
-  module AppMemberships
+  module Memberships
 
     # InviteMemberCommandTest.
     class InviteMemberCommandTest < ActiveSupport::TestCase
 
       test 'il gruppo è obbligatorio' do
-        command = MatildaCore::AppMemberships::InviteMemberCommand.new(
+        command = MatildaCore::Memberships::InviteMemberCommand.new(
           name: 'Nome',
           surname: 'Cognome',
           email: 'email@mail.com',
@@ -21,7 +21,7 @@ module MatildaCore
       end
 
       test 'il nome è obbligatorio' do
-        command = MatildaCore::AppMemberships::InviteMemberCommand.new(
+        command = MatildaCore::Memberships::InviteMemberCommand.new(
           group_uuid: SecureRandom.uuid,
           surname: 'Cognome',
           email: 'email@mail.com',
@@ -32,7 +32,7 @@ module MatildaCore
       end
 
       test 'il cognome è obbligatorio' do
-        command = MatildaCore::AppMemberships::InviteMemberCommand.new(
+        command = MatildaCore::Memberships::InviteMemberCommand.new(
           group_uuid: SecureRandom.uuid,
           name: 'Nome',
           email: 'email@mail.com',
@@ -43,7 +43,7 @@ module MatildaCore
       end
 
       test "l'email è obbligatoria" do
-        command = MatildaCore::AppMemberships::InviteMemberCommand.new(
+        command = MatildaCore::Memberships::InviteMemberCommand.new(
           group_uuid: SecureRandom.uuid,
           name: 'Nome',
           surname: 'Cognome',
@@ -54,7 +54,7 @@ module MatildaCore
       end
 
       test "l'utente non deve essere già parte del gruppo" do
-        command = MatildaCore::AppMemberships::InviteMemberCommand.new(
+        command = MatildaCore::Memberships::InviteMemberCommand.new(
           group_uuid: 'general',
           name: 'Nome',
           surname: 'Cognome',
@@ -66,11 +66,11 @@ module MatildaCore
       end
 
       test 'caso positivo' do
-        command = MatildaCore::AppMemberships::InviteMemberCommand.new(
+        command = MatildaCore::Memberships::InviteMemberCommand.new(
           group_uuid: 'general',
           name: 'Nome',
           surname: 'Cognome',
-          email: 'app_memberships_invite_member_command_999@mail.com',
+          email: 'memberships_invite_member_command_999@mail.com',
           log_who: ''
         )
         assert command.completed?
