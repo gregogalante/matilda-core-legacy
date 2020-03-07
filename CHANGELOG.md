@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.0
+
+- Fix vari.
+
 ## 0.1.9
 
 - Aggiunto supporto a permessi di default per gli utenti invitati ad un gruppo.
