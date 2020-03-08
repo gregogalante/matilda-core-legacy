@@ -3,7 +3,8 @@
 ## 0.2.1
 
 - Rinominato controller AppMembership in Membership.
-- Aggiunto stimulus controller InputSelect con gestione dei select con possibilità di aggiungere opzioni.
+- Aggiunto stimulus controller InputSelect con gestione dei select e possibilità di aggiungere opzioni custom.
+- Aggiunta variabile globale $matildaCore per accesso rapido all'oggetto application e alle funzioni utils.
 
 ## 0.2.0
 
