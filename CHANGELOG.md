@@ -3,6 +3,7 @@
 ## 0.2.1
 
 - Rinominato controller AppMembership in Membership.
+- Aggiunto stimulus controller InputSelect con gestione dei select con possibilità di aggiungere opzioni.
 
 ## 0.2.0
 
