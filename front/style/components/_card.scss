@@ -21,27 +21,6 @@
     margin-bottom: 15px;
   }
 
-  &--viewported { // add viewported support for viewport view
-    &.is-fixed {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 9999;
-      width: 100%;
-      height: 100vh;
-      border-radius: 0;
-      overflow: auto;
-
-      .c-card__header {
-        border-radius: 0;
-      }
-
-      .c-card__body--scrollable {
-        max-height: calc(100vh - 50px);
-      }
-    }
-  }
-
   &:hover {
     box-shadow: 0 5px 5px 0 rgba(0,0,0,0.05);
   }
@@ -53,7 +32,9 @@
   border-bottom: solid 1px darken($color_cenere, 5%);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  @include clearfix;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .c-card__header-title {
@@ -61,29 +42,22 @@
   font-size: 18px;
   font-weight: bold;
   padding: 15px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .c-card__header-actions {
   list-style: none;
   margin: 0;
   padding: 7px 15px;
-  float: right;
-  @include clearfix;
-
-  &--full {
-    float: none;
-    width: 100%;
-  }
+  display: flex;
+  flex-direction: row;
 }
 
 .c-card__header-action {
   display: inline-block;
   margin-right: 5px;
-
-  &--full {
-    display: block;
-    width: 100%;
-  }
 
   &:last-child {
     margin-right: 0;
@@ -196,33 +170,24 @@
 
   .c-card__header {
     border-radius: 0;
+    display: block;
   }
 
   .c-card__header-title {
     display: block;
     text-align: center;
     font-size: 20px;
+    padding-bottom: 5px;
   }
 
   .c-card__header-actions {
     text-align: center;
-    float: none;
-    padding-top: 0;
-    margin-top: -10px;
-
-    &--full {
-      margin-top: 0;
-      padding-top: 7px;
-    }
-  }
-
-  .c-card__header-actions--group {
-    display: flex;
+    justify-content: center;
   }
 
   .c-card__header-action {
-    float: none;
     width: 100%;
+    max-width: 50vw;
 
     .c-button {
       display: block;
@@ -242,47 +207,4 @@
   }
 }
 
-@media (max-width: $breakpoint_sm) {
-  .c-card--mobile-fixed-section { // use it on sections that contains only a card mobile fixed
-    margin: 0 !important;
-  }
-  .c-card--mobile-fixed {
-    position: fixed;
-    top: $size_header_height;
-    left: 0;
-    width: 100%;
-    height: calc(100% - #{$size_header_height});
-    transform: translateX(100%);
-    transition: transform 0.3s;
-    overflow-y: auto;
-    z-index: 1;
-
-    &.is-open {
-      transform: translateX(0);
-    }
-
-    .c-card__header-actions {
-      margin-top: 0;
-      padding-top: 7px;
-    }
-
-    .c-card__body {
-      &--scrollable {
-        max-height: none;
-        overflow-y: hidden;
-      }
-    }
-  }
-
-  .c-card__header-title--mobile-fixed {
-    position: fixed;
-    bottom: 15px;
-    right: 15px;
-    background-color: $color_primary;
-    color: $color_white;
-    border-radius: 10px;
-    font-size: 12px;
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.10);
-    z-index: 2;
-  }
-}
+@media (max-width: $breakpoint_sm) {}

@@ -26,6 +26,15 @@ module MatildaCore
         permission: 'matilda_core.memberships',
         index: 1100
       )
+      if Rails.env.development?
+        MatildaCore.config.add_sidebar_item(
+          'matilda_core.documentation',
+          label: 'locale.matilda_core.titles.documentation',
+          url: MatildaCore::Engine.routes.url_helpers.documentation_index_view_path,
+          icon: 'fas fa-code',
+          index: 1200
+        )
+      end
     end
 
     # Imposto i permessi degli utenti.

@@ -17,6 +17,7 @@
   transition: all 0.15s;
   outline: 0;
   position: relative;
+  text-align: center;
 
   &[disabled] {
     background-color: rgba($color_black, 0.65);

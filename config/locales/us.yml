@@ -58,6 +58,7 @@ us:
       username: Username
       add_email_address: Add new email address
       account_settings: Account settings
+      documentation: Documentation
     helps:
       insert_name_of_group: Insert the name of the group
       insert_username_or_email: Insert the username or email addess
