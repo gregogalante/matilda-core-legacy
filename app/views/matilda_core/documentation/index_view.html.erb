@@ -15,10 +15,46 @@
 </div>
 
 <!-- *******************************************************
+ESEMPIO: BUTTON ********************************************
+******************************************************** -->
+<div class="c-section__head">
+  <h1 class="c-section__head-title">Button</h1>
+  <div class="c-section__head-breadcrumb">
+    <a class="c-section__head-breadcrumb-link">Documentazione</a>
+    <a class="c-section__head-breadcrumb-link">Button</a>
+  </div>
+</div>
+<div class="c-section__content c-grid__container-spaced">
+  <div class="c-section__content-block c-grid__col c-grid__col--24">
+
+    <!-- BUTTON -->
+    <div class="c-card">
+      <div class="c-card__header">
+        <div class="c-card__header-title">
+          Button
+        </div>
+      </div>
+      <div class="c-card__body">
+        <p>Tutti i pulsanti sono identificati dalla classe <span class="code">.c-button</span>.</p>
+      </div>
+    </div>
+    <!-- / -->
+
+  </div>
+</div>
+
+<!-- *******************************************************
 ESEMPIO: CARD **********************************************
 ******************************************************** -->
+<div class="c-section__head">
+  <h1 class="c-section__head-title">Card</h1>
+  <div class="c-section__head-breadcrumb">
+    <a class="c-section__head-breadcrumb-link">Documentazione</a>
+    <a class="c-section__head-breadcrumb-link">Card</a>
+  </div>
+</div>
 <div class="c-section__content c-grid__container-spaced">
-  <div class="c-section__content-block c-grid__col c-grid__col--24 c-grid__col--md-8">
+  <div class="c-section__content-block c-grid__col c-grid__col--24">
 
     <!-- CARD GENERICA -->
     <div class="c-card">
@@ -34,7 +70,7 @@ ESEMPIO: CARD **********************************************
     <!-- / -->
 
   </div>
-  <div class="c-section__content-block c-grid__col c-grid__col--24 c-grid__col--md-8">
+  <div class="c-section__content-block c-grid__col c-grid__col--24">
 
     <!-- CARD CON AZIONI -->
     <div class="c-card">
@@ -55,7 +91,7 @@ ESEMPIO: CARD **********************************************
     <!-- / -->
 
   </div>
-  <div class="c-section__content-block c-grid__col c-grid__col--24 c-grid__col--md-8">
+  <div class="c-section__content-block c-grid__col c-grid__col--24">
 
     <!-- CARD CON AZIONI MULTIPLE -->
     <div class="c-card">
@@ -77,12 +113,13 @@ ESEMPIO: CARD **********************************************
       </div>
       <div class="c-card__body">
         <p>Esempio di utilizzo di una card con multiple azioni.</p>
+        <p>Le azioni sono mostrate utilizzando le flexbox orizzontali. Evitare di mettere troppe azioni nella stessa card altrimenti il mobile potrebbe dare risultati scorretti.</p>
       </div>
     </div>
     <!-- / -->
 
   </div>
-  <div class="c-section__content-block c-grid__col c-grid__col--24 c-grid__col--md-12">
+  <div class="c-section__content-block c-grid__col c-grid__col--24">
 
     <!-- CARD CON RICERCA -->
     <div class="c-card">
@@ -106,7 +143,7 @@ ESEMPIO: CARD **********************************************
     <!-- / -->
 
   </div>
-  <div class="c-section__content-block c-grid__col c-grid__col--24 c-grid__col--md-12">
+  <div class="c-section__content-block c-grid__col c-grid__col--24">
 
     <!-- CARD CON AZIONI E RICERCA -->
     <div class="c-card">
@@ -131,6 +168,57 @@ ESEMPIO: CARD **********************************************
       </div>
     </div>
     <!-- / -->
+
+  </div>
+  <div class="c-section__content-block c-grid__col c-grid__col--24">
+
+    <!-- CARD SENZA OVERFLOW -->
+    <div class="c-card c-card--unhidden">
+      <div class="c-card__header">
+        <div class="c-card__header-title">
+          Card senza overflow
+        </div>
+      </div>
+      <div class="c-card__body">
+        <p>Di default tutte le card hanno l'impostazion eoverflow hidden per evitare che alcuni contenuti possano uscire dalla schermata.</p>
+        <p>L'overflow può essere rimosso utilizzando la classe <span class="code">.c-card--unhidden</span>.</p>
+      </div>
+    </div>
+    <!-- / -->
+    
+  </div>
+  <div class="c-section__content-block c-grid__col c-grid__col--24">
+
+    <!-- CARD CON SPAZIATURA FINALE -->
+    <div class="c-card c-card--hasnext">
+      <div class="c-card__header">
+        <div class="c-card__header-title">
+          Card con spaziatura finale
+        </div>
+      </div>
+      <div class="c-card__body">
+        <p>
+        Di default la griglia contente le card è implementata con la componente <span class="code">.c-section</span>.
+        Ogni section ha un margine sottostante utilizzato per dividere le diverse sezioni (gruppi di card) della schermata.
+        </p>
+        <p>Per simulare la stessa spaziatura presente tra una sezione e l'altra su una card basta utilizzare la classe <span class="code">.c-card--hasnext</span>.</p>
+      </div>
+    </div>
+    <!-- / -->
+    
+  </div>
+
+  <div class="c-section__content-block c-grid__col c-grid__col--24" style="width: 100%; height: 100vh; position: relative;">
+    <div class="c-card c-card--centerpage">
+      <div class="c-card__header">
+        <div class="c-card__header-title">
+          Card a centro pagina
+        </div>
+      </div>
+      <div class="c-card__body">
+        <p>Per eventuali schermate in cui la card è l'unico elemento visualizzato è possibile centrarla rispetto al contenitore (in posizione relativa o assoluta) utilizzando la classe <span class="code">.c-card--centerpage</span>.
+      </div>
+    </div>
 
   </div>
 </div>

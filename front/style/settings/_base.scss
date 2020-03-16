@@ -21,3 +21,10 @@ img {
   max-width: 100%;
 }
 
+span.code {
+  display: inline-block;
+  background-color: $color_cenere;
+  font-family: monospace;
+  padding: 2px 5px;
+  border-radius: 3px;
+}
