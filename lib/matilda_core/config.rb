@@ -48,6 +48,9 @@ module MatildaCore
     # Possibili valori: nil, :first, :last
     attr_accessor :authentication_login_group_selection
 
+    # Imposta un redirect ad hoc dove rimandare gli utenti in caso di sessione non valida.
+    attr_accessor :authentication_session_invalid_custom_redirect
+
     # GRUPPI
 
     # Specifica una path alternativa da utilizzare come root del gruppo selezionato.
@@ -85,6 +88,7 @@ module MatildaCore
       @authentication_signup_default_group_uuid = nil
       @authentication_signup_default_group_permissions = []
       @authentication_invitation_default_group_permissions = []
+      @authentication_session_invalid_custom_redirect = nil
       @groups_root_path = nil
       @groups_permit_creation_to_users = true
       @groups_max_number_per_user = nil

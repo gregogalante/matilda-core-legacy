@@ -141,7 +141,7 @@ module MatildaCore
         return
       end
 
-      redirect_to matilda_core.root_path
+      redirect_to MatildaCore.config.authentication_session_invalid_custom_redirect || matilda_core.root_path
       false
     end
 
