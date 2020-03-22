@@ -7,7 +7,6 @@ class CreateMatildaCoreUsers < ActiveRecord::Migration[6.0]
       t.string :surname
       t.string :password
       t.string :privacy
-      t.string :gravatar_image_url
       t.string :recover_password_code
       t.datetime :recover_password_code_time
       t.timestamps

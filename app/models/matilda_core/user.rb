@@ -22,7 +22,7 @@ module MatildaCore
     def email
       @email ||= user_emails.find_by(primary: true)&.email || user_emails.first&.email
     end
-    
+
     # Ritorna un hash con i dati dell'utente serializzati per l'autenticazione.
     def serialize_authentication
       data = as_json
