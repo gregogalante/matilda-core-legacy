@@ -110,7 +110,7 @@ module MatildaCore
     def session_present?(key = nil)
       session_set unless @session
       result = !@session.nil?
-      result = !@session.data[key].nil? if key
+      result = !@session.data[key].nil? if key && result
 
       result
     end
