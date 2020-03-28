@@ -40,7 +40,7 @@ module MatildaCore
         end
 
         unless BCrypt::Password.new(user.password) == params[:password]
-          err(I18n.t('matilda_core.messages.username_email_not_valid'), code: :password)
+          err(I18n.t('matilda_core.messages.password_not_valid'), code: :password)
           break
         end
 
