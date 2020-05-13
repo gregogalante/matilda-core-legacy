@@ -197,8 +197,12 @@ module MatildaCore
     end
 
     # Funzione che aggiunge alla lista errori dela chiamata gli errori di un comando.
-    def json_errors_coomand(command)
+    def json_errors_command(command)
       command.errors.map { |e| json_errors(e) }
+    end
+    def json_errors_coomand(command)
+      logger.info('Function "json_errors_coomand" is deprecated. Use "json_errors_command".')
+      json_errors_command(command)
     end
 
     # Funzione che aggiunge un nuovo errore alla lista errori della chiamata.

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.3
+
+- Correzione nome funzione json_errors_command.
+
 ## 0.2.2
 
 - Aggiunta configurazione per specificare l'url di redirect dell'utente nel caso in cui la sessione non sia valida.
