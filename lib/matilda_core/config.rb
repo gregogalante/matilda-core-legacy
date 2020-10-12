@@ -63,6 +63,9 @@ module MatildaCore
     # Se il limite e' impostato a 1 allora la sezione di selezione gruppo viene nascosta.
     attr_accessor :groups_max_number_per_user
 
+    # Specifica se mostrare o meno il nome del gruppo nell'header quando questo e' selezionato.
+    attr_accessor :groups_show_name_on_header
+
     # SIDEBAR
 
     # Contiene la lista di voci della sidebar.
@@ -92,6 +95,7 @@ module MatildaCore
       @groups_root_path = nil
       @groups_permit_creation_to_users = true
       @groups_max_number_per_user = nil
+      @groups_show_name_on_header = false
 
       # voci editabili tramite funzioni
       @sidebar_items = []

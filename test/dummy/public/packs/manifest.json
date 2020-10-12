@@ -2,15 +2,15 @@
   "entrypoints": {
     "matilda": {
       "js": [
-        "/packs/js/matilda-03a41455ffa841de3cf8.js"
+        "/packs/js/matilda-06efc0d39fd90ce7dea6.js"
       ],
       "js.map": [
-        "/packs/js/matilda-03a41455ffa841de3cf8.js.map"
+        "/packs/js/matilda-06efc0d39fd90ce7dea6.js.map"
       ]
     }
   },
-  "matilda.js": "/packs/js/matilda-03a41455ffa841de3cf8.js",
-  "matilda.js.map": "/packs/js/matilda-03a41455ffa841de3cf8.js.map",
+  "matilda.js": "/packs/js/matilda-06efc0d39fd90ce7dea6.js",
+  "matilda.js.map": "/packs/js/matilda-06efc0d39fd90ce7dea6.js.map",
   "media/locales/_en.png": "/packs/media/locales/_en-6f382b2d.png",
   "media/locales/_it.png": "/packs/media/locales/_it-cc79b186.png",
   "media/locales/_us.png": "/packs/media/locales/_us-e499f1fb.png",
