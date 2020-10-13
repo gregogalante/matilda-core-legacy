@@ -3,7 +3,7 @@
     <% if MatildaCore.config.global_logo %>
       <img class="c-header__logo-img" src="<%= MatildaCore.config.global_logo %>" alt="<%= MatildaCore.config.global_title %>" />
     <% else %>
-      <span class="c-header__logo-title"><%= MatildaCore.config.groups_show_name_on_header && @session.group_uuid ? @session.group.name : MatildaCore.config.global_title %></span>
+      <span class="c-header__logo-title"><%= MatildaCore.config.groups_show_name_on_header && @session&.group_uuid ? @session.group.name : MatildaCore.config.global_title %></span>
     <% end %>
   </a>
 
