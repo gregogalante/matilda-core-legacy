@@ -175,7 +175,7 @@ module MatildaCore
     # Funzione che gestisce un comando e, se questo ha risultato negativo, rimanda l'errore al client.
     def command_manager(command)
       unless command.completed?
-        json_errors_coomand(command)
+        json_errors_command(command)
         render_json_fail
         return false
       end
