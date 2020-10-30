@@ -53,7 +53,7 @@
               data-remote="true"
               data-link-reload="true"
             >
-              <% if [:it, :en, :us].include?(locale) %>
+              <% if [:it, :en, :us, :de, :es, :fr, :ru].include?(locale) %>
                 <img src="<%= asset_pack_path("media/locales/_#{locale}.png") %>" />
               <% else %>
                 <span><%= locale %></span>
