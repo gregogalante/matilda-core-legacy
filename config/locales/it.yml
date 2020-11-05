@@ -5,6 +5,7 @@ it:
       previous: Precedente
       last: Ultimo
       first: Primo
+      truncate: '...'
   matilda_core:
     header: # voci dell'header
       profile: Profilo
