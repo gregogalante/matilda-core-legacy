@@ -152,7 +152,7 @@ module MatildaCore
 
       if request.headers['Authorization']
         type = 'api'
-        token = request.headers['Authorization'].split(' ').last
+        token = request.headers['Authorization'] ? request.headers['Authorization'].split(' ').last : ''
         begin
           token_decoded = JWT.decode(token, Rails.application.credentials.secret_key_base || 'matilda')[0]
           session_data = token_decoded['token'].to_s
