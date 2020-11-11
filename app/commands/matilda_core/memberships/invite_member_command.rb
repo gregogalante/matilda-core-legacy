@@ -32,7 +32,7 @@ module MatildaCore
 
       to_normalize_params do
         params[:email] = params[:email].downcase
-        params[:_with_notification_invite] ||= true
+        params[:_with_notification_invite] = params[:_with_notification_invite].nil? ? true : params[:_with_notification_invite]
       end
 
       to_validate_logic do
