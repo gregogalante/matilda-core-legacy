@@ -28,9 +28,11 @@ module MatildaCore
                 err: 'Email non valida'
 
       validates :log_who, type: :string
+      validates :_with_notification_invite, type: :boolean
 
       to_normalize_params do
         params[:email] = params[:email].downcase
+        params[:_with_notification_invite] ||= true
       end
 
       to_validate_logic do
@@ -53,7 +55,8 @@ module MatildaCore
             name: params[:name],
             surname: params[:surname],
             email: params[:email],
-            log_who: params[:log_who]
+            log_who: params[:log_who],
+            _with_notification_invite: params[:_with_notification_invite]
           )
           internal_error && break unless event_user.saved?
 

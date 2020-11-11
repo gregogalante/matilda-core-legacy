@@ -7,7 +7,9 @@ module MatildaCore
 
     on :matilda_core_users_invite do
       to_manage_event do
-        MatildaCore::AuthenticationMailer.invite(event.payload[:user_uuid], event.payload[:email]).deliver_now unless Rails.env.test?
+        if event.extras[:with_notification_invite]
+          MatildaCore::AuthenticationMailer.invite(event.payload[:user_uuid], event.payload[:email]).deliver_now unless Rails.env.test?
+        end
       end
     end
 
