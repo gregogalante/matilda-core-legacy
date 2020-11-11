@@ -16,7 +16,7 @@
     </ul>
   </div>
   <div class="c-card__body">
-    <%= form_tag matilda_core.authentication_login_action_path, method: :post, remote: true, data: { controller: 'form', action: 'ajax:success->form#validateResponse', 'form-redirect': matilda_core.groups_select_view_path }, class: 'c-form c-grid__container-spaced' do %>
+    <%= form_tag matilda_core.authentication_login_action_path, method: :post, remote: true, data: { controller: 'form', action: 'ajax:success->form#validateResponse', 'form-redirect': MatildaCore.config.authentication_session_valid_custom_redirect || matilda_core.groups_select_view_path }, class: 'c-form c-grid__container-spaced' do %>
       <div class="c-input c-grid__col c-grid__col--24">
         <label class="c-input__label" for="username_email"><%= I18n.t 'matilda_core.labels.username_or_email' %></label>
         <input class="c-input__field" type="text" name="username_email" id="username_email" placeholder="<%= I18n.t 'matilda_core.helps.insert_username_or_email' %>" autocomplete="off" data-target="form.field" required>
