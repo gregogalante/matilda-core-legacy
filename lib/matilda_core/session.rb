@@ -99,6 +99,12 @@ module MatildaCore
       @data[:group_name]
     end
 
+    # Membership
+
+    def membership
+      @membership ||= MatildaCore::Membership.find_by(group_uuid: group_uuid, user_uuid: user_uuid)
+    end
+
     ######################################################################
 
     protected
