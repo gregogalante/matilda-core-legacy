@@ -72,7 +72,6 @@ module MatildaCore
 
     def group_uuid(group_uuid = nil)
       if group_uuid && group = MatildaCore::Group.find_by(uuid: group_uuid)
-        membership = MatildaCore::Membership.find_by(group_uuid: group_uuid, user_uuid: user_uuid)
         @data[:group_uuid] = group_uuid
         @data[:group_name] = group.name
         @data[:group_permissions] = membership.permissions
