@@ -2,17 +2,21 @@
   "entrypoints": {
     "matilda": {
       "js": [
-        "/packs/js/matilda-06efc0d39fd90ce7dea6.js"
+        "/packs/js/matilda-a269e8027606127c6ab3.js"
       ],
       "js.map": [
-        "/packs/js/matilda-06efc0d39fd90ce7dea6.js.map"
+        "/packs/js/matilda-a269e8027606127c6ab3.js.map"
       ]
     }
   },
-  "matilda.js": "/packs/js/matilda-06efc0d39fd90ce7dea6.js",
-  "matilda.js.map": "/packs/js/matilda-06efc0d39fd90ce7dea6.js.map",
+  "matilda.js": "/packs/js/matilda-a269e8027606127c6ab3.js",
+  "matilda.js.map": "/packs/js/matilda-a269e8027606127c6ab3.js.map",
+  "media/locales/_de.png": "/packs/media/locales/_de-cc23f204.png",
   "media/locales/_en.png": "/packs/media/locales/_en-6f382b2d.png",
+  "media/locales/_es.png": "/packs/media/locales/_es-fed7d0ce.png",
+  "media/locales/_fr.png": "/packs/media/locales/_fr-78e9f99b.png",
   "media/locales/_it.png": "/packs/media/locales/_it-cc79b186.png",
+  "media/locales/_ru.png": "/packs/media/locales/_ru-b36b3e38.png",
   "media/locales/_us.png": "/packs/media/locales/_us-e499f1fb.png",
   "media/webfonts/fa-brands-400.eot": "/packs/media/webfonts/fa-brands-400-088a34f7.eot",
   "media/webfonts/fa-brands-400.svg": "/packs/media/webfonts/fa-brands-400-d7229311.svg",

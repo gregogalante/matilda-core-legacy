@@ -48,7 +48,6 @@ ActiveRecord::Schema.define(version: 2019_11_21_073655) do
     t.string "surname"
     t.string "password"
     t.string "privacy"
-    t.string "gravatar_image_url"
     t.string "recover_password_code"
     t.datetime "recover_password_code_time"
     t.datetime "created_at", precision: 6, null: false
