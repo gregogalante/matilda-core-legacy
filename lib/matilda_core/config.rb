@@ -21,6 +21,9 @@ module MatildaCore
 
     # TEMPLATE
 
+    # Sovrascrive il contenuto del head.
+    attr_accessor :template_head
+
     # Sovrascrive il contenuto del footer.
     attr_accessor :template_footer
 
@@ -89,6 +92,7 @@ module MatildaCore
       @global_date_format = '%d-%m-%Y'
       @global_version = MatildaCore::VERSION
       @template_footer = nil
+      @template_head = nil
       @mailer_from_address = 'Matilda <matilda@1d3o.it>'
       @authentication_permit_signup = true
       @authentication_signup_default_group_uuid = nil

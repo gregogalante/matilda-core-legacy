@@ -13,6 +13,11 @@
   <script>window.addEventListener('DOMContentLoaded', () => {document.querySelector('.loader').classList.add('hidden')})</script>
   -->
 
+  <!-- Custom template -->
+  <% if MatildaCore.config.template_head %>
+    <%= raw MatildaCore.config.template_head %>
+  <% end %>
+
   <!-- Assets -->
   <%= stylesheet_pack_tag 'matilda' %>
   <%= javascript_pack_tag 'matilda' %>
