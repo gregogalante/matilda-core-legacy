@@ -35,6 +35,9 @@ module MatildaCore
 
     # AUTHENTICATION
 
+    # Imposta la durata di vita della sessione.
+    attr_accessor :authentication_session_lifetime
+
     # Imposta la possibilita' di registrarsi autonomamente alla piattaforma.
     attr_accessor :authentication_permit_signup
 
@@ -94,6 +97,7 @@ module MatildaCore
       @template_footer = nil
       @template_head = nil
       @mailer_from_address = 'Matilda <matilda@1d3o.it>'
+      @authentication_session_lifetime = false
       @authentication_permit_signup = true
       @authentication_signup_default_group_uuid = nil
       @authentication_signup_default_group_permissions = []

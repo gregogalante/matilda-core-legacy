@@ -66,20 +66,20 @@ module MatildaCore
     ##############################################################################################################
 
     # Funzione utilizzata per creare una nuova sessione.
-    def session_create(session_uuid, user_uuid, long = false)
+    def session_create(session_uuid, user_uuid)
       @session = MatildaCore::Session.new
       @session.user_session_uuid(session_uuid)
       @session.user_uuid(user_uuid)
-      session_update(long)
+      session_update
     end
 
     # Funzione che aggiorna la sessione e ritorna il token con la sessione aggiornata.
-    def session_update(long = false)
+    def session_update
       return unless @session
 
       # salvo sessione su cookie
-      cookies.encrypted[:mat_session] = { value: @session.to_string, expires: 30.days.from_now } if long
-      session[:mat_session] = @session.to_string unless long
+      cookies.encrypted[:mat_session] = { value: @session.to_string, expires: MatildaCore.config.authentication_session_lifetime.from_now } if MatildaCore.config.authentication_session_lifetime
+      session[:mat_session] = @session.to_string unless MatildaCore.config.authentication_session_lifetime
 
       # genero token sessione
       session_data = {}
