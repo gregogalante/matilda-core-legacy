@@ -8,7 +8,7 @@ class HeaderController extends Controller {
     // set menu preference to close in case of mobile device
     if (getSreenSizes().width <= 768 && !document.body.classList.contains('is-menu-closed')) {
       document.body.classList.add('is-menu-closed')
-      fetch(this.toggleMenuTarget.getAttribute('data-url') + `?value=0`, { method: 'POST' }).then(_response => {})
+      if (this.hasToggleMenuTarget) fetch(this.toggleMenuTarget.getAttribute('data-url') + `?value=0`, { method: 'POST' }).then(_response => {})
     }
   }
 
@@ -32,7 +32,7 @@ class HeaderController extends Controller {
   toggleMenu() {
     if (getSreenSizes().width > 768) {
       const preference = document.body.classList.contains('is-menu-closed') ? 1 : 0
-      fetch(this.toggleMenuTarget.getAttribute('data-url') + `?value=${preference}`, { method: 'POST' }).then(_response => {})
+      if (this.hasToggleMenuTarget) fetch(this.toggleMenuTarget.getAttribute('data-url') + `?value=${preference}`, { method: 'POST' }).then(_response => {})
     }
 
     if (document.body.classList.contains('is-menu-closed')) {
