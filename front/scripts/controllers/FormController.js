@@ -44,11 +44,12 @@ class FormController extends Controller {
 
     if (data.result) {
       const redirect = this.data.get('redirect')
+      const redirectDelay = this.data.get('redirect-delay')
       const reload = this.data.get('reload')
-      const flash = this.data.get('flash-success')
+      const flashSuccess = this.data.get('flash-success')
 
       // manage redirect
-      if (redirect) {
+      if (redirect && !redirectDelay) {
         window.location.replace(redirect)
         return
       }
@@ -60,15 +61,26 @@ class FormController extends Controller {
       }
 
       // success flash
-      if (flash) {
-        Flash.openMessage(flash, 'green')
-        return
+      if (flashSuccess) {
+        Flash.openMessage(flashSuccess, 'green')
+      }
+
+      // manage redirect delay
+      if (redirectDelay) {
+        setTimeout(() => {
+          window.location.replace(redirect)
+          return
+        }, redirectDelay);
       }
 
     } else {
+      const flashError = this.data.get('flash-error')
 
       // error flash
-      Flash.openMessage(data.errors[0].message, 'orange')
+      if (!flashError) {
+        flashError = data.errors[0].message
+      }
+      Flash.openMessage(flashError, 'orange')
       
       // visual errors on fields
       each(data.errors, (error) => {
