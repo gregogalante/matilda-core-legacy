@@ -38,10 +38,14 @@ class FormController extends Controller {
    */
   validateResponse (event) {
     let [data, _status, _xhr] = event.detail
+    const Flash = this.application.getControllerForElementAndIdentifier(
+      document.getElementById('flash'), 'flash'
+    )
 
     if (data.result) {
       const redirect = this.data.get('redirect')
       const reload = this.data.get('reload')
+      const flash = this.data.get('flash-success')
 
       // manage redirect
       if (redirect) {
@@ -54,12 +58,19 @@ class FormController extends Controller {
         location.reload()
         return
       }
-    } else {
-      const Flash = this.application.getControllerForElementAndIdentifier(
-        document.getElementById('flash'), 'flash'
-      )
-      Flash.openMessage(data.errors[0].message, 'orange')
 
+      // success flash
+      if (flash) {
+        Flash.openMessage(flash, 'green')
+        return
+      }
+
+    } else {
+
+      // error flash
+      Flash.openMessage(data.errors[0].message, 'orange')
+      
+      // visual errors on fields
       each(data.errors, (error) => {
         if (!this.fields[error.code]) return
         this.fields[error.code].classList.add('is-error')
