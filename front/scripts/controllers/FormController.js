@@ -74,7 +74,7 @@ class FormController extends Controller {
       }
 
     } else {
-      const flashError = this.data.get('flash-error')
+      let flashError = this.data.get('flash-error')
 
       // error flash
       if (!flashError) {
