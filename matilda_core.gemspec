@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'evnt'
   spec.add_dependency 'jwt'
   spec.add_dependency 'kaminari'
-  spec.add_dependency 'rails', '<= 6.0.0'
+  spec.add_dependency 'rails'
 
   spec.add_development_dependency 'rails'
   spec.add_development_dependency 'sqlite3'
