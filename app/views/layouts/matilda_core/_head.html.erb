@@ -22,5 +22,5 @@
   <%= stylesheet_pack_tag 'matilda' %>
   <%= javascript_pack_tag 'matilda' %>
 </head>
-<body class="<%= session[:mat_menupreference] ? '' : 'is-menu-closed' %>">
+<body class="<%= session[:mat_menupreference] ? '' : 'is-menu-closed' %> controller-<%= controller_name %>">
 <!--<div class="loader"></div>-->

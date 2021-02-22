@@ -1,12 +1,11 @@
 PATH
   remote: .
   specs:
-    matilda_core (0.2.9)
+    matilda_core (0.2.10)
       bcrypt
       evnt
       jwt
       kaminari
-      rails (~> 6.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -176,6 +175,7 @@ PLATFORMS
 
 DEPENDENCIES
   matilda_core!
+  rails
   react-rails
   sqlite3
   timecop
