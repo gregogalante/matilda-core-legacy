@@ -191,8 +191,8 @@ module MatildaCore
     end
 
     # Funzione utilizzata per l'invio di risposte negative in JSON.
-    def render_json_fail
-      response = { result: false, errors: json_errors, payload: nil }
+    def render_json_fail(payload = nil)
+      response = { result: false, errors: json_errors, payload: payload }
       render json: response
     end
 
