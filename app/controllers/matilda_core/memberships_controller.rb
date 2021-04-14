@@ -48,6 +48,14 @@ module MatildaCore
       render_json_success({})
     end
 
+    def edit_permissions_role_action
+      command = command_manager(generate_edit_permissions_role_command)
+      return unless command
+
+      session_update_group(@session.group_uuid) # aggiorno la sessione per aggiornare i permessi dell'utente
+      render_json_success({})
+    end
+
     def remove_action
       command = command_manager(generate_remove_command)
       return unless command
@@ -70,6 +78,14 @@ module MatildaCore
       command_params[:log_who] = @session.user_uuid
       command_params[:permissions] = command_params[:permissions] || []
       MatildaCore::Memberships::EditMemberPermissionsCommand.new(command_params)
+    end
+
+    def generate_edit_permissions_role_command
+      command_params = params.permit(:user_uuid, :role)
+      command_params[:group_uuid] = @session.group_uuid
+      command_params[:log_who] = @session.user_uuid
+      command_params[:permissions] = command_params[:permissions] || []
+      MatildaCore::Memberships::EditMemberPermissionsRoleCommand.new(command_params)
     end
 
     def generate_remove_command

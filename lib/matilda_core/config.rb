@@ -82,8 +82,19 @@ module MatildaCore
 
     # MEMBERSHIPS
 
+    # Specifica se nascondere nella vista utente la visualizzazione e modifica dei
+    # singoli permessi utente.
+    attr_accessor :memberships_show_permissions_editor
+
     # Specifica la lista di permessi utilizzabili dall'applicazione.
     attr_accessor :memberships_permissions
+
+    # Specifica la lista di ruoli di permessi utilizzabili dall'applicazione.
+    # Un ruolo di permessi è un raggruppamento di singoli permessi che semplifica
+    # la suddivisione delle utenze in ruoli.
+    # In generale, utilizzare :memberships_permissions per identificare singole azioni
+    # e :memberships_permissions_roles per identificare livelli gerarchici.
+    attr_accessor :memberships_permissions_roles
 
     def initialize
       set_default_options
@@ -108,10 +119,12 @@ module MatildaCore
       @groups_permit_creation_to_users = true
       @groups_max_number_per_user = nil
       @groups_show_name_on_header = false
+      @memberships_show_permissions_editor = true
 
       # voci editabili tramite funzioni
       @sidebar_items = []
       @memberships_permissions = []
+      @memberships_permissions_roles = []
     end
 
     # Permette di aggiungere una nuova voce di menu alla sidebar.
@@ -150,6 +163,20 @@ module MatildaCore
         index: index
       )
     end
+
+    # Permette di aggiungere un nuovo possibile gruppo di permessi alla applicazione.
+    def add_memberships_permissions_role(name, label: '', permissions: [], index: 0)
+      names = @memberships_permissions_roles.map { |i| i[:name] }
+      throw 'Name already used' if names.include?(name)
+
+      @memberships_permissions_roles.push(
+        name: name,
+        label: label,
+        permissions: permissions,
+        index: index
+      )
+    end
+
 
   end
 

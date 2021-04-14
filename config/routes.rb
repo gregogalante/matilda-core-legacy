@@ -44,5 +44,6 @@ MatildaCore::Engine.routes.draw do
   get 'memberships/manage-view', to: 'memberships#manage_view', as: 'memberships_manage_view'
   post 'memberships/invitation-action', to: 'memberships#invitation_action', as: 'memberships_invitation_action'
   post 'memberships/edit-permissions-action', to: 'memberships#edit_permissions_action', as: 'memberships_edit_permissions_action'
+  post 'memberships/edit-permissions-role-action', to: 'memberships#edit_permissions_role_action', as: 'memberships_edit_permissions_role_action'
   post 'memberships/remove-action', to: 'memberships#remove_action', as: 'memberships_remove_action'
 end

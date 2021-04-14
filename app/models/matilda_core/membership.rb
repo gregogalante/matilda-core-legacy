@@ -10,6 +10,11 @@ module MatildaCore
 
     serialize :permissions, Array
 
+    def permissions_role
+      permissions_role = MatildaCore.config.memberships_permissions_roles.select { |r| r[:permissions].sort == permissions.sort }.first
+      permissions_role ? permissions_role[:name] : nil
+    end
+
   end
 
 end

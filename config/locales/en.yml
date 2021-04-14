@@ -39,6 +39,7 @@ en:
       new_password: New password
       new_password_confirmation: Confirm the new password
       current_password: Current password
+      role: Role
     titles:
       select_a_group: Select a group
       create_a_group: Create a group
@@ -47,6 +48,7 @@ en:
       invite_user: Invite user
       manage_user: Manage user
       edit_permissions: Edit permissions
+      edit_permissions_role: Edit permissions role
       informations: Informations
       dashboard: Dashboard
       personal_informations: Personal informations
@@ -92,3 +94,5 @@ en:
       primary_address: Primary address
       manage_users_permission: Ability to manage users and their permissions
       action_confirmation_request: Are you sure to continue with this action?
+      admin: Administrator
+      personalized: Personalized

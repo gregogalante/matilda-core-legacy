@@ -34,7 +34,7 @@ module MatildaCore
       to_initialize_events do
         event = MatildaCore::Users::EditRecoverPasswordCodeEvent.new(
           user_uuid: @user_uuid,
-          recover_password_code: SecureRandom.alphanumeric(6),
+          recover_password_code: [*('0'..'9')].sample(6).join,
           log_who: params[:log_who]
         )
         internal_error && break unless event.saved?

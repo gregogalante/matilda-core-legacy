@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0
+
+- Aggiunto supporto a ruoli nella gestione utenze.
+
 ## 0.2.4
 
 - Aggiunta configurazione per applicare il nome del gruppo sull'header al posto del nome applicativo nel caso in cui il gruppo è stato selezionato.
