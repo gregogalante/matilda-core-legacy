@@ -43,14 +43,17 @@ module MatildaCore
         'matilda_core.memberships',
         label: 'locale.matilda_core.strings.manage_users_permission',
         index: 0,
-        group: 'locale.matilda_core.titles.users'
+        group: 'locale.matilda_core.titles.administration'
       )
+    end
 
+    # Imposto i ruoli degli utenti.
+    initializer 'matilda_core.add_memberships_permissions_roles' do |_app|
       MatildaCore.config.add_memberships_permissions_role(
-        'matilda_core.admin',
-        label: 'locale.matilda_core.strings.admin',
+        'matilda_core.administrator',
+        label: 'locale.matilda_core.strings.administrator',
         index: 0,
-        permissions: ['matilda_core.memberships', 'matilda_core.cocaina']
+        permissions: ['matilda_core.memberships']
       )
     end
 

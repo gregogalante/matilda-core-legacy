@@ -61,6 +61,7 @@ en:
       add_email_address: Add new email address
       account_settings: Account settings
       documentation: Documentation
+      administration: Administration
     helps:
       insert_name_of_group: Insert the name of the group
       insert_username_or_email: Insert the username or email addess
@@ -94,5 +95,5 @@ en:
       primary_address: Primary address
       manage_users_permission: Ability to manage users and their permissions
       action_confirmation_request: Are you sure to continue with this action?
-      admin: Administrator
+      administrator: Administrator
       personalized: Personalized
