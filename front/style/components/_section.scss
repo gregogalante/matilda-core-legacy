@@ -26,13 +26,12 @@
 }
 
 .c-section__head-breadcrumb {
-  padding-top: 13px;
-  float: right;
+  padding-top: 5px;
 }
 
 .c-section__head-breadcrumb-link {
   font-size: 14px;
-  color: $color_black;
+  color: darken($color_cenere, 40%);
   font-weight: bold;
   text-decoration: none;
 
@@ -119,7 +118,6 @@
 
   .c-section__head-breadcrumb {
     padding-top: 0;
-    float: none;
   }
 
   .c-section__head-breadcrumb-link {

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1
+
+- Ottimizzazione UI breadcrumb.
+
 ## 0.3.0
 
 - Aggiunto supporto a ruoli nella gestione utenze.
