@@ -54,7 +54,6 @@
 }
 
 .c-header__nav-item-action {
-  display: inline-block;
   border: none;
   background-color: transparent;
   padding: 5px 15px;
@@ -65,6 +64,10 @@
   transition: background-color 0.3s;
   outline: 0;
   text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
 
   &:hover, &:focus {
     background-color: darken($color_primary, 5%);
