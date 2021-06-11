@@ -96,6 +96,18 @@ module MatildaCore
     # e :memberships_permissions_roles per identificare livelli gerarchici.
     attr_accessor :memberships_permissions_roles
 
+    # LOCALES
+
+    # Specifica la sorgente utilizzata per il caricamento delle traduzioni tramite i task
+    # di installazione.
+    # I valori possibili sono: :gdrive_spreadsheet_key, :csv_file
+    attr_accessor :locales_source_type
+
+    # Specifica il valore della sorgente delle traduzioni caricate tramite task.
+    # Inserire la chiave di un file spreadsheet nel caso di :gdrive_spreadsheet_key o la path del
+    # file CSV nel caso di :csv_file_path.
+    attr_accessor :locales_source_value
+
     def initialize
       set_default_options
     end
@@ -120,6 +132,8 @@ module MatildaCore
       @groups_max_number_per_user = nil
       @groups_show_name_on_header = false
       @memberships_show_permissions_editor = true
+      @locales_source_type = nil
+      @locales_source_value = nil
 
       # voci editabili tramite funzioni
       @sidebar_items = []
