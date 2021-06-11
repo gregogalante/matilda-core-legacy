@@ -32,7 +32,7 @@ module MatildaCore
           label: 'locale.matilda_core.titles.documentation',
           url: MatildaCore::Engine.routes.url_helpers.documentation_index_view_path,
           icon: 'fas fa-code',
-          index: 1200
+          index: 999999
         )
       end
     end

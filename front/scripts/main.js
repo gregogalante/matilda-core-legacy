@@ -7,6 +7,7 @@ window.$matildaCore = { app, utils }
 
 import FormController from './controllers/FormController'
 import FlashController from './controllers/FlashController'
+import BackController from './controllers/BackController'
 import HeaderController from './controllers/HeaderController'
 import LinkController from './controllers/LinkController'
 import ModalController from './controllers/ModalController'
@@ -15,6 +16,7 @@ import InputSelectController from './controllers/InputSelectController'
 
 app.register('form', FormController)
 app.register('flash', FlashController)
+app.register('back', BackController)
 app.register('header', HeaderController)
 app.register('link', LinkController)
 app.register('modal', ModalController)

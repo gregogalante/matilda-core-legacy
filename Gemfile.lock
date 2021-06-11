@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    matilda_core (0.3.0)
+    matilda_core (0.3.1)
       bcrypt
       evnt
       jwt
@@ -86,7 +86,7 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
-    jwt (2.2.2)
+    jwt (2.2.3)
     kaminari (1.2.1)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.1)
@@ -191,4 +191,4 @@ DEPENDENCIES
   webpacker
 
 BUNDLED WITH
-   2.2.3
+   2.2.19
