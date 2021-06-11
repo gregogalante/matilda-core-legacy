@@ -14,10 +14,8 @@ namespace :matilda_core do
 
     desc "Installa le traduzioni dell'applicativo a partire da una sorgente impostato in configurazione"
     task :locales, :environment do |_task, args|
-      # eseguo tutti gli initializer per accedere ai dati di configurazione aggiornati
-      Dir.glob("#{Rails.root}/config/initializers/*.rb").each do |initializer|
-        require initializer
-      end
+      # eseguo import initializer Matilda per caricamento configurazione applicazione
+      require "#{Rails.root}/config/initializers/matilda_core.rb" File.exist?("#{Rails.root}/config/initializers/matilda_core.rb")
 
       locales_source_type = MatildaCore.config.locales_source_type
       locales_source_value = MatildaCore.config.locales_source_value
