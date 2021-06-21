@@ -7,8 +7,12 @@ module MatildaCore
 
     def matilda_react_view(module_name, props = {})
       react_component "#{module_name}/views/#{controller_name}/#{action_name}/index", {
-        matilda: MatildaCore.config.react_props.to_hash
+        matilda: matilda_react_view_props
       }.merge(props)
+    end
+
+    def matilda_react_view_props
+      MatildaCore.config.react_props.to_hash
     end
 
   end

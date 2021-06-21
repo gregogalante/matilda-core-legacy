@@ -1,55 +1,77 @@
 import React from 'react'
-import { Card, Form, Input, Button, Checkbox, Alert } from 'antd'
-import { MatildaContainer, useMatilda } from 'matilda_core'
+import { Card, Form, Input, Button, Checkbox, Space } from 'antd'
+import { UserOutlined, LockOutlined } from '@ant-design/icons'
+import { MatildaContainer, useMatildaForm, useMatildaRequest, useMatildaRedirect, useMatildaTranslator } from 'matilda_core'
+import './index.scss'
 
-export default function LoginView(props) {
-  const { I18n, Requests, containerProps } = useMatilda(props.matilda)
+export default (props) => <MatildaContainer matilda={props.matilda}><LoginView redirect={props.custom_redirect} /></MatildaContainer>
+
+/********************************************************************************************** */
+
+function LoginView({ redirect }) {
+  const { form, formOnResponseError } = useMatildaForm()
+  const { requestSend: requestSendAuthenticationLogin } = useMatildaRequest('matilda_core.authentication_login_action')
+  const { redirectRun: redirectRunAuthenticationLogin } = useMatildaRedirect(redirect ? { path: redirect } : 'matilda_core.groups_select_view')
+  const { t } = useMatildaTranslator()
 
   //////////////////////////////////////////////////////////
 
   const onFinishLogin = (values) => {
-    Requests.post('/matilda/core/authentication/login-action', values).then((response) => {
-      console.log(response)
-    }).catch((err) => {
-      console.log(err)
+    requestSendAuthenticationLogin(values).then((response) => {
+      if (response.result) {
+        redirectRunAuthenticationLogin({ replace: true })
+      } else {
+        formOnResponseError(response)
+      }
     })
   }
 
   //////////////////////////////////////////////////////////
 
   return (
-    <MatildaContainer props={containerProps}>
-      <div className="LoginView" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100vh', background: '#eee' }}>
-        <Card title={I18n.t('matilda_core.titles.login')} style={{ width: '100%', maxWidth: 500 }}>
-          <Form
-            name="login"
-            layout='vertical'
-            onFinish={onFinishLogin}
+    <div id="LoginView">
+      <Card title={t('matilda_core.titles.login')} className="card">
+        <Form
+          name="login"
+          className="form"
+          initialValues={{ remember: true }}
+          form={form}
+          onFinish={onFinishLogin}
+        >
+          <Form.Item
+            name="username_email"
+            rules={[{ required: true }]}
           >
-            <Form.Item
-              label={I18n.t('matilda_core.labels.username_or_email')}
-              name="username_email"
-              rules={[{ required: true, message: I18n.t('matilda_core.messages.username_email_not_valid') }]}
-            >
-              <Input />
+            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder={t('matilda_core.labels.username_or_email')} />
+          </Form.Item>
+
+          <Form.Item
+            name="password"
+            rules={[{ required: true }]}
+          >
+            <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} placeholder={t('matilda_core.labels.password')} />
+          </Form.Item>
+
+          <Form.Item>
+            <Form.Item name="remember" valuePropName="checked" noStyle>
+              <Checkbox>Remember me</Checkbox>
             </Form.Item>
 
-            <Form.Item
-              label={I18n.t('matilda_core.labels.password')}
-              name="password"
-              rules={[{ required: true, message: I18n.t('matilda_core.messages.password_not_valid') }]}
-            >
-              <Input.Password />
-            </Form.Item>
+            <a className="form__forgot" href="">
+              Forgot password
+            </a>
+          </Form.Item>
 
-            <Form.Item style={{ textAlign: 'right' }}>
-              <Button type="primary" htmlType="submit">
-                {I18n.t('matilda_core.cta.login')}
+          <Form.Item style={{ textAlign: 'center' }}>
+              <Button type="primary" htmlType="submit" className="form__button">
+                {t('matilda_core.cta.login')}
               </Button>
-            </Form.Item>
-          </Form>
-        </Card>
-      </div>
-    </MatildaContainer>
+              <div>
+                Or <a href="">register now!</a>
+              </div>
+          </Form.Item>
+        </Form>
+      </Card>
+    </div>
   )
 }

@@ -47,13 +47,26 @@ module MatildaCore
 
       # add routes from main application
       Rails.application.routes.routes.each do |route|
-        @router_routes[route.name] = route.path.spec.to_s
-      end
+        has_gem = false
+        route_name = route.name
+        route_path = route.path.spec.to_s.gsub('(.:format)', '')
+        route_method = route.verb.upcase
 
-      # add routes from engines
-      # TODO
-      Rails::Engine.subclasses.map(&:instance).each do |instance|
-         
+        Rails::Engine.subclasses.each do |subclass|
+          subclass_name = subclass.module_parent.name.underscore
+        
+          if route_name == subclass_name
+            has_gem = true
+            subclass.instance.routes.routes.each do |subclass_route|
+              subclass_route_name = subclass_route.name
+              subclass_route_path = subclass_route.path.spec.to_s.gsub('(.:format)', '')
+              subclass_route_method = subclass_route.verb.upcase
+              @router_routes["#{subclass_name}.#{subclass_route_name}"] = { path: "#{route_path}#{subclass_route_path}", method: subclass_route_method }
+            end
+          end
+        end
+
+        @router_routes[route_name] = { path: route_path, method: route_method } unless has_gem
       end
 
       @router_routes
