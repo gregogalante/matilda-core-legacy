@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.0
+
+- Implementazione nuova versione di UI (versione 2).
+- Mantenimento della vecchia versione UI come "legacy".
+
 ## 0.3.1
 
 - Ottimizzazione UI breadcrumb.

@@ -1,0 +1,9 @@
+{
+  "name": "@matilda/core_legacy",
+  "dependencies": [
+    "@fortawesome/fontawesome-free",
+    "@rails/ujs",
+    "stimulus",
+    "tippy.js"
+  ]
+}

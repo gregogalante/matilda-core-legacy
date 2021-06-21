@@ -1,0 +1,9 @@
+{
+  "name": "@matilda/core",
+  "dependencies": [
+    "react",
+    "react-dom",
+    "prop-types",
+    "antd"
+  ]
+}
