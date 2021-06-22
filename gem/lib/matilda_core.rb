@@ -8,7 +8,6 @@ require 'kaminari'
 require 'matilda_core/config'
 require 'matilda_core/engine'
 require 'matilda_core/session'
-require 'matilda_core/react_props'
 require 'matilda_core/version'
 
 # MatildaCore.

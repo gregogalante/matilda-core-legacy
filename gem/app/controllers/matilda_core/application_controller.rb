@@ -67,7 +67,7 @@ module MatildaCore
 
     # Funzione utilizzata per creare una nuova sessione.
     def session_create(session_uuid, user_uuid)
-      @session = MatildaCore.config.session || MatildaCore::Session.new
+      @session = MatildaCore::Session.new
       @session.user_session_uuid(session_uuid)
       @session.user_uuid(user_uuid)
       session_update
@@ -165,7 +165,7 @@ module MatildaCore
         return { result: false, type: type } unless session_data
       end
 
-      @session = MatildaCore.config.session ? MatildaCore.config.session.set(session_data) : MatildaCore::Session.new(session_data)
+      @session = MatildaCore::Session.new(session_data)
 
       { result: true, type: type }
     end

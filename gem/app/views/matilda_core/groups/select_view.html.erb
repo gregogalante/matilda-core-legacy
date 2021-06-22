@@ -1,3 +1,5 @@
+<% if MatildaCore.config.is_ui_legacy? %>
+
 <div class="c-card c-card--centerpage">
   <div class="c-card__header">
     <div class="c-card__header-title">
@@ -62,4 +64,10 @@
       </div>
     </div>
   </div>
+<% end %>
+
+<% else %>
+
+<%= matilda_react_view('matilda_core') %>
+
 <% end %>

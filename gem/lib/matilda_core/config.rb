@@ -114,7 +114,7 @@ module MatildaCore
 
     # OTHER NOT EDITABLE DIRECTLY
 
-    attr_reader :session, :react_props
+    attr_reader :react_props
 
     def initialize
       set_default_options
@@ -148,10 +148,6 @@ module MatildaCore
       @sidebar_items = []
       @memberships_permissions = []
       @memberships_permissions_roles = []
-
-      # voci non editabili
-      @session = MatildaCore::Session.new
-      @react_props = MatildaCore::ReactProps.new
     end
 
     # Permette di aggiungere una nuova voce di menu alla sidebar.

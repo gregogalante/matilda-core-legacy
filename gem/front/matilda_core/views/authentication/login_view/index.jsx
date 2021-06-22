@@ -4,14 +4,15 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { MatildaContainer, useMatildaForm, useMatildaRequest, useMatildaRedirect, useMatildaTranslator } from 'matilda_core'
 import './index.scss'
 
-export default (props) => <MatildaContainer matilda={props.matilda}><LoginView redirect={props.custom_redirect} /></MatildaContainer>
+export default (props) => <MatildaContainer matilda={props.matilda}><LoginView {...props} /></MatildaContainer>
 
 /********************************************************************************************** */
 
-function LoginView({ redirect }) {
+function LoginView(props) {
+  const { session_valid_custom_redirect, permit_signup } = props
   const { form, formOnResponseError } = useMatildaForm()
   const { requestSend: requestSendAuthenticationLogin } = useMatildaRequest('matilda_core.authentication_login_action')
-  const { redirectRun: redirectRunAuthenticationLogin } = useMatildaRedirect(redirect ? { path: redirect } : 'matilda_core.groups_select_view')
+  const { redirectRun: redirectRunAuthenticationLogin } = useMatildaRedirect(session_valid_custom_redirect ? { path: session_valid_custom_redirect } : 'matilda_core.groups_select_view')
   const { t } = useMatildaTranslator()
 
   //////////////////////////////////////////////////////////
@@ -34,20 +35,19 @@ function LoginView({ redirect }) {
         <Form
           name="login"
           className="form"
+          layout="vertical"
           initialValues={{ remember: true }}
           form={form}
           onFinish={onFinishLogin}
         >
           <Form.Item
             name="username_email"
-            rules={[{ required: true }]}
           >
             <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder={t('matilda_core.labels.username_or_email')} />
           </Form.Item>
 
           <Form.Item
             name="password"
-            rules={[{ required: true }]}
           >
             <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} placeholder={t('matilda_core.labels.password')} />
           </Form.Item>
@@ -58,7 +58,7 @@ function LoginView({ redirect }) {
             </Form.Item>
 
             <a className="form__forgot" href="">
-              Forgot password
+              {t('matilda_core.cta.recover_password')}
             </a>
           </Form.Item>
 
@@ -66,9 +66,11 @@ function LoginView({ redirect }) {
               <Button type="primary" htmlType="submit" className="form__button">
                 {t('matilda_core.cta.login')}
               </Button>
-              <div>
-                Or <a href="">register now!</a>
-              </div>
+              {permit_signup && (
+                <div>
+                  <a href="">{t('matilda_core.cta.signup')}</a>
+                </div>
+              )}
           </Form.Item>
         </Form>
       </Card>
