@@ -1,28 +1,36 @@
 .layout {
-
-}
-
-.layout__header-logo {
-  float: left;
-  margin-right: 15px;
-
-  span {
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 20px;
-    color: #fff;
+  .layout__header {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
   }
 
-  img {
-    height: 30px;
+  .layout__header-logo {
+    float: left;
+    margin-right: 15px;
+  
+    span {
+      font-weight: bold;
+      font-size: 20px;
+      line-height: 20px;
+      color: #fff;
+    }
+  
+    img {
+      height: 30px;
+    }
   }
-}
 
-.layout__content {
-  min-height: 100vh;
-  padding: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+  .layout__header-menu {
+    float: right;
+  }
+  
+  .layout__content {
+    min-height: 100vh;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
 }

@@ -1,6 +1,7 @@
-import { ConfigProvider, Layout, Menu, Form, notification } from 'antd'
+import { ConfigProvider, Layout, Menu, Form, SubMenu, notification } from 'antd'
 import {
   UserOutlined,
+  FlagOutlined
 } from '@ant-design/icons';
 import React, { useMemo, useContext } from 'react'
 
@@ -49,16 +50,16 @@ export function MatildaProvider ({ matilda, children }) {
  * @param {*} props 
  */
 export function MatildaContainer ({ matilda, layout, children }) {
-  const { config: { global_title, global_logo } } = matilda
+  const { config: { global_title, global_logo }, i18n: { available_locales, locale } } = matilda
 
-  const locale = useMemo(() => {
+  const antdLocale = useMemo(() => {
     const availableLocales = { en, it, us }
     return availableLocales[matilda?.i18n?.locale] || en
   }, [matilda])
 
   const HeaderComponent = () => {
     return (
-      <Header>
+      <Header className="layout__header">
         <div className="layout__header-logo">
           {global_logo ? (
             <img src={global_logo} />
@@ -66,11 +67,14 @@ export function MatildaContainer ({ matilda, layout, children }) {
             <span>{global_title}</span>
           )}
         </div>
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-          {new Array(5).fill(null).map((_, index) => {
-            const key = index + 1;
-            return <Menu.Item key={key}>{`nav ${key}`}</Menu.Item>;
-          })}
+        <Menu className="layout__header-menu" theme="dark" mode="horizontal" selectedKeys={[`locale_${locale}`]}>
+          <Menu.SubMenu key="language" icon={<FlagOutlined />}>
+            {available_locales.map((availableLocale) => {
+              return (
+                <Menu.Item key={`locale_${availableLocale}`}>{availableLocale.toUpperCase()}</Menu.Item>
+              )
+            })}
+          </Menu.SubMenu>
         </Menu>
       </Header>
     )
@@ -85,8 +89,8 @@ export function MatildaContainer ({ matilda, layout, children }) {
   if (layout == 'authentication') {
     return (
       <MatildaProvider matilda={matilda}>
-        <ConfigProvider locale={locale}>
-          <Layout>
+        <ConfigProvider locale={antdLocale}>
+          <Layout className="layout">
             <Layout>
               <HeaderComponent />
               <Content className="layout__content layout__content--authentication">
@@ -102,8 +106,8 @@ export function MatildaContainer ({ matilda, layout, children }) {
 
   return (
     <MatildaProvider matilda={matilda}>
-      <ConfigProvider locale={locale}>
-        <Layout>
+      <ConfigProvider locale={antdLocale}>
+        <Layout className="layout">
           <Sider
             style={{
               overflow: 'auto',
