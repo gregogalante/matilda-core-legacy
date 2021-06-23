@@ -1,0 +1,26 @@
+#LoginView {
+  .card {
+    width: 100%;
+    min-width: 500px;
+  }
+
+  .form {
+    width: 100%;
+  }
+
+  .form__forgot {
+    display: inline-block;
+    margin-left: 15px;
+    float: right;
+  }
+
+  .ant-col-rtl .form__forgot {
+    float: left;
+    margin-right: 15px;
+  }
+
+  .form__button {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+}

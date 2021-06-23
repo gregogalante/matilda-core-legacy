@@ -1,5 +1,5 @@
 PATH
-  remote: ../gem_boilerplate
+  remote: ../boilerplate
   specs:
     matilda_boilerplate (2.0.0)
       evnt
@@ -7,7 +7,7 @@ PATH
       rails
 
 PATH
-  remote: ../gem
+  remote: ..
   specs:
     matilda_core (2.0.0)
       bcrypt

@@ -1,0 +1,11 @@
+#SelectView {
+  .card {
+    width: 100%;
+    min-width: 500px;
+
+    .ant-card-body {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+}
