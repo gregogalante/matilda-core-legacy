@@ -7,7 +7,7 @@ module.exports = getStyleRule(/\.less$/i, false, [
       sourceMap: true,
       lessOptions: {
         modifyVars: {
-          'primary-color': "#273c75", 
+          'primary-color': "#0097e6", 
         },
         javascriptEnabled: true
       }

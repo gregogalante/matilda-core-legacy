@@ -4,16 +4,15 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { MatildaContainer, MatildaContext, useMatildaForm, useMatildaRequest, useMatildaRedirect, useMatildaTranslator } from 'matilda_core/react_tools'
 import './index.scss'
 
-export default (props) => <MatildaContainer matilda={props.matilda} layout="authentication"><LoginView {...props} /></MatildaContainer>
+export default (props) => <MatildaContainer matilda={props.matilda} layout="authentication"><RecoverPasswordView {...props} /></MatildaContainer>
 
 /********************************************************************************************** */
 
-function LoginView() {
+function RecoverPasswordView() {
   const { config: { authentication_session_valid_custom_redirect, authentication_permit_signup }, view: { key } } = useContext(MatildaContext)
   const { form, formOnResponseError } = useMatildaForm()
   const { requestSend: requestSendAuthenticationLogin } = useMatildaRequest('matilda_core.authentication_login_action')
   const { redirectRun: redirectRunAuthenticationLogin } = useMatildaRedirect(authentication_session_valid_custom_redirect ? { path: authentication_session_valid_custom_redirect } : 'matilda_core.groups_select_view')
-  const { redirectRun: redirectRunAuthenticationRecoverPassword } = useMatildaRedirect('matilda_core.authentication_recover_password_view')
   const { t } = useMatildaTranslator()
 
   //////////////////////////////////////////////////////////
@@ -32,7 +31,7 @@ function LoginView() {
 
   return (
     <div id={key}>
-      <Card title={t('matilda_core.titles.login')} className="card">
+      <Card title={t('matilda_core.titles.recover_password')} className="card">
         <Form
           name="login"
           className="form"
@@ -58,7 +57,7 @@ function LoginView() {
               <Checkbox>Remember me</Checkbox>
             </Form.Item>
 
-            <a className="form__forgot" href="#" onClick={() => redirectRunAuthenticationRecoverPassword()}>
+            <a className="form__forgot" href="">
               {t('matilda_core.cta.recover_password')}
             </a>
           </Form.Item>

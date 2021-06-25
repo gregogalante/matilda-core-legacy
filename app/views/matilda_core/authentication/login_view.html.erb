@@ -38,9 +38,6 @@
 
 <% else %>
 
-<%= matilda_react_view('matilda_core', {
-  session_valid_custom_redirect: MatildaCore.config.authentication_session_valid_custom_redirect,
-  permit_signup: MatildaCore.config.authentication_permit_signup
-}) %>
+<%= matilda_react_view('matilda_core') %>
 
 <% end %>

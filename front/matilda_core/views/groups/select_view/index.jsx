@@ -8,7 +8,7 @@ export default (props) => <MatildaContainer matilda={props.matilda} layout="auth
 /********************************************************************************************** */
 
 function SelectView(props) {
-  const { config: { groups_permit_creation_to_users} } = useContext(MatildaContext)
+  const { config: { groups_permit_creation_to_users }, view: { key } } = useContext(MatildaContext)
   const { requestSend: requestSendGroupsSelect } = useMatildaRequest('matilda_core.groups_select_action', true)
   const { redirectRun: redirectRunGroupsIndexView } = useMatildaRedirect('matilda_core.groups_index_view')
   const { t } = useMatildaTranslator()
@@ -17,14 +17,15 @@ function SelectView(props) {
 
   const onSelectGroup = (groupUuid) => {
     requestSendGroupsSelect({ group_uuid: groupUuid }).then((response) => {
-      if (response.result) redirectRunGroupsIndexView()
+      if (!response.result) return
+      redirectRunGroupsIndexView()
     })
   }
 
   //////////////////////////////////////////////////////////
 
   return (
-    <div id="SelectView">
+    <div id={key}>
       <Card
         title={t('matilda_core.titles.select_a_group')}
         className="card"

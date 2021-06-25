@@ -151,7 +151,7 @@ module MatildaCore
     end
 
     # Permette di aggiungere una nuova voce di menu alla sidebar.
-    def add_sidebar_item(name, label: '', url: '', icon: '', permission: nil, index: 0)
+    def add_sidebar_item(name, label: '', url: '', icon: '', icon_legacy: '', permission: nil, index: 0)
       names = @sidebar_items.map { |i| i[:name] }
       throw 'Name already used' if names.include?(name)
 
@@ -160,6 +160,7 @@ module MatildaCore
         label: label,
         url: url,
         icon: icon,
+        icon_legacy: icon_legacy,
         permission: permission,
         index: index
       )
