@@ -88,8 +88,6 @@ export function MatildaContainerSidebar (props) {
   const { view: { sidebar }, session } = matilda
   const { redirectRun: redirectRunForSidebarItem } = useMatildaRedirect()
 
-  console.log(matilda)
-
   //////////////////////////////////////////////////////////
 
   const sidebarItems = useMemo(() => {

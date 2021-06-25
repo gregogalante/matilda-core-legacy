@@ -8,18 +8,27 @@ export default (props) => {
     <MatildaContainer matilda={props.matilda}>
       <MatildaPageRouter routes={[
         {
-          component: <IndexView />,
-          label: 'matilda_core.titles.users_list',
-          internalPages: [{
-            component: <ManageView />,
-            label: 'matilda_core.titles.manage_user'
-          }]
+          label: 'Demo',
+          routes: [
+            {
+              label: 'matilda_core.titles.users_list',
+              pages: [
+                {
+                  component: IndexView,
+                  label: 'matilda_core.titles.users_list'
+                },
+                {
+                  component: ManageView,
+                  label: 'matilda_core.titles.manage_user'
+                },
+              ]
+            }
+          ]
         },
         {
-          component: <InvitationView />,
+          component: InvitationView,
           label: 'matilda_core.titles.invite_user'
-        },
-
+        }
       ]} />
     </MatildaContainer>
   )
@@ -38,8 +47,8 @@ function IndexView() {
   //////////////////////////////////////////////////////////
 
   return (
-    <div id={`${key}__listing`}>
-      Pippo tutto il giorno e dopo smetto
+    <div id={`${key}__index`}>
+      Index
     </div>
   )
 }
@@ -57,8 +66,8 @@ function InvitationView() {
   //////////////////////////////////////////////////////////
 
   return (
-    <div id={`${key}__listing`}>
-      
+    <div id={`${key}__invitation`}>
+      Invitation
     </div>
   )
 }
@@ -76,8 +85,8 @@ function ManageView() {
   //////////////////////////////////////////////////////////
 
   return (
-    <div id={`${key}__listing`}>
-      
+    <div id={`${key}__manage`}>
+      Manage
     </div>
   )
 }

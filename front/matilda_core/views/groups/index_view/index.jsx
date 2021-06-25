@@ -7,7 +7,7 @@ export default (props) => {
   return (
     <MatildaContainer matilda={props.matilda}>
       <MatildaPageRouter routes={[{
-        component: <IndexView />
+        component: IndexView
       }]} />
     </MatildaContainer>
   )

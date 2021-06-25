@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { Breadcrumb, Layout, Menu } from 'antd'
 import { MatildaContext, useMatildaTranslator } from 'matilda_core/react_tools'
@@ -11,16 +11,29 @@ import { MatildaContext, useMatildaTranslator } from 'matilda_core/react_tools'
  */
 export function MatildaPageRouter (props) {
   const { routes } = props
-  const [currentRoute, setCurrentRoute] = useState([0])
+  const [currentRouteIdentifier, setCurrentRouteIdentifier] = useState([0])
+  const [currentPageIdentifier, setCurrentPageIdentifier] = useState(0)
   const { view } = useContext(MatildaContext)
   const { t } = useMatildaTranslator()
+
+  //////////////////////////////////////////////////////////
+
+  const CurrentComponent = useMemo(() => {
+    const findCurrentRoute = (routes, index) => currentRouteIdentifier[index + 1] ? findCurrentRoute(routes[index].routes, index + 1) : routes[index]
+    const findRouteComponent = (route) => route.component || (route.routes ? findRouteComponent(route.routes[0]) : () => null)
+    const currentRoute = findCurrentRoute(routes, 0)
+
+    return currentRoute.component || findRouteComponent(currentRoute)
+  }, [currentRouteIdentifier, currentPageIdentifier])
+
+  //////////////////////////////////////////////////////////
 
   const renderRoutes = (routes, prefix = '') => {
     return (
       <>
         {routes.map((route, index) => {
           const key = `${prefix}_${index}`
-          if (route.subPages) return renderRouteSubmenu(route, key)
+          if (route.routes) return renderRouteSubmenu(route, key)
 
           return <Menu.Item key={key}>{t(route.label)}</Menu.Item>
         })}
@@ -31,7 +44,7 @@ export function MatildaPageRouter (props) {
   const renderRouteSubmenu = (route, index) => {
     return (
       <Menu.SubMenu key={index} title={t(route.label)}>
-        {renderRoutes(route.subPages, index)}
+        {renderRoutes(route.routes, index)}
       </Menu.SubMenu>
     )
   }
@@ -45,7 +58,7 @@ export function MatildaPageRouter (props) {
         </Breadcrumb>
       )}
       <Layout className="matilda-page-router__main">
-        {(routes.length > 1 || routes[0]?.subPages) && (
+        {(routes.length > 1 || routes[0]?.routes) && (
            <Layout.Sider width={200}>
             <Menu
               mode="inline"
@@ -56,7 +69,7 @@ export function MatildaPageRouter (props) {
           </Layout.Sider>
         )}
         <Layout.Content className="matilda-page-router__main-content">
-          {routes[currentRoute[0]].component}
+          <CurrentComponent />
         </Layout.Content>
       </Layout>
     </div>
@@ -65,10 +78,10 @@ export function MatildaPageRouter (props) {
 
 MatildaPageRouter.propTypes = {
   routes: PropTypes.arrayOf(PropTypes.shape({
-    component: PropTypes.any,
+    component: PropTypes.func,
     label: PropTypes.string,
-    subPages: PropTypes.array,
-    internalPages: PropTypes.array
+    routes: PropTypes.array,
+    pages: PropTypes.array
   }))
 }
 
