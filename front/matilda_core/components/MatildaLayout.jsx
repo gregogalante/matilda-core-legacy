@@ -1,7 +1,7 @@
 import React, { useMemo, useContext, useEffect } from 'react'
 import { Layout, Menu } from 'antd'
 import * as Icons from '@ant-design/icons'
-import { MatildaContext } from '../Matilda'
+import { MatildaContext } from '../index'
 import { useMatildaRequest } from './MatildaRequest'
 
 /**
@@ -94,8 +94,6 @@ function Sider () {
   )
 }
 
-/****************************************************************************************************************** */
-
 function MenuPrimary () {
   const { getConfig, getTranslation, getSession } = useContext(MatildaContext)
   const session = getSession()
@@ -182,7 +180,7 @@ function MenuMobile () {
   return (
     <Menu theme="dark" mode="horizontal">
       <Menu.Item
-        key={"menu_mobile_toggle"}
+        key={"toggle"}
         icon={<Icons.MenuOutlined />}
         onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
         title={'Menu'}

@@ -1,6 +1,7 @@
 import React from 'react'
-import { MatildaContainer } from 'matilda_core/Matilda'
+import { MatildaContainer } from 'matilda_core'
 import { MatildaLayout, useMatildaLayout } from 'matilda_core/components/MatildaLayout'
+import LoginView from './login_view'
 
 export default (props) => {
   const layout = useMatildaLayout({ theme: 'clean' })
@@ -8,7 +9,7 @@ export default (props) => {
   return (
     <MatildaContainer {...props}>
       <MatildaLayout layout={layout}>
-        DEMO
+        <LoginView />
       </MatildaLayout>
     </MatildaContainer>
   )

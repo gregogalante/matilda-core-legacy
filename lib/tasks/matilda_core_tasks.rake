@@ -22,18 +22,40 @@ namespace :matilda_core do
       FileUtils.copy_entry(src, dst)
 
       # install dependencies inside main applicaiton
-      # dependencies = JSON.parse(File.read("#{dst}/dependencies.json"))
-      # system("yarn add #{dependencies['dependencies'].join(' ')}")
+      dependencies = JSON.parse(File.read("#{dst}/dependencies.json"))
+      system("yarn add #{dependencies['dependencies'].join(' ')}")
 
       # create matilda.js file in packs if not exists
-      pack_dst = "#{Rails.root}/app/javascript/packs/matilda.js"
-      if File.exist?(pack_dst)
-        puts "IMPORTANTE: Controllare gli import del file #{pack_dst} o eliminare il file e rieseguire il task."
+      file_dst = "#{Rails.root}/app/javascript/packs/matilda.js"
+      if File.exist?(file_dst)
+        puts "IMPORTANTE: Controllare gli import del file #{file_dst} o eliminare il file e rieseguire il task."
       else
-        File.open(pack_dst, "w+") { |f| f.write("// Support component names relative to this directory:\nvar matildaCoreRequireContext = require.context('../../../vendor/matilda_core', true);\nvar ReactRailsUJS = require('react_ujs');\nReactRailsUJS.useContext(matildaCoreRequireContext);") }
+        File.open(file_dst, "w+") { |f| f.write("import 'matilda_core/theme.less'\n\n// Support component names relative to this directory:\nvar matildaCoreRequireContext = require.context('../../../vendor/matilda_core', true);\nvar ReactRailsUJS = require('react_ujs');\nReactRailsUJS.useContext(matildaCoreRequireContext);") }
+      end
+
+      # create addMatildaLessSupport file in config webpack
+      file_dst = "#{Rails.root}/config/webpack/addMatildaLessSupport.js"
+      File.open(file_dst, "w+") { |f| f.write("const getStyleRule = require('@rails/webpacker/package/utils/get_style_rule');\n\nmodule.exports = getStyleRule(/\.less$/i, false, [{loader: 'less-loader', options: {sourceMap: true, lessOptions: {javascriptEnabled: true}}}])") }
+
+      # add import of addMatildaLessSupport file in config webpack environment
+      file_dst = "#{Rails.root}/config/webpack/environment.js"
+      file_cnt = File.read(file_dst)
+      string_to_add = "environment.loaders.prepend('style', require('./addMatildaLessSupport'))"
+      string_before_add = "module.exports = environment"
+      unless file_cnt.include?(string_to_add)
+        File.open(file_dst, "w+") { |f| f.write(file_cnt.sub(string_before_add, "#{string_to_add}\n#{string_before_add}")) }
       end
 
       puts "IMPORTANTE: Aggiungere 'vendor/matilda_core' tra le additional_paths nel file di configurazione webpacker.yml"
+    end
+
+    desc "Aggiorna i sorgenti front-end dell'engine all'applicazione principale"
+    task front_update: :environment do |_task, args|
+      # copy front module to main application
+      src = "#{MatildaCore::Engine.root}/front"
+      dst = "#{Rails.root}/vendor/matilda_core"
+      FileUtils.rm_rf(dst) if File.exist?(dst)
+      FileUtils.copy_entry(src, dst)
     end
 
     # *****************************************************************************
