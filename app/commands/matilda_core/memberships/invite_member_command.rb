@@ -56,7 +56,8 @@ module MatildaCore
             surname: params[:surname],
             email: params[:email],
             log_who: params[:log_who],
-            _with_notification_invite: params[:_with_notification_invite]
+            _with_notification_invite: params[:_with_notification_invite],
+            _username: params[:email]
           )
           internal_error && break unless event_user.saved?
 

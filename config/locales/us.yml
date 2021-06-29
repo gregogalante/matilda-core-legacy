@@ -46,6 +46,7 @@ en:
       create_a_group: Create a group
       users: Users
       users_list: Users list
+      users_stats: Users stats
       invite_user: Invite user
       manage_user: Manage user
       edit_permissions: Edit permissions
@@ -74,6 +75,7 @@ en:
       search_something: Search something
     messages:
       general_error: There was an internal error
+      general_success: Operation completed with success
       name_not_valid: Name not valid
       surname_not_valid: Surname not valid
       username_email_not_valid: Username / Email address not valid

@@ -28,16 +28,6 @@ module MatildaCore
         permission: 'matilda_core.memberships',
         index: 1100
       )
-      if Rails.env.development? && MatildaCore.config.is_ui_legacy?
-        MatildaCore.config.add_sidebar_item(
-          'matilda_core.documentation',
-          label: 'locale.matilda_core.titles.documentation',
-          url: MatildaCore::Engine.routes.url_helpers.documentation_index_view_path,
-          icon_legacy: 'fas fa-code',
-          icon: 'CodeOutlined',
-          index: 999999
-        )
-      end
     end
 
     # Imposto i permessi degli utenti.

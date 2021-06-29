@@ -11,6 +11,8 @@ module MatildaCore
       }.merge(props) if defined?(react_component)
     end
 
+    ##############################################################################################################################
+
     def matilda_react_props
       {
         i18n: {
@@ -21,17 +23,17 @@ module MatildaCore
         router: {
           routes: matilda_react_props_react_props_router_routes
         },
-        config: MatildaCore.config.as_json,
-        session: @session&.data,
         view: {
           controller: controller_name,
           action: action_name,
           key: "#{controller_name}_#{action_name}",
-          sidebar: @_sidebar,
-          section_head: @_section_head
-        }
+        },
+        config: MatildaCore.config.as_json,
+        session: @session&.data
       }
     end
+
+    ##############################################################################################################################
 
     def matilda_react_props_react_props_i18n_translations(locale)
       Rails.cache.fetch("MatildaCore::Session.react_props_i18n_translations(#{locale})") do
@@ -54,6 +56,7 @@ module MatildaCore
           has_gem = false
           route_name = route.name
           route_path = route.path.spec.to_s.gsub('(.:format)', '')
+          route_path = '' if route_path == '/'
           route_method = route.verb.upcase
 
           Rails::Engine.subclasses.each do |subclass|

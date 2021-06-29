@@ -10,7 +10,7 @@ module MatildaCore
   # - actions: azioni che eseguono operazioni (example 'login_action')
   class ApplicationController < ActionController::Base
 
-    layout MatildaCore.config.is_ui_legacy? ? 'matilda_core/application_legacy' : 'matilda_core/application'
+    layout 'matilda_core/application'
 
     protect_from_forgery with: :exception
 
@@ -31,35 +31,6 @@ module MatildaCore
       @session&.locale(params[:locale].to_sym) if I18n.available_locales.include?(params[:locale].to_sym)
       session[:mat_locale] = params[:locale]
       render_json_success({ token: session_update })
-    end
-
-    def helper_update_menu_preference
-      session[:mat_menupreference] = params[:value] == '1'
-      render_json_success({})
-    end
-
-    # FUNZIONI DI GESTIONE MULTILINGUA
-    ##############################################################################################################
-
-    def set_locale
-      session_set unless @session
-      locale = @session&.locale || session[:mat_locale] || I18n.default_locale
-
-      I18n.locale = locale
-    end
-
-    # FUNZIONI DI GESTIONE ELEMENTI VIEW
-    ##############################################################################################################
-
-    def sidebar_set(value)
-      @_sidebar = value
-    end
-
-    def section_head_set(title, breadcrumbs)
-      @_section_head = {
-        title: title,
-        breadcrumbs: breadcrumbs || []
-      }
     end
 
     # FUNZIONI DI GESTIONE SESSIONE
@@ -172,6 +143,12 @@ module MatildaCore
 
     ##############################################################################################################
 
+    def pagination_data(query)
+      { total_items: query.total_count, total_pages: query.total_pages, page: query.current_page, per_page: query.limit_value }
+    end
+
+    ##############################################################################################################
+
     # Funzione che gestisce un comando e, se questo ha risultato negativo, rimanda l'errore al client.
     def command_manager(command)
       unless command.completed?
@@ -215,6 +192,15 @@ module MatildaCore
     # Funzione che genera un errore a partire da un messaggio testuale.
     def json_error(message, code = nil)
       { message: message, code: code }
+    end
+
+    private
+
+    def set_locale
+      session_set unless @session
+      locale = @session&.locale || session[:mat_locale] || I18n.default_locale
+
+      I18n.locale = locale
     end
 
   end

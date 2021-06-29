@@ -8,7 +8,7 @@ Documentazione completa: <a href="https://github.com/ideonetwork/matilda-core/wi
 
 Per configurare la prima volta l'ambiente per sviluppare la libreria eseguire il comando **./sh ./bin/dev_setup.sh**.
 
-Per iniziare a lavorare sul progetto eseguire il comando **sh ./bin/dev_start.sh**. Nel caso di aggiornamenti alla versione legacy utilizzare **sh ./bin/dev_start_legacy.sh**.
+Per iniziare a lavorare sul progetto eseguire il comando **sh ./bin/dev_start.sh**.
 
 Per aggiornare in real-time il front-end eseguire dentro ***example** il comando **watch -n 10 "rails matilda_core:install:front"**.
 

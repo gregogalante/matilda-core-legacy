@@ -11,33 +11,6 @@ namespace :matilda_core do
 
     # *****************************************************************************
 
-    desc "Installa le dipendenze front-end legacy dall'engine all'applicazione principale"
-    task front_legacy: :environment do |_task, args|
-      puts "ATTENZIONE: Nel caso di un nuovo progetto è consigliabile non utilizzare la versione legacy."
-
-      # copy front module to main application
-      src = "#{MatildaCore::Engine.root}/front_legacy"
-      dst = "#{Rails.root}/vendor/matilda_core"
-      FileUtils.rm_rf(dst) if File.exist?(dst)
-      FileUtils.copy_entry(src, dst)
-
-      # install dependencies inside main applicaiton
-      dependencies = JSON.parse(File.read("#{dst}/dependencies.json"))
-      system("yarn add #{dependencies['dependencies'].join(' ')}")
-
-      # create matilda.js file in packs if not exists
-      pack_dst = "#{Rails.root}/app/javascript/packs/matilda.js"
-      if File.exist?(pack_dst)
-        puts "IMPORTANTE: Controllare gli import del file #{pack_dst} o eliminare il file e rieseguire il task."
-      else
-        File.open(pack_dst, "w+") { |f| f.write("import 'matilda_core'") }
-      end
-
-      puts "IMPORTANTE: Aggiungere 'vendor/matilda_core' tra le additional_paths nel file di configurazione webpacker.yml"
-    end
-
-    # *****************************************************************************
-
     desc "Installa le dipendenze front-end dall'engine all'applicazione principale"
     task front: :environment do |_task, args|
       # TODO: inserire avviso nel caso non sia installata la gemma react-rails
@@ -57,7 +30,7 @@ namespace :matilda_core do
       if File.exist?(pack_dst)
         puts "IMPORTANTE: Controllare gli import del file #{pack_dst} o eliminare il file e rieseguire il task."
       else
-        File.open(pack_dst, "w+") { |f| f.write("import 'matilda_core'\n// Support component names relative to this directory:\nvar matildaCoreRequireContext = require.context('../../../vendor/matilda_core', true);\nvar ReactRailsUJS = require('react_ujs');\nReactRailsUJS.useContext(matildaCoreRequireContext);") }
+        File.open(pack_dst, "w+") { |f| f.write("// Support component names relative to this directory:\nvar matildaCoreRequireContext = require.context('../../../vendor/matilda_core', true);\nvar ReactRailsUJS = require('react_ujs');\nReactRailsUJS.useContext(matildaCoreRequireContext);") }
       end
 
       puts "IMPORTANTE: Aggiungere 'vendor/matilda_core' tra le additional_paths nel file di configurazione webpacker.yml"

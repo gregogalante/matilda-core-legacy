@@ -51,9 +51,10 @@ it:
     titles: # titoli di pagine, cards ecc.
       select_a_group: Seleziona gruppo
       create_a_group: Creazione gruppo
-      users: Utenti
-      users_list: Lista utenti
-      invite_user: Invita utenti
+      users: Accessi
+      users_list: Lista accessi
+      users_stats: Statistiche accessi
+      invite_user: Invita utente
       manage_user: Gestisci utente
       edit_permissions: Modifica permessi
       edit_permissions_role: Modifica ruolo
@@ -81,6 +82,7 @@ it:
       search_something: Cerca qualcosa
     messages: # messaggi di errore, alerts ecc.
       general_error: Si è verificato un errore interno
+      general_success: Operazione completata correttamente
       name_not_valid: Nome non valido
       surname_not_valid: Cognome non valido
       username_email_not_valid: Username / Indirizzo Email non valido

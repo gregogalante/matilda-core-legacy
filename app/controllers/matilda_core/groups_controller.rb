@@ -19,9 +19,6 @@ module MatildaCore
         redirect_to matilda_core.groups_select_view_path
         return
       end
-
-      section_head_set('Dashboard', [{ label: 'Dashboard' }])
-      sidebar_set('matilda_core.groups')
     end
 
     def select_view
@@ -33,7 +30,6 @@ module MatildaCore
       end
 
       @groups = @session.user.groups.order('name ASC')
-      sidebar_set('matilda_core.groups')
     end
 
     def select_action

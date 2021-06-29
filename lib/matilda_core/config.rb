@@ -7,10 +7,6 @@ module MatildaCore
 
     # GLOBAL
 
-    # Imposta la tipologia di ui da visualizzare di default.
-    # I valori possibili sono :legacy o nil (default).
-    attr_accessor :global_ui_version
-
     # Imposta il titolo generico del prodotto.
     attr_accessor :global_title
 
@@ -23,13 +19,16 @@ module MatildaCore
     # Imposta la versione dell'applicativo.
     attr_accessor :global_version
 
+    # Imposta la descrizione testuale per il footer.
+    attr_accessor :global_footer
+
     # TEMPLATE
 
     # Sovrascrive il contenuto del head.
     attr_accessor :template_head
 
     # Sovrascrive il contenuto del footer.
-    attr_accessor :template_footer
+    attr_accessor :template_foot
 
     # MAILER
 
@@ -121,12 +120,12 @@ module MatildaCore
     end
 
     def set_default_options
-      @global_ui_version = nil
       @global_title = 'Matilda Core'
       @global_logo = nil
       @global_date_format = '%d-%m-%Y'
       @global_version = MatildaCore::VERSION
-      @template_footer = nil
+      @global_footer = "© #{@global_title} #{Date.today.year} - Version: #{@global_version}"
+      @template_foot = nil
       @template_head = nil
       @mailer_from_address = 'Matilda <matilda@1d3o.it>'
       @authentication_session_lifetime = false
@@ -199,10 +198,6 @@ module MatildaCore
         permissions: permissions,
         index: index
       )
-    end
-
-    def is_ui_legacy?
-      global_ui_version&.to_s == 'legacy' 
     end
 
   end

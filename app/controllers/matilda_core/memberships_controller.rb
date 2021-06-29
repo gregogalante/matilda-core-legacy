@@ -12,25 +12,55 @@ module MatildaCore
     end
 
     def index_view
-      sidebar_set('matilda_core.memberships')
-      section_head_set(I18n.t('matilda_core.titles.users'), [{ label: I18n.t('matilda_core.titles.users') }])
-
       @users = @session.group.users
       @users = @users.where('lower(name) LIKE ? OR lower(surname) LIKE ?', "%#{params[:s].downcase}%", "%#{params[:s].downcase}%") unless params[:s].blank?
       @users = @users.order('surname ASC, name ASC').page(params[:page]).per(15)
     end
 
     def invitation_view
-      sidebar_set('matilda_core.memberships')
-      section_head_set(I18n.t('matilda_core.titles.invite_user'), [{ label: I18n.t('matilda_core.titles.users'), url: matilda_core.memberships_index_view_path }, { label: I18n.t('matilda_core.titles.invite_user') }])
     end
 
     def manage_view
       @user = @session.group.users.find_by(uuid: params[:user_uuid])
       @membership = @session.group.memberships.find_by(user_uuid: params[:user_uuid])
+    end
 
-      sidebar_set('matilda_core.memberships')
-      section_head_set(@user.complete_name, [{ label: I18n.t('matilda_core.titles.users'), url: matilda_core.memberships_index_view_path }, { label: I18n.t('matilda_core.titles.manage_user') }])
+    def index_api
+      page = params[:page]&.to_i || 1
+      per_page = params[:per_page]&.to_i || 15
+      sort_field = params[:sort_field] || 'username'
+      sort_order = params[:sort_order] || 'ASC'
+
+      users = @session.group.users.left_joins(:user_emails)
+      users = users.where('lower(name) LIKE ? OR lower(surname) LIKE ?', "%#{params[:s].downcase}%", "%#{params[:s].downcase}%") unless params[:s].blank?
+      
+      users = users.order('username': sort_order) if sort_field == 'username'
+      users = users.order('name': sort_order) if sort_field == 'name'
+      users = users.order('surname': sort_order) if sort_field == 'surname'
+      users = users.order('matilda_core_user_emails.email': sort_order) if sort_field == 'email'
+      
+      users = users.page(page).per(per_page)
+
+      render_json_success(
+        users: users.map(&:as_json_with_email),
+        pagination: pagination_data(users)
+      )
+    end
+
+    def manage_api
+      user_uuid = params[:user_uuid]
+
+      user = @session.group.users.find_by(uuid: user_uuid)
+      unless user
+        json_errors(json_error(I18n.t('matilda_core.messages.user_not_valid'), code: :user_uuid))
+        render_json_fail
+        return
+      end
+
+      render_json_success(
+        user: user.as_json_with_email,
+        user_emails: user.user_emails
+      )
     end
 
     def invitation_action
