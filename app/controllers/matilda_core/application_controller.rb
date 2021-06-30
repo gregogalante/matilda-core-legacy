@@ -143,8 +143,48 @@ module MatildaCore
 
     ##############################################################################################################
 
-    def pagination_data(query)
-      { total_items: query.total_count, total_pages: query.total_pages, page: query.current_page, per_page: query.limit_value }
+    def paginate_query(query)
+      page = params[:page]&.to_i || 1
+      per_page = params[:per_page]&.to_i || 25
+
+      query.page(page).per(per_page)
+    end
+
+    def sort_query(query, sort_key_map = {})
+      sort_field = params[:sort_field] || nil
+      sort_order = params[:sort_order] || 'ASC'
+      return query if sort_field.blank?
+      return query unless ['ASC', 'DESC'].include?(sort_order)
+
+      sort_key = sort_key_map[sort_field.to_sym]
+      return query unless sort_key
+
+      sort_string = sort_key.sub('SORT', sort_order)
+
+      query.order(sort_string)
+    end
+
+    def search_query(query, search_keys = [])
+      search = params[:search] || nil
+
+      return query if search.blank?
+      return query unless search_keys.length.positive?
+
+      search_strings = []
+      search_keys.each do |search_key|
+        search_strings.push("lower(#{search_key}) LIKE :search") 
+      end
+      search_string = search_strings.join(' OR ')
+
+      query.where(search_string, search: search)
+    end
+
+    def params_for_query(query)
+      {
+        pagination: { page: query.current_page, per_page: query.limit_value, total_pages: query.total_pages, total_items: query.total_count },
+        sort: { sort_field: params[:sort_field], sort_order: params[:sort_order] },
+        search: params[:search]
+      }
     end
 
     ##############################################################################################################

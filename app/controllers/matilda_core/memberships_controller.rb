@@ -13,34 +13,29 @@ module MatildaCore
 
     def index_view; end
 
-    # def invitation_view; end
-
     # def manage_view
     #   @user = @session.group.users.find_by(uuid: params[:user_uuid])
     #   @membership = @session.group.memberships.find_by(user_uuid: params[:user_uuid])
     # end
 
-    # def index_api
-    #   page = params[:page]&.to_i || 1
-    #   per_page = params[:per_page]&.to_i || 15
-    #   sort_field = params[:sort_field] || 'username'
-    #   sort_order = params[:sort_order] || 'ASC'
+    def index_api
+      page = params[:page]&.to_i || 1
+      per_page = params[:per_page]&.to_i || 15
+      sort_field = params[:sort_field] || 'username'
+      sort_order = params[:sort_order] || 'ASC'
 
-    #   users = @session.group.users.left_joins(:user_emails)
-    #   users = users.where('lower(name) LIKE ? OR lower(surname) LIKE ?', "%#{params[:s].downcase}%", "%#{params[:s].downcase}%") unless params[:s].blank?
+      users = @session.group.users.left_joins(:user_emails)
+      users = users.where('lower(name) LIKE ? OR lower(surname) LIKE ?', "%#{params[:s].downcase}%", "%#{params[:s].downcase}%") unless params[:s].blank?
       
-    #   users = users.order('username': sort_order) if sort_field == 'username'
-    #   users = users.order('name': sort_order) if sort_field == 'name'
-    #   users = users.order('surname': sort_order) if sort_field == 'surname'
-    #   users = users.order('matilda_core_user_emails.email': sort_order) if sort_field == 'email'
-      
-    #   users = users.page(page).per(per_page)
+      users = search_query(users, %w(name surname username))
+      users = sort_query(users, username: 'username SORT', name: 'name SORT', surname: 'surname SORT', email: 'matilda_core_user_emails.email SORT')
+      users = paginate_query(users)
 
-    #   render_json_success(
-    #     users: users.map(&:as_json_with_email),
-    #     pagination: pagination_data(users)
-    #   )
-    # end
+      render_json_success(
+        users: users.map(&:as_json_with_email),
+        params: params_for_query(users)
+      )
+    end
 
     # def manage_api
     #   user_uuid = params[:user_uuid]
@@ -58,12 +53,12 @@ module MatildaCore
     #   )
     # end
 
-    # def invitation_action
-    #   command = command_manager(generate_invitation_command)
-    #   return unless command
+    def invitation_action
+      command = command_manager(generate_invitation_command)
+      return unless command
 
-    #   render_json_success({})
-    # end
+      render_json_success({})
+    end
 
     # def edit_permissions_action
     #   command = command_manager(generate_edit_permissions_command)

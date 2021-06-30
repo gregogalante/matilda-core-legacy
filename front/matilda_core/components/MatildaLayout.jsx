@@ -10,7 +10,8 @@ import { useMatildaRequest } from './MatildaRequest'
  * @returns 
  */
 export function MatildaLayout (props) {
-  const { layout: { config } } = props
+  const { layout} = props
+  const { config } = layout
   const { responsive: { isMobile } } = useContext(MatildaContext)
   const [menuCollapsed, setMenuCollapsed] = useState(true)
  
@@ -23,7 +24,7 @@ export function MatildaLayout (props) {
       <Header menuCollapsed={menuCollapsed} setMenuCollapsed={setMenuCollapsed} />
 
       <Layout>
-        {showSider && <Sider collapsed={menuCollapsed} onCollapsedChange={setMenuCollapsed} />}
+        {showSider && <Sider layout={layout} collapsed={menuCollapsed} onCollapsedChange={setMenuCollapsed} />}
         <Layout.Content style={{ minHeight: '100vh', padding: 15, paddingTop: 80, paddingLeft: 70 }}>
           {props.children}
         </Layout.Content>
@@ -42,7 +43,8 @@ export function MatildaLayout (props) {
 export function useMatildaLayout (configProps = {}) {
   const config = useMemo(() => {
     return Object.assign({
-      theme: 'default'
+      theme: 'default',
+      siderActiveKey: null
     }, configProps)
   }, [configProps])
 
@@ -85,7 +87,7 @@ function Footer () {
 }
 
 function Sider (props) {
-  const { collapsed, onCollapsedChange } = props
+  const { layout, collapsed, onCollapsedChange } = props
   const { responsive: { isMobile } } = useContext(MatildaContext)
 
   return (
@@ -100,14 +102,15 @@ function Sider (props) {
       style={{ position: 'fixed', top: 64, height: `calc(100% - 64px)`, zIndex: 999 }}
     >
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
-        <MenuPrimary />
+        <MenuPrimary activeKey={layout.config.siderActiveKey} />
         {isMobile && <MenuSecondary />}
       </div>
     </Layout.Sider>
   )
 }
 
-function MenuPrimary () {
+function MenuPrimary (props) {
+  const { activeKey } = props
   const { getConfig, getTranslation, getSession } = useContext(MatildaContext)
   const session = getSession()
 
@@ -130,7 +133,7 @@ function MenuPrimary () {
   }
 
   return (
-    <Menu theme="dark" mode="vertical" selectedKeys={[]}>
+    <Menu theme="dark" mode="vertical" selectedKeys={[activeKey]}>
       {sidebarItems.map((sidebarItem) => {
         const IconItem = sidebarItem.icon ? Icons[sidebarItem.icon] : null
         return (

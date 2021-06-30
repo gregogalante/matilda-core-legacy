@@ -1,4 +1,5 @@
 import React, { useState, useContext, useMemo } from 'react'
+import PropTypes from 'prop-types'
 import { notification, Form } from 'antd'
 import { useMatildaRequest } from './MatildaRequest'
 import { MatildaContext } from '../index'
@@ -8,17 +9,26 @@ import { MatildaContext } from '../index'
  * @param {*} props
  */
 export function MatildaForm (props) {
-  const { form: { antdForm, onSubmit } } = props
+  const { form: { antdForm, onSubmit }, style } = props
 
   return (
     <Form
       form={antdForm}
       layout='vertical'
       onFinish={onSubmit}
+      style={style}
     >
       {props.children}
     </Form>
   )
+}
+
+MatildaForm.propTypes = {
+  style: PropTypes.object
+}
+
+MatildaForm.defaultProps = {
+  style: {}
 }
 
 /**

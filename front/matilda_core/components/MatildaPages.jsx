@@ -10,6 +10,13 @@ export function MatildaPages (props) {
   const { pages } = props
   const { getTranslation, responsive: { isDesktop } } = useContext(MatildaContext)
 
+  const drawerWidth = useMemo(() => {
+    const drawerSizesMap = { large: 768, medium: 568, small: 368 }
+    if (!isDesktop) return '100%'
+
+    return drawerSizesMap[pages.currentDrawer?.size] || drawerSizesMap.medium
+  }, [pages.currentDrawer, isDesktop])
+
   const onSelectRoute = (routeKey) => {
     pages.goToRoute(routeKey)
   }
@@ -65,9 +72,9 @@ export function MatildaPages (props) {
         closable={true}
         onClose={onCloseDrawer}
         visible={!!pages.currentDrawer}
-        width={'50%'}
+        width={drawerWidth}
       >
-        {pages.currentDrawer && <pages.currentDrawer.component />}
+        {pages.currentDrawer && <pages.currentDrawer.component {...pages.currentDrawer?.props} pages={pages} />}
       </Drawer>
     </>
   )

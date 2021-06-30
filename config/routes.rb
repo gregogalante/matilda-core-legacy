@@ -8,7 +8,7 @@ MatildaCore::Engine.routes.draw do
   # authentication
   get 'authentication/login-view', to: 'authentication#login_view', as: 'authentication_login_view'
   # get 'authentication/signup-view', to: 'authentication#signup_view', as: 'authentication_signup_view'
-  # get 'authentication/recover-password-view', to: 'authentication#recover_password_view', as: 'authentication_recover_password_view'
+  get 'authentication/recover-password-view', to: 'authentication#recover_password_view', as: 'authentication_recover_password_view'
   # get 'authentication/recover-password-complete-view', to: 'authentication#recover_password_complete_view', as: 'authentication_recover_password_complete_view'
   # get 'authentication/update-password-view', to: 'authentication#update_password_view', as: 'authentication_update_password_view'
   # get 'authentication/update-password-complete-view', to: 'authentication#update_password_complete_view', as: 'authentication_update_password_complete_view'
@@ -36,7 +36,6 @@ MatildaCore::Engine.routes.draw do
 
   # memberships
   get 'memberships/index-view', to: 'memberships#index_view', as: 'memberships_index_view'
-  get 'memberships/invitation-view', to: 'memberships#invitation_view', as: 'memberships_invitation_view'
   get 'memberships/manage-view', to: 'memberships#manage_view', as: 'memberships_manage_view'
   get 'memberships/index-api', to: 'memberships#index_api', as: 'memberships_index_api'
   get 'memberships/manage-api', to: 'memberships#manage_api', as: 'memberships_manage_api'

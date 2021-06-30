@@ -7,7 +7,7 @@ import ManagePage from './manage_page'
 import InviteDrawer from './invite_drawer'
 
 export default (props) => {
-  const layout = useMatildaLayout()
+  const layout = useMatildaLayout({ siderActiveKey: 'matilda_core.memberships' })
   const pages = useMatildaPages([
     {
       key: 'users_index',
@@ -21,7 +21,8 @@ export default (props) => {
             {
               key: 'users_index_index_page_invite_drawer',
               label: 'matilda_core.titles.invite_user',
-              component: InviteDrawer
+              component: InviteDrawer,
+              size: 'medium'
             }
           ]
         },

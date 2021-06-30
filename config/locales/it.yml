@@ -80,6 +80,7 @@ it:
       insert_new_password_confirmation: Inserisci di nuovo la nuova password
       insert_email: Inserisci un indirizzo email
       search_something: Cerca qualcosa
+      invitation_user_guide: Un email verrà inviata all'utente per invitarlo a completare il suo account
     messages: # messaggi di errore, alerts ecc.
       general_error: Si è verificato un errore interno
       general_success: Operazione completata correttamente
