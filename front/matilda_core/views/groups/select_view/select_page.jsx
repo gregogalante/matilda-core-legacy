@@ -3,7 +3,7 @@ import { Card, List, Button, Row, Col } from 'antd'
 import { MatildaContext } from 'matilda_core'
 import { useMatildaRequest } from 'matilda_core/components/MatildaRequest'
 
-export default function SelectView (props) {
+export default function SelectPage (props) {
   const { getTranslation, getConfig, getRoute } = useContext(MatildaContext)
   const request = useMatildaRequest()
   const permitGroupCreation = getConfig('groups_permit_creation_to_users')

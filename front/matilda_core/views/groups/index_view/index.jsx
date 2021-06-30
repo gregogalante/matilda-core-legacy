@@ -1,7 +1,7 @@
 import React from 'react'
 import { MatildaContainer } from 'matilda_core'
 import { MatildaLayout, useMatildaLayout } from 'matilda_core/components/MatildaLayout'
-import IndexView from './index_view'
+import IndexPage from './index_page'
 
 export default (props) => {
   const layout = useMatildaLayout()
@@ -9,7 +9,7 @@ export default (props) => {
   return (
     <MatildaContainer {...props}>
       <MatildaLayout layout={layout}>
-        <IndexView />
+        <IndexPage />
       </MatildaLayout>
     </MatildaContainer>
   )

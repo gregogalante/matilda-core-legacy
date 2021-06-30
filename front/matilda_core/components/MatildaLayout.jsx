@@ -1,4 +1,4 @@
-import React, { useMemo, useContext, useEffect } from 'react'
+import React, { useMemo, useContext, useState } from 'react'
 import { Layout, Menu } from 'antd'
 import * as Icons from '@ant-design/icons'
 import { MatildaContext } from '../index'
@@ -12,18 +12,19 @@ import { useMatildaRequest } from './MatildaRequest'
 export function MatildaLayout (props) {
   const { layout: { config } } = props
   const { responsive: { isMobile } } = useContext(MatildaContext)
-
+  const [menuCollapsed, setMenuCollapsed] = useState(true)
+ 
   const showSider = useMemo(() => {
     return isMobile || config.theme != 'clean'
   }, [config.theme, isMobile])
 
   return (
     <Layout>
-      <Header />
+      <Header menuCollapsed={menuCollapsed} setMenuCollapsed={setMenuCollapsed} />
 
       <Layout>
-        {showSider && <Sider />}
-        <Layout.Content style={{ minHeight: '100vh', padding: 15, paddingTop: 80, paddingLeft: 15 }}>
+        {showSider && <Sider collapsed={menuCollapsed} onCollapsedChange={setMenuCollapsed} />}
+        <Layout.Content style={{ minHeight: '100vh', padding: 15, paddingTop: 80, paddingLeft: 70 }}>
           {props.children}
         </Layout.Content>
       </Layout>
@@ -50,10 +51,13 @@ export function useMatildaLayout (configProps = {}) {
 
 /****************************************************************************************************************** */
 
-function Header () {
+function Header (props) {
+  const { menuCollapsed, setMenuCollapsed } = props
   const { getConfig, responsive: { isMobile } } = useContext(MatildaContext)
   const logo = getConfig('global_logo')
   const title = getConfig('global_title')
+
+  const toggleMenu = () => setMenuCollapsed(!menuCollapsed)
 
   return (
     <Layout.Header style={{ position: 'fixed', zIndex: 999, width: '100%' }}>
@@ -65,7 +69,7 @@ function Header () {
         )}
       </div>
       <div style={{ float: 'right' }}>
-        {isMobile ? <MenuMobile /> : <MenuSecondary />}
+        {isMobile ? <MenuMobile toggleMenu={toggleMenu} /> : <MenuSecondary />}
       </div>
     </Layout.Header>
   )
@@ -80,15 +84,24 @@ function Footer () {
   )
 }
 
-function Sider () {
+function Sider (props) {
+  const { collapsed, onCollapsedChange } = props
+  const { responsive: { isMobile } } = useContext(MatildaContext)
+
   return (
     <Layout.Sider
       collapsible
+      collapsed={collapsed}
+      onCollapse={onCollapsedChange}
       defaultCollapsed
+      width={200}
+      collapsedWidth={55}
       theme='dark'
+      style={{ position: 'fixed', top: 64, height: `calc(100% - 64px)`, zIndex: 999 }}
     >
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
         <MenuPrimary />
+        {isMobile && <MenuSecondary />}
       </div>
     </Layout.Sider>
   )
@@ -112,12 +125,16 @@ function MenuPrimary () {
     return items
   }, [session])
 
+  const onClickUrl = (path) => {
+    window.location.replace(path)
+  }
+
   return (
     <Menu theme="dark" mode="vertical" selectedKeys={[]}>
       {sidebarItems.map((sidebarItem) => {
         const IconItem = sidebarItem.icon ? Icons[sidebarItem.icon] : null
         return (
-          <Menu.Item key={sidebarItem.name} icon={IconItem ? <IconItem /> : null} onClick={() => {}}>
+          <Menu.Item key={sidebarItem.name} icon={IconItem ? <IconItem /> : null} onClick={() => onClickUrl(sidebarItem.url)}>
             {sidebarItem.label}
           </Menu.Item>
         )
@@ -176,13 +193,15 @@ function MenuSecondary () {
   )
 }
 
-function MenuMobile () {
+function MenuMobile (props) {
+  const { toggleMenu } = props
+
   return (
     <Menu theme="dark" mode="horizontal">
       <Menu.Item
         key={"toggle"}
         icon={<Icons.MenuOutlined />}
-        onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+        onClick={toggleMenu}
         title={'Menu'}
       >Menu</Menu.Item>
     </Menu>

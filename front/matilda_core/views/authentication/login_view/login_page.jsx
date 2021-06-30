@@ -4,7 +4,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { MatildaContext } from 'matilda_core'
 import { MatildaForm, useMatildaForm } from 'matilda_core/components/MatildaForm'
 
-export default function LoginView () {
+export default function LoginPage () {
   const { getTranslation, getConfig, getRoute } = useContext(MatildaContext)
   const form = useMatildaForm('matilda_core.authentication_login_action', {}, { manageSuccess: false })
   const signupActive = getConfig('authentication_permit_signup')
