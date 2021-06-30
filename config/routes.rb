@@ -12,7 +12,7 @@ MatildaCore::Engine.routes.draw do
   # get 'authentication/recover-password-complete-view', to: 'authentication#recover_password_complete_view', as: 'authentication_recover_password_complete_view'
   # get 'authentication/update-password-view', to: 'authentication#update_password_view', as: 'authentication_update_password_view'
   # get 'authentication/update-password-complete-view', to: 'authentication#update_password_complete_view', as: 'authentication_update_password_complete_view'
-  # post 'authentication/login-action', to: 'authentication#login_action', as: 'authentication_login_action'
+  post 'authentication/login-action', to: 'authentication#login_action', as: 'authentication_login_action'
   # post 'authentication/signup-action', to: 'authentication#signup_action', as: 'authentication_signup_action'
   # post 'authentication/recover-password-action', to: 'authentication#recover_password_action', as: 'authentication_recover_password_action'
   # post 'authentication/update-password-action', to: 'authentication#update_password_action', as: 'authentication_update_password_action'

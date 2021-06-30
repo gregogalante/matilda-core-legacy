@@ -1,13 +1,22 @@
 import React, { useContext, useMemo, useState } from 'react'
-import { notification } from 'antd'
+import { notification, Spin } from 'antd'
 import { MatildaContext } from '../index'
 
 /**
  * @function MatildaRequest
+ * @param {*} props
  * @returns 
  */
-export function MatildaRequest () {
-  return null // TODO: Componente generica di visualizzazione feedback di una richiesta ajax
+export function MatildaRequest (props) {
+  const { request: { running } } = props
+
+  if (!running) return null
+
+  return (
+    <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 999, backgroundColor: 'rgba(0,0,0,0.8)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Spin />
+    </div>
+  )
 }
 
 /**
@@ -17,7 +26,7 @@ export function MatildaRequest () {
  */
 export function useMatildaRequest (configProps = {}) {
   const { getRoute, getTranslation } = useContext(MatildaContext)
-  const [status, setStatus] = useState('loading')
+  const [running, setRunning] = useState(false)
 
   const config = useMemo(() => {
     return Object.assign({
@@ -40,7 +49,9 @@ export function useMatildaRequest (configProps = {}) {
   }
 
   const send = (routeKey, params) => {
-    setStatus('loading')
+    if (running) return new Promise((resolve) => resolve(null)) // avoid multiple execution of same request
+
+    setRunning(true)
     const routeObject = getRouteObject(routeKey)
 
     let url = routeObject.path
@@ -66,12 +77,7 @@ export function useMatildaRequest (configProps = {}) {
           notification['error']({ description: errorMessage })
         }
 
-        if (config.result) {
-          setStatus('completed')
-        } else {
-          setStatus('failed')
-        }
-
+        setRunning(false)
         resolve(response)
       }
 
@@ -87,5 +93,5 @@ export function useMatildaRequest (configProps = {}) {
     })
   }
 
-  return { config, status, send, getRouteObject }
+  return { config, running, send, getRouteObject }
 }
