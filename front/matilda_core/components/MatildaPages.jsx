@@ -65,6 +65,7 @@ export function MatildaPages (props) {
         closable={true}
         onClose={onCloseDrawer}
         visible={!!pages.currentDrawer}
+        width={'50%'}
       >
         {pages.currentDrawer && <pages.currentDrawer.component />}
       </Drawer>
