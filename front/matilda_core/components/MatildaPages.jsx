@@ -115,8 +115,8 @@ MatildaPagesWrapper.defaultProps = {
  * @function useMatildaPages
  * @param {*} routesProps
  */
-export function useMatildaPages (routesProps = []) {
-  const [currentPageData, setCurrentPageData] = useState({ routeKey: routesProps[0].key, pageKey: null, props: {} })
+export function useMatildaPages (routesProps = [], defaultProps = {}) {
+  const [currentPageData, setCurrentPageData] = useState({ routeKey: routesProps[0].key, pageKey: null, props: defaultProps })
   const [currentDrawerData, setCurrentDrawerData] = useState(null)
 
   const routes = useMemo(() => {
@@ -155,7 +155,7 @@ export function useMatildaPages (routesProps = []) {
   }, [currentPageData, routesProps])
 
   const currentPage = useMemo(() => {
-    const currentPage = currentRoute.pages.filter((p) => p.key == currentPageData.key)[0]
+    const currentPage = currentRoute.pages.filter((p) => p.key == currentPageData.pageKey)[0]
     return currentPage || currentRoute.pages[0]
   }, [currentPageData, routesProps])
 
@@ -166,17 +166,17 @@ export function useMatildaPages (routesProps = []) {
   }, [currentDrawerData, routesProps])
 
   const goToRoute = (routeKey, props = {}) => {
-    setCurrentPageData({ routeKey: routeKey, pageKey: null, props })
+    setCurrentPageData({ routeKey: routeKey, pageKey: null, props: Object.assign({}, defaultProps, props) })
     setCurrentDrawerData(null)
   }
 
   const goToPage = (pageKey, props = {}) => {
-    setCurrentPageData({ routeKey: currentPageData.routeKey, pageKey: pageKey, props })
+    setCurrentPageData({ routeKey: currentPageData.routeKey, pageKey: pageKey, props: Object.assign({}, defaultProps, props) })
     setCurrentDrawerData(null)
   }
 
-  const openDrawer = (drawerKey, params = {}) => {
-    setCurrentDrawerData({ key: drawerKey, params })
+  const openDrawer = (drawerKey, props = {}) => {
+    setCurrentDrawerData({ key: drawerKey, props: Object.assign({}, defaultProps, props) })
   }
 
   const closeDrawer = () => {

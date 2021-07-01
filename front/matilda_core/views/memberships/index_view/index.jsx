@@ -5,6 +5,7 @@ import { MatildaPages, useMatildaPages } from 'matilda_core/components/MatildaPa
 import IndexPage from './index_page'
 import ManagePage from './manage_page'
 import InviteDrawer from './invite_drawer'
+import PermissionsDrawer from './permissions_drawer'
 
 export default (props) => {
   const layout = useMatildaLayout({ siderActiveKey: 'matilda_core.memberships' })
@@ -29,7 +30,15 @@ export default (props) => {
         {
           key: 'users_index_manage_page',
           label: 'matilda_core.titles.manage_user',
-          component: ManagePage
+          component: ManagePage,
+          drawers: [
+            {
+              key: 'users_index_manage_page_role_advanced',
+              label: 'matilda_core.titles.edit_permissions',
+              component: PermissionsDrawer,
+              size: 'medium'
+            }
+          ]
         },
       ]
     }

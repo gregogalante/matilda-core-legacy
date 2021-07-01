@@ -4,11 +4,12 @@ import { PlusCircleOutlined } from '@ant-design/icons'
 import { MatildaContext } from 'matilda_core'
 import { MatildaPagesWrapper } from 'matilda_core/components/MatildaPages'
 import { MatildaTable, useMatildaTable } from 'matilda_core/components/MatildaTable'
+import { useMatildaRequest } from '../../../components/MatildaRequest'
 
 export default function IndexPage (props) {
   const { pages } = props
   const { getTranslation } = useContext(MatildaContext)
-
+  const request = useMatildaRequest()
 
   const tableColumns = [
     {
@@ -61,7 +62,7 @@ export default function IndexPage (props) {
   }
 
   const onGoToManageUser = (userUuid) => {
-    // TODO
+    pages.goToPage('users_index_manage_page', { userUuid })
   }
 
   return (
