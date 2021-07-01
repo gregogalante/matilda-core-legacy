@@ -13,11 +13,6 @@ module MatildaCore
 
     def index_view; end
 
-    # def manage_view
-    #   @user = @session.group.users.find_by(uuid: params[:user_uuid])
-    #   @membership = @session.group.memberships.find_by(user_uuid: params[:user_uuid])
-    # end
-
     def index_api
       page = params[:page]&.to_i || 1
       per_page = params[:per_page]&.to_i || 15

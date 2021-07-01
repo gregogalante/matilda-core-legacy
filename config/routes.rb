@@ -36,7 +36,6 @@ MatildaCore::Engine.routes.draw do
 
   # memberships
   get 'memberships/index-view', to: 'memberships#index_view', as: 'memberships_index_view'
-  get 'memberships/manage-view', to: 'memberships#manage_view', as: 'memberships_manage_view'
   get 'memberships/index-api', to: 'memberships#index_api', as: 'memberships_index_api'
   get 'memberships/manage-api', to: 'memberships#manage_api', as: 'memberships_manage_api'
   post 'memberships/invitation-action', to: 'memberships#invitation_action', as: 'memberships_invitation_action'
