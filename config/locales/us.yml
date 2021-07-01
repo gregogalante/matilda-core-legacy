@@ -73,6 +73,7 @@ en:
       insert_new_password_confirmation: Insert the new password to confirm
       insert_email: Insert an email address
       search_something: Search something
+      invitation_user_guide: An e-mail will be send to user to invite him to complete his profile
     messages:
       general_error: There was an internal error
       general_success: Operation completed with success

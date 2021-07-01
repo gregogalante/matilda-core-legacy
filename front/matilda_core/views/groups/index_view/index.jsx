@@ -4,7 +4,7 @@ import { MatildaLayout, useMatildaLayout } from 'matilda_core/components/Matilda
 import IndexPage from './index_page'
 
 export default (props) => {
-  const layout = useMatildaLayout()
+  const layout = useMatildaLayout({ siderActiveKey: 'matilda_core.groups' })
 
   return (
     <MatildaContainer {...props}>
