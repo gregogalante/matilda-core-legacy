@@ -11,6 +11,9 @@ export default function LoginPage () {
   const customLoginRedirect = getConfig('authentication_session_valid_custom_redirect')
   const redirectPath = customLoginRedirect ? getRoute(customLoginRedirect) : getRoute('matilda_core.groups_select_view')
 
+  const signupPath = getRoute("matilda_core.authentication_signup_view")
+  const recoverPwdPath = getRoute("matilda_core.authentication_recover_password_view")
+
   useEffect(() => {
     if (form.response && form.response.result) {
       window.location.replace(redirectPath.path)
@@ -50,7 +53,7 @@ export default function LoginPage () {
               </Button>
               {signupActive && (
                 <div style={{ marginTop: 15 }}>
-                  <a href="#">{getTranslation('matilda_core.cta.signup')}</a> | <a href="#">{getTranslation('matilda_core.cta.recover_password')}</a>
+                  <a href={signupPath.path}>{getTranslation('matilda_core.cta.signup')}</a> | <a href={recoverPwdPath.path}>{getTranslation('matilda_core.cta.recover_password')}</a>
                 </div>
               )}
             </Form.Item>

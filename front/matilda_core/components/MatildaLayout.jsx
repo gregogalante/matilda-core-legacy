@@ -159,6 +159,14 @@ function MenuSecondary () {
     })
   }
 
+  const onLogout = () => {
+    request.send('matilda_core.authentication_logout_action').then((response) => {
+      if (response.result) {
+        location.reload()
+      }
+    })
+  }
+
   return (
     <Menu theme="dark" mode={isMobile ? "inline" : "horizontal"}>
       {session?.user_uuid && (
@@ -175,7 +183,10 @@ function MenuSecondary () {
           >{getTranslation('matilda_core.header.groups')}</Menu.Item>
           <Menu.Item
             key={"profile_logout"}
-          >{getTranslation('matilda_core.header.logout')}</Menu.Item>
+            onClick={() => onLogout()}
+          >
+            {getTranslation('matilda_core.header.logout')}
+          </Menu.Item>
         </Menu.SubMenu>
       )}
       <Menu.SubMenu

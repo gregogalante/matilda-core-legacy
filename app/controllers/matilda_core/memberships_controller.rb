@@ -19,11 +19,6 @@ module MatildaCore
     # end
 
     def index_api
-      page = params[:page]&.to_i || 1
-      per_page = params[:per_page]&.to_i || 15
-      sort_field = params[:sort_field] || 'username'
-      sort_order = params[:sort_order] || 'ASC'
-
       users = @session.group.users.left_joins(:user_emails)
       users = users.where('lower(name) LIKE ? OR lower(surname) LIKE ?', "%#{params[:s].downcase}%", "%#{params[:s].downcase}%") unless params[:s].blank?
       
@@ -31,27 +26,38 @@ module MatildaCore
       users = sort_query(users, username: 'username SORT', name: 'name SORT', surname: 'surname SORT', email: 'matilda_core_user_emails.email SORT')
       users = paginate_query(users)
 
+      # TODO
+      # MatildaCore::UserEmail.where(user_uuid: users.pluck(:uuid))
+
       render_json_success(
         users: users.map(&:as_json_with_email),
         params: params_for_query(users)
       )
     end
 
-    # def manage_api
-    #   user_uuid = params[:user_uuid]
+    def manage_api
+      user_uuid = params[:user_uuid]
 
-    #   user = @session.group.users.find_by(uuid: user_uuid)
-    #   unless user
-    #     json_errors(json_error(I18n.t('matilda_core.messages.user_not_valid'), code: :user_uuid))
-    #     render_json_fail
-    #     return
-    #   end
+      user = @session.group.users.find_by(uuid: user_uuid)
+      unless user
+        json_errors(json_error(I18n.t('matilda_core.messages.user_not_valid'), code: :user_uuid))
+        render_json_fail
+        return
+      end
 
-    #   render_json_success(
-    #     user: user.as_json_with_email,
-    #     user_emails: user.user_emails
-    #   )
-    # end
+      membership = MatildaCore::Membership.find_by(group_uuid: @session.group, user_uuid: user.uuid)
+      unless membership
+        # json_errors(...)
+        render_json_fail
+        return
+      end
+
+      render_json_success(
+        user: user.as_json,
+        user_emails: user.user_emails,
+        membership: membership.as_json
+      )
+    end
 
     def invitation_action
       command = command_manager(generate_invitation_command)

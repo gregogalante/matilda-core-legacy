@@ -34,6 +34,7 @@ module MatildaCore
       data = super
       data[:password] = 'FILTERED'
       data[:recover_password_code] = 'FILTERED'
+      data[:email] = email
       data
     end
 

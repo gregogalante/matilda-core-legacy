@@ -1,0 +1,73 @@
+import React, { useContext, useEffect, useState } from "react"
+import { Row, Col, Card, Form, Button, Input, Result } from "antd"
+import { UserOutlined, LockOutlined, SmileOutlined } from "@ant-design/icons"
+import { MatildaContext } from "matilda_core"
+import {
+  MatildaForm,
+  useMatildaForm,
+} from "matilda_core/components/MatildaForm"
+
+export default function SignupPage() {
+  const { getTranslation, getConfig, getRoute } = useContext(MatildaContext)
+  const form = useMatildaForm(
+    "matilda_core.authentication_update_password_action",
+    {},
+    { manageSuccess: false }
+  )
+  const loginPath = getRoute("matilda_core.authentication_login_view")
+  const [updated, setUpdated] = useState(false)
+
+  useEffect(() => {
+    if (form.response && form.response.result) {
+      setUpdated(true)
+    }
+  }, [form.response])
+
+  return (
+    <Row justify="center" align="center">
+      <Col style={{ maxWidth: 400, width: "100%" }}>
+        <Card
+          title={getTranslation("matilda_core.titles.recover_password")}
+          extra={<a href={loginPath.path}>{getTranslation("matilda_core.cta.login")}</a>}
+        >
+          {updated ? (
+            <Result 
+              icon={<SmileOutlined />}
+              title={getTranslation("matilda_core.strings.update_password_complete_title")}
+              extra={<a href={loginPath.path}>{getTranslation("matilda_core.cta.continue")}</a>}
+            />
+          ) : (
+            <MatildaForm form={form}>
+              <Form.Item
+                name="recover_password_code"
+                label={getTranslation("matilda_core.labels.security_code")}
+              >
+                <Input />
+              </Form.Item>
+
+              <Form.Item
+                name="password"
+                label={getTranslation("matilda_core.labels.new_password")}
+              >
+                <Input.Password />
+              </Form.Item>
+
+              <Form.Item
+                name="password_confirmation"
+                label={getTranslation("matilda_core.labels.new_password_confirmation")}
+              >
+                <Input.Password />
+              </Form.Item>
+
+              <Form.Item style={{ textAlign: "right" }}>
+                <Button type="primary" htmlType="submit" block>
+                  {getTranslation("matilda_core.cta.confirm")}
+                </Button>
+              </Form.Item>
+            </MatildaForm>
+          )}
+        </Card>
+      </Col>
+    </Row>
+  )
+}
