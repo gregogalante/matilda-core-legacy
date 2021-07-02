@@ -14,15 +14,12 @@ module MatildaCore
     def index_view; end
 
     def index_api
-      users = @session.group.users.left_joins(:user_emails)
+      users = @session.group.users.includes(:user_emails)
       users = users.where('lower(name) LIKE ? OR lower(surname) LIKE ?', "%#{params[:s].downcase}%", "%#{params[:s].downcase}%") unless params[:s].blank?
       
       users = search_query(users, %w(name surname username))
       users = sort_query(users, username: 'username SORT', name: 'name SORT', surname: 'surname SORT', email: 'matilda_core_user_emails.email SORT')
       users = paginate_query(users)
-
-      # TODO
-      # MatildaCore::UserEmail.where(user_uuid: users.pluck(:uuid))
 
       render_json_success(
         users: users.map(&:as_json_with_email),

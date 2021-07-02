@@ -1,4 +1,5 @@
 import React, { useMemo, useContext, useState } from 'react'
+import PropTypes from 'prop-types'
 import { Layout, Menu } from 'antd'
 import * as Icons from '@ant-design/icons'
 import { MatildaContext } from '../index'
@@ -16,8 +17,20 @@ export function MatildaLayout (props) {
   const [menuCollapsed, setMenuCollapsed] = useState(true)
  
   const showSider = useMemo(() => {
-    return isMobile || config.theme != 'clean'
+    return isMobile || config.theme == 'default'
   }, [config.theme, isMobile])
+
+  const contentStyle = useMemo(() => {
+    let contentStyle = { minHeight: '100vh', padding: 15, paddingTop: 80, paddingLeft: 70 }
+    if (config.theme == 'clean-centered') {
+      contentStyle = Object.assign(contentStyle, {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center'
+      })
+    }
+    return contentStyle
+  }, [config.theme])
 
   return (
     <Layout>
@@ -25,7 +38,7 @@ export function MatildaLayout (props) {
 
       <Layout>
         {showSider && <Sider layout={layout} collapsed={menuCollapsed} onCollapsedChange={setMenuCollapsed} />}
-        <Layout.Content style={{ minHeight: '100vh', padding: 15, paddingTop: 80, paddingLeft: 70 }}>
+        <Layout.Content style={contentStyle}>
           {props.children}
         </Layout.Content>
       </Layout>
@@ -34,6 +47,16 @@ export function MatildaLayout (props) {
     </Layout>
   )
 }
+MatildaLayout.propTypes = {
+  layout: PropTypes.shape({
+    config: PropTypes.shape({
+      theme: PropTypes.oneOf(['default', 'clean', 'clean-centered']).isRequired,
+      siderActiveKey: PropTypes.string
+    }).isRequired
+  }).isRequired
+}
+
+/***************************************************************************************************** */
 
 /**
  * @function useMatildaLayout
@@ -51,7 +74,7 @@ export function useMatildaLayout (configProps = {}) {
   return { config }
 }
 
-/****************************************************************************************************************** */
+/***************************************************************************************************** */
 
 function Header (props) {
   const { menuCollapsed, setMenuCollapsed } = props
@@ -122,7 +145,7 @@ function MenuPrimary (props) {
       // order by index
       items = items.sort((a, b) => a.index - b.index)
       // update labels
-      items = items.map((i) => { if (i.label.startsWith('locale.')) { i.label = getTranslation(i.label.replace('locale.', '')) } return i })
+      items = items.map((i) => { i.label = getTranslation(i.label); return i })
     }
 
     return items

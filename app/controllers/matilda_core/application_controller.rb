@@ -148,6 +148,7 @@ module MatildaCore
     def paginate_query(query)
       page = params[:page]&.to_i || 1
       per_page = params[:per_page]&.to_i || 25
+      per_page = 100 if per_page > 100 # Avoid to many items
 
       query.page(page).per(per_page)
     end

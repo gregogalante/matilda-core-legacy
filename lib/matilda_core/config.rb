@@ -83,6 +83,10 @@ module MatildaCore
     # Contiene la lista di voci della sidebar.
     attr_accessor :sidebar_items
 
+    # DASHBOARD
+
+    attr_accessor :dashboard_widgets
+
     # MEMBERSHIPS
 
     # Specifica se nascondere nella vista utente la visualizzazione e modifica dei
@@ -110,10 +114,6 @@ module MatildaCore
     # Inserire la chiave di un file spreadsheet nel caso di :gdrive_spreadsheet_key o la path del
     # file CSV nel caso di :csv_file_path.
     attr_accessor :locales_source_value
-
-    # OTHER NOT EDITABLE DIRECTLY
-
-    attr_reader :react_props
 
     def initialize
       set_default_options
@@ -145,8 +145,14 @@ module MatildaCore
 
       # voci editabili tramite funzioni
       @sidebar_items = []
+      @dashboard_widgets = []
       @memberships_permissions = []
       @memberships_permissions_roles = []
+    end
+
+    # Permette di aggiungere un nuovo widget in dashboard.
+    def add_dashboard_widget(name)
+      # TODO
     end
 
     # Permette di aggiungere una nuova voce di menu alla sidebar.

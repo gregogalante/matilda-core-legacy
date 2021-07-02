@@ -4,7 +4,7 @@ import { MatildaLayout, useMatildaLayout } from 'matilda_core/components/Matilda
 import LoginPage from './login_page'
 
 export default (props) => {
-  const layout = useMatildaLayout({ theme: 'clean' })
+  const layout = useMatildaLayout({ theme: 'clean-centered' })
 
   return (
     <MatildaContainer {...props}>

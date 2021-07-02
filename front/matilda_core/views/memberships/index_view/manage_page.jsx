@@ -41,9 +41,7 @@ export default function ManagePage (props) {
     if (permissionsRole) {
       items = permissionsRole
       items = items.map((i) => {
-        if(i.label.startsWith('locale.')){
-          i.label = getTranslation(i.label.replace('locale.', ''))
-        }
+        i.label = getTranslation(i.label)
         return i
       })
     }

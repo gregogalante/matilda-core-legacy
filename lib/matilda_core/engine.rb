@@ -13,7 +13,7 @@ module MatildaCore
 
       MatildaCore.config.add_sidebar_item(
         'matilda_core.groups',
-        label: 'locale.matilda_core.titles.dashboard',
+        label: 'titles.dashboard',
         url: MatildaCore::Engine.routes.url_helpers.groups_index_view_path,
         icon_legacy: 'fas fa-tachometer-alt',
         icon: 'HomeOutlined',
@@ -21,7 +21,7 @@ module MatildaCore
       )
       MatildaCore.config.add_sidebar_item(
         'matilda_core.memberships',
-        label: 'locale.matilda_core.titles.users',
+        label: 'titles.users',
         url: MatildaCore::Engine.routes.url_helpers.memberships_index_view_path,
         icon_legacy: 'fas fa-users',
         icon: 'UsergroupAddOutlined',
@@ -34,9 +34,9 @@ module MatildaCore
     initializer 'matilda_core.add_memberships_permissions' do |_app|
       MatildaCore.config.add_memberships_permission(
         'matilda_core.memberships',
-        label: 'locale.matilda_core.strings.manage_users_permission',
+        label: 'strings.manage_users_permission',
         index: 0,
-        group: 'locale.matilda_core.titles.administration'
+        group: 'titles.administration'
       )
     end
 
@@ -44,7 +44,7 @@ module MatildaCore
     initializer 'matilda_core.add_memberships_permissions_roles' do |_app|
       MatildaCore.config.add_memberships_permissions_role(
         'matilda_core.administrator',
-        label: 'locale.matilda_core.strings.administrator',
+        label: 'strings.administrator',
         index: 0,
         permissions: ['matilda_core.memberships']
       )

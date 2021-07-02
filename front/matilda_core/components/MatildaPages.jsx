@@ -17,14 +17,6 @@ export function MatildaPages (props) {
     return drawerSizesMap[pages.currentDrawer?.size] || drawerSizesMap.medium
   }, [pages.currentDrawer, isDesktop])
 
-  const onSelectRoute = (routeKey) => {
-    pages.goToRoute(routeKey)
-  }
-
-  const onCloseDrawer = () => {
-    pages.closeDrawer()
-  }
-
   const SiderContainer = isDesktop ? ({ children }) => <Layout.Sider width={200} theme="light">{children}</Layout.Sider> : ({ children }) => <div>{children}</div>
 
   const renderRoutes = (routes) => {
@@ -41,7 +33,7 @@ export function MatildaPages (props) {
         {routes.map((route) => {
           if (route.routes) return renderRouteSubmenu(route, key)
 
-          return <Menu.Item key={route.key} onClick={() => onSelectRoute(route.key)}>{getTranslation(route.label)}</Menu.Item>
+          return <Menu.Item key={route.key} onClick={() => pages.goToRoute(route.key)}>{getTranslation(route.label)}</Menu.Item>
         })}
       </>
     )
@@ -70,7 +62,7 @@ export function MatildaPages (props) {
         title={getTranslation(pages.currentDrawer?.label)}
         placement="right"
         closable={true}
-        onClose={onCloseDrawer}
+        onClose={() => pages.closeDrawer()}
         visible={!!pages.currentDrawer}
         width={drawerWidth}
       >
@@ -79,6 +71,8 @@ export function MatildaPages (props) {
     </>
   )
 }
+
+/***************************************************************************************************** */
 
 /**
  * @function MatildaPagesWrapper
@@ -91,17 +85,13 @@ export function MatildaPagesWrapper (props) {
 
   const { getTranslation } = useContext(MatildaContext)
   const title = getTranslation(pages.currentPage.label)
-  const hasBack = !!pages.currentPage.backKey
-
-  const onClickBack = () => {
-    console.log('TODO: Back')
-  }
+  const { prevPageKey } = pages.currentPageData
 
   return (
     <PageHeader
       title={title}
       extra={extra}
-      onBack={hasBack ? onClickBack : null}
+      onBack={prevPageKey ? () => pages.goToPage(prevPageKey, {}, true) : null}
     >
       {props.children}
     </PageHeader>
@@ -111,26 +101,22 @@ MatildaPagesWrapper.defaultProps = {
   extra: []
 }
 
+/***************************************************************************************************** */
+
 /**
  * @function useMatildaPages
  * @param {*} routesProps
  */
 export function useMatildaPages (routesProps = [], defaultProps = {}) {
-  const [currentPageData, setCurrentPageData] = useState({ routeKey: routesProps[0].key, pageKey: null, props: defaultProps })
+  const [currentPageData, setCurrentPageData] = useState({ routeKey: routesProps[0].key, pageKey: null, prevPageKey: null, props: defaultProps })
   const [currentDrawerData, setCurrentDrawerData] = useState(null)
 
+  // preparo la lista di rotte con eventuali metadati aggiuntivi
   const routes = useMemo(() => {
-    const setRouteBackKey = (route, prevKey = null) => {
-      route.backKey = prevKey
-
-      if (route.pages) route.pages = route.pages.map((p) => setRouteBackKey(p, route.key))
-      if (route.routes) route.routes = route.routes.map((p) => setRouteBackKey(p, route.key))
-
-      return route
-    }
-    return routesProps.map((r) => setRouteBackKey(r))
+    return routesProps
   }, [routesProps])
 
+  // identifico la route corrente
   const currentRoute = useMemo(() => {
     const findCurrentRoute = (routes) => {
       let currentRoute = null
@@ -154,6 +140,7 @@ export function useMatildaPages (routesProps = [], defaultProps = {}) {
     return findCurrentRoute(routes)
   }, [currentPageData, routesProps])
 
+  // identifico la page corrente
   const currentPage = useMemo(() => {
     const currentPage = currentRoute.pages.filter((p) => p.key == currentPageData.pageKey)[0]
     return currentPage || currentRoute.pages[0]
@@ -165,20 +152,39 @@ export function useMatildaPages (routesProps = [], defaultProps = {}) {
     return currentPage.drawers.filter((d) => d.key == currentDrawerData.key)[0]
   }, [currentDrawerData, routesProps])
 
+  /**
+   * @function goToRoute
+   * @param {*} routeKey 
+   * @param {*} props 
+   */
   const goToRoute = (routeKey, props = {}) => {
     setCurrentPageData({ routeKey: routeKey, pageKey: null, props: Object.assign({}, defaultProps, props) })
     setCurrentDrawerData(null)
   }
 
-  const goToPage = (pageKey, props = {}) => {
-    setCurrentPageData({ routeKey: currentPageData.routeKey, pageKey: pageKey, props: Object.assign({}, defaultProps, props) })
+  /**
+   * @function goToPage
+   * @param {*} pageKey 
+   * @param {*} props 
+   * @param {boolean} reset
+   */
+  const goToPage = (pageKey, props = {}, reset = false) => {
+    setCurrentPageData({ routeKey: currentPageData.routeKey, pageKey: pageKey, prevPageKey: reset ? null : currentPage.key, props: Object.assign({}, defaultProps, props) })
     setCurrentDrawerData(null)
   }
 
+  /**
+   * @function openDrawer
+   * @param {*} drawerKey 
+   * @param {*} props 
+   */
   const openDrawer = (drawerKey, props = {}) => {
     setCurrentDrawerData({ key: drawerKey, props: Object.assign({}, defaultProps, props) })
   }
 
+  /**
+   * @function closeDrawer
+   */
   const closeDrawer = () => {
     setCurrentDrawerData(null)
   }

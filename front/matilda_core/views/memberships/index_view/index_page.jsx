@@ -4,12 +4,10 @@ import { PlusCircleOutlined } from '@ant-design/icons'
 import { MatildaContext } from 'matilda_core'
 import { MatildaPagesWrapper } from 'matilda_core/components/MatildaPages'
 import { MatildaTable, useMatildaTable } from 'matilda_core/components/MatildaTable'
-import { useMatildaRequest } from '../../../components/MatildaRequest'
 
 export default function IndexPage (props) {
   const { pages } = props
   const { getTranslation } = useContext(MatildaContext)
-  const request = useMatildaRequest()
 
   const tableColumns = [
     {
@@ -42,14 +40,16 @@ export default function IndexPage (props) {
       title: '',
       key: 'action',
       dataIndex: 'uuid',
-      width: 100,
+      width: 150,
+      fixed: 'right',
       render: (userUuid) => {
         return (
-          <Button onClick={() => onGoToManageUser(userUuid)}>{getTranslation('cta.manage')}</Button>
+          <Button type="primary" onClick={() => onGoToManageUser(userUuid)} ghost block>{getTranslation('cta.manage')}</Button>
         )
       }
     }
   ]
+
   const table = useMatildaTable({
     columns: tableColumns,
     route: 'matilda_core.memberships_index_api',
