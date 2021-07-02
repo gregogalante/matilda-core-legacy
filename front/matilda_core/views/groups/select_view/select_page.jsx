@@ -20,11 +20,11 @@ export default function SelectPage (props) {
     <Row justify="center" align="center">
       <Col style={{ maxWidth: 600, width: '100%' }}>
         <Card
-          title={getTranslation('matilda_core.titles.select_a_group')}
+          title={getTranslation('titles.select_a_group')}
           className="card"
           bodyStyle={{ paddingTop: 0, paddingBottom: 0 }}
           extra={[
-            permitGroupCreation ? <Button type="primary">{getTranslation('matilda_core.cta.create')}</Button> : null
+            permitGroupCreation ? <Button type="primary">{getTranslation('cta.create')}</Button> : null
           ]}
         >
           <List
@@ -33,7 +33,7 @@ export default function SelectPage (props) {
             renderItem={item => (
               <List.Item
                 actions={[
-                  <a key="select" onClick={() => onSelectGroup(item.uuid)} >{getTranslation('matilda_core.cta.select')}</a>
+                  <a key="select" onClick={() => onSelectGroup(item.uuid)} >{getTranslation('cta.select')}</a>
                 ]}
               >
                 <List.Item.Meta title={item.name} />

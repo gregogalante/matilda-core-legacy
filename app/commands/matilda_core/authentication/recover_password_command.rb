@@ -11,7 +11,7 @@ module MatildaCore
 
       validates :username_email,
                 presence: true, type: :string, blank: false,
-                err: I18n.t('matilda_core.messages.username_email_not_valid')
+                err: I18n.t('matilda.messages.username_email_not_valid')
 
       validates :log_who, type: :string
 
@@ -24,7 +24,7 @@ module MatildaCore
         user ||= MatildaCore::User.joins(:user_emails).find_by(matilda_core_user_emails: { email: params[:username_email] })
 
         unless user
-          err(I18n.t('matilda_core.messages.username_email_not_valid'), code: :username_email)
+          err(I18n.t('matilda.messages.username_email_not_valid'), code: :username_email)
           break
         end
 

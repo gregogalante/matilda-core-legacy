@@ -2,8 +2,8 @@
 
 module MatildaCore
 
-  # MatildaHelper.
-  module MatildaHelper
+  # ReactHelper.
+  module ReactHelper
 
     def matilda_react_view(module_name, props = {})
       react_component "#{module_name}/views/#{controller_name}/#{action_name}/index", {
@@ -18,15 +18,12 @@ module MatildaCore
         i18n: {
           available_locales: I18n.available_locales,
           locale: I18n.locale,
-          translations: matilda_react_props_react_props_i18n_translations(I18n.locale)
+          translations: matilda_react_props_react_props_i18n_translations
         },
         router: {
-          routes: matilda_react_props_react_props_router_routes
-        },
-        view: {
-          controller: controller_name,
-          action: action_name,
-          key: "#{controller_name}_#{action_name}",
+          routes: matilda_react_props_react_props_router_routes,
+          route_controller: controller_name,
+          route_action: action_name,
         },
         config: MatildaCore.config.as_json,
         session: @session&.data
@@ -35,20 +32,8 @@ module MatildaCore
 
     ##############################################################################################################################
 
-    def matilda_react_props_react_props_i18n_translations(locale)
-      Rails.cache.fetch("MatildaCore::Session.react_props_i18n_translations(#{locale})") do
-        invalid_first_level_keys = ['activerecord', 'date', 'datetime', 'errors', 'helpers', 'number', 'support', 'time', 'views']
-        matilda_react_props_react_props_i18n_translations_flatten_hash(I18n.backend.send(:translations)[locale]).select { |k, v| invalid_first_level_keys.select { |s| k.start_with?("#{s}.") }.length.zero? }
-      end
-    end
-    def matilda_react_props_react_props_i18n_translations_flatten_hash(param, prefix=nil)
-      param.each_pair.reduce({}) do |a, (k, v)|
-        v.is_a?(Hash) ? a.merge(matilda_react_props_react_props_i18n_translations_flatten_hash(v, "#{prefix}#{k}.")) : a.merge("#{prefix}#{k}".to_sym => v)
-      end
-    end
-
     def matilda_react_props_react_props_router_routes
-      Rails.cache.fetch("MatildaCore::Session.react_props_router_routes") do
+      Rails.cache.fetch("MatildaCore::ReactHelper.matilda_react_props_react_props_router_routes") do
         router_routes = {}
 
         # add routes from main application
@@ -77,6 +62,18 @@ module MatildaCore
         end
 
         router_routes
+      end
+    end
+
+    def matilda_react_props_react_props_i18n_translations
+      def flatten_hash(param, prefix=nil)
+        param.each_pair.reduce({}) do |a, (k, v)|
+          v.is_a?(Hash) ? a.merge(flatten_hash(v, "#{prefix}#{k}.")) : a.merge("#{prefix}#{k}".to_sym => v)
+        end
+      end
+
+      Rails.cache.fetch("MatildaCore::ReactHelper.matilda_react_props_react_props_i18n_translations(#{I18n.locale})") do
+        flatten_hash(I18n.t('.')[:matilda])
       end
     end
 

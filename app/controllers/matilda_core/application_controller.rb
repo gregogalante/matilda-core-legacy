@@ -10,6 +10,8 @@ module MatildaCore
   # - actions: azioni che eseguono operazioni (example 'login_action')
   class ApplicationController < ActionController::Base
 
+    helper MatildaCore::ReactHelper
+
     layout 'matilda_core/application'
 
     protect_from_forgery with: :exception

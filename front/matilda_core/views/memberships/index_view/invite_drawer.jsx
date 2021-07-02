@@ -19,14 +19,14 @@ export default function InviteDrawer (props) {
   return (
     <Space direction="vertical" size='large' style={{ width: '100%' }}>
       <Alert
-        message={getTranslation('matilda_core.helps.invitation_user_guide')}
+        message={getTranslation('helps.invitation_user_guide')}
         type="info"
       />
 
       <MatildaForm form={form}>
         <Form.Item
           name="name"
-          label={getTranslation('matilda_core.labels.name')}
+          label={getTranslation('labels.name')}
           rules={[{ required: true }]}
         >
           <Input />
@@ -34,7 +34,7 @@ export default function InviteDrawer (props) {
 
         <Form.Item
           name="surname"
-          label={getTranslation('matilda_core.labels.surname')}
+          label={getTranslation('labels.surname')}
           rules={[{ required: true }]}
         >
           <Input />
@@ -42,7 +42,7 @@ export default function InviteDrawer (props) {
 
         <Form.Item
           name="email"
-          label={getTranslation('matilda_core.labels.email')}
+          label={getTranslation('labels.email')}
           rules={[{ required: true }]}
         >
           <Input type="email" />
@@ -50,7 +50,7 @@ export default function InviteDrawer (props) {
 
         <Form.Item style={{ textAlign: 'right' }}>
           <Button type="primary" htmlType="submit">
-            {getTranslation('matilda_core.cta.confirm')}
+            {getTranslation('cta.confirm')}
           </Button>
         </Form.Item>
       </MatildaForm>

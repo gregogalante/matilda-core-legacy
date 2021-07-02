@@ -31,7 +31,7 @@ export function useMatildaRequest (configProps = {}) {
   const config = useMemo(() => {
     return Object.assign({
       manageError: true,
-      defaultErrorMessage: getTranslation('matilda_core.messages.general_error')
+      defaultErrorMessage: getTranslation('messages.general_error')
     }, configProps)
   }, [configProps])
 

@@ -15,27 +15,27 @@ export default function IndexPage (props) {
     {
       key: 'username',
       dataIndex: 'username',
-      title: getTranslation('matilda_core.labels.username'),
+      title: getTranslation('labels.username'),
       sorter: true,
     },
     {
       key: 'surname',
       dataIndex: 'surname',
-      title: getTranslation('matilda_core.labels.surname'),
+      title: getTranslation('labels.surname'),
       responsive: ['md'],
       sorter: true,
     },
     {
       key: 'name',
       dataIndex: 'name',
-      title: getTranslation('matilda_core.labels.name'),
+      title: getTranslation('labels.name'),
       responsive: ['md'],
       sorter: true,
     },
     {
       key: 'email',
       dataIndex: 'email',
-      title: getTranslation('matilda_core.labels.email'),
+      title: getTranslation('labels.email'),
       sorter: true,
     },
     {
@@ -45,7 +45,7 @@ export default function IndexPage (props) {
       width: 100,
       render: (userUuid) => {
         return (
-          <Button onClick={() => onGoToManageUser(userUuid)}>{getTranslation('matilda_core.cta.manage')}</Button>
+          <Button onClick={() => onGoToManageUser(userUuid)}>{getTranslation('cta.manage')}</Button>
         )
       }
     }
@@ -74,7 +74,7 @@ export default function IndexPage (props) {
           type="primary"
           icon={<PlusCircleOutlined />}
           onClick={onClickInvite}
-        >{getTranslation('matilda_core.cta.invite')}</Button>
+        >{getTranslation('cta.invite')}</Button>
       ]}
     >
       <MatildaTable table={table} />

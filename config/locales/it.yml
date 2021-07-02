@@ -6,7 +6,7 @@ it:
       last: Ultimo
       first: Primo
       truncate: '...'
-  matilda_core:
+  matilda:
     header: # voci dell'header
       profile: Profilo
       account_settings: Imp. Account

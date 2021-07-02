@@ -23,37 +23,37 @@ export default function LoginPage () {
   return (
     <Row justify="center" align="center">
       <Col style={{ maxWidth: 400, width: '100%' }}>
-        <Card title={getTranslation('matilda_core.titles.login')}>
+        <Card title={getTranslation('titles.login')}>
           <MatildaForm
             form={form}
           >
             <Form.Item
               name="username_email"
-              label={getTranslation('matilda_core.labels.username_or_email')}
+              label={getTranslation('labels.username_or_email')}
             >
               <Input
                 prefix={<UserOutlined className="site-form-item-icon" />}
-                placeholder={getTranslation('matilda_core.helps.insert_username_or_email')}
+                placeholder={getTranslation('helps.insert_username_or_email')}
               />
             </Form.Item>
 
             <Form.Item
               name="password"
-              label={getTranslation('matilda_core.labels.password')}
+              label={getTranslation('labels.password')}
             >
               <Input.Password
                 prefix={<LockOutlined className="site-form-item-icon" />}
-                placeholder={getTranslation('matilda_core.helps.insert_password')}
+                placeholder={getTranslation('helps.insert_password')}
               />
             </Form.Item>
 
             <Form.Item style={{ textAlign: 'right' }}>
               <Button type="primary" htmlType="submit" block>
-                {getTranslation('matilda_core.cta.login')}
+                {getTranslation('cta.login')}
               </Button>
               {signupActive && (
                 <div style={{ marginTop: 15 }}>
-                  <a href={signupPath.path}>{getTranslation('matilda_core.cta.signup')}</a> | <a href={recoverPwdPath.path}>{getTranslation('matilda_core.cta.recover_password')}</a>
+                  <a href={signupPath.path}>{getTranslation('cta.signup')}</a> | <a href={recoverPwdPath.path}>{getTranslation('cta.recover_password')}</a>
                 </div>
               )}
             </Form.Item>

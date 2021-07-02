@@ -55,6 +55,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+gem 'faker'
+gem 'react-rails'
 gem 'matilda_core', path: '../'
 gem 'matilda_boilerplate', path: '../boilerplate'
-gem 'react-rails'

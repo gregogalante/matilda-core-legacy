@@ -9,22 +9,22 @@ module MatildaCore
 
       validates :user_uuid,
                 presence: true, type: :string, blank: false,
-                err: I18n.t('matilda_core.messages.user_not_valid')
+                err: I18n.t('matilda.messages.user_not_valid')
 
       validates :name,
                 presence: true, type: :string, blank: false,
-                err: I18n.t('matilda_core.messages.name_not_valid')
+                err: I18n.t('matilda.messages.name_not_valid')
 
       validates :surname,
                 presence: true, type: :string, blank: false,
-                err: I18n.t('matilda_core.messages.surname_not_valid')
+                err: I18n.t('matilda.messages.surname_not_valid')
 
       validates :log_who, type: :string
 
       to_validate_logic do
         # verifico che l'utente esista
         unless MatildaCore::User.find_by(uuid: params[:user_uuid])
-          err(I18n.t('matilda_core.messages.user_not_valid'), code: :user_uuid)
+          err(I18n.t('matilda.messages.user_not_valid'), code: :user_uuid)
           break
         end
       end

@@ -12,16 +12,16 @@ export default (props) => {
   const pages = useMatildaPages([
     {
       key: 'users_index',
-      label: 'matilda_core.titles.users_list',
+      label: 'titles.users_list',
       pages: [
         {
           key: 'users_index_index_page',
-          label: 'matilda_core.titles.users_list',
+          label: 'titles.users_list',
           component: IndexPage,
           drawers: [
             {
               key: 'users_index_index_page_invite_drawer',
-              label: 'matilda_core.titles.invite_user',
+              label: 'titles.invite_user',
               component: InviteDrawer,
               size: 'medium'
             }
@@ -29,12 +29,12 @@ export default (props) => {
         },
         {
           key: 'users_index_manage_page',
-          label: 'matilda_core.titles.manage_user',
+          label: 'titles.manage_user',
           component: ManagePage,
           drawers: [
             {
               key: 'users_index_manage_page_role_advanced',
-              label: 'matilda_core.titles.edit_permissions',
+              label: 'titles.edit_permissions',
               component: PermissionsDrawer,
               size: 'medium'
             }

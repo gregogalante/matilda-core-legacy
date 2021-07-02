@@ -173,26 +173,26 @@ function MenuSecondary () {
         <Menu.SubMenu
           key="profile"
           icon={<Icons.UserOutlined />}
-          title={getTranslation('matilda_core.header.profile')}
+          title={getTranslation('header.profile')}
         >
           <Menu.Item
             key={"profile_account_settings"}
-          >{getTranslation('matilda_core.header.account_settings')}</Menu.Item>
+          >{getTranslation('header.account_settings')}</Menu.Item>
           <Menu.Item
             key={"profile_groups"}
-          >{getTranslation('matilda_core.header.groups')}</Menu.Item>
+          >{getTranslation('header.groups')}</Menu.Item>
           <Menu.Item
             key={"profile_logout"}
             onClick={() => onLogout()}
           >
-            {getTranslation('matilda_core.header.logout')}
+            {getTranslation('header.logout')}
           </Menu.Item>
         </Menu.SubMenu>
       )}
       <Menu.SubMenu
         key="language"
         icon={<Icons.FlagOutlined />}
-        title={getTranslation('matilda_core.header.lang')}
+        title={getTranslation('header.lang')}
       >
         {availableLocales.map((availableLocale) => {
           return (

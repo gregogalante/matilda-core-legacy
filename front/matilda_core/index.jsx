@@ -17,7 +17,7 @@ export const MatildaContext = React.createContext()
  * @returns 
  */
 export function MatildaProvider (props) {
-  const { i18n, config, router, session, view } = props
+  const { i18n, config, router, session } = props
   const breakpoints = Grid.useBreakpoint()
 
   const getTranslation = (key) => {

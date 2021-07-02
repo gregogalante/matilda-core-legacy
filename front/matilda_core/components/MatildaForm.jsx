@@ -51,8 +51,8 @@ export function useMatildaForm (routeKey, extraParamsProps = {}, configProps = {
       onError: null,
       manageError: true,
       manageSuccess: true,
-      defaultErrorMessage: getTranslation('matilda_core.messages.general_error'),
-      defaultSuccessMessage: getTranslation('matilda_core.messages.general_success')
+      defaultErrorMessage: getTranslation('messages.general_error'),
+      defaultSuccessMessage: getTranslation('messages.general_success')
     }, configProps)
   }, [configProps])
 

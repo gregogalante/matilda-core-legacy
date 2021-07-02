@@ -35,7 +35,7 @@ module MatildaCore
 
       user = @session.group.users.find_by(uuid: user_uuid)
       unless user
-        json_errors(json_error(I18n.t('matilda_core.messages.user_not_valid'), code: :user_uuid))
+        json_errors(json_error(I18n.t('matilda.messages.user_not_valid'), code: :user_uuid))
         render_json_fail
         return
       end
