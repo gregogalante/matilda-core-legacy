@@ -61,21 +61,21 @@ module MatildaCore
       render_json_success({})
     end
 
-    # def edit_permissions_action
-    #   command = command_manager(generate_edit_permissions_command)
-    #   return unless command
+    def edit_permissions_action
+      command = command_manager(generate_edit_permissions_command)
+      return unless command
 
-    #   session_update_group(@session.group_uuid) # aggiorno la sessione per aggiornare i permessi dell'utente
-    #   render_json_success({})
-    # end
+      session_update_group(@session.group_uuid) # aggiorno la sessione per aggiornare i permessi dell'utente
+      render_json_success({})
+    end
 
-    # def edit_permissions_role_action
-    #   command = command_manager(generate_edit_permissions_role_command)
-    #   return unless command
+    def edit_permissions_role_action
+      command = command_manager(generate_edit_permissions_role_command)
+      return unless command
 
-    #   session_update_group(@session.group_uuid) # aggiorno la sessione per aggiornare i permessi dell'utente
-    #   render_json_success({})
-    # end
+      session_update_group(@session.group_uuid) # aggiorno la sessione per aggiornare i permessi dell'utente
+      render_json_success({})
+    end
 
     # def remove_action
     #   command = command_manager(generate_remove_command)

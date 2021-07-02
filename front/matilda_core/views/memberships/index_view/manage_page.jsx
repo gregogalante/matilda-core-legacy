@@ -11,13 +11,11 @@ export default function ManagePage (props) {
   const { getTranslation, getConfig } = useContext(MatildaContext)
   const [user, setUser] = useState(null)
   const [membership, setMembership] = useState(null)
-  const form = useMatildaForm('matilda_core.memberships_edit_permissions_role_action', {}, { manageSuccess: false })
-  const { Option } = Select
+  const form = useMatildaForm('matilda_core.memberships_edit_permissions_role_action', {user_uuid: props.userUuid}, { manageSuccess: false })
 
   useEffect(() => {
     request.send('matilda_core.memberships_manage_api', {user_uuid: props.userUuid}).then((response) => {
       if (!response.result) return
-      console.log(response)
       setUser(response.payload.user)
       setMembership(response.payload.membership)
     })
@@ -25,12 +23,13 @@ export default function ManagePage (props) {
 
   useEffect(() => {
     if (form.response && form.response.result) {
+      // window.location.replace(redirectPath.path)
       window.location.reload()
     }
   }, [form.response])
 
   const onClickRoleAdvanced = () => {
-    pages.openDrawer('users_index_manage_page_role_advanced')
+    pages.openDrawer('users_index_manage_page_role_advanced', {user, membership})
   }
 
   const showPermissions = getConfig('memberships_show_permissions_editor')
@@ -38,37 +37,39 @@ export default function ManagePage (props) {
 
   const roles = useMemo(() => {
     let items = []
-    if (permissionsRole) {
-      items = permissionsRole
-      items = items.map((i) => {
+    if(permissionsRole){
+      permissionsRole.map(i => {
         if(i.label.startsWith('locale.')){
-          i.label = getTranslation(i.label.replace('locale.', ''))
+          i.label = getTranslation(i.label.replace('locale.matilda_core.', ''))
         }
-        return i
+
+        items.push(
+          Object.assign({
+            label: i.label,
+            value: i.name
+          })
+        )
       })
     }
     return items
   }, [permissionsRole])
 
-  console.log(user)
-  console.log(membership)
-
   return (
     <MatildaPagesWrapper pages={pages}>
       <Row gutter={[16, 16]}>
         <Col sm={{span: 24}} lg={{span: 18}}>
-          <Card title={getTranslation("matilda_core.titles.informations")}>
+          <Card title={getTranslation("titles.informations")}>
             {user && (
               <Descriptions 
                 bordered
                 column={{sm: 1, lg: 2}}
               >
-                <Descriptions.Item label={getTranslation("matilda_core.labels.name")}>{user.name}</Descriptions.Item>
-                <Descriptions.Item label={getTranslation("matilda_core.labels.surname")}>{user.surname}</Descriptions.Item>
-                <Descriptions.Item label={getTranslation("matilda_core.labels.username")}>{user.username}</Descriptions.Item>
-                <Descriptions.Item label={getTranslation("matilda_core.labels.email")}>{user.email}</Descriptions.Item>
-                <Descriptions.Item label={getTranslation("matilda_core.labels.registration_date")}>{user.created_at}</Descriptions.Item>
-                <Descriptions.Item label={getTranslation("matilda_core.labels.last_access_date")}></Descriptions.Item>
+                <Descriptions.Item label={getTranslation("labels.name")}>{user.name}</Descriptions.Item>
+                <Descriptions.Item label={getTranslation("labels.surname")}>{user.surname}</Descriptions.Item>
+                <Descriptions.Item label={getTranslation("labels.username")}>{user.username}</Descriptions.Item>
+                <Descriptions.Item label={getTranslation("labels.email")}>{user.email}</Descriptions.Item>
+                <Descriptions.Item label={getTranslation("labels.registration_date")}>{user.created_at}</Descriptions.Item>
+                <Descriptions.Item label={getTranslation("labels.last_access_date")}></Descriptions.Item>
               </Descriptions>
             )}
           </Card>
@@ -76,24 +77,22 @@ export default function ManagePage (props) {
 
         <Col sm={{span: 24}} lg={{span: 6}}>
           <Card 
-            title={getTranslation("matilda_core.titles.edit_permissions_role")}
-            extra={showPermissions ? <a onClick={onClickRoleAdvanced}>{getTranslation("matilda_core.titles.edit_permissions")}</a> : ''}
+            title={getTranslation("titles.edit_permissions_role")}
+            extra={showPermissions && user ? <a onClick={onClickRoleAdvanced}>{getTranslation("titles.edit_permissions")}</a> : ''}
           >
             <MatildaForm form={form}>
               <Form.Item
                 name="role"
-                label={getTranslation("matilda_core.labels.role")}
+                label={getTranslation("labels.role")}
               >
-                <Select>
-                  {roles && roles.map(role => {
-                    return <Option value={role.name} key={role.name} >{getTranslation(role.label)}</Option>
-                  })}
-                </Select>
+                {membership && (
+                  <Select defaultValue={membership.permissions_role} options={roles} />
+                )}
               </Form.Item>
 
               <Form.Item>
                 <Button type="primary" htmlType="submit" block>
-                  {getTranslation("matilda_core.cta.confirm")}
+                  {getTranslation("cta.confirm")}
                 </Button>
               </Form.Item>
             </MatildaForm>

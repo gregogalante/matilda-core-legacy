@@ -74,7 +74,7 @@ export function MatildaPages (props) {
         visible={!!pages.currentDrawer}
         width={drawerWidth}
       >
-        {pages.currentDrawer && <pages.currentDrawer.component {...pages.currentDrawer?.props} pages={pages} />}
+        {pages.currentDrawer && <pages.currentDrawer.component {...pages.currentDrawerData?.props} pages={pages} />}
       </Drawer>
     </>
   )
