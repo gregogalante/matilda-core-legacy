@@ -24,7 +24,7 @@ export default function SelectPage (props) {
           className="card"
           bodyStyle={{ paddingTop: 0, paddingBottom: 0 }}
           extra={[
-            permitGroupCreation ? <Button type="primary">{getTranslation('cta.create')}</Button> : null
+            permitGroupCreation ? <Button key="create" type="primary">{getTranslation('cta.create')}</Button> : null
           ]}
         >
           <List

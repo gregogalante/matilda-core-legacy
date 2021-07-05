@@ -25,12 +25,20 @@ namespace :matilda_core do
       dependencies = JSON.parse(File.read("#{dst}/dependencies.json"))
       system("yarn add #{dependencies['dependencies'].join(' ')}")
 
-      # create matilda.js file in packs if not exists
-      file_dst = "#{Rails.root}/app/javascript/packs/matilda.js"
+      # create matilda_theme.js file in packs if not exists
+      file_dst = "#{Rails.root}/app/javascript/packs/matilda_theme.js"
       if File.exist?(file_dst)
         puts "IMPORTANTE: Controllare gli import del file #{file_dst} o eliminare il file e rieseguire il task."
       else
-        File.open(file_dst, "w+") { |f| f.write("import 'matilda_core/theme.less'\n\n// Support component names relative to this directory:\nvar matildaCoreRequireContext = require.context('../../../vendor/matilda_core', true);\nvar ReactRailsUJS = require('react_ujs');\nReactRailsUJS.useContext(matildaCoreRequireContext);") }
+        File.open(file_dst, "w+") { |f| f.write("// Override theme.less on new file and change import to use your custom theme.\nimport 'matilda_core/theme.less';") }
+      end
+
+      # create matilda_core.js file in packs if not exists
+      file_dst = "#{Rails.root}/app/javascript/packs/matilda_core.js"
+      if File.exist?(file_dst)
+        puts "IMPORTANTE: Controllare gli import del file #{file_dst} o eliminare il file e rieseguire il task."
+      else
+        File.open(file_dst, "w+") { |f| f.write("// Support component names relative to this directory:\nvar matildaCoreRequireContext = require.context('../../../vendor/matilda_core', true);\nvar ReactRailsUJS = require('react_ujs');\nReactRailsUJS.useContext(matildaCoreRequireContext);") }
       end
 
       # create addMatildaLessSupport file in config webpack

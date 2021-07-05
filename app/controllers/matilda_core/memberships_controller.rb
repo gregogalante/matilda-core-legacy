@@ -9,14 +9,15 @@ module MatildaCore
       if session_present_check(:group_uuid)
         redirect_to matilda_core.root_path unless session_permission_present?(['matilda_core.memberships'])
       end
+
+      packs_add('matilda_core')
     end
 
     def index_view; end
 
     def index_api
       users = @session.group.users.includes(:user_emails)
-      users = users.where('lower(name) LIKE ? OR lower(surname) LIKE ?', "%#{params[:s].downcase}%", "%#{params[:s].downcase}%") unless params[:s].blank?
-      
+
       users = search_query(users, %w(name surname username))
       users = sort_query(users, username: 'username SORT', name: 'name SORT', surname: 'surname SORT', email: 'matilda_core_user_emails.email SORT')
       users = paginate_query(users)
@@ -58,21 +59,21 @@ module MatildaCore
       render_json_success({})
     end
 
-    # def edit_permissions_action
-    #   command = command_manager(generate_edit_permissions_command)
-    #   return unless command
+    def edit_permissions_action
+      command = command_manager(generate_edit_permissions_command)
+      return unless command
 
-    #   session_update_group(@session.group_uuid) # aggiorno la sessione per aggiornare i permessi dell'utente
-    #   render_json_success({})
-    # end
+      session_update_group(@session.group_uuid) # aggiorno la sessione per aggiornare i permessi dell'utente
+      render_json_success({})
+    end
 
-    # def edit_permissions_role_action
-    #   command = command_manager(generate_edit_permissions_role_command)
-    #   return unless command
+    def edit_permissions_role_action
+      command = command_manager(generate_edit_permissions_role_command)
+      return unless command
 
-    #   session_update_group(@session.group_uuid) # aggiorno la sessione per aggiornare i permessi dell'utente
-    #   render_json_success({})
-    # end
+      session_update_group(@session.group_uuid) # aggiorno la sessione per aggiornare i permessi dell'utente
+      render_json_success({})
+    end
 
     # def remove_action
     #   command = command_manager(generate_remove_command)

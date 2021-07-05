@@ -206,6 +206,14 @@ module MatildaCore
       )
     end
 
+    # Permette di rimuovere un gruppo di permessi dall'applicazione.
+    def remove_memberships_permissions_roles(name)
+      names = @memberships_permissions_roles.map { |i| i[:name] }
+      throw 'Name not used' unless names.include?(name)
+
+      @memberships_permissions_roles = @memberships_permissions_roles.reject { |pr| pr[:name] == name }
+    end
+
   end
 
 end

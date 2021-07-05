@@ -88,7 +88,7 @@ function Header (props) {
     <Layout.Header style={{ position: 'fixed', zIndex: 999, width: '100%' }}>
       <div style={{ float: 'left', color: '#fff', textTransform: 'uppercase', fontWeight: 20 }}>
         {logo ? (
-          <img src={logo} alt={title} title={title} style={{ height: height - 30 }} />
+          <img src={logo} alt={title} title={title} style={{ height: 40 }} />
         ) : (
           <span>{title}</span>
         )}

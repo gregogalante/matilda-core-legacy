@@ -100,4 +100,5 @@ en:
       manage_users_permission: Ability to manage users and their permissions
       action_confirmation_request: Are you sure to continue with this action?
       administrator: Administrator
+      none: None
       personalized: Personalized

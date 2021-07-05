@@ -48,6 +48,12 @@ module MatildaCore
         index: 0,
         permissions: ['matilda_core.memberships']
       )
+      MatildaCore.config.add_memberships_permissions_role(
+        'matilda_core.none',
+        label: 'strings.none',
+        index: 0,
+        permissions: []
+      )
     end
 
   end

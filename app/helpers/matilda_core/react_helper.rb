@@ -33,7 +33,7 @@ module MatildaCore
     ##############################################################################################################################
 
     def matilda_react_props_react_props_router_routes
-      Rails.cache.fetch("MatildaCore::ReactHelper.matilda_react_props_react_props_router_routes") do
+      def get_routes
         router_routes = {}
 
         # add routes from main application
@@ -63,6 +63,12 @@ module MatildaCore
 
         router_routes
       end
+
+      return get_routes if Rails.env.development?
+
+      Rails.cache.fetch("MatildaCore::ReactHelper.matilda_react_props_react_props_router_routes") do
+        get_routes
+      end
     end
 
     def matilda_react_props_react_props_i18n_translations
@@ -72,8 +78,14 @@ module MatildaCore
         end
       end
 
-      Rails.cache.fetch("MatildaCore::ReactHelper.matilda_react_props_react_props_i18n_translations(#{I18n.locale})") do
+      def get_translations
         flatten_hash(I18n.t('.')[:matilda])
+      end
+
+      return get_translations if Rails.env.development?
+
+      Rails.cache.fetch("MatildaCore::ReactHelper.matilda_react_props_react_props_i18n_translations(#{I18n.locale})") do
+        get_translations
       end
     end
 

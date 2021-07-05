@@ -5,7 +5,10 @@ module MatildaCore
   # ProfileController.
   class ProfileController < MatildaCore::ApplicationController
 
-    before_action :session_present_check
+    before_action do
+      session_present_check
+      packs_add('matilda_core')
+    end
 
     def edit_info_action
       command = command_manager(generate_edit_info_command)

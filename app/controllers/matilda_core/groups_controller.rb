@@ -5,7 +5,10 @@ module MatildaCore
   # GroupsController.
   class GroupsController < MatildaCore::ApplicationController
 
-    before_action :session_present_check
+    before_action do
+      session_present_check
+      packs_add('matilda_core')
+    end
 
     def index_view
       if MatildaCore.config.groups_root_path

@@ -5,6 +5,10 @@ module MatildaCore
   # AuthenticationController.
   class AuthenticationController < MatildaCore::ApplicationController
 
+    before_action do
+      packs_add('matilda_core')
+    end
+
     # View
     #######################################################
 

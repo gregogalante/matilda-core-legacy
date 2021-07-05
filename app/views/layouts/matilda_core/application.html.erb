@@ -1,8 +1,5 @@
 <%= render 'layouts/matilda_core/head',
-  assets: [
-    stylesheet_pack_tag('matilda'),
-    javascript_pack_tag('matilda')
-  ]
+  assets: @_packs.map { |name| [ stylesheet_pack_tag(name), javascript_pack_tag(name) ] }.flatten
 %>
 
 <%= yield %>

@@ -19,6 +19,7 @@ module MatildaCore
     skip_before_action :verify_authenticity_token
 
     before_action :set_locale
+    before_action :set_packs
 
     def index
       if session_present?
@@ -33,6 +34,13 @@ module MatildaCore
       @session&.locale(params[:locale].to_sym) if I18n.available_locales.include?(params[:locale].to_sym)
       session[:mat_locale] = params[:locale]
       render_json_success({ token: session_update })
+    end
+
+    # FUNZIONI DI GESTIONE PACKS
+    ##############################################################################################################
+
+    def packs_add(name)
+      @_packs.push(name)
     end
 
     # FUNZIONI DI GESTIONE SESSIONE
@@ -244,6 +252,10 @@ module MatildaCore
       locale = @session&.locale || session[:mat_locale] || I18n.default_locale
 
       I18n.locale = locale
+    end
+
+    def set_packs
+      @_packs = ['matilda_theme']
     end
 
   end
