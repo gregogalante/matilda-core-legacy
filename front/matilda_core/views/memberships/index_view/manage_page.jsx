@@ -1,6 +1,6 @@
 import { Row, Col, Card, Descriptions, Form, Button, Input, Select } from 'antd'
 import React,  { useMemo, useState, useEffect, useContext } from 'react'
-import { useMatildaRequest } from '../../../components/MatildaRequest'
+import { useMatildaRequest } from 'matilda_core/components/MatildaRequest'
 import { MatildaContext } from 'matilda_core'
 import { MatildaForm, useMatildaForm } from 'matilda_core/components/MatildaForm'
 import { MatildaPagesWrapper } from 'matilda_core/components/MatildaPages'

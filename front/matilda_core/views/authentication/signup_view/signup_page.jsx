@@ -26,57 +26,55 @@ export default function SignupPage() {
     <Row justify="center" align="center">
       <Col style={{ maxWidth: 400, width: "100%" }}>
         <Card 
-          title={getTranslation("matilda_core.titles.signup")}
-          extra={<a href={loginPath.path}>{getTranslation("matilda_core.cta.login")}</a>}
+          title={getTranslation("titles.signup")}
+          extra={<a href={loginPath.path}>{getTranslation("cta.login")}</a>}
         >
           <MatildaForm form={form}>
             <Form.Item
               name="name"
-              label={getTranslation("matilda_core.labels.name")}
+              label={getTranslation("labels.name")}
             >
               <Input />
             </Form.Item>
 
             <Form.Item
               name="surname"
-              label={getTranslation("matilda_core.labels.surname")}
+              label={getTranslation("labels.surname")}
             >
               <Input />
             </Form.Item>
 
             <Form.Item
               name="username"
-              label={getTranslation("matilda_core.labels.username")}
+              label={getTranslation("labels.username")}
             >
               <Input />
             </Form.Item>
 
             <Form.Item
               name="email"
-              label={getTranslation("matilda_core.labels.email")}
+              label={getTranslation("labels.email")}
             >
               <Input />
             </Form.Item>
 
             <Form.Item
               name="password"
-              label={getTranslation("matilda_core.labels.password")}
+              label={getTranslation("labels.password")}
             >
               <Input.Password />
             </Form.Item>
 
             <Form.Item
               name="password_confirmation"
-              label={getTranslation(
-                "matilda_core.labels.password_confirmation"
-              )}
+              label={getTranslation("labels.password_confirmation")}
             >
               <Input.Password />
             </Form.Item>
 
             <Form.Item style={{ textAlign: "right" }}>
               <Button type="primary" htmlType="submit" block>
-                {getTranslation("matilda_core.cta.confirm")}
+                {getTranslation("cta.confirm")}
               </Button>
             </Form.Item>
           </MatildaForm>

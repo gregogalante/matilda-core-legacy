@@ -7,7 +7,7 @@ import {
 import SignupPage from "./signup_page";
 
 export default (props) => {
-  const layout = useMatildaLayout({ theme: "clean" });
+  const layout = useMatildaLayout({ theme: "clean-centered" });
 
   return (
     <MatildaContainer {...props}>

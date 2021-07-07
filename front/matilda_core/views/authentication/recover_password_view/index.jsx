@@ -4,7 +4,7 @@ import { MatildaLayout, useMatildaLayout } from 'matilda_core/components/Matilda
 import RecoverPasswordPage from './recover_password_page'
 
 export default (props) => {
-  const layout = useMatildaLayout({ theme: 'clean' })
+  const layout = useMatildaLayout({ theme: 'clean-centered' })
 
   return (
     <MatildaContainer {...props}>

@@ -27,41 +27,41 @@ export default function SignupPage() {
     <Row justify="center" align="center">
       <Col style={{ maxWidth: 400, width: "100%" }}>
         <Card
-          title={getTranslation("matilda_core.titles.recover_password")}
-          extra={<a href={loginPath.path}>{getTranslation("matilda_core.cta.login")}</a>}
+          title={getTranslation("titles.recover_password")}
+          extra={<a href={loginPath.path}>{getTranslation("cta.login")}</a>}
         >
           {updated ? (
             <Result 
               icon={<SmileOutlined />}
-              title={getTranslation("matilda_core.strings.update_password_complete_title")}
-              extra={<a href={loginPath.path}>{getTranslation("matilda_core.cta.continue")}</a>}
+              title={getTranslation("strings.update_password_complete_title")}
+              extra={<a href={loginPath.path}>{getTranslation("cta.continue")}</a>}
             />
           ) : (
             <MatildaForm form={form}>
               <Form.Item
                 name="recover_password_code"
-                label={getTranslation("matilda_core.labels.security_code")}
+                label={getTranslation("labels.security_code")}
               >
                 <Input />
               </Form.Item>
 
               <Form.Item
                 name="password"
-                label={getTranslation("matilda_core.labels.new_password")}
+                label={getTranslation("labels.new_password")}
               >
                 <Input.Password />
               </Form.Item>
 
               <Form.Item
                 name="password_confirmation"
-                label={getTranslation("matilda_core.labels.new_password_confirmation")}
+                label={getTranslation("labels.new_password_confirmation")}
               >
                 <Input.Password />
               </Form.Item>
 
               <Form.Item style={{ textAlign: "right" }}>
                 <Button type="primary" htmlType="submit" block>
-                  {getTranslation("matilda_core.cta.confirm")}
+                  {getTranslation("cta.confirm")}
                 </Button>
               </Form.Item>
             </MatildaForm>

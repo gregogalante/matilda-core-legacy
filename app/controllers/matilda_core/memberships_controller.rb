@@ -29,9 +29,7 @@ module MatildaCore
     end
 
     def manage_api
-      user_uuid = params[:user_uuid]
-
-      user = @session.group.users.find_by(uuid: user_uuid)
+      user = @session.group.users.find_by(uuid: params[:user_uuid])
       unless user
         json_errors(json_error(I18n.t('matilda.messages.user_not_valid'), code: :user_uuid))
         render_json_fail
@@ -40,15 +38,15 @@ module MatildaCore
 
       membership = MatildaCore::Membership.find_by(group_uuid: @session.group, user_uuid: user.uuid)
       unless membership
-        # json_errors(...)
+        json_errors(json_error(I18n.t('matilda.messages.user_not_valid'), code: :user_uuid))
         render_json_fail
         return
       end
 
       render_json_success(
         user: user.as_json,
-        user_emails: user.user_emails,
-        membership: membership.as_json
+        membership: membership.as_json,
+        user_emails: user.user_emails
       )
     end
 

@@ -58,7 +58,7 @@ export default function IndexPage (props) {
   })
 
   const onClickInvite = () => {
-    pages.openDrawer('users_index_index_page_invite_drawer')
+    pages.openDrawer('users_index_index_page_invite_drawer', { onCompleted: () => { table.loadData(); pages.closeDrawer() } })
   }
 
   const onGoToManageUser = (userUuid) => {

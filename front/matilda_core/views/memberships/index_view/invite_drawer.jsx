@@ -8,11 +8,9 @@ export default function InviteDrawer (props) {
   const { getTranslation } = useContext(MatildaContext)
   const form = useMatildaForm('matilda_core.memberships_invitation_action')
 
-  console.log(props)
-
   useEffect(() => {
     if (form.response && form.response.result) {
-      pages.closeDrawer()
+      props.onCompleted()
     }
   }, [form.response])
 

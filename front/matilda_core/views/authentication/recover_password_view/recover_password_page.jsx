@@ -28,27 +28,27 @@ export default function SignupPage() {
     <Row justify="center" align="center">
       <Col style={{ maxWidth: 400, width: "100%" }}>
         <Card
-          title={getTranslation("matilda_core.titles.recover_password")}
-          extra={<a href={loginPath.path}>{getTranslation("matilda_core.cta.login")}</a>}
+          title={getTranslation("titles.recover_password")}
+          extra={<a href={loginPath.path}>{getTranslation("cta.login")}</a>}
         >
           {mailSended ? (
             <Result 
               status="success"
-              title={getTranslation("matilda_core.strings.recover_password_complete_title")}
-              extra={<a href={updatePwdPath.path}>{getTranslation("matilda_core.cta.continue")}</a>}
+              title={getTranslation("strings.recover_password_complete_title")}
+              extra={<Button type="primary" href={updatePwdPath.path}>{getTranslation("cta.continue")}</Button>}
             />
           ) : (
             <MatildaForm form={form}>
               <Form.Item
                 name="username_email"
-                label={getTranslation("matilda_core.labels.username_or_email")}
+                label={getTranslation("labels.username_or_email")}
               >
                 <Input />
               </Form.Item>
 
               <Form.Item style={{ textAlign: "right" }}>
                 <Button type="primary" htmlType="submit" block>
-                  {getTranslation("matilda_core.cta.confirm")}
+                  {getTranslation("cta.confirm")}
                 </Button>
               </Form.Item>
             </MatildaForm>

@@ -3,8 +3,7 @@ import { ConfigProvider as AntdConfigProvider, Grid } from 'antd'
 
 import en from 'antd/lib/locale/en_GB'
 import it from 'antd/lib/locale/it_IT'
-import us from 'antd/lib/locale/en_US'
-const antdLocales = { en, it, us }
+const antdLocales = { en, it }
 
 /**
  * @const MatildaContext
@@ -67,6 +66,8 @@ export function MatildaProvider (props) {
  */
 export function MatildaContainer (props) {
   const matilda = props.matilda || {}
+
+  console.log(antdLocales[matilda.i18n.locale])
 
   return (
     <MatildaProvider {...matilda}>
