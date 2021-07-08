@@ -83,7 +83,7 @@ it:
       invitation_user_guide: Un email verrà inviata all'utente per invitarlo a completare il suo account
     messages: # messaggi di errore, alerts ecc.
       general_error: Si è verificato un errore interno
-      general_success: Operazione completata correttamente
+      general_success: Operazione completata con successo
       name_not_valid: Nome non valido
       surname_not_valid: Cognome non valido
       username_email_not_valid: Username / Indirizzo Email non valido
