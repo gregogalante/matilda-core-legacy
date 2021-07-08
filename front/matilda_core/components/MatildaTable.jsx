@@ -58,6 +58,7 @@ export function useMatildaTable (configProps = {}) {
       columns: [],
       data: [],
       route: null,
+      routeExtraParams: {},
       routeDataParser: () => [],
       routePaginationParser: null,
       pagination: false,
@@ -89,6 +90,7 @@ export function useMatildaTable (configProps = {}) {
       sort_field: sort.field || '',
       sort_order: {ascend:'ASC',descend:'DESC'}[sort.order] || 'ASC'
     }
+    params = Object.assign(params, config.routeExtraParams)
 
     // invio richiesta
     request.send(config.route, params).then((response) => {
