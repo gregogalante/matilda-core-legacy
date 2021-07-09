@@ -6,12 +6,17 @@ import { MatildaForm, useMatildaForm } from 'matilda_core/components/MatildaForm
 export default function PermissionsDrawer (props) {
   const { pages } = props
   const { getTranslation, getConfig } = useContext(MatildaContext)
-  const form = useMatildaForm('matilda_core.memberships_edit_permissions_action', {user_uuid: props.user.uuid}, { manageSuccess: false })
-  const { Option } = Select
+  const userPermissions = props.membership.permissions
+  const userUuid = props.user.uuid
+  // const [checked, setChecked] = useState(userPermissions || [])
+  const form = useMatildaForm('matilda_core.memberships_edit_permissions_action', {user_uuid: userUuid, permissions: userPermissions}, { manageSuccess: false })
 
+  console.log(props)
   useEffect(() => {
     if (form.response && form.response.result) {
-      pages.closeDrawer()
+      // pages.closeDrawer()
+      props.onComplete()
+      // window.location.reload()
     }
   }, [form.response])
 
@@ -33,38 +38,28 @@ export default function PermissionsDrawer (props) {
     return items
   }, [membershipsPermissions])
 
-  const userPermissions = props.membership.permissions
-
-  console.log(props)
-
-  // const [isChecked, setIsChecked] = useState(null)
-  // let isChecked = []
-  // userPermissions.map(p => isChecked.push(p))
-  const isChecked = useMemo(() => {
-    let permissions = []
-    if(userPermissions){
-      userPermissions.map(p => permissions.push(p))
-    }
-    return permissions
-  }, [userPermissions])
-  console.log(isChecked)
-
   const onCheckChange = (e) => {
-    console.log(e.target)
-    if (isChecked.includes(e.target.id)){
-      isChecked.filter(item => item !== e.target.id)
+    // if (checked.includes(e.target.id)){
+    //   setChecked(checked.filter(item => item !== e.target.id))
+    // } else {
+    //   setChecked(lastChecked => [...lastChecked, e.target.id])
+    // }
+    
+    if (form.extraParams.permissions.includes(e.target.id)){
+      form.setExtraParams({
+        user_uuid: userUuid,
+        permissions: form.extraParams.permissions.filter(item => item !== e.target.id)
+      })
     } else {
-      isChecked.push(e.target.id)
+      form.setExtraParams({
+        user_uuid: userUuid,
+        permissions: [...form.extraParams.permissions, e.target.id]
+      })
     }
   }
 
   return (
     <Space direction="vertical" size='large' style={{ width: '100%' }}>
-      {/* <Alert
-        message={getTranslation('helps.invitation_user_guide')}
-        type="info"
-      /> */}
-
       <Card title={getTranslation("titles.edit_permissions")}>
         <MatildaForm form={form}>
           {permissions && permissions.map(permission => {
@@ -73,7 +68,7 @@ export default function PermissionsDrawer (props) {
                 key={permission.name}
                 name={permission.name}
               >
-                <Checkbox checked={isChecked.includes(permission.name)} onChange={onCheckChange}>{getTranslation(permission.label)}</Checkbox>
+                <Checkbox checked={form.extraParams.permissions.includes(permission.name)} onChange={onCheckChange}>{getTranslation(permission.label)}</Checkbox>
               </Form.Item>
             )
           })}

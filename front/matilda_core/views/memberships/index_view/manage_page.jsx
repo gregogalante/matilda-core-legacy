@@ -1,9 +1,10 @@
-import { Row, Col, Card, Descriptions, Form, Button, Input, Select } from 'antd'
+import { Row, Col, Card, Descriptions, Form, Button, Input, Select, notification } from 'antd'
 import React,  { useMemo, useState, useEffect, useContext } from 'react'
 import { useMatildaRequest } from 'matilda_core/components/MatildaRequest'
 import { MatildaContext } from 'matilda_core'
 import { MatildaForm, useMatildaForm } from 'matilda_core/components/MatildaForm'
 import { MatildaPagesWrapper } from 'matilda_core/components/MatildaPages'
+import { CheckCircleTwoTone } from '@ant-design/icons'
 
 export default function ManagePage (props) {
   const { pages } = props
@@ -13,23 +14,44 @@ export default function ManagePage (props) {
   const [membership, setMembership] = useState(null)
   const form = useMatildaForm('matilda_core.memberships_edit_permissions_role_action', {user_uuid: props.userUuid}, { manageSuccess: false })
 
-  useEffect(() => {
+  const manageApi = () => {
     request.send('matilda_core.memberships_manage_api', {user_uuid: props.userUuid}).then((response) => {
       if (!response.result) return
       setUser(response.payload.user)
       setMembership(response.payload.membership)
     })
+  }
+
+  useEffect(() => {
+    manageApi()
   }, [])
 
   useEffect(() => {
     if (form.response && form.response.result) {
-      // window.location.replace(redirectPath.path)
-      window.location.reload()
+      manageApi()
+      openNotification()
     }
   }, [form.response])
 
+  useEffect(() => {
+    if(membership && membership.permissions_role){
+      form.antdForm.setFieldsValue({role: membership.permissions_role})
+    }
+  }, [membership])
+
+  const openNotification = () => {
+    notification.open({
+      message: getTranslation('messages.user_update_success'),
+      duration: 4,
+      icon: <CheckCircleTwoTone />
+    })
+  }
+
   const onClickRoleAdvanced = () => {
-    pages.openDrawer('users_index_manage_page_role_advanced', {user, membership})
+    pages.openDrawer(
+      'users_index_manage_page_role_advanced', 
+      {user, membership, onComplete: () => { pages.closeDrawer(), manageApi(), openNotification() }}
+    )
   }
 
   const showPermissions = getConfig('memberships_show_permissions_editor')
@@ -81,9 +103,7 @@ export default function ManagePage (props) {
                 name="role"
                 label={getTranslation("labels.role")}
               >
-                {membership && (
-                  <Select defaultValue={membership.permissions_role} options={roles} />
-                )}
+                <Select options={roles} />
               </Form.Item>
 
               <Form.Item>

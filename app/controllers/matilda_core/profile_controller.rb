@@ -10,6 +10,17 @@ module MatildaCore
       packs_add('matilda_core')
     end
 
+    def index_view; end
+
+    def index_api
+      user = @session.group.users.find_by(uuid: @session.user_uuid)
+
+      render_json_success(
+        user: user.as_json,
+        user_emails: user.user_emails
+      )
+    end
+
     def edit_info_action
       command = command_manager(generate_edit_info_command)
       return unless command

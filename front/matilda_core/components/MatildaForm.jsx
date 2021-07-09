@@ -92,5 +92,5 @@ export function useMatildaForm (routeKey, extraParamsProps = {}, configProps = {
     })
   }
 
-  return { antdForm, matildaRequest, response, onSubmit, setExtraParams }
+  return { antdForm, extraParams, matildaRequest, response, onSubmit, setExtraParams }
 }

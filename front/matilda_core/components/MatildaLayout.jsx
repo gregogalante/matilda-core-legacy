@@ -170,7 +170,7 @@ function MenuPrimary (props) {
 }
 
 function MenuSecondary () {
-  const { getSession, getTranslation, getAvailableLocales, responsive: { isMobile } } = useContext(MatildaContext)
+  const { getSession, getTranslation, getRoute, getAvailableLocales, responsive: { isMobile } } = useContext(MatildaContext)
   const session = getSession()
   const availableLocales = getAvailableLocales()
   const request = useMatildaRequest()
@@ -180,6 +180,10 @@ function MenuSecondary () {
       if (!result) return
       window.location.reload()
     })
+  }
+
+  const onClickUrl = (path) => {
+    window.location.replace(path.path)
   }
 
   const onLogout = () => {
@@ -200,6 +204,7 @@ function MenuSecondary () {
         >
           <Menu.Item
             key={"profile_account_settings"}
+            onClick={() => onClickUrl(getRoute('matilda_core.profile_index_view'))}
           >{getTranslation('header.account_settings')}</Menu.Item>
           <Menu.Item
             key={"profile_groups"}

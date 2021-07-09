@@ -27,6 +27,7 @@ MatildaCore::Engine.routes.draw do
 
   # profile
   get 'profile/index-view', to: 'profile#index_view', as: 'profile_index_view'
+  get 'profile/index-api', to: 'profile#index_api', as: 'profile_index_api'
   post 'profile/edit-info-action', to: 'profile#edit_info_action', as: 'profile_edit_info_action'
   post 'profile/edit-username-action', to: 'profile#edit_username_action', as: 'profile_edit_username_action'
   post 'profile/create-email-action', to: 'profile#create_email_action', as: 'profile_create_email_action'

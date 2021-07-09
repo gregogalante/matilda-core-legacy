@@ -1,0 +1,85 @@
+import React, { useContext, useEffect, useState } from 'react'
+import { Button, Card, Form, Input, notification } from 'antd'
+import { CheckCircleTwoTone } from '@ant-design/icons'
+import { MatildaContext } from 'matilda_core'
+import { MatildaPagesWrapper } from 'matilda_core/components/MatildaPages'
+import { MatildaForm, useMatildaForm } from 'matilda_core/components/MatildaForm'
+import { useMatildaRequest } from 'matilda_core/components/MatildaRequest'
+
+export default function IndexPage (props) {
+  const { pages } = props
+  const request = useMatildaRequest()
+  const { getTranslation } = useContext(MatildaContext)
+  const [user, setUser] = useState(null)
+
+  const indexApi = () => {
+    request.send('matilda_core.profile_index_api', {}).then((response) => {
+      if (!response.result) return
+
+      setUser(response.payload.user)
+    })
+  }
+  console.log(user)
+
+  useEffect(() => {
+    indexApi()
+  }, [])
+
+  useEffect(() => {
+    if(user){
+      form.antdForm.setFieldsValue({
+        name: user.name,
+        surname: user.surname
+      })
+    }
+  }, [user])
+
+  const form = useMatildaForm('matilda_core.profile_edit_info_action', {}, { manageSuccess: false })
+  const openNotification = () => {
+    notification.open({
+      message: getTranslation('messages.user_update_success'),
+      duration: 4,
+      icon: <CheckCircleTwoTone />
+    })
+  }
+  useEffect(() => {
+    if (form.response && form.response.result) {
+      indexApi()
+      openNotification()
+      // TODO
+    }
+  }, [form.response])
+
+  return (
+    <MatildaPagesWrapper
+      pages={pages}
+    >
+      <Card 
+        title={getTranslation("titles.personal_informations")}
+        // extra={}
+      >
+        <MatildaForm form={form}>
+          <Form.Item
+            name="name"
+            label={getTranslation("labels.name")}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="surname"
+            label={getTranslation("labels.surname")}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item style={{ textAlign: 'right' }}>
+            <Button type="primary" htmlType="submit">
+              {getTranslation("cta.update")}
+            </Button>
+          </Form.Item>
+        </MatildaForm>
+      </Card>
+    </MatildaPagesWrapper>
+  )
+}
