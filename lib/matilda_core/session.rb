@@ -77,6 +77,7 @@ module MatildaCore
         @data[:group_uuid] = group_uuid
         @data[:group_name] = group.name
         @data[:group_permissions] = membership.permissions
+        @data[:group_permissions_role] = membership.permissions_role
       end
 
       @data[:group_uuid]
@@ -86,6 +87,7 @@ module MatildaCore
       @data[:group_uuid] = nil
       @data[:group_name] = nil
       @data[:group_permissions] = []
+      @data[:group_permissions_role] = nil
     end
 
     def group
@@ -96,6 +98,10 @@ module MatildaCore
       @data[:group_permissions] || []
     end
 
+    def group_permissions_role
+      @data[:group_permissions_role] || nil
+    end
+
     def group_name
       @data[:group_name]
     end
@@ -104,6 +110,23 @@ module MatildaCore
 
     def membership
       @membership ||= MatildaCore::Membership.find_by(group_uuid: group_uuid, user_uuid: user_uuid)
+    end
+
+    # Custom
+
+    def get_data(key)
+      @data[:custom] ||= {}
+      @data[:custom][key.to_sym]
+    end
+
+    def set_data(key, value)
+      @data[:custom] ||= {}
+      @data[:custom][key.to_sym] = value
+    end
+
+    def remove_data(key)
+      @data[:custom] ||= {}
+      @data[:custom][key.to_sym] = nil
     end
 
     ######################################################################

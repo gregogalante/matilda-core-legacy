@@ -76,7 +76,7 @@ export function useMatildaRequest (configProps = {}) {
         if (config.manageError && !response.result) {
           let errorMessage = config.defaultErrorMessage
           if (response.errors && response.errors.length > 0) errorMessage = response.errors[0].message
-          notification['error']({ description: errorMessage })
+          notification['error']({ message: errorMessage })
         }
 
         setRunning(false)

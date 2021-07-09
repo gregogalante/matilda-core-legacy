@@ -67,8 +67,6 @@ export function MatildaProvider (props) {
 export function MatildaContainer (props) {
   const matilda = props.matilda || {}
 
-  console.log(antdLocales[matilda.i18n.locale])
-
   return (
     <MatildaProvider {...matilda}>
       <AntdConfigProvider locale={antdLocales[matilda.i18n.locale] || en}>
