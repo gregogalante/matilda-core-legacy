@@ -110,8 +110,7 @@ export function useMatildaTable (configProps = {}) {
       sort_field: sort.field || '',
       sort_order: {ascend:'ASC',descend:'DESC'}[sort.order] || 'ASC',
       filters_keys: Object.keys(filters).join(','),
-      filters_values: Object.values(filters).join(','),
-      selectedRows: selectedRows
+      filters_values: Object.values(filters).join(',')
     }
 
     // invio richiesta
