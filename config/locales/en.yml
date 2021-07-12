@@ -53,7 +53,6 @@ en:
       edit_permissions_role: Edit permissions role
       informations: Informations
       dashboard: Dashboard
-      personal_informations: Personal informations
       login: Login
       signup: Signup
       recover_password: Recover password
@@ -64,6 +63,12 @@ en:
       account_settings: Account settings
       documentation: Documentation
       administration: Administration
+      profile_manage: Manage profile
+      personal_informations: Personal informations
+      profile_emails_manage: Manage emails
+      emails: Emails
+      profile_credentials_manage: Manage credentials
+      access_options: Access options
     helps:
       insert_name_of_group: Insert the name of the group
       insert_username_or_email: Insert the username or email addess
@@ -87,6 +92,7 @@ en:
       user_not_valid: User not valid
       groups_creation_unpermitted: Groups can not be created
       groups_max_number_per_user: You have reached the maximum number of groups
+      user_update_success: User updated successfully
     strings:
       no_data_found_title: No data found
       no_data_found_content: There are not data present on the system

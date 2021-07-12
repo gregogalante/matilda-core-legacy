@@ -60,7 +60,6 @@ it:
       edit_permissions_role: Modifica ruolo
       informations: Informazioni
       dashboard: Dashboard
-      personal_informations: Informazioni personali
       login: Accesso
       signup: Registrazione
       recover_password: Recupero password
@@ -71,6 +70,12 @@ it:
       account_settings: Impostazoni account
       documentation: Documentazione
       administration: Amministrazione
+      profile_manage: Gestisci profilo
+      profile_emails_manage: Gestisci le email
+      emails: Emails
+      personal_informations: Informazioni personali
+      profile_credentials_manage: Gestisci le credenziali
+      access_options: Opzioni di accesso
     helps: # stringhe di aiuto verso l'utente
       insert_name_of_group: Inserisci il nome del gruppo
       insert_username_or_email: Inserisci l'Username o l'indirizzo Email
@@ -94,6 +99,7 @@ it:
       user_not_valid: Utente non valido
       groups_creation_unpermitted: I gruppi non possono essere registrati
       groups_max_number_per_user: Hai raggiunto il numero massimo di gruppi disponibili
+      user_update_success: Utente aggiornato con successo
     strings: # altre stringhe varie utilizzate.
       no_data_found_title: Nessun dato trovato
       no_data_found_content: Non ci sono dati presenti nel sistema
