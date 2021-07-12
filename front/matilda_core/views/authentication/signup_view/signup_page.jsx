@@ -33,6 +33,7 @@ export default function SignupPage() {
             <Form.Item
               name="name"
               label={getTranslation("labels.name")}
+              rules={[{ required: true }]}
             >
               <Input />
             </Form.Item>
@@ -40,6 +41,7 @@ export default function SignupPage() {
             <Form.Item
               name="surname"
               label={getTranslation("labels.surname")}
+              rules={[{ required: true }]}
             >
               <Input />
             </Form.Item>
@@ -47,6 +49,7 @@ export default function SignupPage() {
             <Form.Item
               name="username"
               label={getTranslation("labels.username")}
+              rules={[{ required: true }]}
             >
               <Input />
             </Form.Item>
@@ -54,6 +57,7 @@ export default function SignupPage() {
             <Form.Item
               name="email"
               label={getTranslation("labels.email")}
+              rules={[{ required: true }, { type: 'email' }]}
             >
               <Input />
             </Form.Item>
@@ -61,6 +65,7 @@ export default function SignupPage() {
             <Form.Item
               name="password"
               label={getTranslation("labels.password")}
+              rules={[{ required: true }]}
             >
               <Input.Password />
             </Form.Item>
@@ -68,6 +73,7 @@ export default function SignupPage() {
             <Form.Item
               name="password_confirmation"
               label={getTranslation("labels.password_confirmation")}
+              rules={[{ required: true }]}
             >
               <Input.Password />
             </Form.Item>

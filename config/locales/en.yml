@@ -93,6 +93,10 @@ en:
       groups_creation_unpermitted: Groups can not be created
       groups_max_number_per_user: You have reached the maximum number of groups
       user_update_success: User updated successfully
+      email_add_success: Email add success
+      email_delete_success: Email delete success
+      password_update_success: Password update success
+      username_update_success: Username update success
     strings:
       no_data_found_title: No data found
       no_data_found_content: There are not data present on the system

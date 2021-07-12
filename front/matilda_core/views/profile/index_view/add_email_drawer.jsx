@@ -8,7 +8,6 @@ export default function AddEmailDrawer (props) {
   const { getTranslation, getConfig } = useContext(MatildaContext)
   const form = useMatildaForm('matilda_core.profile_create_email_action', {}, { manageSuccess: false })
 
-  console.log(props)
   useEffect(() => {
     if (form.response && form.response.result) {
       props.onComplete()
@@ -20,7 +19,13 @@ export default function AddEmailDrawer (props) {
     <Space direction="vertical" size='large' style={{ width: '100%' }}>
       <Card title={getTranslation("titles.add_email_address")}>
         <MatildaForm form={form}>
-          
+          <Form.Item
+            name="email"
+            label={getTranslation("labels.email")}
+            rules={[{ required: true }, { type: 'email' }]}
+          >
+            <Input placeholder={getTranslation("helps.insert_email")}/>
+          </Form.Item>
   
           <Form.Item style={{ textAlign: 'right' }}>
             <Button type="primary" htmlType="submit" block>

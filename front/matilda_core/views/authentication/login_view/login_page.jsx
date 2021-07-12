@@ -30,6 +30,7 @@ export default function LoginPage () {
             <Form.Item
               name="username_email"
               label={getTranslation('labels.username_or_email')}
+              rules={[{ required: true }]}
             >
               <Input
                 prefix={<UserOutlined className="site-form-item-icon" />}
@@ -40,6 +41,7 @@ export default function LoginPage () {
             <Form.Item
               name="password"
               label={getTranslation('labels.password')}
+              rules={[{ required: true }]}
             >
               <Input.Password
                 prefix={<LockOutlined className="site-form-item-icon" />}

@@ -15,11 +15,9 @@ export default function IndexPage (props) {
   const indexApi = () => {
     request.send('matilda_core.profile_index_api', {}).then((response) => {
       if (!response.result) return
-
       setUser(response.payload.user)
     })
   }
-  console.log(user)
 
   useEffect(() => {
     indexApi()

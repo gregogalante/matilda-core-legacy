@@ -69,7 +69,7 @@ export function useMatildaForm (routeKey, extraParamsProps = {}, configProps = {
 
         if (config.manageSuccess) {
           antdForm.resetFields()
-          notification['success']({ message: config.defaultSuccessMessage })
+          notification['success']({ description: config.defaultSuccessMessage })
         }
       } else {
         if (config.onError) config.onError(response)
@@ -82,15 +82,15 @@ export function useMatildaForm (routeKey, extraParamsProps = {}, configProps = {
             antdForm.setFields(errorsWithFields.map((err) => ({ name: err.code, errors: [err.message] })))
 
             if (errorsWithoutFields.length > 0) {
-              notification['error']({ message: errorsWithoutFields[0].message })
+              notification['error']({ description: errorsWithoutFields[0].message })
             }
           } else {
-            notification['error']({ message: config.defaultErrorMessage })
+            notification['error']({ description: config.defaultErrorMessage })
           }
         }
       }
     })
   }
 
-  return { antdForm, matildaRequest, response, extraParams, onSubmit, setExtraParams }
+  return { antdForm, extraParams, matildaRequest, response, onSubmit, setExtraParams }
 }

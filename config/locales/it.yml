@@ -100,6 +100,9 @@ it:
       groups_creation_unpermitted: I gruppi non possono essere registrati
       groups_max_number_per_user: Hai raggiunto il numero massimo di gruppi disponibili
       user_update_success: Utente aggiornato con successo
+      email_add_success: Email aggiunta con successo
+      email_delete_success: Email eliminata con successo
+      password_update_success: Password aggiornata con successo
     strings: # altre stringhe varie utilizzate.
       no_data_found_title: Nessun dato trovato
       no_data_found_content: Non ci sono dati presenti nel sistema

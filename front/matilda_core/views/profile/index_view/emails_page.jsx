@@ -18,7 +18,6 @@ export default function EmailsPage (props) {
       setEmails(response.payload.user_emails)
     })
   }
-  console.log(emails)
 
   useEffect(() => {
     indexApi()
@@ -26,17 +25,10 @@ export default function EmailsPage (props) {
   
   const onDeleteEmail = (email) => {
     request.send('matilda_core.profile_remove_email_action', {email}).then((response) => {
-      if(!response.result){
-        notification.open({
-          message: 'Email delete error',
-          duration: 4,
-          icon: <CloseCircleTwoTone />
-        })
-        return
-      }
+      if(!response.result) return
 
       notification.open({
-        message: 'Email delete success',
+        message: getTranslation('messages.email_delete_success'),
         duration: 4,
         icon: <CheckCircleTwoTone />
       })
@@ -51,7 +43,26 @@ export default function EmailsPage (props) {
     )
   }
 
-  const openNotificationAddEmailSuccess = () => {}
+  const openNotificationAddEmailSuccess = () => {
+    notification.open({
+      message: getTranslation('messages.email_add_success'),
+      duration: 4,
+      icon: <CheckCircleTwoTone />
+    })
+  }
+
+  const onTogglePrimaryEmail = (email) => {
+    request.send('matilda_core.profile_toggle_email_primary_action', {email}).then((response) => {
+      if(!response.result)return
+
+      notification.open({
+        message: getTranslation('messages.email_primary_success'),
+        duration: 4,
+        icon: <CheckCircleTwoTone />
+      })
+      indexApi()
+    })
+  }
 
   return (
     <MatildaPagesWrapper
@@ -70,10 +81,10 @@ export default function EmailsPage (props) {
               {email.email} 
               <Space>
                 {email.primary ? (
-                  <Button icon={<StarFilled/>} />
+                  <StarFilled />
                 ) : (
                   <>
-                    <Button icon={<StarOutlined/>} />
+                    <Button icon={<StarOutlined/>} onClick={() => onTogglePrimaryEmail(email.email)} />
                     <Button type='danger' icon={<DeleteOutlined/>} onClick={() => onDeleteEmail(email.email)} />
                   </>
                 )}
