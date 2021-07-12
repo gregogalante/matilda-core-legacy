@@ -12,8 +12,6 @@ export function MatildaTable (props) {
   const { table } = props
   const { config, loading, data, columns } = table
 
-  console.log(table)
-
   return (
     <Table
       columns={columns}
@@ -112,7 +110,8 @@ export function useMatildaTable (configProps = {}) {
       sort_field: sort.field || '',
       sort_order: {ascend:'ASC',descend:'DESC'}[sort.order] || 'ASC',
       filters_keys: Object.keys(filters).join(','),
-      filters_values: Object.values(filters).join(',')
+      filters_values: Object.values(filters).join(','),
+      selectedRows: selectedRows
     }
 
     // invio richiesta
