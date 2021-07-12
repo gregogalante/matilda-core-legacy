@@ -18,7 +18,6 @@ module MatildaCore
     def index_api
       users = @session.group.users.includes(:user_emails)
 
-      users = search_query(users, %w(name surname username))
       users = sort_query(users, username: 'username SORT', name: 'name SORT', surname: 'surname SORT', email: 'matilda_core_user_emails.email SORT')
       users = paginate_query(users)
 

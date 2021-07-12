@@ -162,9 +162,9 @@ module MatildaCore
     end
 
     def sort_query(query, sort_key_map = {})
-      sort_field = params[:sort_field] || nil
-      sort_order = params[:sort_order] || 'ASC'
-      return query if sort_field.blank?
+      sort_field = params[:sort_field].blank? ? 'default' : params[:sort_field]
+      sort_order = params[:sort_order].blank? ? 'ASC' : params[:sort_order]
+      return query if sort_field == 'default' && sort_key_map[:default].nil?
       return query unless ['ASC', 'DESC'].include?(sort_order)
 
       sort_key = sort_key_map[sort_field.to_sym]
@@ -175,19 +175,22 @@ module MatildaCore
       query.order(sort_string)
     end
 
-    def search_query(query, search_keys = [])
-      search = params[:search] || nil
-
-      return query if search.blank?
-      return query unless search_keys.length.positive?
+    def filters_query(query, filter_key_map = {})
+      filter_field_keys = params[:filters_keys].blank? ? [] : params[:filters_keys].split(',')
+      filter_field_values = params[:filters_values].blank? ? [] : params[:filters_values].split(',')
+      
+      return query unless filter_field_keys.length.positive?
 
       search_strings = []
-      search_keys.each do |search_key|
-        search_strings.push("lower(#{search_key}) LIKE :search") 
+      filter_field_keys.each_with_index do |filter_field_key, index|
+        field_key = filter_key_map[filter_field_key]
+        field_value = filter_field_values[index]
+        next if field_key.blank? || field_value.blank?
+        search_strings.push("lower(#{field_key}) LIKE \"%#{field_value.downcase}%\"") 
       end
-      search_string = search_strings.join(' OR ')
+      search_string = search_strings.join(' AND ')
 
-      query.where(search_string, search: search)
+      query.where(search_string)
     end
 
     def params_for_query(query)
