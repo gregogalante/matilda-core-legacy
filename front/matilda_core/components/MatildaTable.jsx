@@ -12,6 +12,8 @@ export function MatildaTable (props) {
   const { table } = props
   const { config, loading, data, columns } = table
 
+  console.log(table)
+
   return (
     <Table
       columns={columns}
@@ -19,6 +21,7 @@ export function MatildaTable (props) {
       dataSource={data}
       paginated={!!config.pagination}
       pagination={table.pagination}
+      rowSelection={config.checkbox ? {selectedRows: table.selectedRows, onChange: table.onChangeSelectedRows} : null}
       onChange={table.onTableChange}
       scroll={{ x: 1024 }}
       bordered
@@ -46,23 +49,6 @@ MatildaTable.propTypes = {
  * @param {*} configProps
  */
 export function useMatildaTable (configProps = {}) {
-  // identifico stati e hook vari
-  const [loading, setLoading] = useState(true)
-  const [data, setData] = useState([])
-  const [pagination, setPagination] = useState(configProps.pagination)
-  const request = useMatildaRequest()
-  
-  // imposto configurazione della componente
-  const config = useMemo(() => {
-    return Object.assign({
-      columns: [],
-      data: [],
-      route: null,
-      routeDataParser: () => [],
-      routePaginationParser: null,
-      pagination: false,
-    }, configProps)
-  }, [configProps])
 
   /**
    * @function getColumnSearchProps
@@ -185,6 +171,16 @@ export function useMatildaTable (configProps = {}) {
     setSearch({ searchText: '' })
   }
 
+  /**
+   * @function onChangeSelectedRows
+   * @param 
+   * @returns 
+   */
+  const onChangeSelectedRows = (selectedRows) => {
+    if(!config.checkbox) return
+    setSelectedRows(selectedRows)
+  }
+
   // imposto variabile per gestione delle richieste
   const request = useMatildaRequest()
 
@@ -200,6 +196,9 @@ export function useMatildaTable (configProps = {}) {
   // imposto stato per memorizzazione dei dati di ricerca
   const [search, setSearch] = useState({ text: '', column: '' })
   const searchInputRef = useRef()
+
+  // imposto stato per memorizzare righe selezionate
+  const [selectedRows, setSelectedRows] = useState([])
   
   // imposto configurazione della componente
   const config = useMemo(() => {
@@ -211,6 +210,7 @@ export function useMatildaTable (configProps = {}) {
       routeDataParser: () => [],
       routePaginationParser: null,
       pagination: false,
+      checkbox: false,
     }, configProps)
   }, [configProps])
 
@@ -235,5 +235,5 @@ export function useMatildaTable (configProps = {}) {
     }
   }, [])
 
-  return { config, loading, data, columns, pagination, loadData, onTableChange }
+  return { config, loading, data, columns, pagination, loadData, onTableChange, selectedRows, onChangeSelectedRows }
 }
