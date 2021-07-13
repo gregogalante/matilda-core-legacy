@@ -119,9 +119,10 @@ export function useMatildaTable (configProps = {}) {
       filters_keys: Object.keys(filters).join(','),
       filters_values: Object.values(filters).join(',')
     }
+    const finalParams =  Object.assign(params, config.routeExtraParams)
 
     // invio richiesta
-    request.send(config.route, params).then((response) => {
+    request.send(config.route, finalParams).then((response) => {
       if (!response.result) return
 
       // gestisco dati paginazione da risposta (se la paginazione e attiva)
