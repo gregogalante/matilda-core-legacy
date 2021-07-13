@@ -182,7 +182,6 @@ export function useMatildaTable (configProps = {}) {
    * @returns 
    */
   const onChangeSelectedRows = (selectedRows) => {
-    if(config.selection != 'checkbox' || config.selection != 'radio') return
     setSelectedRows(selectedRows)
   }
 
