@@ -12,6 +12,13 @@ export function MatildaTable (props) {
   const { table } = props
   const { config, loading, data, columns } = table
 
+  let rowSelection = null
+  if(config.selection == 'checkbox'){
+    rowSelection = {type: 'checkbox', selectedRows: table.selectedRows, onChange: table.onChangeSelectedRows}
+  } else if(config.selection == 'radio'){
+    rowSelection = {type: 'radio', selectedRows: table.selectedRows, onChange: table.onChangeSelectedRows}
+  }
+
   return (
     <Table
       columns={columns}
@@ -19,7 +26,7 @@ export function MatildaTable (props) {
       dataSource={data}
       paginated={!!config.pagination}
       pagination={table.pagination}
-      rowSelection={config.checkbox ? {selectedRows: table.selectedRows, onChange: table.onChangeSelectedRows} : null}
+      rowSelection={rowSelection}
       onChange={table.onTableChange}
       scroll={{ x: 1024 }}
       bordered
@@ -208,7 +215,7 @@ export function useMatildaTable (configProps = {}) {
       routeDataParser: () => [],
       routePaginationParser: null,
       pagination: false,
-      checkbox: false,
+      selection: '',
     }, configProps)
   }, [configProps])
 
