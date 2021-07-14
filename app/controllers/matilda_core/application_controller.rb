@@ -43,6 +43,10 @@ module MatildaCore
       @_packs.push(name)
     end
 
+    def packs_remove(name)
+      @_packs = @_packs.reject { |e| e != name }
+    end
+
     # FUNZIONI DI GESTIONE SESSIONE
     ##############################################################################################################
 
