@@ -186,6 +186,15 @@ export function useMatildaTable (configProps = {}) {
     setSelectedRows(selectedRows)
   }
 
+  /**
+   * @function resetSelectedRows
+   * @param 
+   * @returns 
+   */
+  const resetSelectedRows = () => {
+    setSelectedRows([])
+  }
+
   // imposto variabile per gestione delle richieste
   const request = useMatildaRequest()
 
@@ -240,5 +249,5 @@ export function useMatildaTable (configProps = {}) {
     }
   }, [])
 
-  return { config, loading, data, columns, pagination, loadData, onTableChange, selectedRows, onChangeSelectedRows }
+  return { config, loading, data, columns, pagination, loadData, onTableChange, selectedRows, onChangeSelectedRows, resetSelectedRows }
 }
