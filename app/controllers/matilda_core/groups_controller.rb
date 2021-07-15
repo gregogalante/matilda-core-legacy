@@ -22,6 +22,8 @@ module MatildaCore
         redirect_to matilda_core.groups_select_view_path
         return
       end
+
+      redirect_to root_path
     end
 
     def select_view

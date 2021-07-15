@@ -12,14 +12,6 @@ module MatildaCore
       Rails.application.reload_routes!
 
       MatildaCore.config.add_sidebar_item(
-        'matilda_core.groups',
-        label: 'titles.dashboard',
-        url: MatildaCore::Engine.routes.url_helpers.groups_index_view_path,
-        icon_legacy: 'fas fa-tachometer-alt',
-        icon: 'HomeOutlined',
-        index: 1000
-      )
-      MatildaCore.config.add_sidebar_item(
         'matilda_core.memberships',
         label: 'titles.users',
         url: MatildaCore::Engine.routes.url_helpers.memberships_index_view_path,
