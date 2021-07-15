@@ -1,4 +1,4 @@
-import React, { useState, useContext, useMemo, useRef } from 'react'
+import React, { useState, useContext, useMemo, useRef, useEffect } from 'react'
 import { useMatildaRequest } from './MatildaRequest'
 import { MatildaContext } from '../index'
 
