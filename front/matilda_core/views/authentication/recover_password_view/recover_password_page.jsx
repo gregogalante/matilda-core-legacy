@@ -35,7 +35,6 @@ export default function SignupPage() {
             <Result 
               status="success"
               title={getTranslation("strings.recover_password_complete_title")}
-              subTitle={getTranslation("strings.recover_password_complete_content")}
               extra={<Button type="primary" href={updatePwdPath.path}>{getTranslation("cta.continue")}</Button>}
             />
           ) : (

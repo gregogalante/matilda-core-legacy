@@ -134,7 +134,7 @@ function Sider (props) {
 
 function MenuPrimary (props) {
   const { activeKey } = props
-  const { getConfig, getTranslation, getSession, getRoute } = useContext(MatildaContext)
+  const { getConfig, getTranslation, getSession } = useContext(MatildaContext)
   const session = getSession()
 
   const sidebarItems = useMemo(() => {
@@ -186,13 +186,6 @@ function MenuSecondary () {
     window.location.replace(path.path)
   }
 
-  const onClickGroups = () => {
-    request.send('matilda_core.groups_unselect_action', {}).then((response) => {
-      if (!response.result) return
-      window.location.replace(getRoute('matilda_core.groups_select_view').path)
-    })
-  }
-
   const onLogout = () => {
     request.send('matilda_core.authentication_logout_action').then((response) => {
       if (response.result) {
@@ -215,7 +208,6 @@ function MenuSecondary () {
           >{getTranslation('header.account_settings')}</Menu.Item>
           <Menu.Item
             key={"profile_groups"}
-            onClick={onClickGroups}
           >{getTranslation('header.groups')}</Menu.Item>
           <Menu.Item
             key={"profile_logout"}

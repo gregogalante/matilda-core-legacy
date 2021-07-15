@@ -27,10 +27,6 @@ export function MatildaProvider (props) {
     return i18n.available_locales
   }
 
-  const getLocale = () => {
-    return i18n.locale
-  }
-
   const getConfig = (key) => {
     return config[key] || null
   }
@@ -46,7 +42,6 @@ export function MatildaProvider (props) {
   const value = {
     getTranslation,
     getAvailableLocales,
-    getLocale,
     getConfig,
     getRoute,
     getSession,
@@ -71,6 +66,8 @@ export function MatildaProvider (props) {
  */
 export function MatildaContainer (props) {
   const matilda = props.matilda || {}
+
+  console.log(antdLocales[matilda.i18n.locale])
 
   return (
     <MatildaProvider {...matilda}>

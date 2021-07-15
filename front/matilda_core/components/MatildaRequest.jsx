@@ -50,7 +50,7 @@ export function useMatildaRequest (configProps = {}) {
     }
   }
 
-  const send = (routeKey, params = {}) => {
+  const send = (routeKey, params) => {
     if (running) return new Promise((resolve) => resolve(null)) // avoid multiple execution of same request
 
     setRunning(true)

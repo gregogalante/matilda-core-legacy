@@ -59,7 +59,7 @@ export function useMatildaForm (routeKey, extraParamsProps = {}, configProps = {
   }, [configProps])
 
   const onSubmit = (formParams) => {
-    const params = Object.assign(extraParams, formParams)
+    const params = Object.assign({}, extraParams, formParams)
     matildaRequest.send(routeKey, params).then((response) => {
       setResponse(response)
       if (config.onResponse) config.onResponse(response)

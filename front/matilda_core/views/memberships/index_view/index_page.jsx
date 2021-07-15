@@ -54,6 +54,7 @@ export default function IndexPage (props) {
     columns: tableColumns,
     route: 'matilda_core.memberships_index_api',
     pagination: true,
+    selection: 'radio',
     routeDataParser: (response) => response.payload.users.map((user) => ({ key: user.uuid, uuid: user.uuid, email: user.email, username: user.username, surname: user.surname, name: user.name }))
   })
 

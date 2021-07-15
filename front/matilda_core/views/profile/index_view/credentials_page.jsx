@@ -52,6 +52,7 @@ export default function CredentialsPage (props) {
       })
     }
   }, [user])
+  console.log(user)
 
   return (
     <MatildaPagesWrapper

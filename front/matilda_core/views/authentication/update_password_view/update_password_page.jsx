@@ -7,11 +7,11 @@ import {
   useMatildaForm,
 } from "matilda_core/components/MatildaForm"
 
-export default function SignupPage(props) {
+export default function SignupPage() {
   const { getTranslation, getConfig, getRoute } = useContext(MatildaContext)
   const form = useMatildaForm(
     "matilda_core.authentication_update_password_action",
-    { user_uuid: props.user_uuid },
+    {},
     { manageSuccess: false }
   )
   const loginPath = getRoute("matilda_core.authentication_login_view")
