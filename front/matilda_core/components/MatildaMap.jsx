@@ -34,7 +34,7 @@ export function useMatildaMap (defaultLng = 12, defaultLat = 44, defaultZoom = 4
   const [lat, setLat] = useState(defaultLat); //44
   const [zoom, setZoom] = useState(defaultZoom); //4.5
   useEffect(() => {
-    if (map.current) return; // initialize map only once
+    if (map.current || !mapContainer.current) return; // initialize map only once
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v11',
@@ -64,7 +64,7 @@ export function useMatildaMap (defaultLng = 12, defaultLat = 44, defaultZoom = 4
     map.current.addControl(geocoder)
 
     // let marker = new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map.current)
-  })
+  }, [mapContainer.current])
 
   /**
    * @function getLat
