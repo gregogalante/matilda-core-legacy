@@ -10,9 +10,10 @@ import mapboxglgeocoder from 'mapbox-gl-geocoder'
  * @param {*} props
  */
 export function MatildaMap (props) {
+  const { config, map } = props
 
   return (
-    <div ref={props.map.mapContainer} />
+    <div ref={map.mapContainer} style={{width: config.width, height: congif.height}} />
   )
 }
 
@@ -22,7 +23,9 @@ export function MatildaMap (props) {
  * @function useMatildaMap
  * @param 
  */
-export function useMatildaMap (defaultLng = 12, defaultLat = 44, defaultZoom = 4.5, extraParamsProps = {}) {
+// export function useMatildaMap (defaultLng = 12, defaultLat = 44, defaultZoom = 4.5, extraParamsProps = {}) {
+export function useMatildaMap (configProps = {}) {
+
   const { getTranslation, getLocale, getConfig } = useContext(MatildaContext)
   const [extraParams, setExtraParams] = useState(extraParamsProps)
 
@@ -30,11 +33,11 @@ export function useMatildaMap (defaultLng = 12, defaultLat = 44, defaultZoom = 4
 
   const mapContainer = useRef(null);
   const map = useRef(null);
-  const [lng, setLng] = useState(defaultLng); //12
-  const [lat, setLat] = useState(defaultLat); //44
-  const [zoom, setZoom] = useState(defaultZoom); //4.5
+  const [lng, setLng] = useState(config.defaultLng);
+  const [lat, setLat] = useState(config.defaultLat); 
+  const [zoom, setZoom] = useState(config.defaultZoom); 
   useEffect(() => {
-    if (map.current || !mapContainer.current) return; // initialize map only once
+    if (map.current || !mapContainer.current) return;
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v11',
@@ -48,7 +51,7 @@ export function useMatildaMap (defaultLng = 12, defaultLat = 44, defaultZoom = 4
       setZoom(map.current.getZoom().toFixed(2));
     });
 
-    // TODO
+    // TODO marker on geocoder position
     // map.current.getStyle().layers.forEach((layer) => {
     //   if(layer.id.indexOf('-label')>0){
     //     map.current.setLayoutProperty(layer.id, 'text-field', ['get', 'name_' + getLocale()])
@@ -82,5 +85,16 @@ export function useMatildaMap (defaultLng = 12, defaultLat = 44, defaultZoom = 4
     return lng
   }
 
-  return { mapContainer, getLat, getLng }
+  // imposto configurazione della componente
+  const config = useMemo(() => {
+    return Object.assign({
+      defaultLng: 12,
+      defaultLat: 44,
+      defaultZoom: 4.5,
+      width: '100%',
+      height: '400px'
+    }, configProps)
+  }, [configProps])
+
+  return { mapContainer, getLat, getLng, config }
 }
