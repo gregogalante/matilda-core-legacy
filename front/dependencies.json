@@ -7,6 +7,8 @@
     "antd",
     "less",
     "less-loader@v7.3.0",
-    "babel-plugin-import"
+    "babel-plugin-import",
+    "mapbox-gl",
+    "mapbox-gl-geocoder"
   ]
 }

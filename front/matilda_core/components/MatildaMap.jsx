@@ -1,5 +1,4 @@
 import React, { useState, useContext, useMemo, useRef, useEffect } from 'react'
-import { useMatildaRequest } from './MatildaRequest'
 import { MatildaContext } from '../index'
 
 import mapboxgl from '!mapbox-gl'
@@ -43,32 +42,22 @@ export function useMatildaMap (configProps = {}, extraParamsProps = {}) {
 
   mapboxgl.accessToken = getConfig('mapbox_token')
 
-  const mapContainer = useRef(null);
-  const map = useRef(null);
-  const [lng, setLng] = useState(config.defaultLng);
-  const [lat, setLat] = useState(config.defaultLat); 
-  const [zoom, setZoom] = useState(config.defaultZoom); 
+  const mapContainer = useRef(null)
+  const map = useRef(null)
+  const [lng, setLng] = useState(config.defaultLng)
+  const [lat, setLat] = useState(config.defaultLat)
+  const [zoom, setZoom] = useState(config.defaultZoom)
+  const [location, setLocation] = useState(null)
+
   useEffect(() => {
-    if (map.current || !mapContainer.current) return;
+    if (map.current || !mapContainer.current) return
+
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [lng, lat],
       zoom: zoom
-    });
-
-    map.current.on('move', () => {
-      setLng(map.current.getCenter().lng.toFixed(4));
-      setLat(map.current.getCenter().lat.toFixed(4));
-      setZoom(map.current.getZoom().toFixed(2));
-    });
-
-    // TODO marker on geocoder position
-    // map.current.getStyle().layers.forEach((layer) => {
-    //   if(layer.id.indexOf('-label')>0){
-    //     map.current.setLayoutProperty(layer.id, 'text-field', ['get', 'name_' + getLocale()])
-    //   }
-    // })
+    })
 
     let geocoder = new mapboxglgeocoder({
       accessToken: mapboxgl.accessToken,
@@ -78,8 +67,29 @@ export function useMatildaMap (configProps = {}, extraParamsProps = {}) {
     })
     map.current.addControl(geocoder)
 
-    // let marker = new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map.current)
+    let marker = new mapboxgl.Marker()
+
+    geocoder.on('result', (e) => {
+      setLngLat(e.result.center[0], e.result.center[1])
+      setLoc(e.result.place_name)
+      marker.setLngLat(e.result.center).addTo(map.current)
+    })
   }, [mapContainer.current])
+
+  /**
+   * @function setLngLat
+   */
+  const setLngLat = (lng, lat) => {
+    setLng(lng)
+    setLat(lat)
+  }
+
+  /**
+   * @function setLoc
+   */
+  const setLoc = (loc) => {
+    setLocation(loc)
+  }
 
   /**
    * @function getLat
@@ -97,5 +107,13 @@ export function useMatildaMap (configProps = {}, extraParamsProps = {}) {
     return lng
   }
 
-  return { mapContainer, getLat, getLng, config }
+  /**
+   * @function getLocation
+   * @returns 
+   */
+  const getLocation = () => {
+    return location
+  }
+
+  return { mapContainer, getLat, getLng, getLocation, config }
 }
