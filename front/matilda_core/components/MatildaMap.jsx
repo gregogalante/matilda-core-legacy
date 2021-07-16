@@ -12,7 +12,7 @@ import mapboxglgeocoder from 'mapbox-gl-geocoder'
 export function MatildaMap (props) {
 
   return (
-    <div ref={props.mapContainer} />
+    <div ref={props.map.mapContainer} />
   )
 }
 
