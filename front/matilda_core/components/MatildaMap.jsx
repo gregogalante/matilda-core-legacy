@@ -12,10 +12,11 @@ import 'mapbox-gl/dist/mapbox-gl.css'
  * @param {*} props
  */
 export function MatildaMap (props) {
-  const { config, map } = props
+  const { map } = props
+  const { mapContainer, config } = map
 
   return (
-    <div ref={map.mapContainer} style={{width: config.width, height: congif.height}} />
+    <div ref={mapContainer} style={{width: config.width, height: congif.height}} />
   )
 }
 
@@ -25,11 +26,20 @@ export function MatildaMap (props) {
  * @function useMatildaMap
  * @param 
  */
-// export function useMatildaMap (defaultLng = 12, defaultLat = 44, defaultZoom = 4.5, extraParamsProps = {}) {
 export function useMatildaMap (configProps = {}, extraParamsProps = {}) {
-
   const { getTranslation, getLocale, getConfig } = useContext(MatildaContext)
   const [extraParams, setExtraParams] = useState(extraParamsProps)
+
+  // imposto configurazione della componente
+  const config = useMemo(() => {
+    return Object.assign({
+      defaultLng: 12,
+      defaultLat: 44,
+      defaultZoom: 4.5,
+      width: '100%',
+      height: '400px'
+    }, configProps)
+  }, [configProps])
 
   mapboxgl.accessToken = getConfig('mapbox_token')
 
@@ -86,17 +96,6 @@ export function useMatildaMap (configProps = {}, extraParamsProps = {}) {
   const getLng = () => {
     return lng
   }
-
-  // imposto configurazione della componente
-  const config = useMemo(() => {
-    return Object.assign({
-      defaultLng: 12,
-      defaultLat: 44,
-      defaultZoom: 4.5,
-      width: '100%',
-      height: '400px'
-    }, configProps)
-  }, [configProps])
 
   return { mapContainer, getLat, getLng, config }
 }
