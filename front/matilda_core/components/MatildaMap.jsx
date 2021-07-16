@@ -26,7 +26,7 @@ export function MatildaMap (props) {
  * @param 
  */
 // export function useMatildaMap (defaultLng = 12, defaultLat = 44, defaultZoom = 4.5, extraParamsProps = {}) {
-export function useMatildaMap (configProps = {}) {
+export function useMatildaMap (configProps = {}, extraParamsProps = {}) {
 
   const { getTranslation, getLocale, getConfig } = useContext(MatildaContext)
   const [extraParams, setExtraParams] = useState(extraParamsProps)
