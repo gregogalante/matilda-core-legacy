@@ -4,6 +4,8 @@ import { MatildaContext } from '../index'
 
 import mapboxgl from '!mapbox-gl'
 import mapboxglgeocoder from 'mapbox-gl-geocoder'
+import 'mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
+import 'mapbox-gl/dist/mapbox-gl.css'
 
 /**
  * @function MatildaForm
