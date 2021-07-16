@@ -16,7 +16,7 @@ export function MatildaMap (props) {
   const { mapContainer, config } = map
 
   return (
-    <div ref={mapContainer} style={{width: config.width, height: congif.height}} />
+    <div ref={mapContainer} style={{width: config.width, height: config.height}} />
   )
 }
 
