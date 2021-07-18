@@ -2,10 +2,10 @@ import React from 'react'
 import { MatildaContainer } from 'matilda_core'
 import { MatildaLayout, useMatildaLayout } from 'matilda_core/components/MatildaLayout'
 import { MatildaPages, useMatildaPages } from 'matilda_core/components/MatildaPages'
-import IndexPage from './index_page'
-import EmailsPage from './emails_page'
-import CredentialsPage from './credentials_page'
-import AddEmailDrawer from './add_email_drawer'
+import IndexPage from './pages/IndexPage'
+import EmailsPage from './pages/EmailsPage'
+import CredentialsPage from './pages/CredentialsPage'
+import AddEmailDrawer from './drawers/AddEmailDrawer'
 
 export default (props) => {
   const layout = useMatildaLayout()

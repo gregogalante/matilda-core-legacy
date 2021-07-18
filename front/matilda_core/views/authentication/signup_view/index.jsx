@@ -4,7 +4,7 @@ import {
   MatildaLayout,
   useMatildaLayout,
 } from "matilda_core/components/MatildaLayout";
-import SignupPage from "./signup_page";
+import SignupPage from "./pages/SignupPage";
 
 export default (props) => {
   const layout = useMatildaLayout({ theme: "clean-centered" });

@@ -58,6 +58,10 @@ export function useMatildaForm (routeKey, extraParamsProps = {}, configProps = {
     }, configProps)
   }, [configProps])
 
+  /**
+   * @function onSubmit
+   * @param {*} formParams 
+   */
   const onSubmit = (formParams) => {
     const params = Object.assign({}, extraParams, formParams)
     matildaRequest.send(routeKey, params).then((response) => {

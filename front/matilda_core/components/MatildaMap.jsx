@@ -7,7 +7,7 @@ import 'mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
 /**
- * @function MatildaForm
+ * @function MatildaMap
  * @param {*} props
  */
 export function MatildaMap (props) {

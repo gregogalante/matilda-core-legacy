@@ -2,10 +2,10 @@ import React from 'react'
 import { MatildaContainer } from 'matilda_core'
 import { MatildaLayout, useMatildaLayout } from 'matilda_core/components/MatildaLayout'
 import { MatildaPages, useMatildaPages } from 'matilda_core/components/MatildaPages'
-import IndexPage from './index_page'
-import ManagePage from './manage_page'
-import InviteDrawer from './invite_drawer'
-import PermissionsDrawer from './permissions_drawer'
+import IndexPage from './pages/IndexPage'
+import ManagePage from './pages/ManagePage'
+import InviteDrawer from './drawers/InviteDrawer'
+import PermissionsDrawer from './drawers/PermissionsDrawer'
 
 export default (props) => {
   const layout = useMatildaLayout({ siderActiveKey: 'matilda_core.memberships' })

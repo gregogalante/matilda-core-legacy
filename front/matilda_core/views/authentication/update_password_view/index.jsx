@@ -1,7 +1,7 @@
 import React from 'react'
 import { MatildaContainer } from 'matilda_core'
 import { MatildaLayout, useMatildaLayout } from 'matilda_core/components/MatildaLayout'
-import UpdatePasswordPage from './update_password_page'
+import UpdatePasswordPage from './pages/UpdatePasswordPage'
 
 export default (props) => {
   const layout = useMatildaLayout({ theme: 'clean-centered' })
