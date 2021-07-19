@@ -54,7 +54,9 @@ export function MatildaPages (props) {
           </SiderContainer>
         )}
         <Layout.Content>
-          <pages.currentPage.component {...pages.currentPageData.props} pages={pages} />
+          <div key={pages.currentRute?.key}>
+            <pages.currentPage.component {...pages.currentPageData.props} key={pages.currentPage.key} pages={pages} />
+          </div>
         </Layout.Content>
       </Layout>
 
@@ -110,11 +112,7 @@ MatildaPagesWrapper.defaultProps = {
 export function useMatildaPages (routesProps = [], defaultProps = {}) {
   const [currentPageData, setCurrentPageData] = useState({ routeKey: routesProps[0].key, pageKey: null, prevPageKey: null, props: defaultProps })
   const [currentDrawerData, setCurrentDrawerData] = useState(null)
-
-  // preparo la lista di rotte con eventuali metadati aggiuntivi
-  const routes = useMemo(() => {
-    return routesProps
-  }, [routesProps])
+  const [routes, setRoutes] = useState(routesProps)
 
   // identifico la route corrente
   const currentRoute = useMemo(() => {
@@ -164,7 +162,7 @@ export function useMatildaPages (routesProps = [], defaultProps = {}) {
 
   /**
    * @function goToPage
-   * @param {*} pageKey 
+   * @param {*} pageKey
    * @param {*} props 
    * @param {boolean} reset
    */
@@ -189,5 +187,13 @@ export function useMatildaPages (routesProps = [], defaultProps = {}) {
     setCurrentDrawerData(null)
   }
 
-  return { routes, currentRoute, currentPage, currentPageData, currentDrawer, currentDrawerData, goToRoute, goToPage, openDrawer, closeDrawer }
+  /**
+   * @function addRoutes
+   * @param {*} newRoutes 
+   */
+  const addRoutes = (newRoutes) => {
+    setRoutes(routes.concat(newRoutes))
+  }
+
+  return { routes, currentRoute, currentPage, currentPageData, currentDrawer, currentDrawerData, goToRoute, goToPage, openDrawer, closeDrawer, addRoutes }
 }

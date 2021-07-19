@@ -34,6 +34,7 @@ export function MatildaTable (props) {
     />
   )
 }
+
 MatildaTable.propTypes = {
   table: PropTypes.shape({
     config: PropTypes.shape({
@@ -54,52 +55,56 @@ MatildaTable.propTypes = {
  * @param {*} configProps
  */
 export function useMatildaTable (configProps = {}) {
+  const request = useMatildaRequest()
+  const [loading, setLoading] = useState(true)
+  const [data, setData] = useState([])
+  const [pagination, setPagination] = useState(configProps.pagination)
+  const [selectedRows, setSelectedRows] = useState([])
+  const searchInputRef = useRef()
 
-  /**
-   * @function getColumnSearchProps
-   * @param {*} dataIndex 
-   * @returns 
-   */
-   const getColumnSearchProps = (dataIndex) => {
-    return {
-      filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-        <div style={{ padding: 8 }}>
-          <Input
-            ref={searchInputRef}
-            placeholder={`Search ${dataIndex}`}
-            value={selectedKeys[0]}
-            onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-            onPressEnter={() => onSearchChange(selectedKeys, confirm, dataIndex)}
-            style={{ marginBottom: 8, display: 'block' }}
-          />
-          <Space>
-            <Button
-              type="primary"
-              onClick={() => onSearchChange(selectedKeys, confirm, dataIndex)}
-              icon={<SearchOutlined />}
-              size="small"
-              style={{ width: 90 }}
-            >
-              Search
-            </Button>
-            <Button onClick={() => onSearchReset(clearFilters)} size="small" style={{ width: 90 }}>
-              Reset
-            </Button>
-          </Space>
-        </div>
-      ),
-      filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-      onFilter: (value, record) =>
-        record[dataIndex]
-          ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
-          : '',
-      onFilterDropdownVisibleChange: visible => {
-        if (visible) {
-          setTimeout(() => searchInputRef.current.select(), 100)
-        }
+  const config = useMemo(() => {
+    return Object.assign({
+      columns: [],
+      data: [],
+      route: null,
+      routeExtraParams: {},
+      routeDataParser: () => [],
+      routePaginationParser: null,
+      pagination: false,
+      selection: '',
+    }, configProps)
+  }, [configProps])
+
+  const columns = useMemo(() => {
+    return config.columns.map((column) => {
+      const { dataIndex } = column
+
+      if (column.search) {
+        column = Object.assign(column, {
+          filterDropdown: (params) => renderFiltersDropdown(params, dataIndex),
+          filterIcon: (params) => renderFilterIcon(params, dataIndex),
+          onFilter: (value, record) => record[dataIndex] ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()) : '',
+          onFilterDropdownVisibleChange: visible => {
+            if (visible) {
+              setTimeout(() => searchInputRef.current.select(), 100)
+            }
+          }
+        })
       }
+
+      return column
+    })
+  }, [config.columns])
+
+  // gestisco il primo caricamento di dati della tabella
+  useEffect(() => {
+    if (config.route) {
+      loadData()
+    } else {
+      setData(config.data)
+      setLoading(false)
     }
-  }
+  }, [])
 
   /**
    * @function loadData
@@ -162,10 +167,6 @@ export function useMatildaTable (configProps = {}) {
    */
   const onSearchChange = (selectedKeys, confirm, dataIndex) => {
     confirm()
-    setSearch({
-      text: selectedKeys[0],
-      column: dataIndex
-    })
   }
 
   /**
@@ -174,7 +175,6 @@ export function useMatildaTable (configProps = {}) {
    */
   const onSearchReset = (clearFilters) => {
     clearFilters()
-    setSearch({ searchText: '' })
   }
 
   /**
@@ -195,59 +195,51 @@ export function useMatildaTable (configProps = {}) {
     setSelectedRows([])
   }
 
-  // imposto variabile per gestione delle richieste
-  const request = useMatildaRequest()
+  /**
+   * @function replaceSelectedRows
+   * @param 
+   * @returns 
+   */
+   const replaceSelectedRows = (newRows) => {
+    setSelectedRows(newRows)
+  }
 
-  // imposto stato per gestire il loading della tabella
-  const [loading, setLoading] = useState(true)
-  
-  // imposto stato per memorizzazione dei dati della tabella
-  const [data, setData] = useState([])
+  const renderFiltersDropdown = (params, dataIndex) => {
+    const { setSelectedKeys, selectedKeys, confirm, clearFilters } = params
 
-  // imposto stato per memorizzazione dei dati di paginazione della tabella
-  const [pagination, setPagination] = useState(configProps.pagination)
+    return (
+      <div style={{ padding: 8 }}>
+        <Input
+          ref={searchInputRef}
+          placeholder={`Search ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onPressEnter={() => onSearchChange(selectedKeys, confirm, dataIndex)}
+          style={{ marginBottom: 8, display: 'block' }}
+        />
+        <Space>
+          <Button
+            type="primary"
+            onClick={() => onSearchChange(selectedKeys, confirm, dataIndex)}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Search
+          </Button>
+          <Button onClick={() => onSearchReset(clearFilters)} size="small" style={{ width: 90 }}>
+            Reset
+          </Button>
+        </Space>
+      </div>
+    )
+  }
 
-  // imposto stato per memorizzazione dei dati di ricerca
-  const [search, setSearch] = useState({ text: '', column: '' })
-  const searchInputRef = useRef()
+  const renderFilterIcon = (filtered, dataIndex) => {
+    return (
+      <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />
+    )
+  }
 
-  // imposto stato per memorizzare righe selezionate
-  const [selectedRows, setSelectedRows] = useState([])
-  
-  // imposto configurazione della componente
-  const config = useMemo(() => {
-    return Object.assign({
-      columns: [],
-      data: [],
-      route: null,
-      routeExtraParams: {},
-      routeDataParser: () => [],
-      routePaginationParser: null,
-      pagination: false,
-      selection: '',
-    }, configProps)
-  }, [configProps])
-
-  // imposto colonne della componente (aggiornate a partire da config.columns)
-  const columns = useMemo(() => {
-    return config.columns.map((column) => {
-      if (column.search) {
-        column = Object.assign(column, getColumnSearchProps(column.dataIndex))
-      }
-
-      return column
-    })
-  }, [config.columns])
-
-  // gestisco il primo caricamento di dati della tabella
-  useEffect(() => {
-    if (config.route) {
-      loadData()
-    } else {
-      setData(config.data)
-      setLoading(false)
-    }
-  }, [])
-
-  return { config, loading, data, columns, pagination, loadData, onTableChange, selectedRows, onChangeSelectedRows, resetSelectedRows }
+  return { config, loading, data, columns, pagination, selectedRows, loadData, replaceSelectedRows, resetSelectedRows, onTableChange, onChangeSelectedRows }
 }
