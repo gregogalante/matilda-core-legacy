@@ -11,6 +11,7 @@ import { useMatildaRequest } from './MatildaRequest'
 export function MatildaTable (props) {
   const { table } = props
   const { config, loading, data, columns } = table
+  const dataTable = columns.length > 0 ? calculateColumnsWidth(columns, data, 300) : { width: 1024 }
 
   let rowSelection = null
   if(config.selection == 'checkbox'){
@@ -28,7 +29,7 @@ export function MatildaTable (props) {
       pagination={table.pagination}
       rowSelection={rowSelection}
       onChange={table.onTableChange}
-      scroll={{ x: 1024 }}
+      scroll={{ x: dataTable.tableWidth, y: config.maxHeight || null }}
       bordered
       sticky
     />
@@ -72,6 +73,7 @@ export function useMatildaTable (configProps = {}) {
       routePaginationParser: null,
       pagination: false,
       selection: '',
+      maxHeight: null,
     }, configProps)
   }, [configProps])
 
@@ -243,3 +245,79 @@ export function useMatildaTable (configProps = {}) {
 
   return { config, loading, data, columns, pagination, selectedRows, loadData, replaceSelectedRows, resetSelectedRows, onTableChange, onChangeSelectedRows }
 }
+
+// CALCOLO AUTOMATICO WIDTH TABLE
+// https://codesandbox.io/s/wonderful-tree-ukyy5?fontsize=14&view=preview&file=/src/index.js:544-565
+/********************************************************************************************************** */
+
+/**
+ * This function calculate the width of a string based on its length
+ * @param {String} text
+ * @param {String} font
+ */
+ const getTextWidth = (text, font = "14px -apple-system") => {
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
+  context.font = font;
+  const metrics = context.measureText(text);
+  return Math.round(metrics.width + 80);
+};
+
+/**
+ * This function calculates the width of each column based in all CELL VALUES
+ * @param {Array} columns
+ * @param {Array} source
+ * @param {Number} maxWidthPerCell
+ */
+const calculateColumnsWidth = (
+  columns,
+  source,
+  maxWidthPerCell = 500
+) => {
+  const columnsParsed = JSON.parse(JSON.stringify(columns));
+
+  // First we calculate the width for each column
+  // The column width is based on its string length
+
+  const columnsWithWidth = columnsParsed.map(column =>
+    Object.assign(column, {
+      width: getTextWidth(column.title)
+    })
+  );
+
+  // Since we have a minimum width (column's width already calculated),
+  // now we are going to verify if the cell value is bigger
+  // than the column width which is already set
+
+  source.map(entry => {
+    columnsWithWidth.map((column, indexColumn) => {
+      const columnWidth = column.width;
+      const cellValue = Object.values(entry)[indexColumn];
+
+      // Get the string width based on chars length
+      let cellWidth = getTextWidth(cellValue);
+
+      // Verify if the cell value is smaller than column's width
+      if (cellWidth < columnWidth) cellWidth = columnWidth;
+
+      // Verify if the cell value width is bigger than our max width flag
+      if (cellWidth > maxWidthPerCell) cellWidth = maxWidthPerCell;
+
+      // Update the column width
+      columnsWithWidth[indexColumn].width = cellWidth;
+    });
+  });
+
+  // Sum of all columns width to determine the table max width
+  const tableWidth = columnsWithWidth
+    .map(column => column.width)
+    .reduce((a, b) => {
+      return a + b;
+    });
+
+  return {
+    columns: columnsWithWidth,
+    source,
+    tableWidth
+  };
+};
