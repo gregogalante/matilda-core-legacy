@@ -11,7 +11,6 @@ export default function PermissionsDrawer (props) {
   // const [checked, setChecked] = useState(userPermissions || [])
   const form = useMatildaForm('matilda_core.memberships_edit_permissions_action', {user_uuid: userUuid, permissions: userPermissions}, { manageSuccess: false })
 
-  console.log(props)
   useEffect(() => {
     if (form.response && form.response.result) {
       // pages.closeDrawer()
