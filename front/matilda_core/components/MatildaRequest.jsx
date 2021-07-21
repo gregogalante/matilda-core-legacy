@@ -1,25 +1,6 @@
 import React, { useContext, useMemo, useState } from 'react'
-import { notification, Spin } from 'antd'
+import { notification } from 'antd'
 import { MatildaContext } from '../index'
-
-/**
- * @function MatildaRequest
- * @param {*} props
- * @returns 
- */
-export function MatildaRequest (props) {
-  const { request: { running } } = props
-
-  if (!running) return null
-
-  return (
-    <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 999, backgroundColor: 'rgba(0,0,0,0.8)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <Spin />
-    </div>
-  )
-}
-
-/***************************************************************************************************** */
 
 /**
  * @function useMatildaRequest
@@ -76,7 +57,7 @@ export function useMatildaRequest (configProps = {}) {
         if (config.manageError && !response.result) {
           let errorMessage = config.defaultErrorMessage
           if (response.errors && response.errors.length > 0) errorMessage = response.errors[0].message
-          notification['error']({ description: errorMessage })
+          notification['error']({ message: errorMessage })
         }
 
         setRunning(false)
