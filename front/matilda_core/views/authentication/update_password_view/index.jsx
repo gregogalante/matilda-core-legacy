@@ -9,7 +9,7 @@ export default (props) => {
   return (
     <MatildaContainer {...props}>
       <MatildaLayout layout={layout}>
-        <UpdatePasswordPage />
+        <UpdatePasswordPage userUuid={props.user_uuid} />
       </MatildaLayout>
     </MatildaContainer>
   )

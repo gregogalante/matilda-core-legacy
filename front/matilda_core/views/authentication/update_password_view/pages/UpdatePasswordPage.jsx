@@ -1,17 +1,14 @@
 import React, { useContext, useEffect, useState } from "react"
 import { Row, Col, Card, Form, Button, Input, Result } from "antd"
-import { UserOutlined, LockOutlined, SmileOutlined } from "@ant-design/icons"
+import { SmileOutlined } from "@ant-design/icons"
 import { MatildaContext } from "matilda_core"
-import {
-  MatildaForm,
-  useMatildaForm,
-} from "matilda_core/components/MatildaForm"
+import { MatildaForm, useMatildaForm } from "matilda_core/components/MatildaForm"
 
-export default function SignupPage() {
-  const { getTranslation, getConfig, getRoute } = useContext(MatildaContext)
+export default function SignupPage(props) {
+  const { getTranslation, getRoute } = useContext(MatildaContext)
   const form = useMatildaForm(
     "matilda_core.authentication_update_password_action",
-    {},
+    { user_uuid: props.userUuid },
     { manageSuccess: false }
   )
   const loginPath = getRoute("matilda_core.authentication_login_view")
