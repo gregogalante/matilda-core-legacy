@@ -16,6 +16,7 @@ export default (props) => {
       pages: [
         {
           key: 'profile_index_index_page',
+          label: 'titles.profile_manage',
           component: IndexPage,
           drawers: []
         },
@@ -26,6 +27,7 @@ export default (props) => {
       label: 'titles.profile_emails_manage',
       pages: [{
         key: 'profile_index_emails_page',
+        label: 'titles.profile_emails_manage',
         component: EmailsPage,
         drawers: [
           {
@@ -42,6 +44,7 @@ export default (props) => {
       label: 'titles.profile_credentials_manage',
       pages: [{
         key: 'profile_index_credentials_page',
+        label: 'titles.profile_credentials_manage',
         component: CredentialsPage,
         drawers: []
       }],
