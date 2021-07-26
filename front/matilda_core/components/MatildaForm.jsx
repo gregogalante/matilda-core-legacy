@@ -1,5 +1,7 @@
-import React, { useState, useContext, useMemo } from 'react'
+import React, { useState, useContext, useMemo, useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import mapboxgl from '!mapbox-gl'
+import mapboxglgeocoder from 'mapbox-gl-geocoder'
 import { notification, Form } from 'antd'
 import { useMatildaRequest } from './MatildaRequest'
 import { MatildaContext } from '../index'
@@ -29,6 +31,55 @@ MatildaForm.propTypes = {
 
 MatildaForm.defaultProps = {
   style: {}
+}
+
+/***************************************************************************************************** */
+
+export function MatildaFormMapInput (props) {
+  const { style, zoom, onChange } = props
+  const { getConfig, getLocale } = useContext(MatildaContext)
+  const [mapItem, setMapItem] = useState(null)
+  const [location, setLocation] = useState({ lat: null, lng: null, name: null })
+  mapboxgl.accessToken = getConfig('mapbox_token')
+
+  const mapRef = useCallback((el) => {
+    setMapItem(new mapboxgl.Map({
+      container: el,
+      center: [location.lng, location.lat],
+      style: 'mapbox://styles/mapbox/streets-v11',
+      zoom: zoom || 10
+    }))
+  }, [])
+
+  useEffect(() => {
+    if (!mapItem) return
+
+    let marker = new mapboxgl.Marker()
+    let geocoder = new mapboxglgeocoder({
+      accessToken: mapboxgl.accessToken,
+      mapboxgl: mapboxgl,
+      marker: false,
+      language: getLocale() + '-' + getLocale().toUpperCase()
+    })
+
+    geocoder.on('result', (e) => {
+      setLocation({ lng: e.result.center[0], lat: e.result.center[1], name: e.result.place_name })
+      marker.setLngLat(e.result.center).addTo(mapItem)
+    })
+
+    mapItem.addControl(geocoder)
+
+    mapItem.marker = marker
+    mapItem.geocoder = geocoder
+  }, [mapItem])
+
+  useEffect(() => {
+    onChange(location)
+  }, [location])
+
+  return (
+    <div ref={mapRef} style={Object.assign({ backgroundColor: '#eeeeee' }, style)} />
+  )
 }
 
 /***************************************************************************************************** */
