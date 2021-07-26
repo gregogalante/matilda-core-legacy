@@ -68,31 +68,33 @@ export default function EmailsPage (props) {
     <MatildaPagesWrapper
       pages={pages}
     >
-      <Card 
-        title={getTranslation("titles.email_addresses")}
-        extra={<Button type='link' onClick={onAddEmail}>{getTranslation('cta.add')}</Button>}
-      >
-        {emails && (
-          <List 
-            bordered 
-            dataSource={emails}
-            renderItem={email => (
-            <List.Item style={{display: 'flex', justifyContent: 'space-between'}}>
-              {email.email} 
-              <Space>
-                {email.primary ? (
-                  <StarFilled />
-                ) : (
-                  <>
-                    <Button icon={<StarOutlined/>} onClick={() => onTogglePrimaryEmail(email.email)} />
-                    <Button type='danger' icon={<DeleteOutlined/>} onClick={() => onDeleteEmail(email.email)} />
-                  </>
-                )}
-              </Space>
-            </List.Item>
-          )} />
-        )}
-      </Card>
+      <Space direction="vertical" style={{ width: "100%" }}>
+        <Card 
+          title={getTranslation("titles.email_addresses")}
+          extra={<Button type='link' onClick={onAddEmail}>{getTranslation('cta.add')}</Button>}
+        >
+          {emails && (
+            <List 
+              bordered 
+              dataSource={emails}
+              renderItem={email => (
+              <List.Item style={{display: 'flex', justifyContent: 'space-between'}}>
+                {email.email} 
+                <Space>
+                  {email.primary ? (
+                    <StarFilled />
+                  ) : (
+                    <>
+                      <Button icon={<StarOutlined/>} onClick={() => onTogglePrimaryEmail(email.email)} />
+                      <Button type='danger' icon={<DeleteOutlined/>} onClick={() => onDeleteEmail(email.email)} />
+                    </>
+                  )}
+                </Space>
+              </List.Item>
+            )} />
+          )}
+        </Card>
+      </Space>
     </MatildaPagesWrapper>
   )
 }

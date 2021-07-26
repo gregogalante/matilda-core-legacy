@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Button, Card, Form, Input, notification } from 'antd'
+import { Button, Card, Form, Input, notification, Space } from 'antd'
 import { CheckCircleTwoTone } from '@ant-design/icons'
 import { MatildaContext } from 'matilda_core'
 import { MatildaPagesWrapper } from 'matilda_core/components/MatildaPages'
@@ -52,32 +52,34 @@ export default function IndexPage (props) {
     <MatildaPagesWrapper
       pages={pages}
     >
-      <Card 
-        title={getTranslation("titles.personal_informations")}
-        // extra={}
-      >
-        <MatildaForm form={form}>
-          <Form.Item
-            name="name"
-            label={getTranslation("labels.name")}
-          >
-            <Input />
-          </Form.Item>
+      <Space direction="vertical" style={{ width: "100%" }}>
+        <Card 
+          title={getTranslation("titles.personal_informations")}
+          // extra={}
+        >
+          <MatildaForm form={form}>
+            <Form.Item
+              name="name"
+              label={getTranslation("labels.name")}
+            >
+              <Input />
+            </Form.Item>
 
-          <Form.Item
-            name="surname"
-            label={getTranslation("labels.surname")}
-          >
-            <Input />
-          </Form.Item>
+            <Form.Item
+              name="surname"
+              label={getTranslation("labels.surname")}
+            >
+              <Input />
+            </Form.Item>
 
-          <Form.Item style={{ textAlign: 'right' }}>
-            <Button type="primary" htmlType="submit">
-              {getTranslation("cta.update")}
-            </Button>
-          </Form.Item>
-        </MatildaForm>
-      </Card>
+            <Form.Item style={{ textAlign: 'right' }}>
+              <Button type="primary" htmlType="submit">
+                {getTranslation("cta.update")}
+              </Button>
+            </Form.Item>
+          </MatildaForm>
+        </Card>
+      </Space>
     </MatildaPagesWrapper>
   )
 }
