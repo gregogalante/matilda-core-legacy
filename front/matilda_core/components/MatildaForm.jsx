@@ -43,6 +43,8 @@ export function MatildaFormMapInput (props) {
   mapboxgl.accessToken = getConfig('mapbox_token')
 
   const mapRef = useCallback((el) => {
+    if (!el) return
+
     setMapItem(new mapboxgl.Map({
       container: el,
       center: [location.lng, location.lat],
