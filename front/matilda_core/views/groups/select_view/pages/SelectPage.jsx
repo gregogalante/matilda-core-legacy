@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
 import { Card, List, Button, Row, Col } from 'antd'
 import { MatildaContext } from 'matilda_core'
-import { useMatildaRequest } from 'matilda_core/components/MatildaRequest'
+import useRequestHook from 'matilda_core/hooks/useRequestHook'
 
 export default function SelectPage (props) {
   const { getTranslation, getConfig, getRoute } = useContext(MatildaContext)
-  const request = useMatildaRequest()
+  const request = useRequestHook()
   const permitGroupCreation = getConfig('groups_permit_creation_to_users')
   const groupsIndexView = getRoute('matilda_core.groups_index_view')
 

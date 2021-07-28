@@ -1,120 +1,121 @@
-import { Row, Col, Card, Descriptions, Form, Button, Input, Select, notification } from 'antd'
-import React,  { useMemo, useState, useEffect, useContext } from 'react'
-import { useMatildaRequest } from 'matilda_core/components/MatildaRequest'
+import React, { useMemo, useState, useEffect, useContext, useRef } from 'react'
+import { Row, Col, Descriptions, Form, Select } from 'antd'
 import { MatildaContext } from 'matilda_core'
-import { MatildaForm, useMatildaForm } from 'matilda_core/components/MatildaForm'
-import { MatildaPagesWrapper } from 'matilda_core/components/MatildaPages'
-import { CheckCircleTwoTone } from '@ant-design/icons'
+import useRequestHook from 'matilda_core/hooks/useRequestHook'
+import NavigatorWrapperComponent from 'matilda_core/components/NavigatorWrapperComponent'
+import FormComponent from 'matilda_core/components/FormComponent'
+import CardComponent from 'matilda_core/components/CardComponent'
 
 export default function ManagePage (props) {
-  const { pages } = props
-  const request = useMatildaRequest()
+  const { navigator, userUuid } = props
   const { getTranslation, getConfig } = useContext(MatildaContext)
+  const request = useRequestHook()
+  const formRef = useRef()
   const [user, setUser] = useState(null)
   const [membership, setMembership] = useState(null)
-  const form = useMatildaForm('matilda_core.memberships_edit_permissions_role_action', {user_uuid: props.userUuid}, { manageSuccess: false })
+  const permissionsRoleConfig = getConfig('memberships_permissions_roles')
+  const showPermissionsEditorConfig = getConfig('memberships_show_permissions_editor')
 
-  const manageApi = () => {
-    request.send('matilda_core.memberships_manage_api', {user_uuid: props.userUuid}).then((response) => {
+  const rolesOptions = useMemo(() => {
+    let items = []
+
+    if (permissionsRoleConfig) permissionsRoleConfig.map(i => { items.push({ label: getTranslation(i.label), value: i.name }) })
+
+    return items
+  }, [permissionsRoleConfig])
+
+  useEffect(() => {
+    loadUserData()
+  }, [])
+
+  useEffect(() => {
+    if(!membership?.permissions_role || !formRef.current) return
+    formRef.current.antdForm.setFieldsValue({ role: membership.permissions_role })
+  }, [membership, formRef])
+
+  /**
+   * @function loadUserData
+   */
+  const loadUserData = () => {
+    request.send('matilda_core.memberships_manage_api', { user_uuid: userUuid }).then((response) => {
       if (!response.result) return
       setUser(response.payload.user)
       setMembership(response.payload.membership)
     })
   }
 
-  useEffect(() => {
-    manageApi()
-  }, [])
-
-  useEffect(() => {
-    if (form.response && form.response.result) {
-      manageApi()
-      openNotification()
-    }
-  }, [form.response])
-
-  useEffect(() => {
-    if(membership && membership.permissions_role){
-      form.antdForm.setFieldsValue({role: membership.permissions_role})
-    }
-  }, [membership])
-
-  const openNotification = () => {
-    notification.open({
-      message: getTranslation('messages.user_update_success'),
-      duration: 4,
-      icon: <CheckCircleTwoTone />
-    })
+  /**
+   * @function onPermissionsUpdated
+   * @returns 
+   */
+  const onPermissionsUpdated = () => {
+    loadUserData()
   }
 
-  const onClickRoleAdvanced = () => {
-    pages.openDrawer(
-      'users_index_manage_page_role_advanced', 
-      {user, membership, onComplete: () => { pages.closeDrawer(), manageApi(), openNotification() }}
+  /**
+   * @function onClickEditPermissions
+   */
+  const onClickEditPermissions = () => {
+    navigator.openDrawer(
+      'permissions_drawer', 
+      { user, membership, onCompleted: onPermissionsUpdated }
     )
   }
 
-  const showPermissions = getConfig('memberships_show_permissions_editor')
-  const permissionsRole = getConfig('memberships_permissions_roles')
-
-  const roles = useMemo(() => {
-    let items = []
-    if(permissionsRole){
-      permissionsRole.map(i => {
-        items.push(
-          Object.assign({
-            label: getTranslation(i.label),
-            value: i.name
-          })
-        )
-      })
-    }
-    return items
-  }, [permissionsRole])
-
   return (
-    <MatildaPagesWrapper pages={pages}>
-      <Row gutter={[16, 16]}>
-        <Col sm={{span: 24}} lg={{span: 18}}>
-          <Card title={getTranslation("titles.informations")}>
-            {user && (
-              <Descriptions 
-                bordered
-                column={{sm: 1, lg: 2}}
-              >
-                <Descriptions.Item label={getTranslation("labels.name")}>{user.name}</Descriptions.Item>
-                <Descriptions.Item label={getTranslation("labels.surname")}>{user.surname}</Descriptions.Item>
-                <Descriptions.Item label={getTranslation("labels.username")}>{user.username}</Descriptions.Item>
-                <Descriptions.Item label={getTranslation("labels.email")}>{user.email}</Descriptions.Item>
-                <Descriptions.Item label={getTranslation("labels.registration_date")}>{user.created_at}</Descriptions.Item>
-                <Descriptions.Item label={getTranslation("labels.last_access_date")}></Descriptions.Item>
-              </Descriptions>
-            )}
-          </Card>
+    <NavigatorWrapperComponent navigator={navigator}>
+      <Row gutter={[15, 15]}>
+        <Col sm={24} lg={18}>
+          <CardComponent
+            title={getTranslation("titles.informations")}
+            contentDependOn={user}
+            content={(user) => <UserDescription user={user} getTranslation={getTranslation} />}
+          />
         </Col>
 
-        <Col sm={{span: 24}} lg={{span: 6}}>
-          <Card 
+        <Col sm={24} lg={6}>
+          <CardComponent
             title={getTranslation("titles.edit_permissions_role")}
-            extra={showPermissions && user ? <a onClick={onClickRoleAdvanced}>{getTranslation("titles.edit_permissions")}</a> : ''}
-          >
-            <MatildaForm form={form}>
-              <Form.Item
-                name="role"
-                label={getTranslation("labels.role")}
-              >
-                <Select options={roles} />
-              </Form.Item>
-
-              <Form.Item>
-                <Button type="primary" htmlType="submit" block>
-                  {getTranslation("cta.confirm")}
-                </Button>
-              </Form.Item>
-            </MatildaForm>
-          </Card>
+            extra={showPermissionsEditorConfig && user ? <a onClick={onClickEditPermissions}>{getTranslation("titles.edit_permissions")}</a> : ''}
+            contentDependOn={user}
+            content={(user) => <UserRoleForm user={user} getTranslation={getTranslation} rolesOptions={rolesOptions} formRef={formRef} onPermissionsUpdated={onPermissionsUpdated} />}
+          />
         </Col>
       </Row>
-    </MatildaPagesWrapper>
+    </NavigatorWrapperComponent>
+  )
+}
+
+function UserDescription ({ user, getTranslation }) {
+  return (
+    <Descriptions 
+      bordered
+      column={{sm: 1, lg: 2}}
+    >
+      <Descriptions.Item label={getTranslation("labels.name")}>{user.name}</Descriptions.Item>
+      <Descriptions.Item label={getTranslation("labels.surname")}>{user.surname}</Descriptions.Item>
+      <Descriptions.Item label={getTranslation("labels.username")}>{user.username}</Descriptions.Item>
+      <Descriptions.Item label={getTranslation("labels.email")}>{user.email}</Descriptions.Item>
+      <Descriptions.Item label={getTranslation("labels.registration_date")}>{user.created_at}</Descriptions.Item>
+      <Descriptions.Item label={getTranslation("labels.last_access_date")}></Descriptions.Item>
+    </Descriptions>
+  )
+}
+
+function UserRoleForm ({ user, onPermissionsUpdated, rolesOptions, formRef, getTranslation }) {
+  return (
+    <FormComponent
+      path='matilda_core.memberships_edit_permissions_role_action'
+      paramsDecorator={(p) => Object.assign(p, { user_uuid: user.uuid })}
+      onResponseSuccess={onPermissionsUpdated}
+      formRef={formRef}
+    >
+      <Form.Item
+        name="role"
+        label={getTranslation("labels.role")}
+      >
+        <Select options={rolesOptions} />
+      </Form.Item>
+    </FormComponent>
   )
 }

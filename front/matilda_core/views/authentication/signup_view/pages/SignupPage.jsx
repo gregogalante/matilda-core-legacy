@@ -1,26 +1,18 @@
 import React, { useContext, useEffect } from "react"
 import { Row, Col, Card, Form, Button, Input } from "antd"
-import { UserOutlined, LockOutlined } from "@ant-design/icons"
 import { MatildaContext } from "matilda_core"
-import {
-  MatildaForm,
-  useMatildaForm,
-} from "matilda_core/components/MatildaForm"
+import FormComponent from 'matilda_core/components/FormComponent'
 
 export default function SignupPage() {
-  const { getTranslation, getConfig, getRoute } = useContext(MatildaContext)
-  const form = useMatildaForm(
-    "matilda_core.authentication_signup_action",
-    {},
-    { manageSuccess: false }
-  )
+  const { getTranslation, getRoute } = useContext(MatildaContext)
   const loginPath = getRoute("matilda_core.authentication_login_view")
 
-  useEffect(() => {
-    if (form.response && form.response.result) {
-      window.location.replace(loginPath.path)
-    }
-  }, [form.response])
+  /**
+   * @function onSignupSuccess
+   */
+   const onSignupSuccess = () => {
+    window.location.replace(loginPath.path)
+  }
 
   return (
     <Row justify="center" align="center">
@@ -29,7 +21,11 @@ export default function SignupPage() {
           title={getTranslation("titles.signup")}
           extra={<a href={loginPath.path}>{getTranslation("cta.login")}</a>}
         >
-          <MatildaForm form={form}>
+          <FormComponent
+            path='matilda_core.authentication_signup_action'
+            onResponseSuccess={onSignupSuccess}
+            confirmBlock
+          >
             <Form.Item
               name="name"
               label={getTranslation("labels.name")}
@@ -77,13 +73,7 @@ export default function SignupPage() {
             >
               <Input.Password />
             </Form.Item>
-
-            <Form.Item style={{ textAlign: "right" }}>
-              <Button type="primary" htmlType="submit" block>
-                {getTranslation("cta.confirm")}
-              </Button>
-            </Form.Item>
-          </MatildaForm>
+          </FormComponent>
         </Card>
       </Col>
     </Row>

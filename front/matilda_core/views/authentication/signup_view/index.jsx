@@ -1,19 +1,14 @@
-import React from "react";
-import { MatildaContainer } from "matilda_core";
-import {
-  MatildaLayout,
-  useMatildaLayout,
-} from "matilda_core/components/MatildaLayout";
-import SignupPage from "./pages/SignupPage";
+import React from 'react'
+import { MatildaContainer } from 'matilda_core'
+import LayoutComponent from 'matilda_core/components/LayoutComponent'
+import SignupPage from './pages/SignupPage'
 
 export default (props) => {
-  const layout = useMatildaLayout({ theme: "clean-centered" });
-
   return (
     <MatildaContainer {...props}>
-      <MatildaLayout layout={layout}>
+      <LayoutComponent theme='clean-centered'>
         <SignupPage />
-      </MatildaLayout>
+      </LayoutComponent>
     </MatildaContainer>
-  );
-};
+  )
+}

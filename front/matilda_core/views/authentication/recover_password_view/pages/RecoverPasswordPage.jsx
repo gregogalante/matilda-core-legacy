@@ -1,28 +1,20 @@
 import React, { useContext, useEffect, useState } from "react"
 import { Row, Col, Card, Form, Button, Input, Result } from "antd"
-import { UserOutlined, LockOutlined } from "@ant-design/icons"
 import { MatildaContext } from "matilda_core"
-import {
-  MatildaForm,
-  useMatildaForm,
-} from "matilda_core/components/MatildaForm"
+import FormComponent from 'matilda_core/components/FormComponent'
 
 export default function SignupPage() {
-  const { getTranslation, getConfig, getRoute } = useContext(MatildaContext)
-  const form = useMatildaForm(
-    "matilda_core.authentication_recover_password_action",
-    {},
-    { manageSuccess: false }
-  )
+  const { getTranslation, getRoute } = useContext(MatildaContext)
   const loginPath = getRoute("matilda_core.authentication_login_view")
   const updatePwdPath = getRoute("matilda_core.authentication_update_password_view")
   const [mailSended, setMailSended] = useState(false)
 
-  useEffect(() => {
-    if (form.response && form.response.result) {
-      setMailSended(true)
-    }
-  }, [form.response])
+  /**
+   * @function onRecoverSuccess
+   */
+   const onRecoverSuccess = () => {
+    setMailSended(true)
+  }
 
   return (
     <Row justify="center" align="center">
@@ -38,20 +30,18 @@ export default function SignupPage() {
               extra={<Button type="primary" href={updatePwdPath.path}>{getTranslation("cta.continue")}</Button>}
             />
           ) : (
-            <MatildaForm form={form}>
+            <FormComponent
+              path='matilda_core.authentication_recover_password_action'
+              onResponseSuccess={onRecoverSuccess}
+              confirmBlock
+            >
               <Form.Item
                 name="username_email"
                 label={getTranslation("labels.username_or_email")}
               >
                 <Input />
               </Form.Item>
-
-              <Form.Item style={{ textAlign: "right" }}>
-                <Button type="primary" htmlType="submit" block>
-                  {getTranslation("cta.confirm")}
-                </Button>
-              </Form.Item>
-            </MatildaForm>
+            </FormComponent>
           )}
         </Card>
       </Col>

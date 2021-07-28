@@ -1,16 +1,14 @@
 import React from 'react'
 import { MatildaContainer } from 'matilda_core'
-import { MatildaLayout, useMatildaLayout } from 'matilda_core/components/MatildaLayout'
+import LayoutComponent from 'matilda_core/components/LayoutComponent'
 import SelectPage from './pages/SelectPage'
 
 export default (props) => {
-  const layout = useMatildaLayout({ theme: 'clean' })
-
   return (
     <MatildaContainer {...props}>
-      <MatildaLayout layout={layout}>
+      <LayoutComponent theme='clean-centered'>
         <SelectPage {...props} />
-      </MatildaLayout>
+      </LayoutComponent>
     </MatildaContainer>
   )
 }
