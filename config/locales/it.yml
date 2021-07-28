@@ -64,7 +64,7 @@ it:
       recover_password: Recupero password
       update_password: Aggiornamento password
       email_addresses: Indirizzi email
-      username: Username
+      update_username: Aggiornamento username
       add_email_address: Aggiungi nuovo indirizzo email
       account_settings: Impostazoni account
       documentation: Documentazione

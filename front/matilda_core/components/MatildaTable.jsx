@@ -1,3 +1,7 @@
+/**
+ * NOTE: Deprecated
+ */
+
 import React, { useMemo, useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { Table, Input, Space, Button } from 'antd'

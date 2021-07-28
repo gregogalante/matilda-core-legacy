@@ -57,7 +57,7 @@ en:
       recover_password: Recover password
       update_password: Update password
       email_addresses: Email addresses
-      username: Username
+      update_username: Update username
       add_email_address: Add new email address
       account_settings: Account settings
       documentation: Documentation

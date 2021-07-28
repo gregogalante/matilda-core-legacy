@@ -1,3 +1,7 @@
+/**
+ * NOTE: Deprecated
+ */
+
 import React, { useContext, useMemo, useState } from 'react'
 import { notification } from 'antd'
 import { MatildaContext } from '../index'

@@ -1,3 +1,7 @@
+/**
+ * NOTE: Deprecated
+ */
+
 import React, { useMemo, useState, useContext } from 'react'
 import { Layout, Menu, Drawer, PageHeader } from 'antd'
 import { MatildaContext } from '../index'

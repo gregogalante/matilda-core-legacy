@@ -1,3 +1,7 @@
+/**
+ * NOTE: Deprecated
+ */
+
 import React, { useMemo, useContext, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Layout, Menu } from 'antd'

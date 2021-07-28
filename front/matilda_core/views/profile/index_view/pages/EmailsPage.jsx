@@ -1,53 +1,34 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Button, Card, Form, Input, notification, List, Space } from 'antd'
+import { Button, notification, List, Space, Row, Col } from 'antd'
+import { StarOutlined, StarFilled, DeleteOutlined } from '@ant-design/icons'
 import NavigatorWrapperComponent from 'matilda_core/components/NavigatorWrapperComponent'
-import { useMatildaRequest } from 'matilda_core/components/MatildaRequest'
-import { StarOutlined, StarFilled, DeleteOutlined, CloseCircleTwoTone, CheckCircleTwoTone } from '@ant-design/icons'
 import { MatildaContext } from 'matilda_core'
-import Item from 'antd/lib/list/Item'
+import CardComponent from 'matilda_core/components/CardComponent'
+import useRequestHook from 'matilda_core/hooks/useRequestHook'
 
 export default function EmailsPage (props) {
   const { navigator } = props
   const { getTranslation } = useContext(MatildaContext)
-  const request = useMatildaRequest()
+  const request = useRequestHook()
   const [emails, setEmails] = useState(null)
 
-  const indexApi = () => {
+  useEffect(() => {
+    loadEmails()
+  }, [])
+
+  const loadEmails = () => {
     request.send('matilda_core.profile_index_api', {}).then((response) => {
       if (!response.result) return
       setEmails(response.payload.user_emails)
     })
   }
-
-  useEffect(() => {
-    indexApi()
-  }, [])
   
   const onDeleteEmail = (email) => {
     request.send('matilda_core.profile_remove_email_action', {email}).then((response) => {
       if(!response.result) return
 
-      notification.open({
-        message: getTranslation('messages.email_delete_success'),
-        duration: 4,
-        icon: <CheckCircleTwoTone />
-      })
-      indexApi()
-    })
-  }
-
-  const onAddEmail = () => {
-    pages.openDrawer(
-      'profile_index_emails_page_add_email', 
-      {onComplete: () => { pages.closeDrawer(), indexApi(), openNotificationAddEmailSuccess() }}
-    )
-  }
-
-  const openNotificationAddEmailSuccess = () => {
-    notification.open({
-      message: getTranslation('messages.email_add_success'),
-      duration: 4,
-      icon: <CheckCircleTwoTone />
+      notification.success({ message: getTranslation('messages.email_delete_success') })
+      loadEmails()
     })
   }
 
@@ -55,44 +36,51 @@ export default function EmailsPage (props) {
     request.send('matilda_core.profile_toggle_email_primary_action', {email}).then((response) => {
       if(!response.result)return
 
-      notification.open({
-        message: getTranslation('messages.email_primary_success'),
-        duration: 4,
-        icon: <CheckCircleTwoTone />
-      })
-      indexApi()
+      notification.success({ message: getTranslation('messages.general_success') })
+      loadEmails()
     })
+  }
+
+  const onAddEmail = () => {
+    navigator.openDrawer(
+      'add_email_drawer', 
+      { onCompleted: loadEmails }
+    )
   }
 
   return (
     <NavigatorWrapperComponent navigator={navigator}>
-      <Space direction="vertical" style={{ width: "100%" }}>
-        <Card 
-          title={getTranslation("titles.email_addresses")}
-          extra={<Button type='link' onClick={onAddEmail}>{getTranslation('cta.add')}</Button>}
-        >
-          {emails && (
-            <List 
-              bordered 
-              dataSource={emails}
-              renderItem={email => (
-              <List.Item style={{display: 'flex', justifyContent: 'space-between'}}>
-                {email.email} 
-                <Space>
-                  {email.primary ? (
-                    <StarFilled />
-                  ) : (
-                    <>
-                      <Button icon={<StarOutlined/>} onClick={() => onTogglePrimaryEmail(email.email)} />
-                      <Button type='danger' icon={<DeleteOutlined/>} onClick={() => onDeleteEmail(email.email)} />
-                    </>
-                  )}
-                </Space>
-              </List.Item>
-            )} />
-          )}
-        </Card>
-      </Space>
+      <Row gutter={[15, 15]}>
+        <Col sm={{ span: 24 }}>
+          <CardComponent 
+            title={getTranslation("titles.email_addresses")}
+            extra={<Button type='link' onClick={onAddEmail}>{getTranslation('cta.add')}</Button>}
+            contentDependOn={emails}
+            content={(emails) => {
+              return (
+                <List 
+                  bordered 
+                  dataSource={emails}
+                  renderItem={email => (
+                  <List.Item style={{display: 'flex', justifyContent: 'space-between'}}>
+                    {email.email} 
+                    <Space>
+                      {email.primary ? (
+                        <StarFilled />
+                      ) : (
+                        <>
+                          <Button icon={<StarOutlined/>} onClick={() => onTogglePrimaryEmail(email.email)} />
+                          <Button type='danger' icon={<DeleteOutlined/>} onClick={() => onDeleteEmail(email.email)} />
+                        </>
+                      )}
+                    </Space>
+                  </List.Item>
+                )} />
+              )
+            }}
+          />
+        </Col>
+      </Row>
     </NavigatorWrapperComponent>
   )
 }

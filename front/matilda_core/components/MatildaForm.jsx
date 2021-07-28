@@ -1,3 +1,7 @@
+/**
+ * NOTE: Deprecated
+ */
+
 import React, { useState, useContext, useMemo, useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import mapboxgl from '!mapbox-gl'
@@ -5,6 +9,9 @@ import mapboxglgeocoder from 'mapbox-gl-geocoder'
 import { notification, Form } from 'antd'
 import { useMatildaRequest } from './MatildaRequest'
 import { MatildaContext } from '../index'
+
+import 'mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
+import 'mapbox-gl/dist/mapbox-gl.css'
 
 /**
  * @function MatildaForm
