@@ -5,7 +5,7 @@ import NavigatorComponent from 'matilda_core/components/NavigatorComponent'
 import IndexPage from './pages/IndexPage'
 import ManagePage from './pages/ManagePage'
 import InviteDrawer from './drawers/InviteDrawer'
-import PermissionsDrawer from './drawers/PermissionsDrawer'
+import EditPermissionsDrawer from './drawers/EditPermissionsDrawer'
 
 const navigatorRoutes = [
   {
@@ -31,9 +31,9 @@ const navigatorRoutes = [
         component: ManagePage,
         drawers: [
           {
-            key: 'permissions_drawer',
+            key: 'edit_permissions_drawer',
             label: 'titles.edit_permissions',
-            component: PermissionsDrawer,
+            component: EditPermissionsDrawer,
             size: 'medium'
           }
         ]

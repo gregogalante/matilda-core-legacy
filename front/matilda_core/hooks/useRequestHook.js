@@ -14,7 +14,7 @@ export default function useRequestHook(props = {}) {
    * @param {*} resolve 
    */
   const onResponseSuccess = (response, resolve) => {
-    console.log(response)
+    console.info(response)
 
     setLoading(false)
     resolve(response)
@@ -75,5 +75,5 @@ export default function useRequestHook(props = {}) {
     })
   }
 
-  return { send }
+  return { send, loading }
 }

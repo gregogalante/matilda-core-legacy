@@ -64,8 +64,8 @@ export default function FormComponent (props) {
     >
       {props.children}
 
-      <Form.Item style={{ textAlign: 'right' }}>
-        <Button type={confirmType} block={confirmBlock} htmlType="submit">
+      <Form.Item style={{ textAlign: 'right', marginTop: 15 }}>
+        <Button type={confirmType} block={confirmBlock} loading={request.loading} htmlType="submit">
           {getTranslation(confirmLabel)}
         </Button>
       </Form.Item>

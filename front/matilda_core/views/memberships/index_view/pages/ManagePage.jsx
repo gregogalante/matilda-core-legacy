@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect, useContext, useRef } from 'react'
-import { Row, Col, Descriptions, Form, Select } from 'antd'
+import { Row, Col, Descriptions, Form, Select, Button } from 'antd'
 import { MatildaContext } from 'matilda_core'
 import useRequestHook from 'matilda_core/hooks/useRequestHook'
 import NavigatorWrapperComponent from 'matilda_core/components/NavigatorWrapperComponent'
@@ -57,7 +57,7 @@ export default function ManagePage (props) {
    */
   const onClickEditPermissions = () => {
     navigator.openDrawer(
-      'permissions_drawer', 
+      'edit_permissions_drawer', 
       { user, membership, onCompleted: onPermissionsUpdated }
     )
   }
@@ -76,7 +76,7 @@ export default function ManagePage (props) {
         <Col sm={24} lg={6}>
           <CardComponent
             title={getTranslation("titles.edit_permissions_role")}
-            extra={showPermissionsEditorConfig && user ? <a onClick={onClickEditPermissions}>{getTranslation("titles.edit_permissions")}</a> : ''}
+            extra={showPermissionsEditorConfig && user ? <Button type="primary" onClick={onClickEditPermissions}>{getTranslation("titles.edit_permissions")}</Button> : ''}
             contentDependOn={user}
             content={(user) => <UserRoleForm user={user} getTranslation={getTranslation} rolesOptions={rolesOptions} formRef={formRef} onPermissionsUpdated={onPermissionsUpdated} />}
           />
@@ -92,11 +92,11 @@ function UserDescription ({ user, getTranslation }) {
       bordered
       column={{sm: 1, lg: 2}}
     >
-      <Descriptions.Item label={getTranslation("labels.name")}>{user.name}</Descriptions.Item>
-      <Descriptions.Item label={getTranslation("labels.surname")}>{user.surname}</Descriptions.Item>
-      <Descriptions.Item label={getTranslation("labels.username")}>{user.username}</Descriptions.Item>
-      <Descriptions.Item label={getTranslation("labels.email")}>{user.email}</Descriptions.Item>
-      <Descriptions.Item label={getTranslation("labels.registration_date")}>{user.created_at}</Descriptions.Item>
+      <Descriptions.Item label={getTranslation("labels.name")}>{user.name || ' - '}</Descriptions.Item>
+      <Descriptions.Item label={getTranslation("labels.surname")}>{user.surname || ' - '}</Descriptions.Item>
+      <Descriptions.Item label={getTranslation("labels.username")}>{user.username || ' - '}</Descriptions.Item>
+      <Descriptions.Item label={getTranslation("labels.email")}>{user.email || ' - '}</Descriptions.Item>
+      <Descriptions.Item label={getTranslation("labels.registration_date")}>{user.created_at || ' - '}</Descriptions.Item>
       <Descriptions.Item label={getTranslation("labels.last_access_date")}></Descriptions.Item>
     </Descriptions>
   )
