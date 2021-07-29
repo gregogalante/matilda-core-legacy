@@ -1,5 +1,5 @@
 import React, { useContext, useRef } from 'react'
-import { Button } from 'antd'
+import { Button, Space } from 'antd'
 import { PlusCircleOutlined } from '@ant-design/icons'
 import { MatildaContext } from 'matilda_core'
 import NavigatorWrapperComponent from 'matilda_core/components/NavigatorWrapperComponent'
@@ -41,8 +41,9 @@ export default function IndexPage (props) {
       title: '',
       key: 'action',
       dataIndex: 'uuid',
-      width: 150,
+      width: 200,
       fixed: 'right',
+      align: 'center',
       render: (d) => renderTableAction(d)
     }
   ]
@@ -75,12 +76,14 @@ export default function IndexPage (props) {
    */
   const renderExtra = () => {
     return (
-      <Button
-        key='invite'
-        type="primary"
-        icon={<PlusCircleOutlined />}
-        onClick={onClickInvite}
-      >{getTranslation('cta.invite')}</Button>
+      <Space direction='vertical'>
+        <Button
+          key='invite'
+          type="primary"
+          icon={<PlusCircleOutlined />}
+          onClick={onClickInvite}
+        >{getTranslation('cta.invite')}</Button>
+      </Space>
     )
   }
 

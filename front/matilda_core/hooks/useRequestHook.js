@@ -70,7 +70,7 @@ export default function useRequestHook(props = {}) {
       }).then((response) => {
         return onResponseSuccess(response, resolve)
       }).catch((error) => {
-        return onResponseError(response, resolve)
+        return onResponseError(error, resolve)
       })
     })
   }

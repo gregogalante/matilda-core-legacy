@@ -54,12 +54,13 @@ export default function LoginPage () {
             </Form.Item>
           </FormComponent>
 
-          <div style={{ textAlign: 'right' }}>
-            {signupActiveConfig && (
-              <div style={{ marginTop: 15 }}>
-                <a href={signupRoute.path}>{getTranslation('cta.signup')}</a> | <a href={recoverPasswordRoute.path}>{getTranslation('cta.recover_password')}</a>
-              </div>
-            )}
+          <div style={{ textAlign: 'right', marginTop: 15 }}>
+              {signupActiveConfig && (
+                <>
+                  <a href={signupRoute.path}>{getTranslation('cta.signup')}</a> |
+                </>
+              )}
+              <a href={recoverPasswordRoute.path}>{getTranslation('cta.recover_password')}</a>
           </div>
         </Card>
       </Col>

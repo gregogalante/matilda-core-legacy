@@ -190,7 +190,7 @@ module MatildaCore
         field_key = filter_key_map[filter_field_key]
         field_value = filter_field_values[index]
         next if field_key.blank? || field_value.blank?
-        search_strings.push("lower(#{field_key}) LIKE \"%#{field_value.downcase}%\"") 
+        search_strings.push("lower(#{field_key}) LIKE '%#{field_value.downcase}%'") 
       end
       search_string = search_strings.join(' AND ')
 

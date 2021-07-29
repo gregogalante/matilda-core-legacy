@@ -116,7 +116,7 @@ export default function NavigatorComponent (props) {
     )
   }
 
-  const navigator = { currentPage, currentPageData, goToRoute, goToPage, openDrawer, closeDrawer }
+  const navigator = { currentRoute, currentPage, currentPageData, goToRoute, goToPage, openDrawer, closeDrawer }
   return (
     <>
       <Layout style={{ backgroundColor: '#fff' }}>

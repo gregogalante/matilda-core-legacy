@@ -65,7 +65,7 @@ export default function ManagePage (props) {
   return (
     <NavigatorWrapperComponent navigator={navigator}>
       <Row gutter={[15, 15]}>
-        <Col sm={24} lg={18}>
+        <Col sm={24} lg={16}>
           <CardComponent
             title={getTranslation("titles.informations")}
             contentDependOn={user}
@@ -73,7 +73,7 @@ export default function ManagePage (props) {
           />
         </Col>
 
-        <Col sm={24} lg={6}>
+        <Col sm={24} lg={8}>
           <CardComponent
             title={getTranslation("titles.edit_permissions_role")}
             extra={showPermissionsEditorConfig && user ? <Button type="primary" onClick={onClickEditPermissions}>{getTranslation("titles.edit_permissions")}</Button> : ''}

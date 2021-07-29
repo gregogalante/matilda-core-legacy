@@ -5,18 +5,23 @@ import { SearchOutlined } from '@ant-design/icons'
 import useRequestHook from '../hooks/useRequestHook'
 
 export default function TableComponent (props) {
-  const { columns: defaultColumns, data: defaultData, route, routePaginationParser, routeDataParser, routeParamsDecorator, paginationSetting, width, height, tableRef } = props
+  const { columns: defaultColumns, data: defaultData, route, routePaginationParser, routeDataParser, routeParamsDecorator, paginationSetting, width, height, tableRef, selectionType, selectionOnChange } = props
   const filtersInputRef = useRef()
   const request = useRequestHook()
 
   const [data, setData] = useState([])
   const [loadingData, setLoadingData] = useState(true)
   const [paginationData, setPaginationData] = useState(paginationSetting)
+  const [selectionData, setSelectionData] = useState([])
 
   useEffect(() => {
     if (!tableRef) return
-    tableRef.current = { loadDataFromRoute }
+    tableRef.current = { loadDataFromRoute, resetSelectionData, selectionData }
   }, [tableRef])
+
+  useEffect(() => {
+    selectionOnChange(selectionData)
+  }, [selectionData])
 
   const columns = useMemo(() => {
     return defaultColumns.map((column) => {
@@ -24,7 +29,7 @@ export default function TableComponent (props) {
 
       if (column.search) {
         column = Object.assign(column, {
-          filterDropdown: (functions) => <FiltersDropdown functions={functions} inputRef={filtersInputRef} dataIndex={dataIndex} />,
+          filterDropdown: (functions) => <FiltersDropdown functions={functions} inputRef={filtersInputRef} dataIndex={dataIndex} title={column.title} />,
           filterIcon: (filtered) => <FiltersIcon filtered={filtered} />,
           onFilter: (value, record) => record[dataIndex] ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()) : '',
           onFilterDropdownVisibleChange: visible => { if (visible) { setTimeout(() => filtersInputRef.current.select(), 100) } }
@@ -89,6 +94,13 @@ export default function TableComponent (props) {
   }
 
   /**
+   * @function resetSelectionData
+   */
+  const resetSelectionData = () => {
+    setSelectionData([])
+  }
+
+  /**
    * @function onTableChange
    * @param {*} pagination 
    * @param {*} filters 
@@ -98,7 +110,16 @@ export default function TableComponent (props) {
     loadDataFromRoute(pagination, sort, filters)
   }
 
+  /**
+   * @function onSelectionDataChange
+   * @param {*} newSelectionData 
+   */
+  const onSelectionDataChange = (newSelectionData) => {
+    setSelectionData(newSelectionData)
+  }
+
   const dataTable = columns.length > 0 ? calculateColumnsWidth(columns, data, 300) : { width: 1024 }
+  const rowSelection = selectionType ? { type: selectionType, selectedRows: selectionData, onChange: onSelectionDataChange } : null
 
   return (
     <Table
@@ -108,7 +129,7 @@ export default function TableComponent (props) {
       paginated={!!paginationSetting}
       pagination={paginationData}
       onChange={onTableChange}
-      // rowSelection={rowSelection}
+      rowSelection={rowSelection}
       scroll={{ x: width || dataTable.tableWidth, y: height || null }}
       bordered
       sticky
@@ -126,26 +147,29 @@ TableComponent.propTypes = {
   paginationSetting: PropTypes.any,
   width: PropTypes.number,
   height: PropTypes.number,
-  tableRef: PropTypes.object
+  tableRef: PropTypes.object,
+  selectionType: PropTypes.string,
+  selectionOnChange: PropTypes.func,
 }
 
 TableComponent.defaultProps = {
   data: [],
   routeParamsDecorator: (p) => p,
-  routeDataParser: () => []
+  routeDataParser: () => [],
+  selectionOnChange: () => {}
 }
 
 /***************************************************************************************************** */
 
 function FiltersDropdown (props) {
-  const { functions, inputRef, dataIndex } = props
+  const { functions, inputRef, dataIndex, title } = props
   const { setSelectedKeys, selectedKeys, confirm, clearFilters } = functions
 
   return (
     <div style={{ padding: 8 }}>
       <Input
         ref={inputRef}
-        placeholder={`Search ${dataIndex}`}
+        placeholder={`Search ${title}`}
         value={selectedKeys[0]}
         onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
         onPressEnter={() => confirm()}

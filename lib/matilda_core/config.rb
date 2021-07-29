@@ -113,6 +113,7 @@ module MatildaCore
 
     # MAPBOX
     attr_accessor :mapbox_token
+    attr_accessor :mapbox_style
 
     def initialize
       set_default_options
@@ -142,6 +143,7 @@ module MatildaCore
       @locales_source_type = nil
       @locales_source_value = nil
       @mapbox_token = nil
+      @mapbox_style = 'mapbox://styles/mapbox/light-v10'
 
       # voci editabili tramite funzioni
       @sidebar_items = []
