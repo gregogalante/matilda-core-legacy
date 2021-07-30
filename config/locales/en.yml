@@ -41,6 +41,7 @@ en:
       new_password_confirmation: Confirm the new password
       current_password: Current password
       role: Role
+      selected_items: Selected items
     titles:
       select_a_group: Select a group
       create_a_group: Create a group

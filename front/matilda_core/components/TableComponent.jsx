@@ -1,13 +1,15 @@
-import React, { useMemo, useRef, useEffect, useState } from 'react'
+import React, { useMemo, useRef, useEffect, useState, useContext } from 'react'
 import PropTypes from 'prop-types'
-import { Table, Input, Space, Button } from 'antd'
+import { Table, Input, Space, Button, Row, Col } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
+import { MatildaContext } from '../index'
 import useRequestHook from '../hooks/useRequestHook'
 
 export default function TableComponent (props) {
-  const { columns: defaultColumns, data: defaultData, route, routePaginationParser, routeDataParser, routeParamsDecorator, paginationSetting, width, height, tableRef, selectionType, selectionOnChange } = props
+  const { columns: defaultColumns, data: defaultData, route, routePaginationParser, routeDataParser, routeParamsDecorator, paginationSetting, width, height, tableRef, selectionType, selectionOnChange, selectionBulkActions } = props
   const filtersInputRef = useRef()
   const request = useRequestHook()
+  const { getTranslation } = useContext(MatildaContext)
 
   const [data, setData] = useState([])
   const [loadingData, setLoadingData] = useState(true)
@@ -17,7 +19,7 @@ export default function TableComponent (props) {
   useEffect(() => {
     if (!tableRef) return
     tableRef.current = { loadDataFromRoute, resetSelectionData, getSelectionData }
-  }, [tableRef])
+  }, [tableRef, selectionData])
 
   useEffect(() => {
     selectionOnChange(selectionData)
@@ -130,18 +132,25 @@ export default function TableComponent (props) {
   const rowSelection = selectionType ? { type: selectionType, selectedRows: selectionData, onChange: onSelectionDataChange } : null
 
   return (
-    <Table
-      columns={columns}
-      loading={loadingData}
-      dataSource={data}
-      paginated={!!paginationSetting}
-      pagination={paginationData}
-      onChange={onTableChange}
-      rowSelection={rowSelection}
-      scroll={{ x: width || dataTable.tableWidth, y: height || null }}
-      bordered
-      sticky
-    />
+    <Row gutter={[15, 15]}>
+      <Col sm={{ span: 24 }}>
+        {selectionBulkActions && <Header selectionData={selectionData} selectionBulkActions={selectionBulkActions} getTranslation={getTranslation} />}
+      </Col>
+      <Col sm={{ span: 24 }}>
+      <Table
+        columns={columns}
+        loading={loadingData}
+        dataSource={data}
+        paginated={!!paginationSetting}
+        pagination={paginationData}
+        onChange={onTableChange}
+        rowSelection={rowSelection}
+        scroll={{ x: width || dataTable.tableWidth, y: height || null }}
+        bordered
+        sticky
+      />
+      </Col>
+    </Row>
   )
 }
 
@@ -158,6 +167,7 @@ TableComponent.propTypes = {
   tableRef: PropTypes.object,
   selectionType: PropTypes.string,
   selectionOnChange: PropTypes.func,
+  selectionBulkActions: PropTypes.func
 }
 
 TableComponent.defaultProps = {
@@ -168,6 +178,26 @@ TableComponent.defaultProps = {
 }
 
 /***************************************************************************************************** */
+
+function Header (props) {
+  const { selectionData, selectionBulkActions, getTranslation } = props
+  const isActive = selectionData.length > 0
+  
+  return (
+    <Row justify="space-between" align="middle">
+      <Col>
+        {isActive && (
+          <>
+            {getTranslation('labels.selected_items')}: {selectionData.length}
+          </>
+        )}
+      </Col>
+      <Col>
+        {selectionBulkActions(!isActive)}
+      </Col>
+    </Row>
+  )
+}
 
 function FiltersDropdown (props) {
   const { functions, inputRef, dataIndex, title } = props
