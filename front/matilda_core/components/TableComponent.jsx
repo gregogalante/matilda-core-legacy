@@ -16,7 +16,7 @@ export default function TableComponent (props) {
 
   useEffect(() => {
     if (!tableRef) return
-    tableRef.current = { loadDataFromRoute, resetSelectionData, selectionData }
+    tableRef.current = { loadDataFromRoute, resetSelectionData, getSelectionData }
   }, [tableRef])
 
   useEffect(() => {
@@ -98,6 +98,14 @@ export default function TableComponent (props) {
    */
   const resetSelectionData = () => {
     setSelectionData([])
+  }
+
+  /**
+   * @function getSelectionData
+   * @returns 
+   */
+  const getSelectionData = () => {
+    return selectionData
   }
 
   /**
