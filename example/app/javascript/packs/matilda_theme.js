@@ -1,1 +1,1 @@
-import 'matilda_core/theme.less'
+import '../matilda_themes/theme.less'

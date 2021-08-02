@@ -11,16 +11,16 @@ import useRequestHook from '../hooks/useRequestHook'
  * @returns 
  */
 export default function LayoutComponent (props) {
-  const { theme, siderActiveKey } = props
+  const { theme, siderActiveKey, siderCollapsed } = props
   const { responsive: { isMobile } } = useContext(MatildaContext)
-  const [menuCollapsed, setMenuCollapsed] = useState(true)
+  const [menuCollapsed, setMenuCollapsed] = useState(siderCollapsed)
 
   const showSider = useMemo(() => {
     return isMobile || theme == 'default'
   }, [theme, isMobile])
 
   const contentStyle = useMemo(() => {
-    let contentStyle = { minHeight: '100vh', padding: 15, paddingTop: 80, paddingLeft: 70 }
+    let contentStyle = { minHeight: '100vh', padding: 15, paddingTop: 80, paddingLeft: menuCollapsed ? 70 : 220 }
 
     if (theme == 'clean-centered') {
       contentStyle = Object.assign(contentStyle, {
@@ -31,7 +31,7 @@ export default function LayoutComponent (props) {
     }
 
     return contentStyle
-  }, [theme])
+  }, [theme, menuCollapsed])
 
   return (
     <Layout>
