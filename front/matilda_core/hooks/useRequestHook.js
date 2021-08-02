@@ -14,8 +14,6 @@ export default function useRequestHook(props = {}) {
    * @param {*} resolve 
    */
   const onResponseSuccess = (response, resolve) => {
-    console.info(response)
-
     setLoading(false)
     resolve(response)
   }
@@ -26,8 +24,6 @@ export default function useRequestHook(props = {}) {
    * @param {*} resolve 
    */
   const onResponseError = (error, resolve) => {
-    console.error(error)
-
     setLoading(false)
     resolve({ result: false, errors: [{ message: getTranslation(errorMessage || 'messages.general_error') }] })
   }
