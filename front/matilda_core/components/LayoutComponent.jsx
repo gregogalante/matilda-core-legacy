@@ -11,7 +11,7 @@ import useRequestHook from '../hooks/useRequestHook'
  * @returns 
  */
 export default function LayoutComponent (props) {
-  const { theme, siderActiveKey, siderCollapsed } = props
+  const { theme, siderActiveKey, siderCollapsed, siderTheme } = props
   const { responsive: { isMobile } } = useContext(MatildaContext)
   const [menuCollapsed, setMenuCollapsed] = useState(siderCollapsed)
 
@@ -20,7 +20,9 @@ export default function LayoutComponent (props) {
   }, [theme, isMobile])
 
   const contentStyle = useMemo(() => {
-    let contentStyle = { minHeight: '100vh', padding: 15, paddingTop: 80, paddingLeft: menuCollapsed ? 70 : 220 }
+    let paddingLeft = 0
+    if (theme == 'default') paddingLeft = menuCollapsed ? 70 : 220
+    let contentStyle = { minHeight: '100vh', padding: 15, paddingTop: 80, paddingLeft: paddingLeft }
 
     if (theme == 'clean-centered') {
       contentStyle = Object.assign(contentStyle, {
@@ -38,7 +40,7 @@ export default function LayoutComponent (props) {
       <Header menuCollapsed={menuCollapsed} setMenuCollapsed={setMenuCollapsed} />
 
       <Layout>
-        {showSider && <Sider siderActiveKey={siderActiveKey} collapsed={menuCollapsed} onCollapsedChange={setMenuCollapsed} />}
+        {showSider && <Sider siderActiveKey={siderActiveKey} siderTheme={siderTheme || 'dark'} collapsed={menuCollapsed} onCollapsedChange={setMenuCollapsed} />}
         <Layout.Content style={contentStyle}>
           {props.children}
         </Layout.Content>
@@ -94,7 +96,7 @@ function Footer () {
 }
 
 function Sider (props) {
-  const { siderActiveKey, collapsed, onCollapsedChange } = props
+  const { siderActiveKey, siderTheme, collapsed, onCollapsedChange } = props
   const { responsive: { isMobile } } = useContext(MatildaContext)
 
   return (
@@ -105,19 +107,19 @@ function Sider (props) {
       defaultCollapsed
       width={200}
       collapsedWidth={55}
-      theme='dark'
+      theme={siderTheme}
       style={{ position: 'fixed', top: 64, height: `calc(100% - 64px)`, zIndex: 999 }}
     >
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
-        <MenuPrimary activeKey={siderActiveKey} />
-        {isMobile && <MenuSecondary />}
+        <MenuPrimary activeKey={siderActiveKey} theme={siderTheme} />
+        {isMobile && <MenuSecondary theme={siderTheme} />}
       </div>
     </Layout.Sider>
   )
 }
 
 function MenuPrimary (props) {
-  const { activeKey } = props
+  const { activeKey, theme } = props
   const { getConfig, getTranslation, getSession } = useContext(MatildaContext)
   const session = getSession()
 
@@ -140,7 +142,7 @@ function MenuPrimary (props) {
   }
 
   return (
-    <Menu theme="dark" mode="vertical" selectedKeys={[activeKey]}>
+    <Menu theme={theme || 'dark'} mode="vertical" selectedKeys={[activeKey]}>
       {sidebarItems.map((sidebarItem) => {
         const IconItem = sidebarItem.icon ? Icons[sidebarItem.icon] : null
         return (
@@ -153,7 +155,8 @@ function MenuPrimary (props) {
   )
 }
 
-function MenuSecondary () {
+function MenuSecondary (props) {
+  const { theme } = props
   const { getSession, getTranslation, getRoute, getAvailableLocales, responsive: { isMobile } } = useContext(MatildaContext)
   const session = getSession()
   const availableLocales = getAvailableLocales()
@@ -178,7 +181,7 @@ function MenuSecondary () {
   }
 
   return (
-    <Menu theme="dark" mode={isMobile ? "inline" : "horizontal"}>
+    <Menu theme={theme || 'dark'} mode={isMobile ? "inline" : "horizontal"}>
       {session?.user_uuid && (
         <Menu.SubMenu
           key="profile"
