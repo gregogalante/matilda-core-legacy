@@ -121,15 +121,15 @@ export default function NavigatorComponent (props) {
     <>
       <Layout style={{ backgroundColor: '#fff' }}>
         {routes.length > 0 && (
-          <SiderContainer isDesktop={isDesktop}>
+          <div>
             <Menu
-              mode={isDesktop ? 'inline' : 'horizontal'}
+              mode='horizontal'
               selectedKeys={[currentPageData.routeKey]}
               style={{ height: '100%' }}
             >
               {renderRoutes(routes)}
             </Menu>
-          </SiderContainer>
+          </div>
         )}
         <Layout.Content>
           <div key={currentRoute?.key}>
@@ -150,14 +150,6 @@ export default function NavigatorComponent (props) {
       </Drawer>
     </>
   )
-}
-
-function SiderContainer ({ isDesktop, children }) {
-  if (isDesktop) {
-    return <Layout.Sider width={200} theme="light">{children}</Layout.Sider>
-  } else {
-    return <div>{children}</div>
-  }
 }
 
 NavigatorComponent.propTypes = {
