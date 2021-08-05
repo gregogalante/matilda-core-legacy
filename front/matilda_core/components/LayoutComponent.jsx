@@ -40,7 +40,7 @@ export default function LayoutComponent (props) {
       <Header menuCollapsed={menuCollapsed} setMenuCollapsed={setMenuCollapsed} />
 
       <Layout>
-        {showSider && <Sider siderActiveKey={siderActiveKey} siderTheme={siderTheme || 'dark'} collapsed={menuCollapsed} onCollapsedChange={setMenuCollapsed} />}
+        {showSider && <Sider siderActiveKey={siderActiveKey} siderTheme={siderTheme || 'light'} collapsed={menuCollapsed} onCollapsedChange={setMenuCollapsed} />}
         <Layout.Content style={contentStyle}>
           {props.children}
         </Layout.Content>
