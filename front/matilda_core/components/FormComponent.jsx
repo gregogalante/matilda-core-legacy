@@ -44,6 +44,7 @@ export default function FormComponent (props) {
    */
   const onFinish = (formParams) => {
     const params = Object.assign({}, paramsDecorator(formParams))
+    if(!paramsValidator(params)) return false
 
     request.send(path, params).then((response) => {
       if (!onResponse(response)) return
@@ -81,6 +82,7 @@ FormComponent.propTypes = {
   confirmBlock: PropTypes.bool,
   successMessage: PropTypes.string,
   paramsDecorator: PropTypes.func,
+  paramsValidator: PropTypes.func,
   onResponseSuccess: PropTypes.func,
   onResponseError: PropTypes.func,
   onResponse: PropTypes.func
@@ -93,5 +95,6 @@ FormComponent.defaultProps = {
   confirmBlock: false,
   successMessage: 'messages.general_success',
   paramsDecorator: (p) => p,
+  paramsValidator: () => true,
   onResponse: () => true
 }
