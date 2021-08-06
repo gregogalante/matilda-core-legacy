@@ -5,7 +5,7 @@ import useRequestHook from '../hooks/useRequestHook'
 import { MatildaContext } from '../index'
 
 export default function FormComponent (props) {
-  const { path, layout, confirmLabel, confirmType, confirmBlock, successMessage, paramsDecorator, onResponseSuccess, onResponseError, onResponse, formRef } = props
+  const { path, layout, confirmLabel, confirmType, confirmBlock, successMessage, paramsDecorator, paramsValidator, onResponseSuccess, onResponseError, onResponse, formRef } = props
   const { getTranslation } = useContext(MatildaContext)
   const [antdForm] = Form.useForm()
   const request = useRequestHook()
