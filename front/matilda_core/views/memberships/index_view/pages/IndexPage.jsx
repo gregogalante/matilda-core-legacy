@@ -42,7 +42,6 @@ export default function IndexPage (props) {
       key: 'action',
       dataIndex: 'uuid',
       width: 200,
-      fixed: 'right',
       align: 'center',
       render: (d) => renderTableAction(d)
     }

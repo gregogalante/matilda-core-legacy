@@ -37,7 +37,7 @@ export default function CredentialsPage (props) {
   return (
     <NavigatorWrapperComponent navigator={navigator}>
       <Row gutter={[15, 15]}>
-        <Col sm={{ span: 24 }}>
+        <Col xs={{ span: 24 }} sm={{ span: 24 }}>
           <CardComponent
             title={getTranslation("titles.update_password")}
             contentDependOn={username}
@@ -75,7 +75,7 @@ export default function CredentialsPage (props) {
             }}
           />
         </Col>
-        <Col sm={{ span: 24 }}>
+        <Col xs={{ span: 24 }} sm={{ span: 24 }}>
           <CardComponent
             title={getTranslation("titles.update_username")}
             contentDependOn={username}

@@ -40,7 +40,7 @@ export default function IndexPage (props) {
   return (
     <NavigatorWrapperComponent navigator={navigator} >
       <Row gutter={[15, 15]}>
-        <Col sm={{ span: 24 }}>
+        <Col xs={{ span: 24 }} sm={{ span: 24 }}>
           <CardComponent 
             title={getTranslation("titles.personal_informations")}
             contentDependOn={user}

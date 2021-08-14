@@ -1,4 +1,4 @@
-import React, { useMemo, useContext, useState } from 'react'
+import React, { useMemo, useContext, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Layout, Menu } from 'antd'
 import * as Icons from '@ant-design/icons'
@@ -13,7 +13,7 @@ import useRequestHook from '../hooks/useRequestHook'
 export default function LayoutComponent (props) {
   const { theme, siderActiveKey, siderCollapsed, siderTheme } = props
   const { responsive: { isMobile } } = useContext(MatildaContext)
-  const [menuCollapsed, setMenuCollapsed] = useState(siderCollapsed)
+  const [menuCollapsed, setMenuCollapsed] = useState(siderCollapsed || isMobile)
 
   const showSider = useMemo(() => {
     return isMobile || theme == 'default'
@@ -21,7 +21,7 @@ export default function LayoutComponent (props) {
 
   const contentStyle = useMemo(() => {
     let paddingLeft = 0
-    if (theme == 'default') paddingLeft = menuCollapsed ? 70 : 220
+    if (showSider) paddingLeft = menuCollapsed ? 70 : (isMobile ? 70 : 220)
     let contentStyle = { minHeight: '100vh', padding: 15, paddingTop: 80, paddingLeft: paddingLeft }
 
     if (theme == 'clean-centered') {
@@ -33,7 +33,13 @@ export default function LayoutComponent (props) {
     }
 
     return contentStyle
-  }, [theme, menuCollapsed])
+  }, [theme, menuCollapsed, showSider])
+
+  useEffect(() => {
+    if (isMobile && !menuCollapsed) {
+      setMenuCollapsed(true)
+    }
+  }, [isMobile])
 
   return (
     <Layout>

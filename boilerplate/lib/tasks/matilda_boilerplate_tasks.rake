@@ -17,8 +17,8 @@ namespace :matilda_boilerplate do
       FileUtils.copy_entry(src, dst)
 
       # install dependencies inside main applicaiton
-      # dependencies = JSON.parse(File.read("#{dst}/dependencies.json"))
-      # system("yarn add #{dependencies['dependencies'].join(' ')}")
+      dependencies = JSON.parse(File.read("#{dst}/dependencies.json"))
+      system("yarn add #{dependencies['dependencies'].join(' ')}")
 
       puts "IMPORTANTE: Aggiungere il modulo come nuovo require context sul file matilda.js"
       puts "IMPORTANTE: Aggiungere 'vendor/matilda_boilerplate' tra le additional_paths nel file di configurazione webpacker.yml"

@@ -90,7 +90,7 @@ function UserDescription ({ user, getTranslation }) {
   return (
     <Descriptions 
       bordered
-      column={{sm: 1, lg: 2}}
+      column={{xs: 1, sm: 1, lg: 2}}
     >
       <Descriptions.Item label={getTranslation("labels.name")}>{user.name || ' - '}</Descriptions.Item>
       <Descriptions.Item label={getTranslation("labels.surname")}>{user.surname || ' - '}</Descriptions.Item>

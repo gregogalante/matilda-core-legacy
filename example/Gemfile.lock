@@ -1,4 +1,12 @@
 PATH
+  remote: ../../matilda-asset
+  specs:
+    matilda_asset (2.0.0)
+      evnt
+      kaminari
+      rails
+
+PATH
   remote: ../boilerplate
   specs:
     matilda_boilerplate (2.0.0)
@@ -276,6 +284,7 @@ DEPENDENCIES
   faker
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  matilda_asset!
   matilda_boilerplate!
   matilda_core!
   puma (~> 5.0)

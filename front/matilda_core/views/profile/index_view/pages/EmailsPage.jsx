@@ -51,7 +51,7 @@ export default function EmailsPage (props) {
   return (
     <NavigatorWrapperComponent navigator={navigator}>
       <Row gutter={[15, 15]}>
-        <Col sm={{ span: 24 }}>
+        <Col xs={{ span: 24 }} sm={{ span: 24 }}>
           <CardComponent 
             title={getTranslation("titles.email_addresses")}
             extra={<Button type='link' onClick={onAddEmail}>{getTranslation('cta.add')}</Button>}
