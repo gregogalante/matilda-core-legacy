@@ -5,7 +5,7 @@ import { MenuOutlined } from '@ant-design/icons'
 import { MatildaContext } from '../'
 
  export default function NavigatorWrapperComponent (props) {
-  const { navigator, menu } = props
+  const { navigator, menu, extra } = props
   const { prevPageKey } = navigator.currentPageData
   const { getTranslation } = useContext(MatildaContext)
   const title = getTranslation(navigator.currentPage.label)
