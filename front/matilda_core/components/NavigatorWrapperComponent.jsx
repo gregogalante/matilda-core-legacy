@@ -33,6 +33,7 @@ import { MatildaContext } from '../'
   }
 
   const renderExtra = () => {
+    if (extra) return extra
     if (!menu) return null
 
     return (
@@ -57,9 +58,11 @@ import { MatildaContext } from '../'
 
 NavigatorWrapperComponent.propTypes = {
   navigator: PropTypes.object.isRequired,
-  menu: PropTypes.array
+  menu: PropTypes.array,
+  extra: PropTypes.any
 }
 
 NavigatorWrapperComponent.defaultProps = {
-  menu: null
+  menu: null,
+  extra: null
 }
