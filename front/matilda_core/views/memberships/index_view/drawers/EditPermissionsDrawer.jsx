@@ -50,7 +50,7 @@ export default function EditPermissionsDrawer (props) {
       <Row gutter={[15, 15]}>
         {permissionsGroups && Object.entries(permissionsGroups).map(([group, permissions]) => {
           return (
-            <Col sm={24}>
+            <Col xs={24} sm={24} md={24} lg={24} key={group.name}>
               <Card title={getTranslation(group)}>
                   {permissions.map(permission => {
                     return (

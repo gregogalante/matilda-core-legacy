@@ -65,7 +65,7 @@ export default function ManagePage (props) {
   return (
     <NavigatorWrapperComponent navigator={navigator}>
       <Row gutter={[15, 15]}>
-        <Col sm={24} lg={16}>
+        <Col xs={24} sm={24} md={12} lg={16}>
           <CardComponent
             title={getTranslation("titles.informations")}
             contentDependOn={user}
@@ -73,10 +73,13 @@ export default function ManagePage (props) {
           />
         </Col>
 
-        <Col sm={24} lg={8}>
+        <Col xs={24} sm={24} md={12} lg={8}>
           <CardComponent
             title={getTranslation("titles.edit_permissions_role")}
-            extra={showPermissionsEditorConfig && user ? <Button type="primary" onClick={onClickEditPermissions}>{getTranslation("titles.edit_permissions")}</Button> : ''}
+            menuDependOn={user}
+            menu={[
+              showPermissionsEditorConfig ? { label: getTranslation("titles.edit_permissions"), onClick: onClickEditPermissions } : null
+            ]}
             contentDependOn={user}
             content={(user) => <UserRoleForm user={user} getTranslation={getTranslation} rolesOptions={rolesOptions} formRef={formRef} onPermissionsUpdated={onPermissionsUpdated} />}
           />
@@ -90,7 +93,7 @@ function UserDescription ({ user, getTranslation }) {
   return (
     <Descriptions 
       bordered
-      column={{xs: 1, sm: 1, lg: 2}}
+      column={{xs: 1, sm: 1, md: 1, lg: 2}}
     >
       <Descriptions.Item label={getTranslation("labels.name")}>{user.name || ' - '}</Descriptions.Item>
       <Descriptions.Item label={getTranslation("labels.surname")}>{user.surname || ' - '}</Descriptions.Item>

@@ -14,7 +14,7 @@ export default function AddEmailDrawer (props) {
 
   return (
     <Row gutter={[15, 15]}>
-      <Col sm={24}>
+      <Col xs={24} sm={24} md={24} lg={24}>
         <Card title={getTranslation("titles.add_email_address")}>
           <FormComponent
             path={'matilda_core.profile_create_email_action'}

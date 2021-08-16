@@ -70,23 +70,6 @@ export default function IndexPage (props) {
   }
 
   /**
-   * @function renderExtra
-   * @returns 
-   */
-  const renderExtra = () => {
-    return (
-      <Space direction='vertical'>
-        <Button
-          key='invite'
-          type="primary"
-          icon={<PlusCircleOutlined />}
-          onClick={onClickInvite}
-        >{getTranslation('cta.invite')}</Button>
-      </Space>
-    )
-  }
-
-  /**
    * @function renderTableAction
    * @param {*} userUuid 
    * @returns 
@@ -100,7 +83,9 @@ export default function IndexPage (props) {
   return (
     <NavigatorWrapperComponent
       navigator={navigator}
-      extra={renderExtra()}
+      menu={[
+        { label: getTranslation('cta.invite'), onClick: onClickInvite }
+      ]}
     >
       <TableComponent
         columns={tableColumns}
