@@ -10,6 +10,6 @@ Per configurare la prima volta l'ambiente per sviluppare la libreria eseguire il
 
 Per iniziare a lavorare sul progetto eseguire il comando **sh ./bin/dev_start.sh**.
 
-Per aggiornare in real-time il front-end eseguire dentro ***example** il comando **watch -n 10 "rails matilda_core:install:front_update"**.
+Per aggiornare in real-time il front-end eseguire il comando **sh ./bin/dev_watch.sh**.
 
 All'interno del database sarà già presente un gruppo con uuid ***demo***, un utente con username ***demo*** e password ***Password1***.
