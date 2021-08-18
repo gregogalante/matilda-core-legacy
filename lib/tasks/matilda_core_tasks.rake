@@ -34,10 +34,12 @@ namespace :matilda_core do
       end
 
       # create default.less inside matilda_theme file in packs if not exists
-      file_dst = "#{Rails.root}/app/javascript/matilda_theme/default.less"
+      dir_dst = "#{Rails.root}/app/javascript/matilda_theme"
+      file_dst = "#{dir_dst}/default.less"
       if File.exist?(file_dst)
         puts "IMPORTANTE: Controllare gli import del file #{file_dst} o eliminare il file e rieseguire il task."
       else
+        Dir.mkdir(dir_dst)
         File.open(file_dst, "w+") { |f| f.write("@import '~antd/lib/style/themes/default.less';\n@import '~antd/dist/antd.less';\n@primary-color: #12369b;") }
       end
 
