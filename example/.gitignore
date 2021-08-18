@@ -39,5 +39,5 @@
 yarn-debug.log*
 .yarn-integrity
 
-/vendor/matilda_core
-/vendor/matilda_boilerplate
+/app/javascript/matilda_core
+/app/javascript/matilda_boilerplate
