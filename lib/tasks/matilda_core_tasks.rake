@@ -17,7 +17,7 @@ namespace :matilda_core do
 
       # copy front module to main application
       src = "#{MatildaCore::Engine.root}/front"
-      dst = "#{Rails.root}/vendor/matilda_core"
+      dst = "#{Rails.root}/app/javascript/matilda_core"
       FileUtils.rm_rf(dst) if File.exist?(dst)
       FileUtils.copy_entry(src, dst)
 
