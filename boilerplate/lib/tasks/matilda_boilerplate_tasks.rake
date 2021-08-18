@@ -12,7 +12,7 @@ namespace :matilda_boilerplate do
     task front: :environment do |_task, args|
       # copy front module to main application
       src = "#{MatildaBoilerplate::Engine.root}/front"
-      dst = "#{Rails.root}/vendor/matilda_boilerplate"
+      dst = "#{Rails.root}/app/javascript/matilda_boilerplate"
       FileUtils.rm_rf(dst) if File.exist?(dst)
       FileUtils.copy_entry(src, dst)
 
