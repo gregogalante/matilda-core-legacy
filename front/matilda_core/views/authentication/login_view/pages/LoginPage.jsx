@@ -57,7 +57,7 @@ export default function LoginPage () {
           <div style={{ textAlign: 'right', marginTop: 15 }}>
               {signupActiveConfig && (
                 <>
-                  <a href={signupRoute.path}>{getTranslation('cta.signup')}</a> |
+                  <a href={signupRoute.path}>{getTranslation('cta.signup')}</a>&#8194;|&#8194;
                 </>
               )}
               <a href={recoverPasswordRoute.path}>{getTranslation('cta.recover_password')}</a>
