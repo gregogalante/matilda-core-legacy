@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react"
 import { Row, Col, Card, Form, Input, Result } from "antd"
-import { SmileOutlined } from "@ant-design/icons"
 import { MatildaContext } from "matilda_core"
 import FormComponent from "matilda_core/components/FormComponent"
 
@@ -26,7 +25,7 @@ export default function UpdatePasswordPage(props) {
         >
           {updated ? (
             <Result 
-              icon={<SmileOutlined />}
+              status="success"
               title={getTranslation("strings.update_password_complete_title")}
               extra={<a href={loginPath.path}>{getTranslation("cta.continue")}</a>}
             />

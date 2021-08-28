@@ -34,7 +34,7 @@ export default function useRequestHook(props = {}) {
    * @param {*} params 
    * @returns 
    */
-  const send = (routeKey, params) => {
+  const send = (routeKey, params = {}) => {
     if (loading) return new Promise((resolve) => resolve(false))
 
     setLoading(true)
