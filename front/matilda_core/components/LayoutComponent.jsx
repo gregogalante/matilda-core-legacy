@@ -152,7 +152,7 @@ function MenuPrimary (props) {
       {sidebarItems.map((sidebarItem) => {
         const IconItem = sidebarItem.icon ? Icons[sidebarItem.icon] : null
         return (
-          <Menu.Item key={sidebarItem.name} icon={IconItem ? <IconItem /> : null} onClick={() => onClickUrl(sidebarItem.url)}>
+          <Menu.Item key={sidebarItem.name} icon={IconItem ? <IconItem /> : (sidebarItem.icon ? <div dangerouslySetInnerHTML={{ __html: sidebarItem.icon }} /> : null)} onClick={() => onClickUrl(sidebarItem.url)}>
             {sidebarItem.label}
           </Menu.Item>
         )
