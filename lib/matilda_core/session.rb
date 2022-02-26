@@ -8,7 +8,12 @@ module MatildaCore
     attr_accessor :data
 
     def initialize(data = nil)
-      return set(data) if data
+      if data
+        data_parsed = JSON.parse(data).with_indifferent_access
+        @data = validate_data(data_parsed)
+        return
+      end
+
       @data = initialize_data
     end
 
@@ -22,13 +27,6 @@ module MatildaCore
 
     def reset
       @data = initialize_data
-    end
-
-    def set(data = nil)
-      return unless data
-
-      data_parsed = JSON.parse(data).with_indifferent_access
-      @data = validate_data(data_parsed)
     end
 
     # Funzioni principali di gestione dei dati
@@ -77,7 +75,6 @@ module MatildaCore
         @data[:group_uuid] = group_uuid
         @data[:group_name] = group.name
         @data[:group_permissions] = membership.permissions
-        @data[:group_permissions_role] = membership.permissions_role
       end
 
       @data[:group_uuid]
@@ -87,7 +84,6 @@ module MatildaCore
       @data[:group_uuid] = nil
       @data[:group_name] = nil
       @data[:group_permissions] = []
-      @data[:group_permissions_role] = nil
     end
 
     def group
@@ -96,10 +92,6 @@ module MatildaCore
 
     def group_permissions
       @data[:group_permissions] || []
-    end
-
-    def group_permissions_role
-      @data[:group_permissions_role] || nil
     end
 
     def group_name
@@ -114,19 +106,12 @@ module MatildaCore
 
     # Custom
 
-    def get_data(key)
-      @data[:custom] ||= {}
-      @data[:custom][key.to_sym]
+    def set(key, value)
+      @data[key] = value
     end
 
-    def set_data(key, value)
-      @data[:custom] ||= {}
-      @data[:custom][key.to_sym] = value
-    end
-
-    def remove_data(key)
-      @data[:custom] ||= {}
-      @data[:custom][key.to_sym] = nil
+    def get(key)
+      @data[key]
     end
 
     ######################################################################

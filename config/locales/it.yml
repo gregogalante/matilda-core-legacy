@@ -6,7 +6,7 @@ it:
       last: Ultimo
       first: Primo
       truncate: '...'
-  matilda:
+  matilda_core:
     header: # voci dell'header
       profile: Profilo
       account_settings: Imp. Account
@@ -32,7 +32,6 @@ it:
       add: Aggiungi nuovo
       delete: Elimina
       set_primary: Imposta come primario
-      select: Seleziona
     labels: # labels di input, tabelle ecc.
       name: Nome
       surname: Cognome
@@ -48,34 +47,28 @@ it:
       new_password_confirmation: Conferma nuova Password
       current_password: Attuale Password
       role: Ruolo
-      selected_items: Elementi selezionati
     titles: # titoli di pagine, cards ecc.
       select_a_group: Seleziona gruppo
       create_a_group: Creazione gruppo
-      users: Accessi
-      users_list: Lista accessi
-      users_stats: Statistiche accessi
-      invite_user: Invita utente
+      users: Utenti
+      users_list: Lista utenti
+      invite_user: Invita utenti
       manage_user: Gestisci utente
       edit_permissions: Modifica permessi
       edit_permissions_role: Modifica ruolo
       informations: Informazioni
+      dashboard: Dashboard
+      personal_informations: Informazioni personali
       login: Accesso
       signup: Registrazione
       recover_password: Recupero password
       update_password: Aggiornamento password
       email_addresses: Indirizzi email
-      update_username: Aggiornamento username
+      username: Username
       add_email_address: Aggiungi nuovo indirizzo email
       account_settings: Impostazoni account
       documentation: Documentazione
       administration: Amministrazione
-      profile_manage: Gestisci profilo
-      profile_emails_manage: Gestisci le email
-      emails: Emails
-      personal_informations: Informazioni personali
-      profile_credentials_manage: Gestisci le credenziali
-      access_options: Opzioni di accesso
     helps: # stringhe di aiuto verso l'utente
       insert_name_of_group: Inserisci il nome del gruppo
       insert_username_or_email: Inserisci l'Username o l'indirizzo Email
@@ -85,10 +78,8 @@ it:
       insert_new_password_confirmation: Inserisci di nuovo la nuova password
       insert_email: Inserisci un indirizzo email
       search_something: Cerca qualcosa
-      invitation_user_guide: Un email verrà inviata all'utente per invitarlo a completare il suo account
     messages: # messaggi di errore, alerts ecc.
       general_error: Si è verificato un errore interno
-      general_success: Operazione completata con successo
       name_not_valid: Nome non valido
       surname_not_valid: Cognome non valido
       username_email_not_valid: Username / Indirizzo Email non valido
@@ -99,10 +90,6 @@ it:
       user_not_valid: Utente non valido
       groups_creation_unpermitted: I gruppi non possono essere registrati
       groups_max_number_per_user: Hai raggiunto il numero massimo di gruppi disponibili
-      user_update_success: Utente aggiornato con successo
-      email_add_success: Email aggiunta con successo
-      email_delete_success: Email eliminata con successo
-      password_update_success: Password aggiornata con successo
     strings: # altre stringhe varie utilizzate.
       no_data_found_title: Nessun dato trovato
       no_data_found_content: Non ci sono dati presenti nel sistema
@@ -116,5 +103,4 @@ it:
       manage_users_permission: Possibilità di gestire gli utenti del sistema ed i loro permessi.
       action_confirmation_request: Sei sicuro di voler procedere con l'azione?
       administrator: Amministratore
-      none: Nessuno
       personalized: Personalizzato

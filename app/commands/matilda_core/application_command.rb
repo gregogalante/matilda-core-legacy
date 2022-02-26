@@ -11,7 +11,7 @@ module MatildaCore
     protected
 
     def internal_error
-      err(I18n.t('matilda.messages.general_error'), code: :error_500)
+      err(I18n.t('matilda_core.messages.general_error'), code: :error_500)
     end
 
   end

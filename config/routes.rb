@@ -4,14 +4,18 @@ MatildaCore::Engine.routes.draw do
   root 'application#index'
 
   post 'helper/update-session-locale', to: 'application#helper_update_session_locale', as: 'helper_update_session_locale'
+  post 'helper/update-menu-preference', to: 'application#helper_update_menu_preference', as: 'helper_update_menu_preference'
+
+  # documentation
+  get 'documentation/index-view', to: 'documentation#index_view', as: 'documentation_index_view'
 
   # authentication
   get 'authentication/login-view', to: 'authentication#login_view', as: 'authentication_login_view'
   get 'authentication/signup-view', to: 'authentication#signup_view', as: 'authentication_signup_view'
   get 'authentication/recover-password-view', to: 'authentication#recover_password_view', as: 'authentication_recover_password_view'
-  # get 'authentication/recover-password-complete-view', to: 'authentication#recover_password_complete_view', as: 'authentication_recover_password_complete_view'
+  get 'authentication/recover-password-complete-view', to: 'authentication#recover_password_complete_view', as: 'authentication_recover_password_complete_view'
   get 'authentication/update-password-view', to: 'authentication#update_password_view', as: 'authentication_update_password_view'
-  # get 'authentication/update-password-complete-view', to: 'authentication#update_password_complete_view', as: 'authentication_update_password_complete_view'
+  get 'authentication/update-password-complete-view', to: 'authentication#update_password_complete_view', as: 'authentication_update_password_complete_view'
   post 'authentication/login-action', to: 'authentication#login_action', as: 'authentication_login_action'
   post 'authentication/signup-action', to: 'authentication#signup_action', as: 'authentication_signup_action'
   post 'authentication/recover-password-action', to: 'authentication#recover_password_action', as: 'authentication_recover_password_action'
@@ -27,7 +31,6 @@ MatildaCore::Engine.routes.draw do
 
   # profile
   get 'profile/index-view', to: 'profile#index_view', as: 'profile_index_view'
-  get 'profile/index-api', to: 'profile#index_api', as: 'profile_index_api'
   post 'profile/edit-info-action', to: 'profile#edit_info_action', as: 'profile_edit_info_action'
   post 'profile/edit-username-action', to: 'profile#edit_username_action', as: 'profile_edit_username_action'
   post 'profile/create-email-action', to: 'profile#create_email_action', as: 'profile_create_email_action'
@@ -37,8 +40,8 @@ MatildaCore::Engine.routes.draw do
 
   # memberships
   get 'memberships/index-view', to: 'memberships#index_view', as: 'memberships_index_view'
-  get 'memberships/index-api', to: 'memberships#index_api', as: 'memberships_index_api'
-  get 'memberships/manage-api', to: 'memberships#manage_api', as: 'memberships_manage_api'
+  get 'memberships/invitation-view', to: 'memberships#invitation_view', as: 'memberships_invitation_view'
+  get 'memberships/manage-view', to: 'memberships#manage_view', as: 'memberships_manage_view'
   post 'memberships/invitation-action', to: 'memberships#invitation_action', as: 'memberships_invitation_action'
   post 'memberships/edit-permissions-action', to: 'memberships#edit_permissions_action', as: 'memberships_edit_permissions_action'
   post 'memberships/edit-permissions-role-action', to: 'memberships#edit_permissions_role_action', as: 'memberships_edit_permissions_role_action'

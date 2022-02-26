@@ -5,10 +5,7 @@ module MatildaCore
   # GroupsController.
   class GroupsController < MatildaCore::ApplicationController
 
-    before_action do
-      session_present_check
-      packs_add('matilda_core')
-    end
+    before_action :session_present_check
 
     def index_view
       if MatildaCore.config.groups_root_path
@@ -23,7 +20,8 @@ module MatildaCore
         return
       end
 
-      redirect_to root_path
+      section_head_set('Dashboard', [{ label: 'Dashboard' }])
+      sidebar_set('matilda_core.groups')
     end
 
     def select_view
@@ -35,6 +33,7 @@ module MatildaCore
       end
 
       @groups = @session.user.groups.order('name ASC')
+      sidebar_set('matilda_core.groups')
     end
 
     def select_action

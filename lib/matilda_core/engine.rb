@@ -12,23 +12,38 @@ module MatildaCore
       Rails.application.reload_routes!
 
       MatildaCore.config.add_sidebar_item(
+        'matilda_core.groups',
+        label: 'locale.matilda_core.titles.dashboard',
+        url: MatildaCore::Engine.routes.url_helpers.groups_index_view_path,
+        icon: 'fas fa-tachometer-alt',
+        index: 1000
+      )
+      MatildaCore.config.add_sidebar_item(
         'matilda_core.memberships',
-        label: 'titles.users',
+        label: 'locale.matilda_core.titles.users',
         url: MatildaCore::Engine.routes.url_helpers.memberships_index_view_path,
-        icon_legacy: 'fas fa-users',
-        icon: 'UsergroupAddOutlined',
+        icon: 'fas fa-users',
         permission: 'matilda_core.memberships',
         index: 1100
       )
+      if Rails.env.development?
+        MatildaCore.config.add_sidebar_item(
+          'matilda_core.documentation',
+          label: 'locale.matilda_core.titles.documentation',
+          url: MatildaCore::Engine.routes.url_helpers.documentation_index_view_path,
+          icon: 'fas fa-code',
+          index: 999999
+        )
+      end
     end
 
     # Imposto i permessi degli utenti.
     initializer 'matilda_core.add_memberships_permissions' do |_app|
       MatildaCore.config.add_memberships_permission(
         'matilda_core.memberships',
-        label: 'strings.manage_users_permission',
+        label: 'locale.matilda_core.strings.manage_users_permission',
         index: 0,
-        group: 'titles.administration'
+        group: 'locale.matilda_core.titles.administration'
       )
     end
 
@@ -36,15 +51,9 @@ module MatildaCore
     initializer 'matilda_core.add_memberships_permissions_roles' do |_app|
       MatildaCore.config.add_memberships_permissions_role(
         'matilda_core.administrator',
-        label: 'strings.administrator',
+        label: 'locale.matilda_core.strings.administrator',
         index: 0,
         permissions: ['matilda_core.memberships']
-      )
-      MatildaCore.config.add_memberships_permissions_role(
-        'matilda_core.none',
-        label: 'strings.none',
-        index: 0,
-        permissions: []
       )
     end
 

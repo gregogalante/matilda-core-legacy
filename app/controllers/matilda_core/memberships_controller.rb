@@ -9,44 +9,28 @@ module MatildaCore
       if session_present_check(:group_uuid)
         redirect_to matilda_core.root_path unless session_permission_present?(['matilda_core.memberships'])
       end
-
-      packs_add('matilda_core')
     end
 
-    def index_view; end
+    def index_view
+      sidebar_set('matilda_core.memberships')
+      section_head_set(I18n.t('matilda_core.titles.users'), [{ label: I18n.t('matilda_core.titles.users') }])
 
-    def index_api
-      users = @session.group.users.includes(:user_emails)
-
-      users = sort_query(users, username: 'username SORT', name: 'name SORT', surname: 'surname SORT', email: 'matilda_core_user_emails.email SORT')
-      users = paginate_query(users)
-
-      render_json_success(
-        users: users.map(&:as_json_with_email),
-        params: params_for_query(users)
-      )
+      @users = @session.group.users
+      @users = @users.where('lower(name) LIKE ? OR lower(surname) LIKE ?', "%#{params[:s].downcase}%", "%#{params[:s].downcase}%") unless params[:s].blank?
+      @users = @users.order('surname ASC, name ASC').page(params[:page]).per(15)
     end
 
-    def manage_api
-      user = @session.group.users.find_by(uuid: params[:user_uuid])
-      unless user
-        json_errors(json_error(I18n.t('matilda.messages.user_not_valid'), code: :user_uuid))
-        render_json_fail
-        return
-      end
+    def invitation_view
+      sidebar_set('matilda_core.memberships')
+      section_head_set(I18n.t('matilda_core.titles.invite_user'), [{ label: I18n.t('matilda_core.titles.users'), url: matilda_core.memberships_index_view_path }, { label: I18n.t('matilda_core.titles.invite_user') }])
+    end
 
-      membership = MatildaCore::Membership.find_by(group_uuid: @session.group, user_uuid: user.uuid)
-      unless membership
-        json_errors(json_error(I18n.t('matilda.messages.user_not_valid'), code: :user_uuid))
-        render_json_fail
-        return
-      end
+    def manage_view
+      @user = @session.group.users.find_by(uuid: params[:user_uuid])
+      @membership = @session.group.memberships.find_by(user_uuid: params[:user_uuid])
 
-      render_json_success(
-        user: user.as_json,
-        membership: membership.as_json,
-        user_emails: user.user_emails
-      )
+      sidebar_set('matilda_core.memberships')
+      section_head_set(@user.complete_name, [{ label: I18n.t('matilda_core.titles.users'), url: matilda_core.memberships_index_view_path }, { label: I18n.t('matilda_core.titles.manage_user') }])
     end
 
     def invitation_action
@@ -72,12 +56,12 @@ module MatildaCore
       render_json_success({})
     end
 
-    # def remove_action
-    #   command = command_manager(generate_remove_command)
-    #   return unless command
+    def remove_action
+      command = command_manager(generate_remove_command)
+      return unless command
 
-    #   render_json_success({})
-    # end
+      render_json_success({})
+    end
 
     private
 

@@ -10,8 +10,6 @@ module MatildaCore
   # - actions: azioni che eseguono operazioni (example 'login_action')
   class ApplicationController < ActionController::Base
 
-    helper MatildaCore::ReactHelper
-
     layout 'matilda_core/application'
 
     protect_from_forgery with: :exception
@@ -19,7 +17,6 @@ module MatildaCore
     skip_before_action :verify_authenticity_token
 
     before_action :set_locale
-    before_action :set_packs
 
     def index
       if session_present?
@@ -36,15 +33,33 @@ module MatildaCore
       render_json_success({ token: session_update })
     end
 
-    # FUNZIONI DI GESTIONE PACKS
-    ##############################################################################################################
-
-    def packs_add(name)
-      @_packs.push(name)
+    def helper_update_menu_preference
+      session[:mat_menupreference] = params[:value] == '1'
+      render_json_success({})
     end
 
-    def packs_remove(name)
-      @_packs = @_packs.reject { |e| e != name }
+    # FUNZIONI DI GESTIONE MULTILINGUA
+    ##############################################################################################################
+
+    def set_locale
+      session_set unless @session
+      locale = @session&.locale || session[:mat_locale] || I18n.default_locale
+
+      I18n.locale = locale
+    end
+
+    # FUNZIONI DI GESTIONE ELEMENTI VIEW
+    ##############################################################################################################
+
+    def sidebar_set(value)
+      @_sidebar = value
+    end
+
+    def section_head_set(title, breadcrumbs)
+      @_section_head = {
+        title: title,
+        breadcrumbs: breadcrumbs || []
+      }
     end
 
     # FUNZIONI DI GESTIONE SESSIONE
@@ -157,56 +172,6 @@ module MatildaCore
 
     ##############################################################################################################
 
-    def paginate_query(query)
-      page = params[:page]&.to_i || 1
-      per_page = params[:per_page]&.to_i || 25
-      per_page = 100 if per_page > 100 # Avoid to many items
-
-      query.page(page).per(per_page)
-    end
-
-    def sort_query(query, sort_key_map = {})
-      sort_field = params[:sort_field].blank? ? 'default' : params[:sort_field]
-      sort_order = params[:sort_order].blank? ? 'ASC' : params[:sort_order]
-      return query if sort_field == 'default' && sort_key_map[:default].nil?
-      return query unless ['ASC', 'DESC'].include?(sort_order)
-
-      sort_key = sort_key_map[sort_field.to_sym]
-      return query unless sort_key
-
-      sort_string = sort_key.sub('SORT', sort_order)
-
-      query.order(sort_string)
-    end
-
-    def filters_query(query, filter_key_map = {})
-      filter_field_keys = params[:filters_keys].blank? ? [] : params[:filters_keys].split(',')
-      filter_field_values = params[:filters_values].blank? ? [] : params[:filters_values].split(',')
-      
-      return query unless filter_field_keys.length.positive?
-
-      search_strings = []
-      filter_field_keys.each_with_index do |filter_field_key, index|
-        field_key = filter_key_map[filter_field_key]
-        field_value = filter_field_values[index]
-        next if field_key.blank? || field_value.blank?
-        search_strings.push("lower(#{field_key}) LIKE '%#{field_value.downcase}%'") 
-      end
-      search_string = search_strings.join(' AND ')
-
-      query.where(search_string)
-    end
-
-    def params_for_query(query)
-      {
-        pagination: { page: query.current_page, per_page: query.limit_value, total_pages: query.total_pages, total_items: query.total_count },
-        sort: { sort_field: params[:sort_field], sort_order: params[:sort_order] },
-        search: params[:search]
-      }
-    end
-
-    ##############################################################################################################
-
     # Funzione che gestisce un comando e, se questo ha risultato negativo, rimanda l'errore al client.
     def command_manager(command)
       unless command.completed?
@@ -250,19 +215,6 @@ module MatildaCore
     # Funzione che genera un errore a partire da un messaggio testuale.
     def json_error(message, code = nil)
       { message: message, code: code }
-    end
-
-    private
-
-    def set_locale
-      session_set unless @session
-      locale = @session&.locale || session[:mat_locale] || I18n.default_locale
-
-      I18n.locale = locale
-    end
-
-    def set_packs
-      @_packs = ['matilda_theme']
     end
 
   end

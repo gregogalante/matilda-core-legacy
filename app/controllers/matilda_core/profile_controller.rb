@@ -5,20 +5,10 @@ module MatildaCore
   # ProfileController.
   class ProfileController < MatildaCore::ApplicationController
 
-    before_action do
-      session_present_check
-      packs_add('matilda_core')
-    end
+    before_action :session_present_check
 
-    def index_view; end
-
-    def index_api
-      user = @session.group.users.find_by(uuid: @session.user_uuid)
-
-      render_json_success(
-        user: user.as_json,
-        user_emails: user.user_emails
-      )
+    def index_view
+      section_head_set(@session.user.complete_name, [{ label: I18n.t('matilda_core.titles.account_settings') }])
     end
 
     def edit_info_action

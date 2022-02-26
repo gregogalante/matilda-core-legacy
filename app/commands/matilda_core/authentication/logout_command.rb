@@ -9,7 +9,7 @@ module MatildaCore
 
       validates :session_uuid,
                 presence: true, type: :string, blank: false,
-                err: I18n.t('matilda.messages.session_not_valid')
+                err: I18n.t('matilda_core.messages.session_not_valid')
 
       validates :log_who, type: :string
 

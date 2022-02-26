@@ -15,12 +15,6 @@ module MatildaCore
       permissions_role ? permissions_role[:name] : nil
     end
 
-    def as_json
-      base = super
-      base[:permissions_role] =permissions_role
-      base
-    end
-
   end
 
 end

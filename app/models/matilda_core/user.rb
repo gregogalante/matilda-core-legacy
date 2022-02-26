@@ -20,20 +20,14 @@ module MatildaCore
 
     # Ritorna l'indirizzo email principale dell'utente.
     def email
-      @email ||= user_emails.select(&:primary).first&.email || user_emails.first&.email
+      @email ||= user_emails.find_by(primary: true)&.email || user_emails.first&.email
     end
 
     # Ritorna un hash con i dati dell'utente serializzati per l'autenticazione.
-    def as_json_with_email
+    def serialize_authentication
       data = as_json
-      data[:email] = email
-      data
-    end
-
-    def as_json
-      data = super
       data[:password] = 'FILTERED'
-      data[:recover_password_code] = 'FILTERED'
+      data[:email] = email
       data
     end
 
