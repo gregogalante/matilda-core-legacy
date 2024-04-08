@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'jwt'
   spec.add_dependency 'kaminari'
   spec.add_dependency 'rest-client'
-  spec.add_dependency 'rails'
+  spec.add_dependency 'rails', '7.0.1'
 
   spec.add_development_dependency 'rails'
   spec.add_development_dependency 'sqlite3'
