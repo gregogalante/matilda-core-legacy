@@ -10,6 +10,10 @@ require 'matilda_core/engine'
 require 'matilda_core/session'
 require 'matilda_core/version'
 
+require 'matilda_core/application_command'
+require 'matilda_core/application_event'
+require 'matilda_core/application_handler'
+
 # MatildaCore.
 module MatildaCore
 
