@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'matilda_core/application_handler'
+
 module MatildaCore
 
   # NotificationsHandler.
